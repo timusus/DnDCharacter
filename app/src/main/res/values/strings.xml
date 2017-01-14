@@ -1,0 +1,16 @@
+<resources>
+    <!--
+    Syntax:
+    IDs - Camel Case: addCharacterBtn
+    Generic Strings - Underscores: add_character_label
+
+    Android Open Source Conventions
+    _______________________________
+    Non-public, non-static field names start with m.
+    Static field names start with s.
+    Other fields start with a lower case letter.
+    Public static final fields (constants) are ALL_CAPS_WITH_UNDERSCORES.
+    -->
+    <string name="app_name">"D&amp;D Character"</string>
+    <string name="title_activity_character_list">CharacterLIstActivity</string>
+</resources>
