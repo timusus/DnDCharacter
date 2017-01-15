@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Activities.CharacterLIstActivity"
+    tools:context=".Activities.CharacterListActivity"
     tools:showIn="@layout/activity_character_list">
 
     <android.support.v7.widget.RecyclerView
@@ -13,5 +13,13 @@
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/label_add_character_btn"
+        android:id="@+id/addCharacterBtn"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
