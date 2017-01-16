@@ -12,22 +12,39 @@
     Public static final fields (constants) are ALL_CAPS_WITH_UNDERSCORES.
     -->
     <string name="app_name">"D&amp;D Character"</string>
-    <string name="title_activity_character_list">CharacterListActivity</string>
+
+    <!-- Activity Titles -->
+    <string name="title_activity_character_list">CharactersListActivity</string>
+    <string name="title_activity_character_nav_drawer">CharacterNavDrawerActivity</string>
 
     <!-- General Strings-->
-    <string name="Ok">Ok</string>
+    <string name="Ok">OK</string>
     <string name="Cancel">Cancel</string>
 
     <!-- Labels -->
     <string name="label_add_character_btn">Add Character</string>
+    <string name="label_nav_drawer_attributes">Attributes</string>
+    <string name="label_nav_drawer_abilities">Abilities</string>
+    <string name="label_nav_drawer_skills">Skills</string>
+    <string name="label_nav_drawer_items">Items</string>
+    <string name="label_nav_drawer_attacks">Attacks</string>
+    <string name="label_nav_drawer_animals">Animals</string>
 
     <!-- Titles -->
     <string name="title_add_character">Add Character</string>
+    <string name="title_action_settings">Settings</string>
 
     <!-- Hints -->
     <string name="hint_add_character_name">Name</string>
     <string name="hint_add_character_level">Level</string>
 
     <!-- Tags -->
-    <string name="tag_add_character_dialog">ADD CHARACTER DIALOG</string>
+    <string name="tag_add_character_dialog">ADD_CHARACTER_DIALOG</string>
+
+    <!-- Actions -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- DEV STRINGS -->
+    <string name="lavender_goons">Lavender Goons</string>
 </resources>

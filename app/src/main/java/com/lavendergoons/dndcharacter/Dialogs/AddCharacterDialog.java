@@ -43,12 +43,11 @@ public class AddCharacterDialog extends DialogFragment implements DialogInterfac
 
         nameEdit = new EditText(getActivity());
         nameEdit.setHint(R.string.hint_add_character_name);
-        //nameEdit.setPadding(16, 0, 16, 0);
 
         levelEdit = new EditText(getActivity());
-        levelEdit.setInputType(InputType.TYPE_NUMBER_VARIATION_NORMAL);
+        levelEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
         levelEdit.setHint(R.string.hint_add_character_level);
-        //levelEdit.setPadding(16, 0, 16, 0);
+
         dialogLayout.addView(nameEdit, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         dialogLayout.addView(levelEdit, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
@@ -65,11 +64,12 @@ public class AddCharacterDialog extends DialogFragment implements DialogInterfac
     }
 
     public static interface OnCharacterCompleteListener {
-        public abstract void onCharacterComplete(Character character);
+        void onCharacterComplete(Character character);
     }
 
     @Override
     public void onClick(DialogInterface dialog, int position) {
+        //TODO Clean up click functions
         Character character = new Character(nameEdit.getText().toString(), Integer.parseInt(levelEdit.getText().toString()));
         Log.d("DEBUG / ADD_CHARACTER", "VALUES = "+nameEdit.getText().toString()+" "+levelEdit.getText().toString());
         CharacterListActivity activity = (CharacterListActivity) getActivity();
