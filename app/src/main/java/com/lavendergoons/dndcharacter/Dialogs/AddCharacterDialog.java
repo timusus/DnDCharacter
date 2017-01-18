@@ -2,6 +2,7 @@ package com.lavendergoons.dndcharacter.Dialogs;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,7 +20,7 @@ import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.R;
 
 /**
- * Created by t00530282 on 1/14/2017.
+ * Initial simple Character creation dialog.
  */
 public class AddCharacterDialog extends DialogFragment implements DialogInterface.OnClickListener {
 
@@ -53,7 +54,7 @@ public class AddCharacterDialog extends DialogFragment implements DialogInterfac
 
         builder.setTitle(getString(R.string.title_add_character));
         builder.setView(dialogLayout);
-        builder.setPositiveButton(R.string.Ok, this).setNegativeButton(R.string.Cancel, null);
+        builder.setPositiveButton(R.string.ok, this).setNegativeButton(R.string.cancel, null);
 
         return builder.create();
     }
@@ -70,20 +71,21 @@ public class AddCharacterDialog extends DialogFragment implements DialogInterfac
     @Override
     public void onClick(DialogInterface dialog, int position) {
         //TODO Clean up click functions
-        Character character = new Character(nameEdit.getText().toString(), Integer.parseInt(levelEdit.getText().toString()));
         Log.d("DEBUG / ADD_CHARACTER", "VALUES = "+nameEdit.getText().toString()+" "+levelEdit.getText().toString());
+
+        Character character = new Character(nameEdit.getText().toString(), Integer.parseInt(levelEdit.getText().toString()));
         CharacterListActivity activity = (CharacterListActivity) getActivity();
         activity.onCharacterComplete(character);
         dialog.dismiss();
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
         try {
-            mListener = (OnCharacterCompleteListener) activity;
+            mListener = (OnCharacterCompleteListener) context;
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement OnCharacterCompleteListener");
+            throw new ClassCastException(context.toString() + " must implement OnCharacterCompleteListener");
         }
     }
 }

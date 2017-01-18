@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import static android.R.attr.id;
 
 /**
- * Created by rtas on 2017-01-13.
+ * RecyclerView list adapter for Character list.
  */
 public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdapter.ViewHolder> {
 

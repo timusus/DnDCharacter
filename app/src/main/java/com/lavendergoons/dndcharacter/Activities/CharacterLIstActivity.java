@@ -19,6 +19,13 @@ import com.lavendergoons.dndcharacter.Utils.CharacterListAdapter;
 
 import java.util.ArrayList;
 
+/**
+  * Initial Activity to hold list of characters
+  * Add and delete characters.
+  * Selecting Character will launch CharacterNavDrawerActivity,
+  * to show all Character info.
+ */
+
 public class CharacterListActivity extends AppCompatActivity implements AddCharacterDialog.OnCharacterCompleteListener, CharacterListAdapter.OnCharacterClickListener {
 
     private RecyclerView mCharacterRecyclerView;

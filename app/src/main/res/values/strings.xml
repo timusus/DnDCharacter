@@ -18,8 +18,11 @@
     <string name="title_activity_character_nav_drawer">CharacterNavDrawerActivity</string>
 
     <!-- General Strings-->
-    <string name="Ok">OK</string>
-    <string name="Cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
 
     <!-- Labels -->
     <string name="label_add_character_btn">Add Character</string>
@@ -33,6 +36,7 @@
     <!-- Titles -->
     <string name="title_add_character">Add Character</string>
     <string name="title_action_settings">Settings</string>
+    <string name="title_generic_confirm">Are you sure?</string>
 
     <!-- Hints -->
     <string name="hint_add_character_name">Name</string>
