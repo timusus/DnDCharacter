@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lavendergoons.dndcharacter.Activities.CharacterListActivity;
+import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.R;
 
@@ -90,6 +91,7 @@ public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdap
         int position = holder.getAdapterPosition();
         String name = holder.mNameTextView.getText().toString();
         Toast.makeText(context, "Long - pos "+position+" name "+name, Toast.LENGTH_SHORT).show();
+        ConfirmationDialog.showConfirmDialog(context, "Are you sure long click?", (CharacterListActivity)context);
     }
 
     @Override

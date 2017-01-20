@@ -26,7 +26,7 @@ import java.util.ArrayList;
   * to show all Character info.
  */
 
-public class CharacterListActivity extends AppCompatActivity implements AddCharacterDialog.OnCharacterCompleteListener, CharacterListAdapter.OnCharacterClickListener {
+public class CharacterListActivity extends BaseActivity implements AddCharacterDialog.OnCharacterCompleteListener, CharacterListAdapter.OnCharacterClickListener {
 
     private RecyclerView mCharacterRecyclerView;
     private RecyclerView.Adapter mCharRecyclerAdapter;
@@ -104,6 +104,16 @@ public class CharacterListActivity extends AppCompatActivity implements AddChara
         Intent intent = new Intent(this, CharacterNavDrawerActivity.class);
         intent.putExtra("CHARACTER_NAME", name);
         startActivity(intent);
+    }
+
+    @Override
+    public void onConfirm() {
+
+    }
+
+    @Override
+    public void onCancel() {
+
     }
 }
 
