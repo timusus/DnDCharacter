@@ -1,11 +1,7 @@
 package com.lavendergoons.dndcharacter.Dialogs;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 
@@ -19,22 +15,20 @@ import com.lavendergoons.dndcharacter.R;
 
 public class ConfirmationDialog extends DialogFragment {
 
-    private ConfirmationDialogInterface mInterface;
-
     public ConfirmationDialog() {
         super();
     }
 
     public static interface ConfirmationDialogInterface {
-        void onConfirm();
-        void onCancel();
+        void ConfirmDialogOk();
+        void ConfirmDialogCancel();
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            mInterface = (ConfirmationDialogInterface) context;
+            ConfirmationDialogInterface mInterface = (ConfirmationDialogInterface) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() +" must implement ConfirmationDialogInterface");
         }
@@ -50,13 +44,13 @@ public class ConfirmationDialog extends DialogFragment {
         builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                target.onConfirm();
+                target.ConfirmDialogOk();
             }
         });
         builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                target.onCancel();
+                target.ConfirmDialogCancel();
             }
         });
         builder.create().show();

@@ -10,8 +10,8 @@ import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 
 public abstract class BaseActivity extends AppCompatActivity implements ConfirmationDialog.ConfirmationDialogInterface {
     @Override
-    public abstract void onConfirm();
+    public abstract void ConfirmDialogOk();
 
     @Override
-    public abstract void onCancel();
+    public abstract void ConfirmDialogCancel();
 }

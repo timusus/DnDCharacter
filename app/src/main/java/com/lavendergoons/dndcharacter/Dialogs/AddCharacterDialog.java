@@ -1,6 +1,5 @@
 package com.lavendergoons.dndcharacter.Dialogs;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -24,7 +23,6 @@ import com.lavendergoons.dndcharacter.R;
  */
 public class AddCharacterDialog extends DialogFragment implements DialogInterface.OnClickListener {
 
-    private OnCharacterCompleteListener mListener;
     private EditText nameEdit, levelEdit;
 
     public AddCharacterDialog() {
@@ -83,7 +81,7 @@ public class AddCharacterDialog extends DialogFragment implements DialogInterfac
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            mListener = (OnCharacterCompleteListener) context;
+            OnCharacterCompleteListener mListener = (OnCharacterCompleteListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() + " must implement OnCharacterCompleteListener");
         }

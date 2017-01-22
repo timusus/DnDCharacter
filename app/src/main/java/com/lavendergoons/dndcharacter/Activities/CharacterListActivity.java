@@ -26,7 +26,9 @@ import java.util.ArrayList;
   * to show all Character info.
  */
 
-public class CharacterListActivity extends BaseActivity implements AddCharacterDialog.OnCharacterCompleteListener, CharacterListAdapter.OnCharacterClickListener {
+public class CharacterListActivity extends BaseActivity
+        implements AddCharacterDialog.OnCharacterCompleteListener,
+        CharacterListAdapter.OnCharacterClickListener {
 
     private RecyclerView mCharacterRecyclerView;
     private RecyclerView.Adapter mCharRecyclerAdapter;
@@ -106,14 +108,16 @@ public class CharacterListActivity extends BaseActivity implements AddCharacterD
         startActivity(intent);
     }
 
-    @Override
-    public void onConfirm() {
 
+    @Override
+    public void ConfirmDialogOk() {
+        //TODO Clean up
+        Toast.makeText(this, "YES I AM SURE.", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onCancel() {
-
+    public void ConfirmDialogCancel() {
+        Toast.makeText(this, "NO I AM NOT SURE.", Toast.LENGTH_SHORT).show();
     }
 }
 
