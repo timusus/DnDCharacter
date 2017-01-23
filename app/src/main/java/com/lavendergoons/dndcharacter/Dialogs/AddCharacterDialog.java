@@ -41,11 +41,11 @@ public class AddCharacterDialog extends DialogFragment implements DialogInterfac
         dialogLayout.setPadding(2, 2, 2, 2);
 
         nameEdit = new EditText(getActivity());
-        nameEdit.setHint(R.string.hint_add_character_name);
+        nameEdit.setHint(R.string.hint_name);
 
         levelEdit = new EditText(getActivity());
         levelEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
-        levelEdit.setHint(R.string.hint_add_character_level);
+        levelEdit.setHint(R.string.hint_level);
 
         dialogLayout.addView(nameEdit, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         dialogLayout.addView(levelEdit, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));

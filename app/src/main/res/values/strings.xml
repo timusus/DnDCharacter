@@ -38,9 +38,18 @@
     <string name="title_action_settings">Settings</string>
     <string name="title_generic_confirm">Are you sure?</string>
 
-    <!-- Hints -->
-    <string name="hint_add_character_name">Name</string>
-    <string name="hint_add_character_level">Level</string>
+    <!-- Hints/Placeholders -->
+    <string name="hint_name">Name</string>
+    <string name="hint_level">Level</string>
+    <string name="hint_skill_checkbox">SkillName</string>
+    <string name="hint_skill_mod">MOD</string>
+    <string name="hint_total">Total</string>
+    <string name="hint_rank">Rank</string>
+    <string name="hint_misc">Misc</string>
+    <string name="hint_enter_craft">Enter Craft</string>
+    <string name="hint_enter_profession">Enter Profession</string>
+    <string name="hint_enter_perform">Enter Perform</string>
+    <string name="hint_enter_knowledge">Enter Knowledge</string>
 
     <!-- Tags -->
     <string name="tag_add_character_dialog">ADD_CHARACTER_DIALOG</string>
@@ -48,6 +57,46 @@
     <!-- Actions -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- Numbers -->
+    <string name="zero">0</string>
+
+    <!-- Skills -->
+    <string name="skill_appraise">Appraise</string>
+    <string name="skill_balance">Balance</string>
+    <string name="skill_bluff">Bluff</string>
+    <string name="skill_climb">Climb</string>
+    <string name="skill_concentration">Concentration</string>
+    <string name="skill_craft">Craft</string>
+    <string name="skill_decipher_script">Decipher Script</string>
+    <string name="skill_diplomacy">Diplomacy</string>
+    <string name="skill_disable_device">Disable Device</string>
+    <string name="skill_disguise">Disguise</string>
+    <string name="skill_escape_artist">Escape Artist</string>
+    <string name="skill_forgery">Forgery</string>
+    <string name="skill_gather_info">Gather Info</string>
+    <string name="skill_handle_animal">Handle Animal</string>
+    <string name="skill_heal">Heal</string>
+    <string name="skill_hide">Hide</string>
+    <string name="skill_intimidate">Intimidate</string>
+    <string name="skill_jump">Jump</string>
+    <string name="skill_knowledge">Knowledge</string>
+    <string name="skill_listen">Listen</string>
+    <string name="skill_move_silently">Move Silently</string>
+    <string name="skill_open_lock">Open Lock</string>
+    <string name="skill_perform">Perform</string>
+    <string name="skill_profession">Profession</string>
+    <string name="skill_ride">Ride</string>
+    <string name="skill_search">Search</string>
+    <string name="skill_sense_motive">Sense Motive</string>
+    <string name="skill_sleight_hand">Sleight of Hand</string>
+    <string name="skill_spellcraft">Spellcraft</string>
+    <string name="skill_spot">Spot</string>
+    <string name="skill_survival">Survival</string>
+    <string name="skill_swim">Swim</string>
+    <string name="skill_tumble">Tumble</string>
+    <string name="skill_use_magic_device">Use Magic Device</string>
+    <string name="skill_use_rope">Use Rope</string>
 
     <!-- DEV STRINGS -->
     <string name="lavender_goons">Lavender Goons</string>

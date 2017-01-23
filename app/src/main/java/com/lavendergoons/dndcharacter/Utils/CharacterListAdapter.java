@@ -20,9 +20,8 @@ import java.util.ArrayList;
  */
 public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdapter.ViewHolder> {
 
-
     private ArrayList<Character> mDataset;
-    private Context context;
+    private Context mContext;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public View cardView;
@@ -37,15 +36,14 @@ public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdap
     }
 
     public CharacterListAdapter(Context context, ArrayList<Character> dataset) {
-        this.context = context;
-        mDataset = dataset;
+        this.mContext = context;
+        this.mDataset = dataset;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_character_list, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return  new ViewHolder(view);
     }
 
     @Override
@@ -70,15 +68,15 @@ public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdap
     private void onCardClick(ViewHolder holder) {
         //TODO Clean up click functions
         String name = holder.mNameTextView.getText().toString();
-        CharacterListActivity activity = (CharacterListActivity) context;
+        CharacterListActivity activity = (CharacterListActivity) mContext;
         activity.onCharacterClick(name);
     }
 
     private void onCardLongClick(ViewHolder holder) {
         //TODO Clean up click functions
-        Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        Vibrator v = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(Constants.LONG_CLICK_VIBRATION);
-        ConfirmationDialog.showConfirmDialog(context, "Are you sure long click?", (CharacterListActivity)context);
+        ConfirmationDialog.showConfirmDialog(mContext, "Are you sure long click?", (CharacterListActivity)mContext);
     }
 
     @Override

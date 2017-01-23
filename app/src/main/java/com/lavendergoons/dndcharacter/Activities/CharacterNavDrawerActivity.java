@@ -2,14 +2,16 @@ package com.lavendergoons.dndcharacter.Activities;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
+import com.lavendergoons.dndcharacter.Fragments.SkillsFragment;
 import com.lavendergoons.dndcharacter.R;
 
 /**
@@ -18,17 +20,13 @@ import com.lavendergoons.dndcharacter.R;
  */
 
 public class CharacterNavDrawerActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        SkillsFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_nav);
-
-        //TODO Clean up intent messages
-        String name = getIntent().getStringExtra("CHARACTER_NAME");
-        TextView textView = (TextView) findViewById(R.id.testCharacterName);
-        textView.setText(name);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.character_nav_toolbar);
         setSupportActionBar(toolbar);
@@ -75,28 +73,34 @@ public class CharacterNavDrawerActivity extends BaseActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        // TODO Clean up. Dont init fragment
+        Fragment fragment = new Fragment();
+        switch (item.getItemId()) {
+            case R.id.nav_attributes:
+                break;
+            case R.id.nav_abilities:
+                break;
+            case R.id.nav_skills:
+                fragment = SkillsFragment.newInstance();
+                break;
+            case R.id.nav_attacks:
+                break;
+            case R.id.nav_items:
+                break;
+            case R.id.nav_animal:
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
+        if (fragment != null) {
+            FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();
+            fragTransaction.replace(R.id.content_character_nav, fragment).commit();
+        }
         return true;
     }
 
@@ -107,6 +111,11 @@ public class CharacterNavDrawerActivity extends BaseActivity
 
     @Override
     public void ConfirmDialogCancel() {
+
+    }
+
+    @Override
+    public void onFragmentInteraction() {
 
     }
 }
