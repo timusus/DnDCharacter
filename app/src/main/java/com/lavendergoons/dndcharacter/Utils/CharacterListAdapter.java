@@ -30,8 +30,8 @@ public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdap
         public ViewHolder(View view) {
             super(view);
             this.cardView = view;
-            mNameTextView = (TextView) view.findViewById(R.id.characterName);
-            mLevelTextView = (TextView) view.findViewById(R.id.characterLevel);
+            mNameTextView = (TextView) view.findViewById(R.id.characterListName);
+            mLevelTextView = (TextView) view.findViewById(R.id.characterListLevel);
         }
     }
 

@@ -61,6 +61,23 @@
     <!-- Numbers -->
     <string name="zero">0</string>
 
+    <!-- Attributes -->
+    <string name="attr_name">Name</string>
+    <string name="attr_class">Class</string>
+    <string name="attr_level">Level</string>
+    <string name="attr_experience">XP</string>
+    <string name="attr_race">Race</string>
+    <string name="attr_align">Alignment</string>
+    <string name="attr_deity">Deity</string>
+    <string name="attr_size">Size</string>
+    <string name="attr_age">Age</string>
+    <string name="attr_gender">Gender</string>
+    <string name="attr_height">Height</string>
+    <string name="attr_weight">Weight</string>
+    <string name="attr_eyes">Eyes</string>
+    <string name="attr_hair">Hair</string>
+    <string name="attr_skin">Skin</string>
+
     <!-- Skills -->
     <string name="skill_appraise">Appraise</string>
     <string name="skill_balance">Balance</string>

@@ -12,7 +12,7 @@ public final class Constants {
     final static String FRAGMENT_SKILLS = "SKILLS";
 
     // Arrays
-    final static String[] SKILLS = {
+    public final static String[] SKILLS = {
             "Appraise",
             "Balance",
             "Bluff",
@@ -48,6 +48,24 @@ public final class Constants {
             "Tumble",
             "Use Magic Device",
             "Use Rope"
+    };
+
+    public final static String[] ATTRIBUTES = {
+            "Name",
+            "Class",
+            "Level",
+            "XP",
+            "Race",
+            "Alignment",
+            "Deity",
+            "Size",
+            "Age",
+            "Gender",
+            "Height",
+            "Weight",
+            "Eyes",
+            "Hair",
+            "Skin"
     };
 
     // Enums

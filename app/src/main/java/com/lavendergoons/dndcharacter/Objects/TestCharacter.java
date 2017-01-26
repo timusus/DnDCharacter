@@ -3,6 +3,7 @@ package com.lavendergoons.dndcharacter.Objects;
 import com.lavendergoons.dndcharacter.Utils.Constants;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -11,6 +12,7 @@ import java.util.Random;
 
 public class TestCharacter {
     private ArrayList<Skill> skills = new ArrayList<Skill>();
+    private ArrayList<String> attributes = new ArrayList<String>(Arrays.asList(Constants.ATTRIBUTES));
     private String name = "Silian Mord";
     private int level = 10;
     Random random = new Random(1);

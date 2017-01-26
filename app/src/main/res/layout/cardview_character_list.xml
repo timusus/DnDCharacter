@@ -14,21 +14,21 @@
         card_view:cardCornerRadius="@dimen/cardview_default_radius">
 
         <TextView
-            android:id="@+id/characterName"
+            android:id="@+id/characterListName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Character Name"
+            android:text="@string/hint_name"
             android:layout_gravity="start"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"/>
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"/>
 
         <TextView
-            android:id="@+id/characterLevel"
+            android:id="@+id/characterListLevel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Level"
+            android:text="@string/hint_level"
             android:layout_gravity="end"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"/>
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"/>
     </android.support.v7.widget.CardView>
 </LinearLayout>
