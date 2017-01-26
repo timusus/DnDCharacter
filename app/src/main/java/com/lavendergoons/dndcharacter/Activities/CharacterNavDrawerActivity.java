@@ -7,10 +7,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Fragments.SkillsFragment;
 import com.lavendergoons.dndcharacter.R;
 
@@ -19,9 +22,10 @@ import com.lavendergoons.dndcharacter.R;
  * with all Character info.
  */
 
-public class CharacterNavDrawerActivity extends BaseActivity
+public class CharacterNavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        SkillsFragment.OnFragmentInteractionListener {
+        SkillsFragment.OnFragmentInteractionListener,
+        ConfirmationDialog.ConfirmationDialogInterface {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,12 +110,14 @@ public class CharacterNavDrawerActivity extends BaseActivity
 
     @Override
     public void ConfirmDialogOk() {
-
+        //TODO Clean up
+        Toast.makeText(this, "CharacterNavDrawerActivity Confirm", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void ConfirmDialogCancel() {
-
+        //TODO Clean up
+        Toast.makeText(this, "CharacterNavDrawerActivity Cancel", Toast.LENGTH_SHORT).show();
     }
 
     @Override

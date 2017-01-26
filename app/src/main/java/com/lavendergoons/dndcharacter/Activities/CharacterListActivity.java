@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.lavendergoons.dndcharacter.Dialogs.AddCharacterDialog;
+import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.CharacterListAdapter;
@@ -26,9 +27,10 @@ import java.util.ArrayList;
   * to show all Character info.
  */
 
-public class CharacterListActivity extends BaseActivity
+public class CharacterListActivity extends AppCompatActivity
         implements AddCharacterDialog.OnCharacterCompleteListener,
-        CharacterListAdapter.OnCharacterClickListener {
+        CharacterListAdapter.OnCharacterClickListener,
+        ConfirmationDialog.ConfirmationDialogInterface {
 
     private RecyclerView mCharacterRecyclerView;
     private RecyclerView.Adapter mCharRecyclerAdapter;
@@ -112,12 +114,12 @@ public class CharacterListActivity extends BaseActivity
     @Override
     public void ConfirmDialogOk() {
         //TODO Clean up
-        Toast.makeText(this, "YES I AM SURE.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "CharacterListActivity Confirm", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void ConfirmDialogCancel() {
-        Toast.makeText(this, "NO I AM NOT SURE.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "CharacterListActivity Cancel", Toast.LENGTH_SHORT).show();
     }
 }
 

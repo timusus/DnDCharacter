@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 
-import com.lavendergoons.dndcharacter.Activities.BaseActivity;
 import com.lavendergoons.dndcharacter.R;
 
 /**
@@ -34,7 +33,7 @@ public class ConfirmationDialog extends DialogFragment {
         }
     }
 
-    public static void showConfirmDialog(Context context, String mMessage, final BaseActivity target) {
+    public static void showConfirmDialog(Context context, String mMessage, final ConfirmationDialog.ConfirmationDialogInterface target) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(context.getString(R.string.confirm));
 

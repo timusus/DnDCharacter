@@ -8,7 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Objects.Skill;
 import com.lavendergoons.dndcharacter.Objects.TestCharacter;
 import com.lavendergoons.dndcharacter.R;
@@ -16,7 +18,7 @@ import com.lavendergoons.dndcharacter.Utils.SkillsAdapter;
 
 import java.util.ArrayList;
 
-public class SkillsFragment extends Fragment {
+public class SkillsFragment extends Fragment implements ConfirmationDialog.ConfirmationDialogInterface {
 
     private OnFragmentInteractionListener mListener;
     private RecyclerView mSkillsRecyclerView;
@@ -57,7 +59,7 @@ public class SkillsFragment extends Fragment {
         mSkillRecyclerLayoutManager = new LinearLayoutManager(this.getContext());
         mSkillsRecyclerView.setLayoutManager(mSkillRecyclerLayoutManager);
 
-        mSkillRecyclerAdapter = new SkillsAdapter(this.getContext(), skills);
+        mSkillRecyclerAdapter = new SkillsAdapter(this, skills);
         mSkillsRecyclerView.setAdapter(mSkillRecyclerAdapter);
 
         return rootView;
@@ -83,5 +85,15 @@ public class SkillsFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction();
+    }
+
+    @Override
+    public void ConfirmDialogOk() {
+        Toast.makeText(this.getContext(), "SkillsFragment Confirm", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void ConfirmDialogCancel() {
+        Toast.makeText(this.getContext(), "SkillsFragment Cancel", Toast.LENGTH_SHORT).show();
     }
 }
