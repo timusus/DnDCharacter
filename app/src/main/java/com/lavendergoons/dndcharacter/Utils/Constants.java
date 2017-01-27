@@ -6,7 +6,8 @@ package com.lavendergoons.dndcharacter.Utils;
 // ??
 public final class Constants {
 
-    final static int LONG_CLICK_VIBRATION = 100;
+    public final static int LONG_CLICK_VIBRATION = 100;
+    public final static int ATTRIBUTES_GRID_SPAN = 2;
 
     //Fragments
     final static String FRAGMENT_SKILLS = "SKILLS";

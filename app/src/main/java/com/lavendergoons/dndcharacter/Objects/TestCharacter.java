@@ -11,14 +11,13 @@ import java.util.Random;
  */
 
 public class TestCharacter {
-    private ArrayList<Skill> skills = new ArrayList<Skill>();
-    private ArrayList<String> attributes = new ArrayList<String>(Arrays.asList(Constants.ATTRIBUTES));
+    private ArrayList<Skill> skills = new ArrayList<>();
+    private ArrayList<Attribute> attributes = new ArrayList<>();
     private String name = "Silian Mord";
     private int level = 10;
     Random random = new Random(1);
 
     public TestCharacter() {
-
         init();
     }
 
@@ -30,9 +29,17 @@ public class TestCharacter {
             int total = mod + rank + misc;
             skills.add(new Skill(s.getName(), s.getMod(), random.nextBoolean(), total, mod, rank, misc));
         }
+
+        for(String s : Constants.ATTRIBUTES) {
+            attributes.add(new Attribute(s, s));
+        }
     }
 
     public ArrayList<Skill> getSkills() {
         return skills;
+    }
+
+    public ArrayList<Attribute> getAttributes() {
+        return attributes;
     }
 }

@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
+import com.lavendergoons.dndcharacter.Fragments.AttributesFragment;
 import com.lavendergoons.dndcharacter.Fragments.SkillsFragment;
 import com.lavendergoons.dndcharacter.R;
 
@@ -25,6 +26,7 @@ import com.lavendergoons.dndcharacter.R;
 public class CharacterNavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         SkillsFragment.OnFragmentInteractionListener,
+        AttributesFragment.OnFragmentInteractionListener,
         ConfirmationDialog.ConfirmationDialogInterface {
 
     @Override
@@ -84,6 +86,7 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         Fragment fragment = new Fragment();
         switch (item.getItemId()) {
             case R.id.nav_attributes:
+                fragment = AttributesFragment.newInstance();
                 break;
             case R.id.nav_abilities:
                 break;

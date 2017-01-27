@@ -3,15 +3,17 @@ package com.lavendergoons.dndcharacter.Fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.lavendergoons.dndcharacter.Objects.Attribute;
 import com.lavendergoons.dndcharacter.Objects.TestCharacter;
 import com.lavendergoons.dndcharacter.R;
-import com.lavendergoons.dndcharacter.Utils.SkillsAdapter;
+import com.lavendergoons.dndcharacter.Utils.AttributesAdapter;
+import com.lavendergoons.dndcharacter.Utils.Constants;
 
 import java.util.ArrayList;
 
@@ -24,7 +26,7 @@ public class AttributesFragment extends Fragment {
     private RecyclerView.Adapter mAttributeRecyclerAdapter;
     private RecyclerView.LayoutManager mAttributeLayoutManager;
     //TODO Change to Attribute object
-    private ArrayList<String> attributes;
+    private ArrayList<Attribute> attributes;
     //TODO Get Rid of TestCharacter
     private TestCharacter character;
 
@@ -41,7 +43,9 @@ public class AttributesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        // TODO Get rid of test character
+        character = new TestCharacter();
+        attributes = character.getAttributes();
     }
 
     @Override
@@ -54,10 +58,10 @@ public class AttributesFragment extends Fragment {
         // Keeps View same size on content change
         mAttributesRecyclerView.setHasFixedSize(true);
 
-        mAttributeLayoutManager = new LinearLayoutManager(this.getContext());
+        mAttributeLayoutManager = new GridLayoutManager(this.getActivity(), Constants.ATTRIBUTES_GRID_SPAN);
         mAttributesRecyclerView.setLayoutManager(mAttributeLayoutManager);
 
-        //mAttributeRecyclerAdapter = new SkillsAdapter(this, attributes);
+        mAttributeRecyclerAdapter = new AttributesAdapter(this, attributes);
         mAttributesRecyclerView.setAdapter(mAttributeRecyclerAdapter);
         return rootView;
     }
