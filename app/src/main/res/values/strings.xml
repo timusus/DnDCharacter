@@ -17,12 +17,16 @@
     <string name="title_activity_character_list">CharactersListActivity</string>
     <string name="title_activity_character_nav_drawer">CharacterNavDrawerActivity</string>
 
-    <!-- General Strings-->
+    <!-- General Strings -->
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="confirm">Confirm</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
+
+    <!-- General D&D -->
+    <string name="gen_weight">Weight</string>
+    <string name="gen_speed">Speed</string>
 
     <!-- Labels -->
     <string name="label_add_character_btn">Add Character</string>
@@ -37,6 +41,7 @@
     <string name="title_add_character">Add Character</string>
     <string name="title_action_settings">Settings</string>
     <string name="title_generic_confirm">Are you sure?</string>
+    <string name="title_armor_dialog">Armor Details</string>
 
     <!-- Hints/Placeholders -->
     <string name="hint_name">Name</string>
@@ -115,6 +120,18 @@
     <string name="skill_use_magic_device">Use Magic Device</string>
     <string name="skill_use_rope">Use Rope</string>
 
+    <!-- Armor -->
+    <string name="armor_name">Armor</string>
+    <string name="armor_type">Type</string>
+    <string name="armor_ac_bonus">AC Bonus</string>
+    <string name="armor_max_dex">Max Dex</string>
+    <string name="armor_check_penalty">Check Penalty</string>
+    <string name="armor_spell_failure">Spell Failure</string>
+    <string name="armor_properties">Properties</string>
+
     <!-- DEV STRINGS -->
     <string name="lavender_goons">Lavender Goons</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

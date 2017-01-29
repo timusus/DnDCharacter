@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/armor_name"
+        android:id="@+id/armorDialogName"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textSize="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/armor_type"
+        android:id="@+id/armorDialogType"
+        android:layout_below="@+id/armorDialogName"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="14dp"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/armor_ac_bonus"
+        android:id="@+id/armorDialogAC"
+        android:layout_below="@+id/armorDialogType"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="14dp"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/armor_max_dex"
+        android:id="@+id/armorDialogDex"
+        android:layout_below="@+id/armorDialogAC"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="14dp"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/armor_check_penalty"
+        android:id="@+id/armorDialogCheck"
+        android:layout_below="@+id/armorDialogDex"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="14dp"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/armor_spell_failure"
+        android:id="@+id/armorDialogSpell"
+        android:layout_below="@+id/armorDialogCheck"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="14dp"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gen_speed"
+        android:id="@+id/armorDialogSpeed"
+        android:layout_below="@+id/armorDialogSpell"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="14dp"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gen_weight"
+        android:id="@+id/armorDialogWeight"
+        android:layout_below="@+id/armorDialogSpeed"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="14dp"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/armor_properties"
+        android:id="@+id/armorDialogProperties"
+        android:layout_below="@+id/armorDialogWeight"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="14dp"
+        android:textSize="16dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/armorNameEdit"
+        android:ems="5"
+        android:layout_alignBottom="@+id/armorDialogName"
+        android:layout_toEndOf="@+id/armorDialogCheck" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/armorTypeEdit"
+        android:ems="5"
+        android:layout_alignBottom="@+id/armorDialogType"
+        android:layout_toEndOf="@+id/armorDialogCheck" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/armorACEdit"
+        android:ems="5"
+        android:layout_alignBottom="@+id/armorDialogAC"
+        android:layout_toEndOf="@+id/armorDialogCheck"
+        android:inputType="number" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/armorDexEdit"
+        android:ems="5"
+        android:layout_alignBottom="@+id/armorDialogDex"
+        android:layout_toEndOf="@+id/armorDialogCheck"
+        android:inputType="number" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/armorCheckEdit"
+        android:ems="5"
+        android:layout_alignBottom="@+id/armorDialogCheck"
+        android:layout_toEndOf="@+id/armorDialogCheck"
+        android:inputType="number" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/armorSpellEdit"
+        android:ems="5"
+        android:layout_alignBottom="@+id/armorDialogSpell"
+        android:layout_toEndOf="@+id/armorDialogCheck"
+        android:inputType="number" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/armorSpeedEdit"
+        android:ems="5"
+        android:layout_alignBottom="@+id/armorDialogSpeed"
+        android:layout_toEndOf="@+id/armorDialogCheck"
+        android:inputType="number" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/armorWeightEdit"
+        android:ems="5"
+        android:layout_alignBottom="@+id/armorDialogWeight"
+        android:layout_toEndOf="@+id/armorDialogCheck"
+        android:inputType="number" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/armorPropertiesEdit"
+        android:ems="5"
+        android:layout_alignBottom="@+id/armorDialogProperties"
+        android:layout_toEndOf="@+id/armorDialogCheck" />
+
+</RelativeLayout>
+<!-- TODO Change the text size to constant -->
