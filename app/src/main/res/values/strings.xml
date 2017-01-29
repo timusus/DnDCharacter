@@ -78,6 +78,14 @@
     <string name="attr_hair">Hair</string>
     <string name="attr_skin">Skin</string>
 
+    <!-- Abilities -->
+    <string name="ability_str">STR</string>
+    <string name="ability_dex">DEX</string>
+    <string name="ability_con">CON</string>
+    <string name="ability_int">INT</string>
+    <string name="ability_wis">WIS</string>
+    <string name="ability_cha">CHA</string>
+
     <!-- Skills -->
     <string name="skill_appraise">Appraise</string>
     <string name="skill_balance">Balance</string>

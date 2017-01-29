@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="@string/ability_str"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/abilityModStr"
+        android:textSize="18sp"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:text="@string/ability_dex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/abilityModStr"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp"
+        android:id="@+id/abilityModDex"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:text="@string/ability_con"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/abilityModDex"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp"
+        android:id="@+id/abilityModCon"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:text="@string/ability_int"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/abilityModCon"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp"
+        android:id="@+id/abilityModInt"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:text="@string/ability_wis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/abilityModInt"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp"
+        android:id="@+id/abilityModWis"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:text="@string/ability_cha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/abilityModWis"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp"
+        android:id="@+id/abilityModCha"
+        android:textSize="18sp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="2"
+        android:id="@+id/abilityStrScoreEdit"
+        android:hint="@string/ability_str"
+        android:layout_alignBaseline="@+id/abilityModStr"
+        android:layout_alignBottom="@+id/abilityModStr"
+        android:layout_toEndOf="@+id/abilityModCon"
+        android:layout_marginStart="16dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="2"
+        android:id="@+id/abilityDexScoreEdit"
+        android:hint="@string/ability_dex"
+        android:layout_alignBaseline="@+id/abilityModDex"
+        android:layout_alignBottom="@+id/abilityModDex"
+        android:layout_toEndOf="@+id/abilityModCon"
+        android:layout_marginStart="16dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="2"
+        android:id="@+id/abilityConScoreEdit"
+        android:hint="@string/ability_con"
+        android:layout_alignBaseline="@+id/abilityModCon"
+        android:layout_alignBottom="@+id/abilityModCon"
+        android:layout_toEndOf="@+id/abilityModCon"
+        android:layout_marginStart="16dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="2"
+        android:id="@+id/abilityIntScoreEdit"
+        android:hint="@string/ability_int"
+        android:layout_alignBaseline="@+id/abilityModInt"
+        android:layout_alignBottom="@+id/abilityModInt"
+        android:layout_toEndOf="@+id/abilityModCon"
+        android:layout_marginStart="16dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="2"
+        android:id="@+id/abilityWisScoreEdit"
+        android:hint="@string/ability_wis"
+        android:layout_alignBaseline="@+id/abilityModWis"
+        android:layout_alignBottom="@+id/abilityModWis"
+        android:layout_toEndOf="@+id/abilityModCon"
+        android:layout_marginStart="16dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="2"
+        android:id="@+id/abilityChaScoreEdit"
+        android:hint="@string/ability_cha"
+        android:layout_alignBaseline="@+id/abilityModCha"
+        android:layout_alignBottom="@+id/abilityModCha"
+        android:layout_toEndOf="@+id/abilityModCon"
+        android:layout_marginStart="16dp" />
+</RelativeLayout>
