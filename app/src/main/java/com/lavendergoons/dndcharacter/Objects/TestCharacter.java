@@ -13,6 +13,7 @@ import java.util.Random;
 public class TestCharacter {
     private ArrayList<Skill> skills = new ArrayList<>();
     private ArrayList<Attribute> attributes = new ArrayList<>();
+    private ArrayList<Armor> armor = new ArrayList<>();
     private String name = "Silian Mord";
     private int level = 10;
     Random random = new Random(1);
@@ -33,6 +34,9 @@ public class TestCharacter {
         for(String s : Constants.ATTRIBUTES) {
             attributes.add(new Attribute(s, s));
         }
+        armor.add(new Armor("Studded Leather", "Light", 3, 5, -1, 15, 20, 30, "This is my test string, the quick brown fox jumped over the lazy dog", 1));
+        armor.add(new Armor("Leather", "Light", 2, 4, -1, 15, 10, 30, "Some good thick leather for your needs", 1));
+        armor.add(new Armor("Shield", "Wooden", 1, 0, -1, 5, 5, 0, "A shield to use for stuff", 1));
     }
 
     public ArrayList<Skill> getSkills() {
@@ -41,5 +45,9 @@ public class TestCharacter {
 
     public ArrayList<Attribute> getAttributes() {
         return attributes;
+    }
+
+    public ArrayList<Armor> getArmor() {
+        return armor;
     }
 }

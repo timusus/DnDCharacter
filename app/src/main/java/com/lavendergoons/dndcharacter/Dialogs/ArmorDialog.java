@@ -12,6 +12,7 @@ import android.widget.EditText;
 import com.lavendergoons.dndcharacter.Objects.Armor;
 import com.lavendergoons.dndcharacter.R;
 
+
 /**
  * Dialog for Armor to be edited
  */
@@ -22,7 +23,8 @@ public class ArmorDialog extends DialogFragment {
     }
 
     public static interface OnArmorAction {
-
+        void OnArmorPositive();
+        void OnArmorNegative();
     }
 
     @Override
@@ -51,28 +53,31 @@ public class ArmorDialog extends DialogFragment {
         final EditText armorWeightEdit = (EditText) view.findViewById(R.id.armorWeightEdit);
         final EditText armorPropertiesEdit = (EditText) view.findViewById(R.id.armorPropertiesEdit);
 
-        armorNameEdit.setText(armor.getName());
-        armorTypeEdit.setText(armor.getType());
-        armorACEdit.setText(String.valueOf(armor.getAcBonus()));
-        armorDexEdit.setText(String.valueOf(armor.getMaxDex()));
-        armorCheckEdit.setText(String.valueOf(armor.getCheckPenalty()));
-        armorSpellEdit.setText(String.valueOf(armor.getSpellFailure()));
-        armorSpeedEdit.setText(String.valueOf(armor.getSpeed()));
-        armorWeightEdit.setText(String.valueOf(armor.getWeight()));
-        armorPropertiesEdit.setText(armor.getProperties());
+        if (armor != null) {
+            armorNameEdit.setText(armor.getName());
+            armorTypeEdit.setText(armor.getType());
+            armorACEdit.setText(String.valueOf(armor.getAcBonus()));
+            armorDexEdit.setText(String.valueOf(armor.getMaxDex()));
+            armorCheckEdit.setText(String.valueOf(armor.getCheckPenalty()));
+            armorSpellEdit.setText(String.valueOf(armor.getSpellFailure()));
+            armorSpeedEdit.setText(String.valueOf(armor.getSpeed()));
+            armorWeightEdit.setText(String.valueOf(armor.getWeight()));
+            armorPropertiesEdit.setText(armor.getProperties());
+        }
 
-        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+        builder.setView(view).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 //TODO Update onClicks
-                dialogInterface.dismiss();
+                target.OnArmorPositive();
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
+                target.OnArmorNegative();
             }
         });
+        builder.create().show();
     }
 }

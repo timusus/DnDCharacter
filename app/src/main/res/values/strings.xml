@@ -36,6 +36,9 @@
     <string name="label_nav_drawer_items">Items</string>
     <string name="label_nav_drawer_attacks">Attacks</string>
     <string name="label_nav_drawer_animals">Animals</string>
+    <string name="label_layout_ac_bonus">AC\nBonus</string>
+    <string name="label_layout_max_dex">Max\nDex</string>
+    <string name="label_layout_check_penalty">Check\nPenalty</string>
 
     <!-- Titles -->
     <string name="title_add_character">Add Character</string>
@@ -55,6 +58,7 @@
     <string name="hint_enter_profession">Enter Profession</string>
     <string name="hint_enter_perform">Enter Perform</string>
     <string name="hint_enter_knowledge">Enter Knowledge</string>
+    <string name="hint_properties">Properties</string>
 
     <!-- Tags -->
     <string name="tag_add_character_dialog">ADD_CHARACTER_DIALOG</string>
@@ -134,4 +138,5 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_test">TEST</string>
 </resources>
