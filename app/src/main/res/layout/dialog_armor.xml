@@ -195,6 +195,29 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gen_quantity"
+            android:id="@+id/armorDialogQuantity"
+            android:layout_centerVertical="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/gen_quantity"
+            android:ems="10"
+            android:id="@+id/armorQuantityEdit"
+            android:textSize="14sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:inputType="number" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal">
 

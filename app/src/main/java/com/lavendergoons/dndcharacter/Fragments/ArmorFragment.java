@@ -102,9 +102,9 @@ public class ArmorFragment extends Fragment implements ArmorDialog.OnArmorAction
     }
 
     @Override
-    public void OnArmorPositive() {
+    public void OnArmorPositive(Armor armor) {
         //TODO add armor from dialog to armor list
-        Toast.makeText(this.getContext(), "OK", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this.getContext(), "OK", Toast.LENGTH_SHORT).show();
     }
 
     @Override

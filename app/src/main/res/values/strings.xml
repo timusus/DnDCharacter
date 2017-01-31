@@ -24,9 +24,13 @@
     <string name="yes">YES</string>
     <string name="no">NO</string>
 
+    <!-- Warnings -->
+    <string name="warning_enter_required_fields">Please Enter All Required Fields</string>
+
     <!-- General D&D -->
     <string name="gen_weight">Weight</string>
     <string name="gen_speed">Speed</string>
+    <string name="gen_quantity">Quantity</string>
 
     <!-- Labels -->
     <string name="label_add_character_btn">Add Character</string>
