@@ -76,13 +76,23 @@ public class ArmorAdapter extends RecyclerView.Adapter<ArmorAdapter.ViewHolder> 
                 return onCardLongClick(mDataset.get(position));
             }
         });
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onCardClick(mDataset.get(position));
+            }
+        });
     }
 
     private boolean onCardLongClick(Armor armor) {
         Vibrator v = (Vibrator) armorFragment.getContext().getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(Constants.LONG_CLICK_VIBRATION);
-        ArmorDialog.showArmorDialog(armorFragment.getActivity(), armorFragment, armor);
+        armorFragment.deleteArmor(armor);
         return true;
+    }
+
+    private void onCardClick(Armor armor) {
+        ArmorDialog.showArmorDialog(armorFragment.getActivity(), armorFragment, armor);
     }
 
     @Override

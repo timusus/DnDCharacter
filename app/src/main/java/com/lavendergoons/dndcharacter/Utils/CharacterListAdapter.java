@@ -76,7 +76,7 @@ public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdap
         //TODO Clean up click functions
         Vibrator v = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(Constants.LONG_CLICK_VIBRATION);
-        ConfirmationDialog.showConfirmDialog(mContext, "Are you sure long click?", (CharacterListActivity)mContext);
+        ConfirmationDialog.showConfirmDialog(mContext, "Are you sure long click?", (CharacterListActivity)mContext, null);
     }
 
     @Override

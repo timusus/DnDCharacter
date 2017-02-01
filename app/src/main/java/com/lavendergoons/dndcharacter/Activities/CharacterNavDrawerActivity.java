@@ -115,13 +115,13 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
     }
 
     @Override
-    public void ConfirmDialogOk() {
+    public void ConfirmDialogOk(Object o) {
         //TODO Clean up
         Toast.makeText(this, "CharacterNavDrawerActivity Confirm", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void ConfirmDialogCancel() {
+    public void ConfirmDialogCancel(Object o) {
         //TODO Clean up
         Toast.makeText(this, "CharacterNavDrawerActivity Cancel", Toast.LENGTH_SHORT).show();
     }

@@ -1,12 +1,58 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.lavendergoons.dndcharacter.Fragments.SkillsFragment">
+    tools:context="com.lavendergoons.dndcharacter.Fragments.SkillsFragment"
+    android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/skill"
+            android:layout_marginStart="@dimen/activity_half_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_half_vertical_margin"/>
+
+        <TextView
+            android:text="@string/gen_misc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/skillLabelMiscView"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"/>
+
+        <TextView
+            android:text="@string/gen_rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/skillLabelMiscView"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:id="@+id/skillLabelRankView" />
+
+        <TextView
+            android:text="@string/gen_mod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/skillLabelRankView"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:id="@+id/skillLabelModView" />
+
+        <TextView
+            android:text="@string/gen_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/skillLabelModView"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:id="@+id/skillLabelTotalView" />
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/skillsRecyclerView"/>
-</FrameLayout>
+</LinearLayout>

@@ -93,7 +93,7 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
         //TODO Clean Up
         Vibrator v = (Vibrator) skillsFragment.getContext().getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(Constants.LONG_CLICK_VIBRATION);
-        ConfirmationDialog.showConfirmDialog(skillsFragment.getContext(), "Skills?", skillsFragment);
+        ConfirmationDialog.showConfirmDialog(skillsFragment.getContext(), "Skills?", skillsFragment, null);
         return true;
     }
 

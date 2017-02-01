@@ -9,9 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.lavendergoons.dndcharacter.Dialogs.ArmorDialog;
+import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Objects.Armor;
 import com.lavendergoons.dndcharacter.Objects.TestCharacter;
 import com.lavendergoons.dndcharacter.R;
@@ -22,14 +22,15 @@ import java.util.ArrayList;
 /**
  * Fragment to hold armor recycler view
  */
-public class ArmorFragment extends Fragment implements ArmorDialog.OnArmorAction, View.OnClickListener {
+public class ArmorFragment extends Fragment implements ArmorDialog.OnArmorAction, View.OnClickListener, ConfirmationDialog.ConfirmationDialogInterface {
 
     //TODO Character should be passed in from CharacterNavDrawerActivity
     private RecyclerView mArmorRecyclerView;
     private RecyclerView.Adapter mArmorRecyclerAdapter;
     private RecyclerView.LayoutManager mArmorRecyclerLayoutManager;
     private OnFragmentInteractionListener mListener;
-    private ArrayList<Armor> armor;
+    private ArrayList<Armor> armorList;
+    // TODO Get rid of test character
     private TestCharacter character;
     private FloatingActionButton fab;
 
@@ -49,7 +50,7 @@ public class ArmorFragment extends Fragment implements ArmorDialog.OnArmorAction
         super.onCreate(savedInstanceState);
         //TODO Get rid of test character
         character = new TestCharacter();
-        armor = character.getArmor();
+        armorList = character.getArmor();
     }
 
     @Override
@@ -65,7 +66,7 @@ public class ArmorFragment extends Fragment implements ArmorDialog.OnArmorAction
         mArmorRecyclerLayoutManager = new LinearLayoutManager(this.getContext());
         mArmorRecyclerView.setLayoutManager(mArmorRecyclerLayoutManager);
 
-        mArmorRecyclerAdapter = new ArmorAdapter(this, armor);
+        mArmorRecyclerAdapter = new ArmorAdapter(this, armorList);
         mArmorRecyclerView.setAdapter(mArmorRecyclerAdapter);
 
         fab = (FloatingActionButton) rootView.findViewById(R.id.addArmorFAB);
@@ -103,12 +104,25 @@ public class ArmorFragment extends Fragment implements ArmorDialog.OnArmorAction
 
     @Override
     public void OnArmorPositive(Armor armor) {
-        //TODO add armor from dialog to armor list
-        //Toast.makeText(this.getContext(), "OK", Toast.LENGTH_SHORT).show();
+
+        armorList.add(armor);
+        mArmorRecyclerAdapter.notifyDataSetChanged();
     }
 
     @Override
-    public void OnArmorNegative() {
-        Toast.makeText(this.getContext(), "Cancel", Toast.LENGTH_SHORT).show();
+    public void OnArmorNegative() {}
+
+    public void deleteArmor(Armor armor) {
+        ConfirmationDialog.showConfirmDialog(this.getContext(), getString(R.string.confirm_delete_armor), this, armor);
     }
+
+    // This may be sketchy
+    @Override
+    public void ConfirmDialogOk(Object armor) {
+        armorList.remove(armor);
+        mArmorRecyclerAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void ConfirmDialogCancel(Object armor) {}
 }

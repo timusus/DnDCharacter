@@ -15,9 +15,6 @@ import com.lavendergoons.dndcharacter.Objects.Armor;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.Utils;
 
-import static java.lang.Long.getLong;
-
-
 /**
  * Dialog for Armor to be edited
  */
@@ -81,13 +78,13 @@ public class ArmorDialog extends DialogFragment {
                 String name = armorNameEdit.getText().toString();
                 String type = armorTypeEdit.getText().toString();
                 String properties = armorPropertiesEdit.getText().toString();
-                long ac = 0;
-                long dex = 0;
-                long check = 0;
-                long spell = 0;
-                long speed = 0;
-                long weight = 0;
-                long quantity = 0;
+                long ac = -1;
+                long dex = -1;
+                long check = -1;
+                long spell = -1;
+                long speed = -1;
+                long weight = -1;
+                long quantity = -1;
                 try {
                     ac = Long.parseLong(armorACEdit.getText().toString());
                     dex = Long.parseLong(armorDexEdit.getText().toString());
@@ -97,14 +94,13 @@ public class ArmorDialog extends DialogFragment {
                     weight = Long.parseLong(armorWeightEdit.getText().toString());
                     quantity = Long.parseLong(armorQuantityEdit.getText().toString());
                 } catch (Exception ex) {
-                    Log.e("Number Error", "Error parsing longs");
+                    Log.e("PARSE", "Error parsing longs");
                     Toast.makeText(activity, ex.toString(), Toast.LENGTH_SHORT).show();
                     exceptionCheck = true;
                 }
-                //TODO Clean up
-                if (Utils.isStringEmpty(name) && Utils.isStringEmpty(type) && !exceptionCheck) {
+
+                if (Utils.isStringEmpty(name) && !exceptionCheck) {
                     target.OnArmorPositive(new Armor(name, type, ac, dex, check, spell, speed, weight, properties, quantity));
-                    Toast.makeText(activity, "All Good", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(activity, activity.getString(R.string.warning_enter_required_fields), Toast.LENGTH_LONG).show();
                 }

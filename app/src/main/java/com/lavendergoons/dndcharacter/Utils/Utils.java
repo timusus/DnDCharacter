@@ -1,7 +1,7 @@
 package com.lavendergoons.dndcharacter.Utils;
 
 /**
- * Created by rtas on 2017-01-30.
+ * General Utils
  */
 
 public class Utils {
