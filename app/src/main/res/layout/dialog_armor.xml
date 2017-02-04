@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/cardview_half_horizontal_margin"
+    android:paddingBottom="@dimen/cardview_half_vertical_margin"
+    android:paddingTop="@dimen/cardview_half_vertical_margin"
+    android:paddingEnd="@dimen/cardview_half_horizontal_margin">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/armor_name"
+            android:id="@+id/armorDialogName"
+            android:layout_centerVertical="true"/>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="@string/armor_name"
+            android:ems="10"
+            android:id="@+id/armorNameEdit"
+            android:textSize="14sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/armor_type"
+            android:id="@+id/armorDialogType"
+            android:layout_centerVertical="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="@string/armor_type"
+            android:ems="10"
+            android:id="@+id/armorTypeEdit"
+            android:textSize="14sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/armor_ac_bonus"
+            android:id="@+id/armorDialogAC"
+            android:layout_centerVertical="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="@string/armor_ac_bonus"
+            android:ems="10"
+            android:id="@+id/armorACEdit"
+            android:textSize="14sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/armor_max_dex"
+            android:id="@+id/armorDialogDex"
+            android:layout_centerVertical="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="@string/armor_max_dex"
+            android:ems="10"
+            android:id="@+id/armorDexEdit"
+            android:textSize="14sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/armor_check_penalty"
+            android:id="@+id/armorDialogCheck"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="@string/armor_check_penalty"
+            android:ems="10"
+            android:id="@+id/armorCheckEdit"
+            android:textSize="14sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/armor_spell_failure"
+            android:id="@+id/armorDialogSpell"
+            android:layout_centerVertical="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="@string/armor_spell_failure"
+            android:ems="10"
+            android:id="@+id/armorSpellEdit"
+            android:textSize="14sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gen_speed"
+            android:id="@+id/armorDialogSpeed"
+            android:layout_centerVertical="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="@string/gen_speed"
+            android:ems="10"
+            android:id="@+id/armorSpeedEdit"
+            android:textSize="14sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gen_weight"
+            android:id="@+id/armorDialogWeight"
+            android:layout_centerVertical="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/gen_weight"
+            android:ems="10"
+            android:id="@+id/armorWeightEdit"
+            android:textSize="14sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:inputType="number" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gen_quantity"
+            android:id="@+id/armorDialogQuantity"
+            android:layout_centerVertical="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/gen_quantity"
+            android:ems="10"
+            android:id="@+id/armorQuantityEdit"
+            android:textSize="14sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:inputType="number" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/armor_properties"
+            android:id="@+id/armorDialogProperties"/>
+
+    </RelativeLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="@string/armor_properties"
+        android:ems="10"
+        android:id="@+id/armorPropertiesEdit"
+        android:textSize="14sp"/>
+
+</LinearLayout>
+<!-- TODO Change the text size to constant -->

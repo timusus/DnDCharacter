@@ -112,13 +112,13 @@ public class CharacterListActivity extends AppCompatActivity
 
 
     @Override
-    public void ConfirmDialogOk() {
+    public void ConfirmDialogOk(Object o) {
         //TODO Clean up
         Toast.makeText(this, "CharacterListActivity Confirm", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void ConfirmDialogCancel() {
+    public void ConfirmDialogCancel(Object o) {
         Toast.makeText(this, "CharacterListActivity Cancel", Toast.LENGTH_SHORT).show();
     }
 }

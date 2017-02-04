@@ -25,8 +25,7 @@ public class AttributesFragment extends Fragment {
     private RecyclerView mAttributesRecyclerView;
     private RecyclerView.Adapter mAttributeRecyclerAdapter;
     private RecyclerView.LayoutManager mAttributeLayoutManager;
-    //TODO Change to Attribute object
-    private ArrayList<Attribute> attributes;
+    private ArrayList<Attribute> attributesList;
     //TODO Get Rid of TestCharacter
     private TestCharacter character;
 
@@ -35,9 +34,7 @@ public class AttributesFragment extends Fragment {
     }
 
     public static AttributesFragment newInstance() {
-        AttributesFragment fragment = new AttributesFragment();
-        Bundle args = new Bundle();
-        return fragment;
+        return new AttributesFragment();
     }
 
     @Override
@@ -45,7 +42,7 @@ public class AttributesFragment extends Fragment {
         super.onCreate(savedInstanceState);
         // TODO Get rid of test character
         character = new TestCharacter();
-        attributes = character.getAttributes();
+        attributesList = character.getAttributes();
     }
 
     @Override
@@ -61,7 +58,7 @@ public class AttributesFragment extends Fragment {
         mAttributeLayoutManager = new GridLayoutManager(this.getActivity(), Constants.ATTRIBUTES_GRID_SPAN);
         mAttributesRecyclerView.setLayoutManager(mAttributeLayoutManager);
 
-        mAttributeRecyclerAdapter = new AttributesAdapter(this, attributes);
+        mAttributeRecyclerAdapter = new AttributesAdapter(this, attributesList);
         mAttributesRecyclerView.setAdapter(mAttributeRecyclerAdapter);
         return rootView;
     }

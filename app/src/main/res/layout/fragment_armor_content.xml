@@ -1,0 +1,62 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.lavendergoons.dndcharacter.Fragments.ArmorFragment"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/labelLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Armor"
+            android:id="@+id/armorLabel"
+            android:layout_marginBottom="@dimen/cardview_half_vertical_margin"/>
+
+        <TextView
+            android:text="Type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="75dp"
+            android:id="@+id/armorTypeLabel" />
+
+        <TextView
+            android:text="@string/label_layout_check_penalty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/armorCheckLabel" />
+
+        <TextView
+            android:text="@string/label_layout_max_dex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:id="@+id/armorDexLabel"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/armorCheckLabel" />
+
+        <TextView
+            android:text="@string/label_layout_ac_bonus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:id="@+id/armorACLabel"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/armorDexLabel" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/armorRecyclerView"/>
+
+</LinearLayout>

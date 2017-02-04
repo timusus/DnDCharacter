@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/cardview_separator_margin"
+        card_view:cardCornerRadius="@dimen/cardview_default_radius">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/cardview_half_horizontal_margin"
+            android:layout_marginTop="@dimen/cardview_half_vertical_margin"
+            android:layout_marginBottom="@dimen/cardview_half_vertical_margin"
+            android:layout_marginEnd="@dimen/cardview_half_horizontal_margin">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/armor_name"
+                android:id="@+id/cardArmorName"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/armor_type"
+                android:id="@+id/cardArmorType"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/cardArmorName"
+                android:layout_marginStart="12dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00"
+                android:id="@+id/cardArmorCheck"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00"
+                android:id="@+id/cardArmorDex"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@+id/cardArmorCheck"
+                android:layout_marginEnd="@dimen/activity_double_horizontal_margin" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00"
+                android:id="@+id/cardArmorAC"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@+id/cardArmorDex"
+                android:layout_marginEnd="@dimen/activity_double_horizontal_margin" />
+
+            <TextView
+                android:text="@string/armor_spell_failure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/armorSpellLabel"
+                android:layout_below="@+id/cardArmorName"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="12dp" />
+
+            <TextView
+                android:text="00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cardArmorSpell"
+                android:layout_alignBaseline="@+id/armorSpellLabel"
+                android:layout_alignBottom="@+id/armorSpellLabel"
+                android:layout_toEndOf="@+id/armorSpellLabel"
+                android:layout_marginStart="12dp"/>
+
+            <TextView
+                android:text="@string/gen_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/cardArmorSpell"
+                android:layout_toEndOf="@+id/cardArmorSpell"
+                android:layout_marginStart="16dp"
+                android:id="@+id/armorSpeedLabel" />
+
+            <TextView
+                android:text="00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cardArmorSpeed"
+                android:layout_alignBaseline="@+id/armorSpeedLabel"
+                android:layout_alignBottom="@+id/armorSpeedLabel"
+                android:layout_toEndOf="@+id/armorSpeedLabel"
+                android:layout_marginStart="12dp"/>
+
+            <TextView
+                android:text="@string/gen_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/cardArmorSpeed"
+                android:layout_toEndOf="@+id/cardArmorSpeed"
+                android:id="@+id/armorWeightLabel"
+                android:layout_marginStart="16dp"/>
+
+            <TextView
+                android:text="00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cardArmorWeight"
+                android:layout_alignBaseline="@+id/armorWeightLabel"
+                android:layout_alignBottom="@+id/armorWeightLabel"
+                android:layout_toEndOf="@+id/armorWeightLabel"
+                android:layout_marginStart="12dp" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

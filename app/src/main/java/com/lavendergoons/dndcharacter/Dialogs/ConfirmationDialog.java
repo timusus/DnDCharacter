@@ -19,8 +19,8 @@ public class ConfirmationDialog extends DialogFragment {
     }
 
     public static interface ConfirmationDialogInterface {
-        void ConfirmDialogOk();
-        void ConfirmDialogCancel();
+        void ConfirmDialogOk(Object o);
+        void ConfirmDialogCancel(Object o);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class ConfirmationDialog extends DialogFragment {
         }
     }
 
-    public static void showConfirmDialog(Context context, String mMessage, final ConfirmationDialog.ConfirmationDialogInterface target) {
+    public static void showConfirmDialog(Context context, String mMessage, final ConfirmationDialog.ConfirmationDialogInterface target, final Object o) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(context.getString(R.string.confirm));
 
@@ -43,13 +43,13 @@ public class ConfirmationDialog extends DialogFragment {
         builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                target.ConfirmDialogOk();
+                target.ConfirmDialogOk(o);
             }
         });
         builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                target.ConfirmDialogCancel();
+                target.ConfirmDialogCancel(o);
             }
         });
         builder.create().show();

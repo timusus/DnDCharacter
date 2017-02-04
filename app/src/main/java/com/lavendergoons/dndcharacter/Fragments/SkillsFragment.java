@@ -25,7 +25,7 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
     private RecyclerView mSkillsRecyclerView;
     private RecyclerView.Adapter mSkillRecyclerAdapter;
     private RecyclerView.LayoutManager mSkillRecyclerLayoutManager;
-    private ArrayList<Skill> skills;
+    private ArrayList<Skill> skillsList;
     // TODO Get rid of test character
     private TestCharacter character;
 
@@ -34,9 +34,7 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
     }
 
     public static SkillsFragment newInstance() {
-        SkillsFragment fragment = new SkillsFragment();
-        Bundle args = new Bundle();
-        return fragment;
+        return new SkillsFragment();
     }
 
     @Override
@@ -44,7 +42,7 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
         super.onCreate(savedInstanceState);
         // TODO Get rid of test character
         character = new TestCharacter();
-        skills = character.getSkills();
+        skillsList = character.getSkills();
     }
 
     @Override
@@ -60,7 +58,7 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
         mSkillRecyclerLayoutManager = new LinearLayoutManager(this.getContext());
         mSkillsRecyclerView.setLayoutManager(mSkillRecyclerLayoutManager);
 
-        mSkillRecyclerAdapter = new SkillsAdapter(this, skills);
+        mSkillRecyclerAdapter = new SkillsAdapter(this, skillsList);
         mSkillsRecyclerView.setAdapter(mSkillRecyclerAdapter);
 
         return rootView;
@@ -89,12 +87,12 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
     }
 
     @Override
-    public void ConfirmDialogOk() {
+    public void ConfirmDialogOk(Object o) {
         Toast.makeText(this.getContext(), "SkillsFragment Confirm", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void ConfirmDialogCancel() {
+    public void ConfirmDialogCancel(Object o) {
         Toast.makeText(this.getContext(), "SkillsFragment Cancel", Toast.LENGTH_SHORT).show();
     }
 }
