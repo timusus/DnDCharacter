@@ -80,6 +80,7 @@
 
     <!-- Numbers -->
     <string name="zero">0</string>
+    <string name="one">1</string>
 
     <!-- Attributes -->
     <string name="attr_name">Name</string>

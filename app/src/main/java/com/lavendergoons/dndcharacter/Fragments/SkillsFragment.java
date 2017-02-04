@@ -34,9 +34,7 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
     }
 
     public static SkillsFragment newInstance() {
-        SkillsFragment fragment = new SkillsFragment();
-        Bundle args = new Bundle();
-        return fragment;
+        return new SkillsFragment();
     }
 
     @Override

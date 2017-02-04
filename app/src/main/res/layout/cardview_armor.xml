@@ -41,7 +41,8 @@
                 android:text="00"
                 android:id="@+id/cardArmorCheck"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -50,7 +51,7 @@
                 android:id="@+id/cardArmorDex"
                 android:layout_alignParentTop="true"
                 android:layout_toStartOf="@+id/cardArmorCheck"
-                android:layout_marginEnd="16dp" />
+                android:layout_marginEnd="@dimen/activity_double_horizontal_margin" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -59,7 +60,7 @@
                 android:id="@+id/cardArmorAC"
                 android:layout_alignParentTop="true"
                 android:layout_toStartOf="@+id/cardArmorDex"
-                android:layout_marginEnd="16dp" />
+                android:layout_marginEnd="@dimen/activity_double_horizontal_margin" />
 
             <TextView
                 android:text="@string/armor_spell_failure"

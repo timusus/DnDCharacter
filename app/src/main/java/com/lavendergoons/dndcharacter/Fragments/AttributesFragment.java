@@ -34,9 +34,7 @@ public class AttributesFragment extends Fragment {
     }
 
     public static AttributesFragment newInstance() {
-        AttributesFragment fragment = new AttributesFragment();
-        Bundle args = new Bundle();
-        return fragment;
+        return new AttributesFragment();
     }
 
     @Override

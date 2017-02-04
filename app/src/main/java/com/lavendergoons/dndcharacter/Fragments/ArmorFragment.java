@@ -39,10 +39,7 @@ public class ArmorFragment extends Fragment implements ArmorDialog.OnArmorAction
     }
 
     public static ArmorFragment newInstance() {
-        ArmorFragment fragment = new ArmorFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+        return new ArmorFragment();
     }
 
     @Override
@@ -104,8 +101,9 @@ public class ArmorFragment extends Fragment implements ArmorDialog.OnArmorAction
 
     @Override
     public void OnArmorPositive(Armor armor) {
-
-        armorList.add(armor);
+        if (armor != null) {
+            armorList.add(armor);
+        }
         mArmorRecyclerAdapter.notifyDataSetChanged();
     }
 

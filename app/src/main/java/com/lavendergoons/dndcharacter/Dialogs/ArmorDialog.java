@@ -39,7 +39,7 @@ public class ArmorDialog extends DialogFragment {
         }
     }
 
-    public static void showArmorDialog(final Activity activity, final OnArmorAction target, Armor armor) {
+    public static void showArmorDialog(final Activity activity, final OnArmorAction target, final Armor armor) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(activity.getString(R.string.title_armor_dialog));
 
@@ -67,6 +67,9 @@ public class ArmorDialog extends DialogFragment {
             armorWeightEdit.setText(String.valueOf(armor.getWeight()));
             armorPropertiesEdit.setText(armor.getProperties());
             armorQuantityEdit.setText(String.valueOf(armor.getQuantity()));
+        } else {
+            // Make quantity 1 by default
+            armorQuantityEdit.setText(activity.getString(R.string.one));
         }
 
         builder.setView(view).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
@@ -84,23 +87,36 @@ public class ArmorDialog extends DialogFragment {
                 long spell = -1;
                 long speed = -1;
                 long weight = -1;
-                long quantity = -1;
+                long quantity = 1;
                 try {
                     ac = Long.parseLong(armorACEdit.getText().toString());
                     dex = Long.parseLong(armorDexEdit.getText().toString());
                     check = Long.parseLong(armorCheckEdit.getText().toString());
                     spell = Long.parseLong(armorSpellEdit.getText().toString());
-                    speed = Long.parseLong(armorSpeedEdit.getText().toString());
                     weight = Long.parseLong(armorWeightEdit.getText().toString());
+                    speed = Long.parseLong(armorSpeedEdit.getText().toString());
                     quantity = Long.parseLong(armorQuantityEdit.getText().toString());
                 } catch (Exception ex) {
                     Log.e("PARSE", "Error parsing longs");
-                    Toast.makeText(activity, ex.toString(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(activity, ex.toString(), Toast.LENGTH_SHORT).show();
                     exceptionCheck = true;
                 }
 
-                if (Utils.isStringEmpty(name) && !exceptionCheck) {
-                    target.OnArmorPositive(new Armor(name, type, ac, dex, check, spell, speed, weight, properties, quantity));
+                // Not Editing existing Armor, create new one
+                if (Utils.isStringEmpty(name) && !exceptionCheck && armor == null) {
+                    target.OnArmorPositive(new Armor(name, type, ac, dex, check, spell, weight, speed, properties, quantity));
+                } else if (Utils.isStringEmpty(name) && !exceptionCheck && armor != null) {
+                    armor.setName(name);
+                    armor.setType(type);
+                    armor.setAcBonus(ac);
+                    armor.setMaxDex(dex);
+                    armor.setCheckPenalty(check);
+                    armor.setSpellFailure(spell);
+                    armor.setWeight(weight);
+                    armor.setSpeed(speed);
+                    armor.setProperties(properties);
+                    armor.setQuantity(quantity);
+                    target.OnArmorPositive(null);
                 } else {
                     Toast.makeText(activity, activity.getString(R.string.warning_enter_required_fields), Toast.LENGTH_LONG).show();
                 }
