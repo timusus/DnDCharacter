@@ -22,7 +22,7 @@ import java.util.ArrayList;
 /**
  * Fragment to hold armor recycler view
  */
-public class ArmorFragment extends Fragment implements ArmorDialog.OnArmorAction, View.OnClickListener, ConfirmationDialog.ConfirmationDialogInterface {
+public class ArmorFragment extends Fragment implements ArmorDialog.ArmorDialogListener, View.OnClickListener, ConfirmationDialog.ConfirmationDialogInterface {
 
     //TODO Character should be passed in from CharacterNavDrawerActivity
     private RecyclerView mArmorRecyclerView;

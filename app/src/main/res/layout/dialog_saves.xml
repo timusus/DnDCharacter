@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_half_horizontal_margin">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/hint_total"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/saveDialogTotalLabel"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical" />
+
+        <TextView
+            android:text="@string/gen_base"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/saveDialogBaseLabel"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical" />
+
+        <TextView
+            android:text="@string/label_layout_ability_mod"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/saveDialogAbilityLabel"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical" />
+
+        <TextView
+            android:text="@string/label_layout_magic_mod"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/saveDialogMagicLabel"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical" />
+
+        <TextView
+            android:text="@string/label_layout_misc_mod"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/saveDialogMiscLabel"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical" />
+
+        <TextView
+            android:text="@string/label_layout_temp_mod"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/saveDialogTempLabel"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical" />
+    </LinearLayout>
+
+    <TextView
+        android:text="@string/save_fortitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/saveDialogFortLabel" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="2"
+            android:id="@+id/saveDialogFortTotalEdit"
+            android:layout_weight="1"
+            android:hint="00"
+            android:gravity="center_horizontal"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="2"
+            android:id="@+id/saveDialogFortBaseEdit"
+            android:layout_weight="1"
+            android:hint="00"
+            android:gravity="center_horizontal"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="2"
+            android:id="@+id/saveDialogFortAbilityEdit"
+            android:layout_weight="1"
+            android:hint="00"
+            android:gravity="center_horizontal"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="2"
+            android:id="@+id/saveDialogFortMagicEdit"
+            android:layout_weight="1"
+            android:hint="00"
+            android:gravity="center_horizontal"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="2"
+            android:id="@+id/saveDialogFortMiscEdit"
+            android:layout_weight="1"
+            android:hint="00"
+            android:gravity="center_horizontal"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="2"
+            android:id="@+id/saveDialogFortTempEdit"
+            android:layout_weight="1"
+            android:hint="00"
+            android:gravity="center_horizontal"/>
+    </LinearLayout>
+
+    <TextView
+        android:text="@string/save_reflex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/saveDialogReflexLabel" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="2"
+            android:id="@+id/saveDialogReflexTotalEdit"
+            android:layout_weight="1"
+            android:hint="00"
+            android:gravity="center_horizontal"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="2"
+            android:id="@+id/saveDialogReflexBaseEdit"
+            android:layout_weight="1"
+            android:hint="00"
+            android:gravity="center_horizontal"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="2"
+            android:id="@+id/saveDialogReflexAbilityEdit"
+            android:layout_weight="1"
+            android:hint="00"
+            android:gravity="center_horizontal"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="2"
+            android:id="@+id/saveDialogReflexMagicEdit"
+            android:layout_weight="1"
+            android:hint="00"
+            android:gravity="center_horizontal"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="2"
+            android:id="@+id/saveDialogReflexMiscEdit"
+            android:layout_weight="1"
+            android:hint="00"
+            android:gravity="center_horizontal"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="2"
+            android:id="@+id/saveDialogReflexTempEdit"
+            android:layout_weight="1"
+            android:hint="00"
+            android:gravity="center_horizontal"/>
+    </LinearLayout>
+
+    <TextView
+        android:text="@string/save_will"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/saveDialogWillLabel" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="2"
+            android:id="@+id/saveDialogWillTotalEdit"
+            android:layout_weight="1"
+            android:hint="00"
+            android:gravity="center_horizontal"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="2"
+            android:id="@+id/saveDialogWillBaseEdit"
+            android:layout_weight="1"
+            android:hint="00"
+            android:gravity="center_horizontal"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="2"
+            android:id="@+id/saveDialogWillAbilityEdit"
+            android:layout_weight="1"
+            android:hint="00"
+            android:gravity="center_horizontal"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="2"
+            android:id="@+id/saveDialogWillMagicEdit"
+            android:layout_weight="1"
+            android:hint="00"
+            android:gravity="center_horizontal"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="2"
+            android:id="@+id/saveDialogWillMiscEdit"
+            android:layout_weight="1"
+            android:hint="00"
+            android:gravity="center_horizontal"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="2"
+            android:id="@+id/saveDialogWillTempEdit"
+            android:layout_weight="1"
+            android:hint="00"
+            android:gravity="center_horizontal"/>
+    </LinearLayout>
+</LinearLayout>

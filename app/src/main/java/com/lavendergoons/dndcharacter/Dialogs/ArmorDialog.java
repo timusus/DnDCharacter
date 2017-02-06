@@ -24,7 +24,7 @@ public class ArmorDialog extends DialogFragment {
         super();
     }
 
-    public static interface OnArmorAction {
+    public static interface ArmorDialogListener {
         void OnArmorPositive(Armor armor);
         void OnArmorNegative();
     }
@@ -33,13 +33,13 @@ public class ArmorDialog extends DialogFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            OnArmorAction mInterface = (OnArmorAction) context;
+            ArmorDialogListener mInterface = (ArmorDialogListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() +" must implement OnArmorAction");
         }
     }
 
-    public static void showArmorDialog(final Activity activity, final OnArmorAction target, final Armor armor) {
+    public static void showArmorDialog(final Activity activity, final ArmorDialogListener target, final Armor armor) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(activity.getString(R.string.title_armor_dialog));
 

@@ -23,6 +23,7 @@
     <string name="confirm">Confirm</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
+    <string name="edit">Edit</string>
 
     <!-- Warnings -->
     <string name="warning_enter_required_fields">Please Enter All Required Fields</string>
@@ -38,6 +39,8 @@
     <string name="gen_mod">Mod</string>
     <string name="gen_rank">Rank</string>
     <string name="gen_misc">Misc</string>
+    <string name="gen_score">Score</string>
+    <string name="gen_base">Base</string>
 
     <!-- Labels -->
     <string name="label_add_character_btn">Add Character</string>
@@ -50,12 +53,18 @@
     <string name="label_layout_ac_bonus">AC\nBonus</string>
     <string name="label_layout_max_dex">Max\nDex</string>
     <string name="label_layout_check_penalty">Check\nPenalty</string>
+    <string name="label_layout_ability_mod">Ability\nMod</string>
+    <string name="label_layout_magic_mod">Magic\nMod</string>
+    <string name="label_layout_misc_mod">Misc\nMod</string>
+    <string name="label_layout_temp_mod">Temp\nMod</string>
 
     <!-- Titles -->
     <string name="title_add_character">Add Character</string>
     <string name="title_action_settings">Settings</string>
     <string name="title_generic_confirm">Are you sure?</string>
     <string name="title_armor_dialog">Armor Details</string>
+    <string name="title_ac_dialog">AC Details</string>
+    <string name="title_saves_dialog">Saves Details</string>
 
     <!-- Hints/Placeholders -->
     <string name="hint_name">Name</string>
@@ -81,6 +90,35 @@
     <!-- Numbers -->
     <string name="zero">0</string>
     <string name="one">1</string>
+    <string name="ten">10</string>
+
+    <!-- Abilities -->
+    <string name="ability_str">STR</string>
+    <string name="ability_dex">DEX</string>
+    <string name="ability_con">CON</string>
+    <string name="ability_int">INT</string>
+    <string name="ability_wis">WIS</string>
+    <string name="ability_cha">CHA</string>
+
+    <!-- AC -->
+    <string name="ac_gen">AC</string>
+    <string name="ac_default">Default</string>
+    <string name="ac_touch">Touch</string>
+    <string name="ac_flat_foot">Flat-Footed</string>
+    <string name="ac_shield">Shield</string>
+    <string name="ac_dex">Dex</string>
+    <string name="ac_size">Size</string>
+    <string name="ac_natural">Natural</string>
+    <string name="ac_deflection">Deflection</string>
+
+    <!-- Armor -->
+    <string name="armor_name">Armor</string>
+    <string name="armor_type">Type</string>
+    <string name="armor_ac_bonus">AC Bonus</string>
+    <string name="armor_max_dex">Max Dex</string>
+    <string name="armor_check_penalty">Check Penalty</string>
+    <string name="armor_spell_failure">Spell Failure</string>
+    <string name="armor_properties">Properties</string>
 
     <!-- Attributes -->
     <string name="attr_name">Name</string>
@@ -98,14 +136,11 @@
     <string name="attr_eyes">Eyes</string>
     <string name="attr_hair">Hair</string>
     <string name="attr_skin">Skin</string>
-
-    <!-- Abilities -->
-    <string name="ability_str">STR</string>
-    <string name="ability_dex">DEX</string>
-    <string name="ability_con">CON</string>
-    <string name="ability_int">INT</string>
-    <string name="ability_wis">WIS</string>
-    <string name="ability_cha">CHA</string>
+    
+    <!-- Saves -->
+    <string name="save_fortitude">Fortitude</string>
+    <string name="save_reflex">Reflex</string>
+    <string name="save_will">Will</string>
 
     <!-- Skills -->
     <string name="skill">Skill</string>
@@ -145,19 +180,6 @@
     <string name="skill_use_magic_device">Use Magic Device</string>
     <string name="skill_use_rope">Use Rope</string>
 
-    <!-- Armor -->
-    <string name="armor_name">Armor</string>
-    <string name="armor_type">Type</string>
-    <string name="armor_ac_bonus">AC Bonus</string>
-    <string name="armor_max_dex">Max Dex</string>
-    <string name="armor_check_penalty">Check Penalty</string>
-    <string name="armor_spell_failure">Spell Failure</string>
-    <string name="armor_properties">Properties</string>
-
     <!-- DEV STRINGS -->
     <string name="lavender_goons">Lavender Goons</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_test">TEST</string>
 </resources>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="@string/save_fortitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/saveFortLabel"
+                android:layout_marginBottom="@dimen/activity_half_horizontal_margin"/>
+
+            <TextView
+                android:text="@string/save_reflex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/saveReflexLabel"
+                android:layout_marginBottom="@dimen/activity_half_horizontal_margin"/>
+
+            <TextView
+                android:text="@string/save_will"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/saveWillLabel"
+                android:layout_marginBottom="@dimen/activity_half_horizontal_margin"/>
+
+            <Button
+                android:text="@string/edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/savesEditBtn" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/saveFortValue"
+                android:layout_marginBottom="@dimen/activity_half_horizontal_margin"/>
+
+            <TextView
+                android:text="00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/saveReflexValue"
+                android:layout_marginBottom="@dimen/activity_half_horizontal_margin"/>
+
+            <TextView
+                android:text="00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/saveWillValue"
+                android:layout_marginBottom="@dimen/activity_half_horizontal_margin"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="@string/ac_gen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/acGenLabel"
+                android:layout_marginBottom="@dimen/activity_half_horizontal_margin"/>
+
+            <TextView
+                android:text="@string/ac_touch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/acTouchLabel"
+                android:layout_marginBottom="@dimen/activity_half_horizontal_margin"/>
+
+            <TextView
+                android:text="@string/ac_flat_foot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/acFlatFootLabel"
+                android:layout_marginBottom="@dimen/activity_half_horizontal_margin"/>
+
+            <Button
+                android:text="@string/edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/acEditBtn" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/acGenValue"
+                android:layout_marginBottom="@dimen/activity_half_horizontal_margin"/>
+
+            <TextView
+                android:text="00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/acTouchValue"
+                android:layout_marginBottom="@dimen/activity_half_horizontal_margin"/>
+
+            <TextView
+                android:text="00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/acFlatFootValue"
+                android:layout_marginBottom="@dimen/activity_half_horizontal_margin"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
