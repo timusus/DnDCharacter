@@ -33,7 +33,7 @@ public class SavesDialog extends DialogFragment {
         try {
             SavesDialog.SavesDialogListener mInterface = (SavesDialog.SavesDialogListener) context;
         } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() +" must implement OnAcDialogAction");
+            throw new ClassCastException(context.toString() +" must implement SavesDialogListener");
         }
     }
 

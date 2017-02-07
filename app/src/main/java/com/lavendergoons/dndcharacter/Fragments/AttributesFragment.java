@@ -33,7 +33,7 @@ public class AttributesFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static AttributesFragment newInstance() {
+    public static AttributesFragment newInstance(/*Character*/) {
         return new AttributesFragment();
     }
 

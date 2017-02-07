@@ -34,7 +34,7 @@ public class ACDialog extends DialogFragment {
         try {
             ACDialog.ACDialogListener mInterface = (ACDialog.ACDialogListener) context;
         } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() +" must implement OnAcDialogAction");
+            throw new ClassCastException(context.toString() +" must implement ACDialogListener");
         }
     }
 

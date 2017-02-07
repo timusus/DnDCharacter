@@ -33,7 +33,7 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
         // Required empty public constructor
     }
 
-    public static SkillsFragment newInstance() {
+    public static SkillsFragment newInstance(/*Character*/) {
         return new SkillsFragment();
     }
 

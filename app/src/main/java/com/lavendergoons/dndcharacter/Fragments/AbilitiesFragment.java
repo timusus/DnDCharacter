@@ -38,7 +38,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
         // Required empty public constructor
     }
 
-    public static AbilitiesFragment newInstance() {
+    public static AbilitiesFragment newInstance(/*Character*/) {
         return new AbilitiesFragment();
     }
 

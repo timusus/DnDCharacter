@@ -30,7 +30,7 @@ public class TestCharacter {
             int rank = random.nextInt(8);
             int misc = random.nextInt(1);
             int total = mod + rank + misc;
-            skills.add(new Skill(s.getName(), s.getMod(), random.nextBoolean(), total, mod, rank, misc));
+            skills.add(new Skill(s.getName(), s.getMod(), s.getDefault(), total, mod, rank, misc));
         }
 
         for(String s : Constants.ATTRIBUTES) {

@@ -1,13 +1,14 @@
 package com.lavendergoons.dndcharacter.Utils;
 
 /**
- * Created by t00530282 on 1/14/2017.
+ * Constants
  */
 // ??
 public final class Constants {
 
     public final static int LONG_CLICK_VIBRATION = 100;
     public final static int ATTRIBUTES_GRID_SPAN = 2;
+    public final static int AC_DEFAULT = 10;
 
     //Fragments
     final static String FRAGMENT_SKILLS = "SKILLS";
@@ -71,60 +72,63 @@ public final class Constants {
 
     // Enums
     public enum Skills {
-        APPRAISE        ("Appraise", "INT"),
-        BALANCE         ("Balance", "DEX"),
-        BLUFF           ("Bluff", "CHA"),
-        CLIMB           ("Climb", "STR"),
-        CONCENTRATION   ("Concentration", "CON"),
-        CRAFT1          ("Craft", "INT"),
-        CRAFT2          ("Craft", "INT"),
-        CRAFT3          ("Craft", "INT"),
-        DECIPHER_SCRIPT ("Decipher Script", "INT"),
-        DIPLOMACY       ("Diplomacy", "CHA"),
-        DISABLE_DEVICE  ("Disable Device", "INT"),
-        DISGUISE        ("Disguise", "CHA"),
-        ESCAPE_ARTIST   ("Escape Artist", "DEX"),
-        FORGERY         ("Forgery", "INT"),
-        GATHER_INFO     ("Gather Info", "CHA"),
-        HANDLE_ANIMAL   ("Handle Animal", "CHA"),
-        HEAL            ("Heal", "WIS"),
-        HIDE            ("Hide", "DEX"),
-        INITIMIDATE     ("Intimidate", "CHA"),
-        JUMP            ("Jump", "STR"),
-        KNOWLEDGE1      ("Knowledge", "INT"),
-        KNOWLEDGE2      ("Knowledge", "INT"),
-        KNOWLEDGE3      ("Knowledge", "INT"),
-        KNOWLEDGE4      ("Knowledge", "INT"),
-        LISTEN          ("Listen", "WIS"),
-        MOVE_SILENTLY   ("Move Silently", "DEX"),
-        OPEN_LOCK       ("Open Lock", "DEX"),
-        PERFORM1        ("Perform", "CHA"),
-        PERFORM2        ("Perform", "CHA"),
-        PERFORM3        ("Perform", "CHA"),
-        PROFESSION      ("Profession", "WIS"),
-        RIDE            ("Ride", "DEX"),
-        SEARCH          ("Search", "INT"),
-        SENSE_MOTIVE    ("Sense Motive", "WIS"),
-        SLEIGHT_OF_HAND ("Sleight of Hand", "DEX"),
-        SPELLCRAFT      ("Spellcraft", "INT"),
-        SPOT            ("Spot", "WIS"),
-        SURVIVAL        ("Survival", "WIS"),
-        SWIM            ("Swim", "STR"),
-        TUMBLE          ("Tumble", "DEX"),
-        MAGIC_DEVICE    ("Use Magic Device", "CHA"),
-        USE_ROPE        ("Use Rope", "DEX");
+        APPRAISE        ("Appraise", "INT", true),
+        BALANCE         ("Balance", "DEX", true),
+        BLUFF           ("Bluff", "CHA", true),
+        CLIMB           ("Climb", "STR", true),
+        CONCENTRATION   ("Concentration", "CON", true),
+        CRAFT1          ("Craft", "INT", true),
+        CRAFT2          ("Craft", "INT", true),
+        CRAFT3          ("Craft", "INT", true),
+        DECIPHER_SCRIPT ("Decipher Script", "INT", false),
+        DIPLOMACY       ("Diplomacy", "CHA", true),
+        DISABLE_DEVICE  ("Disable Device", "INT", false),
+        DISGUISE        ("Disguise", "CHA", true),
+        ESCAPE_ARTIST   ("Escape Artist", "DEX", true),
+        FORGERY         ("Forgery", "INT", true),
+        GATHER_INFO     ("Gather Info", "CHA", true),
+        HANDLE_ANIMAL   ("Handle Animal", "CHA", false),
+        HEAL            ("Heal", "WIS", true),
+        HIDE            ("Hide", "DEX", true),
+        INITIMIDATE     ("Intimidate", "CHA", true),
+        JUMP            ("Jump", "STR", true),
+        KNOWLEDGE1      ("Knowledge", "INT", false),
+        KNOWLEDGE2      ("Knowledge", "INT", false),
+        KNOWLEDGE3      ("Knowledge", "INT", false),
+        KNOWLEDGE4      ("Knowledge", "INT", false),
+        LISTEN          ("Listen", "WIS", true),
+        MOVE_SILENTLY   ("Move Silently", "DEX", true),
+        OPEN_LOCK       ("Open Lock", "DEX", false),
+        PERFORM1        ("Perform", "CHA", false),
+        PERFORM2        ("Perform", "CHA", false),
+        PERFORM3        ("Perform", "CHA", false),
+        PROFESSION      ("Profession", "WIS", false),
+        RIDE            ("Ride", "DEX", true),
+        SEARCH          ("Search", "INT", true),
+        SENSE_MOTIVE    ("Sense Motive", "WIS", true),
+        SLEIGHT_OF_HAND ("Sleight of Hand", "DEX", false),
+        SPELLCRAFT      ("Spellcraft", "INT", false),
+        SPOT            ("Spot", "WIS", true),
+        SURVIVAL        ("Survival", "WIS", true),
+        SWIM            ("Swim", "STR", true),
+        TUMBLE          ("Tumble", "DEX", false),
+        MAGIC_DEVICE    ("Use Magic Device", "CHA", false),
+        USE_ROPE        ("Use Rope", "DEX", true);
 
         private final String mName;
         private final String mMod;
+        private final boolean mDefault;
         private static final int mSize = 42;
 
-        Skills(String name, String mod) {
+        Skills(String name, String mod, boolean mDefault) {
             this.mName = name;
             this.mMod = mod;
+            this.mDefault = mDefault;
         }
 
         public String getName() { return mName;}
         public String getMod() { return mMod;}
+        public boolean getDefault() { return mDefault;}
         public int getSize() { return mSize;}
     }
 }

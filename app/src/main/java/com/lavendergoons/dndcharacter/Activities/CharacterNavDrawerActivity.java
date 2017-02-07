@@ -90,18 +90,18 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         Fragment fragment = new Fragment();
         switch (item.getItemId()) {
             case R.id.nav_attributes:
-                fragment = AttributesFragment.newInstance();
+                fragment = AttributesFragment.newInstance(/*Character*/);
                 break;
             case R.id.nav_abilities:
-                fragment = AbilitiesFragment.newInstance();
+                fragment = AbilitiesFragment.newInstance(/*Character*/);
                 break;
             case R.id.nav_skills:
-                fragment = SkillsFragment.newInstance();
+                fragment = SkillsFragment.newInstance(/*Character*/);
                 break;
             case R.id.nav_attacks:
                 break;
             case R.id.nav_items:
-                fragment = ArmorFragment.newInstance();
+                fragment = ArmorFragment.newInstance(/*Character*/);
                 break;
             case R.id.nav_animal:
                 break;

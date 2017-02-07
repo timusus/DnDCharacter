@@ -65,6 +65,7 @@
     <string name="title_armor_dialog">Armor Details</string>
     <string name="title_ac_dialog">AC Details</string>
     <string name="title_saves_dialog">Saves Details</string>
+    <string name="title_scores_dialog">Scores Details</string>
 
     <!-- Hints/Placeholders -->
     <string name="hint_name">Name</string>
@@ -136,6 +137,12 @@
     <string name="attr_eyes">Eyes</string>
     <string name="attr_hair">Hair</string>
     <string name="attr_skin">Skin</string>
+    
+    <!-- Grapple -->
+    <string name="grapple_base_attack">Base Atk.</string>
+    <string name="grapple_str_mod">STR Mod.</string>
+    <string name="grapple_size_mod">Size Mod</string>
+    <string name="grapple_misc_mod">Misc Mod</string>
     
     <!-- Saves -->
     <string name="save_fortitude">Fortitude</string>

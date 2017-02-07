@@ -38,7 +38,7 @@ public class ArmorFragment extends Fragment implements ArmorDialog.ArmorDialogLi
         // Required empty public constructor
     }
 
-    public static ArmorFragment newInstance() {
+    public static ArmorFragment newInstance(/*Character*/) {
         return new ArmorFragment();
     }
 

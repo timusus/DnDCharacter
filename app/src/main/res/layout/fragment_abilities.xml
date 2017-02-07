@@ -18,7 +18,7 @@
     <include
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        layout="@layout/content_ability_fort_ac"
+        layout="@layout/content_ability_fort_ac_grapple"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true" />
 

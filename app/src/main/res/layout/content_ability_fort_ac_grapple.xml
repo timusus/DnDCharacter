@@ -137,4 +137,110 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:text="@string/grapple_base_attack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/grappleBaseAttackLabel"
+                android:layout_weight="1"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:text="@string/grapple_str_mod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/grappleStrModLabel"
+                android:layout_weight="1"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:text="@string/grapple_size_mod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/grappleSizeModLabel"
+                android:layout_weight="1"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:text="@string/grapple_misc_mod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/grappleMiscModLabel"
+                android:layout_weight="1"
+                android:gravity="center_vertical"/>
+
+            <TextView
+                android:text="@string/hint_total"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/grappleTotalLabel"
+                android:layout_weight="1"
+                android:gravity="center_vertical"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="2"
+                android:id="@+id/grappleBaseAttackEdit"
+                android:hint="00"
+                android:gravity="center_horizontal"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="2"
+                android:id="@+id/grappleStrModEdit"
+                android:hint="00"
+                android:gravity="center_horizontal"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="2"
+                android:id="@+id/grappleSizeModEdit"
+                android:hint="00"
+                android:gravity="center_horizontal"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="2"
+                android:id="@+id/grappleMiscModEdit"
+                android:hint="00"
+                android:gravity="center_horizontal"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="2"
+                android:id="@+id/grappleTotalEdit"
+                android:hint="00"
+                android:gravity="center_horizontal"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
 </LinearLayout>
