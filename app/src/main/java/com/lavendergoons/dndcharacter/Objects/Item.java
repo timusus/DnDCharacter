@@ -5,10 +5,10 @@ package com.lavendergoons.dndcharacter.Objects;
  */
 public class Item {
     private String name;
-    private long weight;
-    private long quantity;
+    private int weight;
+    private int quantity;
 
-    public Item(String name, long weight, long quantity) {
+    public Item(String name, int weight, int quantity) {
         this.name = name;
         this.weight = weight;
         this.quantity = quantity;
@@ -22,19 +22,19 @@ public class Item {
         this.name = name;
     }
 
-    public long getWeight() {
+    public int getWeight() {
         return weight;
     }
 
-    public void setWeight(long weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 
-    public long getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(long quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 }

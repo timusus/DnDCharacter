@@ -15,19 +15,20 @@ import android.widget.Toast;
 
 import com.lavendergoons.dndcharacter.Dialogs.ACDialog;
 import com.lavendergoons.dndcharacter.Dialogs.SavesDialog;
+import com.lavendergoons.dndcharacter.Dialogs.ScoresDialog;
+import com.lavendergoons.dndcharacter.Objects.Abilities;
 import com.lavendergoons.dndcharacter.Objects.TestCharacter;
 import com.lavendergoons.dndcharacter.R;
 
-import static com.lavendergoons.dndcharacter.R.id.savesEditBtn;
 
 /**
  * Abilities Fragment
  */
-public class AbilitiesFragment extends Fragment implements View.OnClickListener, ACDialog.ACDialogListener, SavesDialog.SavesDialogListener {
+public class AbilitiesFragment extends Fragment implements View.OnClickListener, ACDialog.ACDialogListener, SavesDialog.SavesDialogListener, ScoresDialog.ScoresDialogListener {
 
 
     private OnFragmentInteractionListener mListener;
-    private Button savesEditBtn, acEditBtn;
+    private Button savesEditBtn, acEditBtn, scoresEditBtn;
     private TextView saveFortValue, saveReflexValue, saveWillValue, acGenValue, acTouchValue, acFlatFootValue;
     private EditText abilityStrScoreEdit, abilityDexScoreEdit, abilityConScoreEdit, abilityIntScoreEdit,
             abilityWisScoreEdit, abilityChaScoreEdit, abilityStrModEdit, abilityDexModEdit, abilityConModEdit,
@@ -58,6 +59,8 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
         savesEditBtn.setOnClickListener(this);
         acEditBtn = (Button) rootView.findViewById(R.id.acEditBtn);
         acEditBtn.setOnClickListener(this);
+        scoresEditBtn = (Button) rootView.findViewById(R.id.scoresEditBtn);
+        scoresEditBtn.setOnClickListener(this);
 
         saveFortValue = (TextView) rootView.findViewById(R.id.saveFortValue);
         saveReflexValue = (TextView) rootView.findViewById(R.id.saveReflexValue);
@@ -145,6 +148,8 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
         abilityIntModEdit = (EditText) rootView.findViewById(R.id.abilityIntModEdit);
         abilityWisModEdit = (EditText) rootView.findViewById(R.id.abilityWisModEdit);
         abilityChaModEdit = (EditText) rootView.findViewById(R.id.abilityChaModEdit);
+
+        setScoreValues();
         return rootView;
     }
 
@@ -157,6 +162,10 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
             }
             case R.id.savesEditBtn: {
                 SavesDialog.showSavesDialog(this.getActivity(), this, character.getAbilities());
+                break;
+            }
+            case R.id.scoresEditBtn: {
+                ScoresDialog.showScoresDialog(this.getActivity(), this, character.getAbilities());
                 break;
             }
         }
@@ -196,7 +205,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void OnSavesPositive() {
-        Toast.makeText(this.getContext(), "Saves AbilitesFragment Cancel", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.getContext(), "Saves AbilitesFragment OK", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -204,22 +213,45 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
         Toast.makeText(this.getContext(), "Saves AbilitesFragment Cancel", Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void OnScoresPositive() {
+        setScoreValues();
+        Toast.makeText(this.getContext(), "Score AbilitesFragment OK", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void OnScoresNegative() {
+        Toast.makeText(this.getContext(), "Score AbilitesFragment Cancel", Toast.LENGTH_SHORT).show();
+    }
+
+    private void setScoreValues() {
+        abilityStrScoreEdit.setText(String.valueOf(character.getAbilities().getScore(Abilities.STR)));
+        abilityDexScoreEdit.setText(String.valueOf(character.getAbilities().getScore(Abilities.DEX)));
+        abilityConScoreEdit.setText(String.valueOf(character.getAbilities().getScore(Abilities.CON)));
+        abilityIntScoreEdit.setText(String.valueOf(character.getAbilities().getScore(Abilities.INT)));
+        abilityWisScoreEdit.setText(String.valueOf(character.getAbilities().getScore(Abilities.WIS)));
+        abilityChaScoreEdit.setText(String.valueOf(character.getAbilities().getScore(Abilities.CHA)));
+
+        abilityStrModEdit.setText(String.valueOf(character.getAbilities().getMod(Abilities.STR)));
+        abilityDexModEdit.setText(String.valueOf(character.getAbilities().getMod(Abilities.DEX)));
+        abilityConModEdit.setText(String.valueOf(character.getAbilities().getMod(Abilities.CON)));
+        abilityIntModEdit.setText(String.valueOf(character.getAbilities().getMod(Abilities.INT)));
+        abilityWisModEdit.setText(String.valueOf(character.getAbilities().getMod(Abilities.WIS)));
+        abilityChaModEdit.setText(String.valueOf(character.getAbilities().getMod(Abilities.CHA)));
+    }
+
     private String modValue(CharSequence score) {
-        long mod = 0;
+        int mod = 0;
         if (score.length() <= 0) {
             return String.valueOf(mod);
         }
         try {
-            mod = Long.parseLong(score.toString());
+            mod = Integer.parseInt(score.toString());
         }catch (NumberFormatException ex) {
             ex.printStackTrace();
             Toast.makeText(this.getActivity(), ex.toString(), Toast.LENGTH_SHORT).show();
         }
-        if (mod % 2 == 0) {
-            mod = (mod - 10)/2;
-        } else {
-            mod = (mod - 11) / 2;
-        }
+        mod = (mod%2==0)? (mod - 10)/2 : (mod - 11)/2;
         return String.valueOf(mod);
     }
 }

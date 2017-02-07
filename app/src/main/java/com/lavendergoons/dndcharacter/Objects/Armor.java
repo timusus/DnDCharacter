@@ -1,18 +1,18 @@
 package com.lavendergoons.dndcharacter.Objects;
 
 /**
- * Created by rtas on 2017-01-13.
+ * Armor object
  */
 public class Armor extends Item {
     private String type;
-    private long acBonus;
-    private long maxDex;
-    private long checkPenalty;
-    private long spellFailure;
-    private long speed;
+    private int acBonus;
+    private int maxDex;
+    private int checkPenalty;
+    private int spellFailure;
+    private int speed;
     private String properties;
 
-    public Armor(String name, String type, long acBonus, long maxDex, long checkPenalty, long spellFailure, long weight, long speed, String properties, long quantity) {
+    public Armor(String name, String type, int acBonus, int maxDex, int checkPenalty, int spellFailure, int weight, int speed, String properties, int quantity) {
         super(name, weight, quantity);
         this.type = type;
         this.acBonus = acBonus;
@@ -31,43 +31,43 @@ public class Armor extends Item {
         this.type = type;
     }
 
-    public long getAcBonus() {
+    public int getAcBonus() {
         return acBonus;
     }
 
-    public void setAcBonus(long acBonus) {
+    public void setAcBonus(int acBonus) {
         this.acBonus = acBonus;
     }
 
-    public long getMaxDex() {
+    public int getMaxDex() {
         return maxDex;
     }
 
-    public void setMaxDex(long maxDex) {
+    public void setMaxDex(int maxDex) {
         this.maxDex = maxDex;
     }
 
-    public long getCheckPenalty() {
+    public int getCheckPenalty() {
         return checkPenalty;
     }
 
-    public void setCheckPenalty(long checkPenalty) {
+    public void setCheckPenalty(int checkPenalty) {
         this.checkPenalty = checkPenalty;
     }
 
-    public long getSpellFailure() {
+    public int getSpellFailure() {
         return spellFailure;
     }
 
-    public void setSpellFailure(long spellFailure) {
+    public void setSpellFailure(int spellFailure) {
         this.spellFailure = spellFailure;
     }
 
-    public long getSpeed() {
+    public int getSpeed() {
         return speed;
     }
 
-    public void setSpeed(long speed) {
+    public void setSpeed(int speed) {
         this.speed = speed;
     }
 

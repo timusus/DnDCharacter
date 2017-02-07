@@ -81,23 +81,23 @@ public class ArmorDialog extends DialogFragment {
                 String name = armorNameEdit.getText().toString();
                 String type = armorTypeEdit.getText().toString();
                 String properties = armorPropertiesEdit.getText().toString();
-                long ac = -1;
-                long dex = -1;
-                long check = -1;
-                long spell = -1;
-                long speed = -1;
-                long weight = -1;
-                long quantity = 1;
+                int ac = -1;
+                int dex = -1;
+                int check = -1;
+                int spell = -1;
+                int speed = -1;
+                int weight = -1;
+                int quantity = 1;
                 try {
-                    ac = Long.parseLong(armorACEdit.getText().toString());
-                    dex = Long.parseLong(armorDexEdit.getText().toString());
-                    check = Long.parseLong(armorCheckEdit.getText().toString());
-                    spell = Long.parseLong(armorSpellEdit.getText().toString());
-                    weight = Long.parseLong(armorWeightEdit.getText().toString());
-                    speed = Long.parseLong(armorSpeedEdit.getText().toString());
-                    quantity = Long.parseLong(armorQuantityEdit.getText().toString());
+                    ac = Integer.parseInt(armorACEdit.getText().toString());
+                    dex = Integer.parseInt(armorDexEdit.getText().toString());
+                    check = Integer.parseInt(armorCheckEdit.getText().toString());
+                    spell = Integer.parseInt(armorSpellEdit.getText().toString());
+                    weight = Integer.parseInt(armorWeightEdit.getText().toString());
+                    speed = Integer.parseInt(armorSpeedEdit.getText().toString());
+                    quantity = Integer.parseInt(armorQuantityEdit.getText().toString());
                 } catch (Exception ex) {
-                    Log.e("PARSE", "Error parsing longs");
+                    Log.e("PARSE", "Error parsing ints");
                     //Toast.makeText(activity, ex.toString(), Toast.LENGTH_SHORT).show();
                     exceptionCheck = true;
                 }

@@ -1,6 +1,7 @@
 package com.lavendergoons.dndcharacter.Objects;
 
 import com.lavendergoons.dndcharacter.Utils.Constants;
+import com.lavendergoons.dndcharacter.Utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,10 +13,12 @@ import java.util.Random;
  */
 
 public class TestCharacter {
+
     private ArrayList<Skill> skills = new ArrayList<>();
     private ArrayList<Attribute> attributes = new ArrayList<>();
     private ArrayList<Armor> armor = new ArrayList<>();
     private Abilities abilities;
+
     private String name = "Silian Mord";
     private int level = 10;
     Random random = new Random(1);
@@ -41,6 +44,14 @@ public class TestCharacter {
         armor.add(new Armor("Leather", "Light", 2, 4, -1, 15, 10, 30, "Some good thick leather for your needs", 1));
         armor.add(new Armor("Shield", "Wooden", 1, 0, -1, 5, 5, 0, "A shield to use for stuff", 1));
         abilities = new Abilities();
+
+        for (int i=0;i<abilities.getScoreArray().length;i++) {
+            int value = random.nextInt(5)+10;
+            abilities.setScore(value, i);
+            abilities.setMod(Utils.modValue(value), i);
+            abilities.setScoreTemp(0, i);
+            abilities.setModTemp(0, i);
+        }
     }
 
     public ArrayList<Skill> getSkills() {

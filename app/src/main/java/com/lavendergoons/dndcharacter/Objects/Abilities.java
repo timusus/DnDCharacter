@@ -35,82 +35,98 @@ public class Abilities {
     public static final int AC_TOTAL = 8;
     public static final int AC = 8;
 
-    private long[] score = new long[SCORES];
-    private long[] mod = new long[SCORES];
-    private long[] scoreTemp = new long[SCORES];
-    private long[] modTemp = new long[SCORES];
+    private int[] score = new int[SCORES];
+    private int[] mod = new int[SCORES];
+    private int[] scoreTemp = new int[SCORES];
+    private int[] modTemp = new int[SCORES];
 
-    private long[] fort = new long[SAVES];
-    private long[] reflex = new long[SAVES];
-    private long[] will = new long[SAVES];
+    private int[] fort = new int[SAVES];
+    private int[] reflex = new int[SAVES];
+    private int[] will = new int[SAVES];
 
-    private long[] ac = new long[AC];
+    private int[] ac = new int[AC];
 
     public Abilities() {
         ac[DEFAULT] = Constants.AC_DEFAULT;
     }
 
-    public void setScore(long value, int which) {
+    public void setScore(int value, int which) {
         score[which] = value;
     }
 
-    public long getScore(int which) {
+    public int getScore(int which) {
         return score[which];
     }
 
-    public void setScoreTemp(long value, int which) {
+    public int[] getScoreArray() {
+        return score;
+    }
+
+    public void setScoreTemp(int value, int which) {
         scoreTemp[which] = value;
     }
 
-    public long getScoreTemp(int which) {
+    public int getScoreTemp(int which) {
         return scoreTemp[which];
     }
 
-    public void setMod(long value, int which) {
+    public int[] getScoreTempArray(){
+        return scoreTemp;
+    }
+
+    public void setMod(int value, int which) {
         mod[which] = value;
     }
 
-    public long getMod(int which) {
+    public int getMod(int which) {
         return mod[which];
     }
 
-    public void setModTemp(long value, int which) {
+    public int[] getModArray() {
+        return mod;
+    }
+
+    public void setModTemp(int value, int which) {
         modTemp[which] = value;
     }
 
-    public long getModTemp(int which) {
+    public int getModTemp(int which) {
         return modTemp[which];
     }
 
-    public void setFort(long value, int which) {
+    public int[] getModTempArray() {
+        return modTemp;
+    }
+
+    public void setFort(int value, int which) {
         fort[which] = value;
     }
 
-    public long getFort(int which) {
+    public int getFort(int which) {
         return fort[which];
     }
 
-    public void setReflex(long value, int which) {
+    public void setReflex(int value, int which) {
         reflex[which] = value;
     }
 
-    public long getReflex(int which) {
+    public int getReflex(int which) {
         return reflex[which];
     }
 
-    public void setWill(long value, int which) {
+    public void setWill(int value, int which) {
         will[which] = value;
     }
 
-    public long getWill(int which) {
+    public int getWill(int which) {
         return will[which];
     }
 
-    public void setAC(long value, int which) {
+    public void setAC(int value, int which) {
         ac[which] = value;
     }
 
-    public long getAC(int which) {
+    public int getAC(int which) {
         return ac[which];
     }
 
