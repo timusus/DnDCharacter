@@ -83,63 +83,69 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="@string/ability_str"
+                android:inputType="numberSigned"
+                android:hint="00"
                 android:ems="3"
                 android:id="@+id/abilityStrScoreEdit"
                 android:layout_weight="1"
                 android:textSize="14sp"
-                android:gravity="center_vertical|center_horizontal" />
+                android:gravity="center_vertical|center_horizontal"
+                android:selectAllOnFocus="true"/>
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="@string/ability_dex"
+                android:inputType="numberSigned"
+                android:hint="00"
                 android:ems="3"
                 android:id="@+id/abilityDexScoreEdit"
                 android:layout_weight="1"
                 android:textSize="14sp"
-                android:gravity="center_vertical|center_horizontal" />
+                android:gravity="center_vertical|center_horizontal"
+                android:selectAllOnFocus="true"/>
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="@string/ability_con"
+                android:inputType="numberSigned"
+                android:hint="00"
                 android:ems="3"
                 android:id="@+id/abilityConScoreEdit"
                 android:layout_weight="1"
                 android:textSize="14sp"
-                android:gravity="center_vertical|center_horizontal" />
+                android:gravity="center_vertical|center_horizontal"
+                android:selectAllOnFocus="true"/>
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="@string/ability_int"
+                android:inputType="numberSigned"
+                android:hint="00"
                 android:ems="3"
                 android:id="@+id/abilityIntScoreEdit"
                 android:layout_weight="1"
                 android:textSize="14sp"
-                android:gravity="center_vertical|center_horizontal" />
+                android:gravity="center_vertical|center_horizontal"
+                android:selectAllOnFocus="true"/>
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="@string/ability_wis"
+                android:inputType="numberSigned"
+                android:hint="00"
                 android:ems="3"
                 android:id="@+id/abilityWisScoreEdit"
                 android:layout_weight="1"
                 android:textSize="14sp"
-                android:gravity="center_vertical|center_horizontal" />
+                android:gravity="center_vertical|center_horizontal"
+                android:selectAllOnFocus="true"/>
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="@string/ability_cha"
+                android:inputType="numberSigned"
+                android:hint="00"
                 android:ems="3"
                 android:id="@+id/abilityChaScoreEdit"
                 android:layout_weight="1"
                 android:textSize="14sp"
-                android:gravity="center_vertical|center_horizontal" />
+                android:gravity="center_vertical|center_horizontal"
+                android:selectAllOnFocus="true"/>
 
         </LinearLayout>
 
@@ -159,63 +165,69 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="@string/ability_str"
+                android:inputType="numberSigned"
+                android:hint="00"
                 android:ems="3"
                 android:id="@+id/abilityStrModEdit"
                 android:layout_weight="1"
                 android:textSize="14sp"
-                android:gravity="center_vertical|center_horizontal" />
+                android:gravity="center_vertical|center_horizontal"
+                android:selectAllOnFocus="true"/>
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="@string/ability_dex"
+                android:inputType="numberSigned"
+                android:hint="00"
                 android:ems="3"
                 android:id="@+id/abilityDexModEdit"
                 android:layout_weight="1"
                 android:textSize="14sp"
-                android:gravity="center_vertical|center_horizontal" />
+                android:gravity="center_vertical|center_horizontal"
+                android:selectAllOnFocus="true"/>
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="@string/ability_con"
+                android:inputType="numberSigned"
+                android:hint="00"
                 android:ems="3"
                 android:id="@+id/abilityConModEdit"
                 android:layout_weight="1"
                 android:textSize="14sp"
-                android:gravity="center_vertical|center_horizontal" />
+                android:gravity="center_vertical|center_horizontal"
+                android:selectAllOnFocus="true"/>
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="@string/ability_int"
+                android:inputType="numberSigned"
+                android:hint="00"
                 android:ems="3"
                 android:id="@+id/abilityIntModEdit"
                 android:layout_weight="1"
                 android:textSize="14sp"
-                android:gravity="center_vertical|center_horizontal" />
+                android:gravity="center_vertical|center_horizontal"
+                android:selectAllOnFocus="true"/>
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="@string/ability_wis"
+                android:inputType="numberSigned"
+                android:hint="00"
                 android:ems="3"
                 android:id="@+id/abilityWisModEdit"
                 android:layout_weight="1"
                 android:textSize="14sp"
-                android:gravity="center_vertical|center_horizontal" />
+                android:gravity="center_vertical|center_horizontal"
+                android:selectAllOnFocus="true"/>
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:hint="@string/ability_cha"
+                android:inputType="numberSigned"
+                android:hint="00"
                 android:ems="3"
                 android:id="@+id/abilityChaModEdit"
                 android:layout_weight="1"
                 android:textSize="14sp"
-                android:gravity="center_vertical|center_horizontal" />
+                android:gravity="center_vertical|center_horizontal"
+                android:selectAllOnFocus="true"/>
 
         </LinearLayout>
     </LinearLayout>

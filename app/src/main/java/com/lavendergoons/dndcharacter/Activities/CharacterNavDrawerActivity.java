@@ -17,6 +17,8 @@ import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Fragments.AbilitiesFragment;
 import com.lavendergoons.dndcharacter.Fragments.ArmorFragment;
 import com.lavendergoons.dndcharacter.Fragments.AttributesFragment;
+import com.lavendergoons.dndcharacter.Fragments.ItemsFragment;
+import com.lavendergoons.dndcharacter.Fragments.ItemsGeneralFragment;
 import com.lavendergoons.dndcharacter.Fragments.SkillsFragment;
 import com.lavendergoons.dndcharacter.R;
 
@@ -27,10 +29,12 @@ import com.lavendergoons.dndcharacter.R;
 
 public class CharacterNavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        SkillsFragment.OnFragmentInteractionListener,
         AbilitiesFragment.OnFragmentInteractionListener,
-        AttributesFragment.OnFragmentInteractionListener,
         ArmorFragment.OnFragmentInteractionListener,
+        AttributesFragment.OnFragmentInteractionListener,
+        ItemsFragment.OnFragmentInteractionListener,
+        ItemsGeneralFragment.OnFragmentInteractionListener,
+        SkillsFragment.OnFragmentInteractionListener,
         ConfirmationDialog.ConfirmationDialogInterface {
 
     @Override
@@ -101,7 +105,7 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
             case R.id.nav_attacks:
                 break;
             case R.id.nav_items:
-                fragment = ArmorFragment.newInstance(/*Character*/);
+                fragment = ItemsFragment.newInstance(/*Character*/);
                 break;
             case R.id.nav_animal:
                 break;
@@ -110,10 +114,8 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
-        if (fragment != null) {
-            FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();
-            fragTransaction.replace(R.id.content_character_nav, fragment).commit();
-        }
+        FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();
+        fragTransaction.replace(R.id.content_character_nav, fragment).commit();
         return true;
     }
 

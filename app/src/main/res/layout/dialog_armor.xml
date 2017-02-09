@@ -68,13 +68,14 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:hint="@string/armor_ac_bonus"
             android:ems="10"
             android:id="@+id/armorACEdit"
             android:textSize="14sp"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:selectAllOnFocus="true" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -91,13 +92,14 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:hint="@string/armor_max_dex"
             android:ems="10"
             android:id="@+id/armorDexEdit"
             android:textSize="14sp"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:selectAllOnFocus="true" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -115,13 +117,14 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:hint="@string/armor_check_penalty"
             android:ems="10"
             android:id="@+id/armorCheckEdit"
             android:textSize="14sp"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:selectAllOnFocus="true" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -138,13 +141,14 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:hint="@string/armor_spell_failure"
             android:ems="10"
             android:id="@+id/armorSpellEdit"
             android:textSize="14sp"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:selectAllOnFocus="true" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -167,7 +171,8 @@
             android:id="@+id/armorSpeedEdit"
             android:textSize="14sp"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:selectAllOnFocus="true" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -190,7 +195,8 @@
             android:textSize="14sp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:inputType="number" />
+            android:inputType="number"
+            android:selectAllOnFocus="true" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -213,7 +219,8 @@
             android:textSize="14sp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:inputType="number" />
+            android:inputType="number"
+            android:selectAllOnFocus="true" />
     </RelativeLayout>
 
     <RelativeLayout

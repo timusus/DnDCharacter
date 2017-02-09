@@ -72,62 +72,68 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:ems="2"
             android:id="@+id/saveDialogFortTotalEdit"
             android:layout_weight="1"
             android:hint="00"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:selectAllOnFocus="true"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:ems="2"
             android:id="@+id/saveDialogFortBaseEdit"
             android:layout_weight="1"
             android:hint="00"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:selectAllOnFocus="true"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:ems="2"
             android:id="@+id/saveDialogFortAbilityEdit"
             android:layout_weight="1"
             android:hint="00"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:selectAllOnFocus="true"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:ems="2"
             android:id="@+id/saveDialogFortMagicEdit"
             android:layout_weight="1"
             android:hint="00"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:selectAllOnFocus="true"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:ems="2"
             android:id="@+id/saveDialogFortMiscEdit"
             android:layout_weight="1"
             android:hint="00"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:selectAllOnFocus="true"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:ems="2"
             android:id="@+id/saveDialogFortTempEdit"
             android:layout_weight="1"
             android:hint="00"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:selectAllOnFocus="true"/>
     </LinearLayout>
 
     <TextView
@@ -144,62 +150,68 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:ems="2"
             android:id="@+id/saveDialogReflexTotalEdit"
             android:layout_weight="1"
             android:hint="00"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:selectAllOnFocus="true"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:ems="2"
             android:id="@+id/saveDialogReflexBaseEdit"
             android:layout_weight="1"
             android:hint="00"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:selectAllOnFocus="true"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:ems="2"
             android:id="@+id/saveDialogReflexAbilityEdit"
             android:layout_weight="1"
             android:hint="00"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:selectAllOnFocus="true"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:ems="2"
             android:id="@+id/saveDialogReflexMagicEdit"
             android:layout_weight="1"
             android:hint="00"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:selectAllOnFocus="true"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:ems="2"
             android:id="@+id/saveDialogReflexMiscEdit"
             android:layout_weight="1"
             android:hint="00"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:selectAllOnFocus="true"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:ems="2"
             android:id="@+id/saveDialogReflexTempEdit"
             android:layout_weight="1"
             android:hint="00"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:selectAllOnFocus="true"/>
     </LinearLayout>
 
     <TextView
@@ -216,61 +228,67 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:ems="2"
             android:id="@+id/saveDialogWillTotalEdit"
             android:layout_weight="1"
             android:hint="00"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:selectAllOnFocus="true"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:ems="2"
             android:id="@+id/saveDialogWillBaseEdit"
             android:layout_weight="1"
             android:hint="00"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:selectAllOnFocus="true"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:ems="2"
             android:id="@+id/saveDialogWillAbilityEdit"
             android:layout_weight="1"
             android:hint="00"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:selectAllOnFocus="true"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:ems="2"
             android:id="@+id/saveDialogWillMagicEdit"
             android:layout_weight="1"
             android:hint="00"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:selectAllOnFocus="true"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:ems="2"
             android:id="@+id/saveDialogWillMiscEdit"
             android:layout_weight="1"
             android:hint="00"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:selectAllOnFocus="true"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:ems="2"
             android:id="@+id/saveDialogWillTempEdit"
             android:layout_weight="1"
             android:hint="00"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:selectAllOnFocus="true"/>
     </LinearLayout>
 </LinearLayout>

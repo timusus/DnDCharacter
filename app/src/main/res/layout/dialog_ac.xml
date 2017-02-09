@@ -62,35 +62,38 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:ems="2"
             android:id="@+id/acDialogArmorEdit"
             android:layout_weight="1"
             android:textSize="14sp"
             android:hint="00"
-            android:gravity="center_vertical|center_horizontal" />
+            android:gravity="center_vertical|center_horizontal"
+            android:selectAllOnFocus="true" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:ems="2"
             android:id="@+id/acDialogShieldEdit"
             android:layout_weight="1"
             android:textSize="14sp"
             android:hint="00"
-            android:gravity="center_vertical|center_horizontal" />
+            android:gravity="center_vertical|center_horizontal"
+            android:selectAllOnFocus="true" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:ems="2"
             android:id="@+id/acDialogDexEdit"
             android:layout_weight="1"
             android:textSize="14sp"
             android:hint="00"
-            android:gravity="center_vertical|center_horizontal" />
+            android:gravity="center_vertical|center_horizontal"
+            android:selectAllOnFocus="true" />
 
     </LinearLayout>
 
@@ -141,47 +144,51 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:ems="2"
             android:id="@+id/acDialogSizeEdit"
             android:layout_weight="1"
             android:textSize="14sp"
             android:hint="00"
-            android:gravity="center_vertical|center_horizontal" />
+            android:gravity="center_vertical|center_horizontal"
+            android:selectAllOnFocus="true" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:ems="2"
             android:id="@+id/acDialogNaturalEdit"
             android:layout_weight="1"
             android:textSize="14sp"
             android:hint="00"
-            android:gravity="center_vertical|center_horizontal" />
+            android:gravity="center_vertical|center_horizontal"
+            android:selectAllOnFocus="true" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:ems="2"
             android:id="@+id/acDialogDeflectionEdit"
             android:layout_weight="1"
             android:textSize="14sp"
             android:hint="00"
-            android:gravity="center_vertical|center_horizontal" />
+            android:gravity="center_vertical|center_horizontal"
+            android:selectAllOnFocus="true" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:ems="2"
             android:id="@+id/acDialogMiscEdit"
             android:layout_weight="1"
             android:textSize="14sp"
             android:hint="00"
             android:layout_gravity="center_horizontal"
-            android:gravity="center_vertical|center_horizontal" />
+            android:gravity="center_vertical|center_horizontal"
+            android:selectAllOnFocus="true" />
     </LinearLayout>
 
     <LinearLayout
@@ -200,12 +207,13 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="numberSigned"
             android:ems="3"
             android:id="@+id/acDialogTotalEdit"
             android:layout_weight="1"
             android:hint="00"
-            android:gravity="center_horizontal"/>
+            android:gravity="center_horizontal"
+            android:selectAllOnFocus="true" />
 
     </LinearLayout>
 </LinearLayout>

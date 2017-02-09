@@ -88,6 +88,12 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <!-- Arrays -->
+    <string-array name="item_spinner">
+        <item>Armor</item>
+        <item>Items</item>
+    </string-array>
+
     <!-- Numbers -->
     <string name="zero">0</string>
     <string name="one">1</string>
@@ -137,13 +143,13 @@
     <string name="attr_eyes">Eyes</string>
     <string name="attr_hair">Hair</string>
     <string name="attr_skin">Skin</string>
-    
+
     <!-- Grapple -->
     <string name="grapple_base_attack">Base Atk.</string>
     <string name="grapple_str_mod">STR Mod.</string>
     <string name="grapple_size_mod">Size Mod</string>
     <string name="grapple_misc_mod">Misc Mod</string>
-    
+
     <!-- Saves -->
     <string name="save_fortitude">Fortitude</string>
     <string name="save_reflex">Reflex</string>
@@ -189,4 +195,7 @@
 
     <!-- DEV STRINGS -->
     <string name="lavender_goons">Lavender Goons</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
