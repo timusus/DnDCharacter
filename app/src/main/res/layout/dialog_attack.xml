@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/cardview_half_horizontal_margin">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/attack_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/atkDialogNameLabel"
+            android:layout_weight="2" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="@string/attack_name"
+            android:ems="10"
+            android:id="@+id/atkDialogNameEdit"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/attack_bonus_short"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/atkDialogBonusValue"
+            android:layout_weight="2" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="@string/attack_bonus_short"
+            android:ems="10"
+            android:id="@+id/atkDialogBonusEdit"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/attack_damage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/atkDialogDamageValue"
+            android:layout_weight="2" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="@string/attack_damage"
+            android:ems="10"
+            android:id="@+id/atkDialogDamageEdit"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/attack_critical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/atkDialogCriticalValue"
+            android:layout_weight="2" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="@string/attack_critical"
+            android:ems="10"
+            android:id="@+id/atkDialogCriticalEdit"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/attack_range"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/atkDialogRangeValue"
+            android:layout_weight="2" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/attack_range"
+            android:ems="10"
+            android:id="@+id/atkDialogRangeEdit"
+            android:layout_weight="1"
+            android:inputType="number" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/attack_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/atkDialogTypeValue"
+            android:layout_weight="2" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="@string/attack_type"
+            android:ems="10"
+            android:id="@+id/atkDialogTypeEdit"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/attack_ammo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/atkDialogAmmoValue"
+            android:layout_weight="2" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/attack_ammo"
+            android:ems="10"
+            android:id="@+id/atkDialogAmmoEdit"
+            android:layout_weight="1"
+            android:inputType="number" />
+    </LinearLayout>
+
+    <TextView
+        android:text="@string/notes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/atkDialogNotesLabel"
+        android:gravity="center_horizontal" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:maxLines="3"
+        android:hint="@string/notes"
+        android:ems="10"
+        android:id="@+id/atkDialogNotesEdit" />
+
+</LinearLayout>

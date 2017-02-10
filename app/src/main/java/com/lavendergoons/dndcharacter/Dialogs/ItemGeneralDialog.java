@@ -74,15 +74,15 @@ public class ItemGeneralDialog extends DialogFragment {
                     exceptionCheck = true;
                 }
 
-                if (Utils.isStringEmpty(name) && !exceptionCheck && item != null) {
+                if (!Utils.isStringEmpty(name) && !exceptionCheck && item != null) {
                     item.setName(name);
                     item.setWeight(weight);
                     item.setQuantity(quantity);
                     target.OnItemsPositive(null);
-                } else if (Utils.isStringEmpty(name) && !exceptionCheck && item == null) {
+                } else if (!Utils.isStringEmpty(name) && !exceptionCheck && item == null) {
                     target.OnItemsPositive(new Item(name, weight, quantity));
                 } else {
-                    Toast.makeText(activity, activity.getString(R.string.warning_enter_required_fields), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, activity.getString(R.string.warning_enter_required_fields), Toast.LENGTH_LONG).show();
                 }
             }
         }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

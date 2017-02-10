@@ -24,6 +24,7 @@
     <string name="yes">YES</string>
     <string name="no">NO</string>
     <string name="edit">Edit</string>
+    <string name="notes">Notes</string>
 
     <!-- Warnings -->
     <string name="warning_enter_required_fields">Please Enter All Required Fields</string>
@@ -31,6 +32,7 @@
     <!-- Confirmations -->
     <string name="confirm_delete_armor">Are you sure you want to delete this armor?</string>
     <string name="confirm_delete_item">Are you sure you want to delete this item?</string>
+    <string name="confirm_delete_attack">Are you sure you want to delete this attack?</string>
 
     <!-- General D&D -->
     <string name="gen_weight">Weight</string>
@@ -68,6 +70,7 @@
     <string name="title_saves_dialog">Saves Details</string>
     <string name="title_scores_dialog">Scores Details</string>
     <string name="title_items_general_dialog">Item Details</string>
+    <string name="title_attack_dialog">Attack Details</string>
 
     <!-- Hints/Placeholders -->
     <string name="hint_name">Name</string>
@@ -128,6 +131,16 @@
     <string name="armor_check_penalty">Check Penalty</string>
     <string name="armor_spell_failure">Spell Failure</string>
     <string name="armor_properties">Properties</string>
+
+    <!-- Attack -->
+    <string name="attack_name">Attack</string>
+    <string name="attack_bonus_short">Atk. Bonus</string>
+    <string name="attack_bonus_long">Attack Bonus</string>
+    <string name="attack_damage">Damage</string>
+    <string name="attack_critical">Critical</string>
+    <string name="attack_range">Range</string>
+    <string name="attack_type">Type</string>
+    <string name="attack_ammo">Ammo</string>
 
     <!-- Attributes -->
     <string name="attr_name">Name</string>

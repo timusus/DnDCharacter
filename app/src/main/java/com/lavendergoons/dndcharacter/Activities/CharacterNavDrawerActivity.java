@@ -13,9 +13,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.lavendergoons.dndcharacter.Dialogs.AttackDialog;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Fragments.AbilitiesFragment;
 import com.lavendergoons.dndcharacter.Fragments.ArmorFragment;
+import com.lavendergoons.dndcharacter.Fragments.AttacksFragment;
 import com.lavendergoons.dndcharacter.Fragments.AttributesFragment;
 import com.lavendergoons.dndcharacter.Fragments.ItemsFragment;
 import com.lavendergoons.dndcharacter.Fragments.ItemsGeneralFragment;
@@ -31,6 +33,7 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         AbilitiesFragment.OnFragmentInteractionListener,
         ArmorFragment.OnFragmentInteractionListener,
+        AttacksFragment.OnFragmentInteractionListener,
         AttributesFragment.OnFragmentInteractionListener,
         ItemsFragment.OnFragmentInteractionListener,
         ItemsGeneralFragment.OnFragmentInteractionListener,
@@ -103,6 +106,7 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
                 fragment = SkillsFragment.newInstance(/*Character*/);
                 break;
             case R.id.nav_attacks:
+                fragment = AttacksFragment.newInstance(/*Character*/);
                 break;
             case R.id.nav_items:
                 fragment = ItemsFragment.newInstance(/*Character*/);

@@ -3,10 +3,7 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingStart="@dimen/cardview_half_horizontal_margin"
-    android:paddingBottom="@dimen/cardview_half_vertical_margin"
-    android:paddingTop="@dimen/cardview_half_vertical_margin"
-    android:paddingEnd="@dimen/cardview_half_horizontal_margin">
+    android:padding="@dimen/cardview_half_horizontal_margin">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -239,7 +236,8 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="textMultiLine"
+        android:maxLines="2"
         android:hint="@string/armor_properties"
         android:ems="10"
         android:id="@+id/armorPropertiesEdit"

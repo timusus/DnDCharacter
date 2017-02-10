@@ -1,18 +1,19 @@
 package com.lavendergoons.dndcharacter.Objects;
 
 /**
- * Created by rtas on 2017-01-13.
+ * Attack Object
  */
 public class Attack {
     private String attack;
     private String attackBonus;
     private String damage;
     private String critical;
-    private String range;
+    private int range;
     private String type;
-    private String ammo;
+    private int ammo;
+    private String notes;
 
-    public Attack(String attack, String attackBonus, String damage, String critical, String range, String type, String ammo) {
+    public Attack(String attack, String attackBonus, String damage, String critical, int range, String type, int ammo, String notes) {
         this.attack = attack;
         this.attackBonus = attackBonus;
         this.damage = damage;
@@ -20,6 +21,7 @@ public class Attack {
         this.range = range;
         this.type = type;
         this.ammo = ammo;
+        this.notes = notes;
     }
 
     public String getAttack() {
@@ -54,11 +56,11 @@ public class Attack {
         this.critical = critical;
     }
 
-    public String getRange() {
+    public int getRange() {
         return range;
     }
 
-    public void setRange(String range) {
+    public void setRange(int range) {
         this.range = range;
     }
 
@@ -70,11 +72,19 @@ public class Attack {
         this.type = type;
     }
 
-    public String getAmmo() {
+    public int getAmmo() {
         return ammo;
     }
 
-    public void setAmmo(String ammo) {
+    public void setAmmo(int ammo) {
         this.ammo = ammo;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 }

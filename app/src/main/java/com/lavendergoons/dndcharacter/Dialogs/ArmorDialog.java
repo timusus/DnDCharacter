@@ -35,7 +35,7 @@ public class ArmorDialog extends DialogFragment {
         try {
             ArmorDialogListener mInterface = (ArmorDialogListener) context;
         } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() +" must implement OnArmorAction");
+            throw new ClassCastException(context.toString() +" must implement ArmorDialogListener");
         }
     }
 
@@ -103,9 +103,9 @@ public class ArmorDialog extends DialogFragment {
                 }
 
                 // Not Editing existing Armor, create new one
-                if (Utils.isStringEmpty(name) && !exceptionCheck && armor == null) {
+                if (!Utils.isStringEmpty(name) && !exceptionCheck && armor == null) {
                     target.OnArmorPositive(new Armor(name, type, ac, dex, check, spell, weight, speed, properties, quantity));
-                } else if (Utils.isStringEmpty(name) && !exceptionCheck && armor != null) {
+                } else if (!Utils.isStringEmpty(name) && !exceptionCheck && armor != null) {
                     armor.setName(name);
                     armor.setType(type);
                     armor.setAcBonus(ac);
