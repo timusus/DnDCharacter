@@ -11,6 +11,7 @@
     <dimen name="cardview_separator_margin">4dp</dimen>
     <dimen name="cardview_half_horizontal_margin">8dp</dimen>
     <dimen name="cardview_half_vertical_margin">8dp</dimen>
+    <dimen name="text_space_12">12dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">160dp</dimen>

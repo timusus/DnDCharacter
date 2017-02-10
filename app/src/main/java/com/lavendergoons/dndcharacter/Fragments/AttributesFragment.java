@@ -41,6 +41,7 @@ public class AttributesFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // TODO Get rid of test character
+        attributesList = new ArrayList<>();
         character = new TestCharacter();
         attributesList = character.getAttributes();
     }

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/cardview_separator_margin"
+        card_view:cardCornerRadius="@dimen/cardview_default_radius">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/cardview_half_vertical_margin">
+
+            <TextView
+                android:text="@string/hint_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/itemCardNameValue" />
+
+            <TextView
+                android:text="@string/gen_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/itemCardNameValue"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="@dimen/cardview_half_vertical_margin"
+                android:id="@+id/itemCardQuantityLabel" />
+
+            <TextView
+                android:text="00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/itemCardQuantityLabel"
+                android:layout_toEndOf="@+id/itemCardQuantityLabel"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:id="@+id/itemCardQuantityValue" />
+
+            <TextView
+                android:text="00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/itemCardQuantityValue"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/itemCardWeightValue" />
+
+            <TextView
+                android:text="@string/gen_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/itemCardWeightValue"
+                android:layout_toStartOf="@+id/itemCardWeightValue"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:id="@+id/itemCardWeightLabel" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

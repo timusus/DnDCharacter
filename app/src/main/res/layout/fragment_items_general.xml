@@ -1,14 +1,22 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.lavendergoons.dndcharacter.Fragments.ItemsGeneralFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <include
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="General Items Fragment"
-        android:id="@+id/textView2" />
+        layout="@layout/content_items_general" />
 
-</FrameLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/ic_add_white"
+        android:id="@+id/addItemFAB"
+        app:rippleColor="#FFF"/>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -97,7 +97,7 @@ public class ArmorDialog extends DialogFragment {
                     speed = Integer.parseInt(armorSpeedEdit.getText().toString());
                     quantity = Integer.parseInt(armorQuantityEdit.getText().toString());
                 } catch (Exception ex) {
-                    Log.e("PARSE", "Error parsing ints");
+                    Log.e("PARSE", "Error parsing armor ints");
                     //Toast.makeText(activity, ex.toString(), Toast.LENGTH_SHORT).show();
                     exceptionCheck = true;
                 }

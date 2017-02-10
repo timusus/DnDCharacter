@@ -1,13 +1,14 @@
 package com.lavendergoons.dndcharacter.Objects;
 
 /**
- * Created by rtas on 2017-01-13.
+ * General Item
  */
 public class Item {
     private String name;
     private int weight;
     private int quantity;
 
+    //TODO Make weight a double for decimal values
     public Item(String name, int weight, int quantity) {
         this.name = name;
         this.weight = weight;

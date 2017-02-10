@@ -17,6 +17,7 @@ public class TestCharacter {
     private ArrayList<Skill> skills = new ArrayList<>();
     private ArrayList<Attribute> attributes = new ArrayList<>();
     private ArrayList<Armor> armor = new ArrayList<>();
+    private ArrayList<Item> items = new ArrayList<>();
     private Abilities abilities;
 
     private String name = "Silian Mord";
@@ -52,6 +53,11 @@ public class TestCharacter {
             abilities.setScoreTemp(0, i);
             abilities.setModTemp(0, i);
         }
+
+        items.add(new Item("Bedroll", 2, 1));
+        items.add(new Item("Flint/Steel", 4, 1));
+        items.add(new Item("Health Potion", 1, 5));
+        items.add(new Item("Lantern", 7, 1));
     }
 
     public ArrayList<Skill> getSkills() {
@@ -69,4 +75,6 @@ public class TestCharacter {
     public Abilities getAbilities() {
         return abilities;
     }
+
+    public ArrayList<Item> getItems() {return items;}
 }

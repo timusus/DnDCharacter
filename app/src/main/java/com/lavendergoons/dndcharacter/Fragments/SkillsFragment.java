@@ -41,6 +41,7 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // TODO Get rid of test character
+        skillsList = new ArrayList<>();
         character = new TestCharacter();
         skillsList = character.getSkills();
     }

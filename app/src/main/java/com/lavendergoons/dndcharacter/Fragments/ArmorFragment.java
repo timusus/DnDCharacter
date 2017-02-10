@@ -46,6 +46,7 @@ public class ArmorFragment extends Fragment implements ArmorDialog.ArmorDialogLi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //TODO Get rid of test character
+        armorList = new ArrayList<>();
         character = new TestCharacter();
         armorList = character.getArmor();
     }
@@ -117,8 +118,10 @@ public class ArmorFragment extends Fragment implements ArmorDialog.ArmorDialogLi
     // This may be sketchy
     @Override
     public void ConfirmDialogOk(Object armor) {
-        armorList.remove(armor);
-        mArmorRecyclerAdapter.notifyDataSetChanged();
+        if (armor instanceof Armor) {
+            armorList.remove(armor);
+            mArmorRecyclerAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
