@@ -44,6 +44,10 @@
     <string name="gen_misc">Misc</string>
     <string name="gen_score">Score</string>
     <string name="gen_base">Base</string>
+    <string name="gen_range">Range</string>
+    <string name="gen_time">Time</string>
+    <string name="gen_type">Type</string>
+    <string name="gen_duration">Duration</string>
 
     <!-- Labels -->
     <string name="label_add_character_btn">Add Character</string>

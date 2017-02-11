@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/cardview_separator_margin"
+        card_view:cardCornerRadius="@dimen/cardview_default_radius">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/activity_half_horizontal_margin">
+
+            <TextView
+                android:text="@string/hint_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/cardSpellNameValue" />
+
+            <TextView
+                android:text="@string/hint_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cardSpellNameValue"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:id="@+id/cardSpellLevelLabel" />
+
+            <TextView
+                android:text="00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/cardSpellLevelLabel"
+                android:layout_toEndOf="@+id/cardSpellNameValue"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:id="@+id/cardSpellLevelValue" />
+
+            <TextView
+                android:text="@string/attack_range"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/cardSpellNameValue"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:id="@+id/cardSpellRangeValue" />
+
+            <TextView
+                android:text="@string/gen_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/cardSpellTimeValue" />
+
+            <TextView
+                android:text="@string/gen_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@+id/cardSpellTimeValue"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:id="@+id/cardSpellDurationValue" />
+
+            <TextView
+                android:text="@string/gen_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/cardSpellLevelValue"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/cardSpellTypeValue" />
+
+            <TextView
+                android:text="@string/gen_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/cardSpellTypeValue"
+                android:layout_toStartOf="@+id/cardSpellTypeValue"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:id="@+id/cardSpellTypeLabel" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
