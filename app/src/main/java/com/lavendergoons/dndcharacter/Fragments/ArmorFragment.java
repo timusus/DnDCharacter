@@ -29,7 +29,7 @@ public class ArmorFragment extends Fragment implements ArmorDialog.ArmorDialogLi
     private RecyclerView.Adapter mArmorRecyclerAdapter;
     private RecyclerView.LayoutManager mArmorRecyclerLayoutManager;
     private OnFragmentInteractionListener mListener;
-    private ArrayList<Armor> armorList;
+    private ArrayList<Armor> armorList = new ArrayList<>();
     // TODO Get rid of test character
     private TestCharacter character;
     private FloatingActionButton fab;
@@ -46,7 +46,6 @@ public class ArmorFragment extends Fragment implements ArmorDialog.ArmorDialogLi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //TODO Get rid of test character
-        armorList = new ArrayList<>();
         character = new TestCharacter();
         armorList = character.getArmor();
     }

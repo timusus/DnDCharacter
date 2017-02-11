@@ -29,7 +29,7 @@ public class ItemsGeneralFragment extends Fragment implements View.OnClickListen
     private RecyclerView.Adapter mItemsRecyclerAdapter;
     private RecyclerView.LayoutManager mItemsRecyclerLayoutManager;
     private OnFragmentInteractionListener mListener;
-    private ArrayList<Item> itemList;
+    private ArrayList<Item> itemList = new ArrayList<>();
     private TestCharacter character;
     private FloatingActionButton fab;
 
@@ -45,7 +45,6 @@ public class ItemsGeneralFragment extends Fragment implements View.OnClickListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //TODO Get rid of test character
-        itemList = new ArrayList<>();
         character = new TestCharacter();
         itemList = character.getItems();
     }

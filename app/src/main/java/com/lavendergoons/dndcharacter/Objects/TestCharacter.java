@@ -19,6 +19,7 @@ public class TestCharacter {
     private ArrayList<Armor> armor = new ArrayList<>();
     private ArrayList<Item> items = new ArrayList<>();
     private ArrayList<Attack> attacks = new ArrayList<>();
+    private ArrayList<Spell> spells = new ArrayList<>();
     private Abilities abilities;
 
     private String name = "Silian Mord";
@@ -64,6 +65,11 @@ public class TestCharacter {
         attacks.add(new Attack("Longsword", "+4", "2d6", "19-20x2", 0, "S", 0, ""));
         attacks.add(new Attack("Dagger", "+4", "1d4", "19-20x2", 0, "S", 0, ""));
         attacks.add(new Attack("Longbow", "+2", "1d6", "18-20x2", 110, "P", 21, ""));
+
+        //String name, int level, String type, String castTime, String range, String duration
+        spells.add(new Spell("Aura of Vitatlity", 7, "Transmutation", "1 Standard Action", "25ft + 5ft/2 lvl", "1 round/lvl"));
+        spells.add(new Spell("Launch Bolt", 0, "Transmutation", "1 Standard Action", "Touch", "Instant"));
+        spells.add(new Spell("Life's Grace", 5, "Abjuration", "1 Standard Action", "Touch", "1 minute/lvl"));
     }
 
     public ArrayList<Skill> getSkills() {
@@ -85,4 +91,6 @@ public class TestCharacter {
     public ArrayList<Item> getItems() {return items;}
 
     public ArrayList<Attack> getAttacks() {return attacks;}
+
+    public ArrayList<Spell> getSpells() {return spells;}
 }

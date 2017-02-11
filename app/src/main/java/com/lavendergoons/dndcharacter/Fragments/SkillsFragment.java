@@ -25,7 +25,7 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
     private RecyclerView mSkillsRecyclerView;
     private RecyclerView.Adapter mSkillRecyclerAdapter;
     private RecyclerView.LayoutManager mSkillRecyclerLayoutManager;
-    private ArrayList<Skill> skillsList;
+    private ArrayList<Skill> skillsList = new ArrayList<>();
     // TODO Get rid of test character
     private TestCharacter character;
 
@@ -41,7 +41,6 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // TODO Get rid of test character
-        skillsList = new ArrayList<>();
         character = new TestCharacter();
         skillsList = character.getSkills();
     }

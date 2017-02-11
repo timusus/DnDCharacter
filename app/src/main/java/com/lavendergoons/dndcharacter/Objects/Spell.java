@@ -5,25 +5,30 @@ package com.lavendergoons.dndcharacter.Objects;
  */
 
 public class Spell {
-    private String name;
-    private String type;
-    private String component;
-    private String castTime;
-    private String time;
-    private String range;
-    private String area;
-    private String duration;
-    private String savingThrow;
+    private String name, type, component, castTime, range, area, duration, savingThrow, notes;
     private boolean spellRes;
-    private String notes;
+    private int level;
 
-    public Spell(String name, String type, String component, String castTime, String time,
+    public Spell() {
+
+    }
+
+    public Spell(String name, int level, String type, String castTime, String range, String duration) {
+        this.name = name;
+        this.level = level;
+        this.type = type;
+        this.range = range;
+        this.castTime = castTime;
+        this.duration = duration;
+    }
+
+    public Spell(String name, int level, String type, String component, String castTime,
                  String range, String area, String duration, String savingThrow, boolean spellRes, String notes) {
         this.name = name;
+        this.level = level;
         this.type = type;
         this.component = component;
         this.castTime = castTime;
-        this.time = time;
         this.range = range;
         this.area = area;
         this.duration = duration;
@@ -38,6 +43,14 @@ public class Spell {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public String getType() {
@@ -62,14 +75,6 @@ public class Spell {
 
     public void setCastTime(String castTime) {
         this.castTime = castTime;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 
     public String getRange() {

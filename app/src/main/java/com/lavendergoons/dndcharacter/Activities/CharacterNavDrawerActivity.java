@@ -3,6 +3,7 @@ package com.lavendergoons.dndcharacter.Activities;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.lavendergoons.dndcharacter.Dialogs.AttackDialog;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Fragments.AbilitiesFragment;
 import com.lavendergoons.dndcharacter.Fragments.ArmorFragment;
@@ -22,6 +22,8 @@ import com.lavendergoons.dndcharacter.Fragments.AttributesFragment;
 import com.lavendergoons.dndcharacter.Fragments.ItemsFragment;
 import com.lavendergoons.dndcharacter.Fragments.ItemsGeneralFragment;
 import com.lavendergoons.dndcharacter.Fragments.SkillsFragment;
+import com.lavendergoons.dndcharacter.Fragments.SpellFragment;
+import com.lavendergoons.dndcharacter.Fragments.SpellListFragment;
 import com.lavendergoons.dndcharacter.R;
 
 /**
@@ -38,7 +40,13 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         ItemsFragment.OnFragmentInteractionListener,
         ItemsGeneralFragment.OnFragmentInteractionListener,
         SkillsFragment.OnFragmentInteractionListener,
+        SpellFragment.OnFragmentInteractionListener,
+        SpellListFragment.OnFragmentInteractionListener,
+        FragmentManager.OnBackStackChangedListener,
         ConfirmationDialog.ConfirmationDialogInterface {
+
+    private ActionBarDrawerToggle toggle;
+    private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,23 +56,31 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.character_nav_toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        getSupportFragmentManager().addOnBackStackChangedListener(this);
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+        }
+    }
+
+    @Override
+    public void onBackStackChanged() {
+        if (toggle != null) {
+            toggle.setDrawerIndicatorEnabled(true);
         }
     }
 
@@ -111,11 +127,11 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
             case R.id.nav_items:
                 fragment = ItemsFragment.newInstance(/*Character*/);
                 break;
-            case R.id.nav_animal:
+            case R.id.nav_spells:
+                fragment = SpellListFragment.newInstance(/*Character*/);
                 break;
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
         FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();

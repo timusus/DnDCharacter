@@ -26,7 +26,7 @@ public class AttacksFragment extends Fragment implements View.OnClickListener, A
     private RecyclerView.Adapter mAttacksRecyclerAdapter;
     private RecyclerView.LayoutManager mAttacksRecyclerLayoutManager;
     private OnFragmentInteractionListener mListener;
-    private ArrayList<Attack> attackList;
+    private ArrayList<Attack> attackList = new ArrayList<>();
     private TestCharacter character;
     private FloatingActionButton fab;
 
@@ -41,7 +41,6 @@ public class AttacksFragment extends Fragment implements View.OnClickListener, A
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        attackList = new ArrayList<>();
         character = new TestCharacter();
         attackList = character.getAttacks();
     }

@@ -2,6 +2,7 @@ package com.lavendergoons.dndcharacter.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,17 +28,18 @@ import java.util.ArrayList;
   * to show all Character info.
  */
 
-public class CharacterListActivity extends AppCompatActivity
-        implements AddCharacterDialog.OnCharacterCompleteListener,
+public class CharacterListActivity extends AppCompatActivity implements
+        AddCharacterDialog.OnCharacterCompleteListener,
         CharacterListAdapter.OnCharacterClickListener,
-        ConfirmationDialog.ConfirmationDialogInterface {
+        ConfirmationDialog.ConfirmationDialogInterface,
+        View.OnClickListener {
 
     private RecyclerView mCharacterRecyclerView;
     private RecyclerView.Adapter mCharRecyclerAdapter;
     private RecyclerView.LayoutManager mCharRecyclerLayoutManager;
     private ArrayList<Character> characters;
     private AddCharacterDialog addCharacterDialog;
-    private Button addCharacterBtn;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,17 +69,19 @@ public class CharacterListActivity extends AppCompatActivity
         mCharRecyclerAdapter = new CharacterListAdapter(this, characters);
         mCharacterRecyclerView.setAdapter(mCharRecyclerAdapter);
 
-        addCharacterBtn = (Button) findViewById(R.id.addCharacterBtn);
-        addCharacterBtn.setOnClickListener(addCharacterClick);
+        fab = (FloatingActionButton) findViewById(R.id.addCharacterFAB);
+        fab.setOnClickListener(this);
     }
 
-    private View.OnClickListener addCharacterClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            addCharacterDialog = new AddCharacterDialog();
-            addCharacterDialog.show(getSupportFragmentManager(), getString(R.string.tag_add_character_dialog));
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.addCharacterFAB:
+                addCharacterDialog = new AddCharacterDialog();
+                addCharacterDialog.show(getSupportFragmentManager(), getString(R.string.tag_add_character_dialog));
+                break;
         }
-    };
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -1,15 +1,14 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.lavendergoons.dndcharacter.Fragments.SpellListFragment">
 
-
-    <include
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        layout="@layout/content_spell_list" />
+        android:id="@+id/spellRecyclerView"/>
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
@@ -20,4 +19,4 @@
         app:srcCompat="@drawable/ic_add_white"
         android:id="@+id/addSpellFAB"
         app:rippleColor="#FFF"/>
-</FrameLayout>
+</android.support.design.widget.CoordinatorLayout>
