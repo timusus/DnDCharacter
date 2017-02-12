@@ -40,6 +40,7 @@ public class CharacterListActivity extends AppCompatActivity implements
     private ArrayList<Character> characters;
     private AddCharacterDialog addCharacterDialog;
     private FloatingActionButton fab;
+    public static final String TAG = "CHARACTER_LIST";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

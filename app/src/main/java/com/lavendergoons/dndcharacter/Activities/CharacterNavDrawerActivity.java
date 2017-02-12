@@ -10,8 +10,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
@@ -45,8 +47,10 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         FragmentManager.OnBackStackChangedListener,
         ConfirmationDialog.ConfirmationDialogInterface {
 
-    private ActionBarDrawerToggle toggle;
-    private DrawerLayout drawer;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private DrawerLayout mDrawerLayout;
+    public static final String TAG = "CHARACTER_NAV";
+    private boolean toolbarListenerRegister = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +60,11 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.character_nav_toolbar);
         setSupportActionBar(toolbar);
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -70,17 +74,63 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
     }
 
+    private void showBackButton(boolean enabled) {
+        try {
+            if (enabled) {
+                mDrawerToggle.setDrawerIndicatorEnabled(false);
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                if (!toolbarListenerRegister) {
+                    mDrawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            onBackPressed();
+                        }
+                    });
+                }
+                toolbarListenerRegister = true;
+            } else {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                mDrawerToggle.setDrawerIndicatorEnabled(true);
+                mDrawerToggle.setToolbarNavigationClickListener(null);
+                toolbarListenerRegister = false;
+            }
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void setDrawerLock(boolean locked) {
+        if (locked) {
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            mDrawerToggle.onDrawerStateChanged(DrawerLayout.STATE_IDLE);
+            mDrawerToggle.syncState();
+        } else {
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+            mDrawerToggle.onDrawerStateChanged(DrawerLayout.STATE_IDLE);
+            mDrawerToggle.syncState();
+        }
+    }
+
+    private boolean isCurrentFragment(String tag) {
+        Fragment frag = getSupportFragmentManager().findFragmentByTag(tag);
+        return frag != null && frag.isVisible();
+    }
+
     @Override
     public void onBackStackChanged() {
-        if (toggle != null) {
-            toggle.setDrawerIndicatorEnabled(true);
+        if (isCurrentFragment(SpellFragment.TAG)) {
+            showBackButton(true);
+            setDrawerLock(true);
+        } else {
+            showBackButton(false);
+            setDrawerLock(false);
         }
     }
 
@@ -111,31 +161,38 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         // TODO Clean up. Dont init fragment
         Fragment fragment = new Fragment();
+        String tag = "tag";
         switch (item.getItemId()) {
             case R.id.nav_attributes:
                 fragment = AttributesFragment.newInstance(/*Character*/);
+                tag = AttributesFragment.TAG;
                 break;
             case R.id.nav_abilities:
                 fragment = AbilitiesFragment.newInstance(/*Character*/);
+                tag = AbilitiesFragment.TAG;
                 break;
             case R.id.nav_skills:
                 fragment = SkillsFragment.newInstance(/*Character*/);
+                tag = SkillsFragment.TAG;
                 break;
             case R.id.nav_attacks:
                 fragment = AttacksFragment.newInstance(/*Character*/);
+                tag = AttacksFragment.TAG;
                 break;
             case R.id.nav_items:
                 fragment = ItemsFragment.newInstance(/*Character*/);
+                tag = ItemsFragment.TAG;
                 break;
             case R.id.nav_spells:
                 fragment = SpellListFragment.newInstance(/*Character*/);
+                tag = SpellListFragment.TAG;
                 break;
         }
 
-        drawer.closeDrawer(GravityCompat.START);
+        mDrawerLayout.closeDrawer(GravityCompat.START);
 
         FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();
-        fragTransaction.replace(R.id.content_character_nav, fragment).commit();
+        fragTransaction.replace(R.id.content_character_nav, fragment, tag).commit();
         return true;
     }
 

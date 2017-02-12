@@ -22,6 +22,7 @@ public class ItemsFragment extends Fragment implements AdapterView.OnItemSelecte
     private OnFragmentInteractionListener mListener;
     private Spinner itemSelectionSpinner;
     private ArrayAdapter<CharSequence> spinnerAdapter;
+    public static final String TAG = "ITEMS_FRAG";
 
     public ItemsFragment() {
         // Required empty public constructor

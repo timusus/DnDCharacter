@@ -32,6 +32,7 @@ public class ItemsGeneralFragment extends Fragment implements View.OnClickListen
     private ArrayList<Item> itemList = new ArrayList<>();
     private TestCharacter character;
     private FloatingActionButton fab;
+    public static final String TAG = "ITEMS_GENERAL_FRAG";
 
     public ItemsGeneralFragment() {
         // Required empty public constructor

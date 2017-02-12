@@ -10,6 +10,6 @@
         android:text="Single Spell Fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/textView2"
+        android:id="@+id/spellNameVIew"
         android:gravity="center_vertical|center_horizontal" />
 </FrameLayout>

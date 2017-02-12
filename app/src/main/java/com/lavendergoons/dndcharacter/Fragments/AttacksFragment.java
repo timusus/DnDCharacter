@@ -29,6 +29,7 @@ public class AttacksFragment extends Fragment implements View.OnClickListener, A
     private ArrayList<Attack> attackList = new ArrayList<>();
     private TestCharacter character;
     private FloatingActionButton fab;
+    public static final String TAG = "ATTACKS_FRAG";
 
     public AttacksFragment() {
         // Required empty public constructor

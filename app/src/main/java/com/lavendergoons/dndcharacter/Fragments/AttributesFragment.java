@@ -28,6 +28,7 @@ public class AttributesFragment extends Fragment {
     private ArrayList<Attribute> attributesList;
     //TODO Get Rid of TestCharacter
     private TestCharacter character;
+    public static final String TAG = "ATTRIBUTES_FRAG";
 
     public AttributesFragment() {
         // Required empty public constructor

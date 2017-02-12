@@ -88,7 +88,7 @@ public class SpellAdapter extends RecyclerView.Adapter<SpellAdapter.ViewHolder> 
 
     private void launchSpellFragment(Spell spell) {
         FragmentTransaction fragTransaction = spellListFragment.getActivity().getSupportFragmentManager().beginTransaction();
-        fragTransaction.replace(R.id.content_character_nav, SpellFragment.newInstance()).addToBackStack(SpellFragment.TAG).commit();
+        fragTransaction.replace(R.id.content_character_nav, SpellFragment.newInstance(spell), SpellFragment.TAG).addToBackStack(SpellFragment.TAG).commit();
     }
 
     @Override

@@ -28,6 +28,7 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
     private ArrayList<Skill> skillsList = new ArrayList<>();
     // TODO Get rid of test character
     private TestCharacter character;
+    public static final String TAG = "SKILLS_FRAG";
 
     public SkillsFragment() {
         // Required empty public constructor

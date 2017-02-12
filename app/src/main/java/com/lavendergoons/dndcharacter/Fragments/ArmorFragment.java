@@ -33,6 +33,7 @@ public class ArmorFragment extends Fragment implements ArmorDialog.ArmorDialogLi
     // TODO Get rid of test character
     private TestCharacter character;
     private FloatingActionButton fab;
+    public static final String TAG = "ARMOR_FRAG";
 
     public ArmorFragment() {
         // Required empty public constructor

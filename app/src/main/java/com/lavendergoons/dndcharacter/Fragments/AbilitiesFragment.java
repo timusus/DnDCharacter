@@ -34,6 +34,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
             abilityWisScoreEdit, abilityChaScoreEdit, abilityStrModEdit, abilityDexModEdit, abilityConModEdit,
             abilityIntModEdit, abilityWisModEdit, abilityChaModEdit;
     TestCharacter character;
+    public static final String TAG = "ABILITIES_FRAG";
 
     public AbilitiesFragment() {
         // Required empty public constructor

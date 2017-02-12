@@ -29,6 +29,7 @@ public class SpellListFragment extends Fragment implements View.OnClickListener,
     private TestCharacter character;
     private FloatingActionButton fab;
     private OnFragmentInteractionListener mListener;
+    public static final String TAG = "SPELL_LIST_FRAG";
 
     public SpellListFragment() {
         // Required empty public constructor
@@ -90,10 +91,6 @@ public class SpellListFragment extends Fragment implements View.OnClickListener,
 
     public void deleteSpell(Spell spell) {
         ConfirmationDialog.showConfirmDialog(this.getContext(), getString(R.string.confirm_delete_spell), this, spell);
-    }
-
-    public void launchSpellFragment() {
-
     }
 
     @Override
