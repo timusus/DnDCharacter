@@ -77,6 +77,7 @@
     <string name="title_scores_dialog">Scores Details</string>
     <string name="title_items_general_dialog">Item Details</string>
     <string name="title_attack_dialog">Attack Details</string>
+    <string name="title_spell_dialog">Create New Spell</string>
 
     <!-- Hints/Placeholders -->
     <string name="hint_name">Name</string>
@@ -213,6 +214,15 @@
     <string name="skill_tumble">Tumble</string>
     <string name="skill_use_magic_device">Use Magic Device</string>
     <string name="skill_use_rope">Use Rope</string>
+
+    <!-- Spells -->
+    <string name="spell_type">Type</string>
+    <string name="spell_component">Component</string>
+    <string name="spell_cast_time">Cast Time</string>
+    <string name="spell_area">Area</string>
+    <string name="spell_saving_throw">Saving Throw</string>
+    <string name="spell_resistance">Spell Resistance</string>
+    <string name="spell_resistance_short">Spell Res.</string>
 
     <!-- DEV STRINGS -->
     <string name="lavender_goons">Lavender Goons</string>

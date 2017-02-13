@@ -2,6 +2,7 @@ package com.lavendergoons.dndcharacter.Objects;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.widget.Switch;
 
 /**
  * Spell Object
@@ -14,6 +15,11 @@ public class Spell implements Parcelable{
 
     public Spell() {
 
+    }
+
+    public Spell(String name, int level) {
+        this.name = name;
+        this.level = level;
     }
 
     public Spell(String name, int level, String type, String castTime, String range, String duration) {

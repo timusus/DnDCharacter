@@ -8,17 +8,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.Switch;
 
 import com.lavendergoons.dndcharacter.Objects.Spell;
 import com.lavendergoons.dndcharacter.R;
+
 
 /**
  * Fragment for showing & editing a single spell
  */
 public class SpellFragment extends Fragment {
 
-    private TextView spellName;
+    private EditText spellNameEdit, spellLevelEdit, spellTypeEdit, spellComponentEdit, spellCastTimeEdit, spellRangeEdit, spellAreaEdit, spellDurationEdit, spellSavingThrowEdit, spellNotesEdit;
+    private Switch spellResSwitch;
     private OnFragmentInteractionListener mListener;
     private Spell spell;
     public static final String TAG = "SPELL_FRAG";
@@ -29,6 +32,9 @@ public class SpellFragment extends Fragment {
 
     public static SpellFragment newInstance(Spell spell) {
         SpellFragment frag = new SpellFragment();
+        if (spell == null) {
+            spell = new Spell();
+        }
         Bundle args = new Bundle();
         args.putParcelable("SPELL", spell);
         frag.setArguments(args);
@@ -50,14 +56,62 @@ public class SpellFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_spell, container, false);
-        spellName = (TextView) rootView.findViewById(R.id.spellNameVIew);
-        spellName.setText(spell.getName());
+        spellNameEdit = (EditText) rootView.findViewById(R.id.spellNameEdit);
+        spellLevelEdit = (EditText) rootView.findViewById(R.id.spellLevelEdit);
+        spellTypeEdit = (EditText) rootView.findViewById(R.id.spellTypeEdit);
+        spellComponentEdit = (EditText) rootView.findViewById(R.id.spellComponentEdit);
+        spellCastTimeEdit = (EditText) rootView.findViewById(R.id.spellCastTimeEdit);
+        spellRangeEdit = (EditText) rootView.findViewById(R.id.spellRangeEdit);
+        spellAreaEdit = (EditText) rootView.findViewById(R.id.spellAreaEdit);
+        spellDurationEdit = (EditText) rootView.findViewById(R.id.spellDurationEdit);
+        spellSavingThrowEdit = (EditText) rootView.findViewById(R.id.spellSavingThrowEdit);
+        spellNotesEdit = (EditText) rootView.findViewById(R.id.spellNotesEdit);
+
+        spellResSwitch = (Switch) rootView.findViewById(R.id.spellResSwitch);
+        getValues();
         return rootView;
+    }
+
+    private void getValues() {
+        try {
+            spellNameEdit.setText(spell.getName());
+            spellLevelEdit.setText(String.valueOf(spell.getLevel()));
+            spellTypeEdit.setText(spell.getType());
+            spellComponentEdit.setText(spell.getComponent());
+            spellCastTimeEdit.setText(spell.getCastTime());
+            spellRangeEdit.setText(spell.getRange());
+            spellAreaEdit.setText(spell.getArea());
+            spellDurationEdit.setText(spell.getDuration());
+            spellSavingThrowEdit.setText(spell.getSavingThrow());
+            spellNotesEdit.setText(spell.getNotes());
+            spellResSwitch.setChecked(spell.isSpellRes());
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void setValues() {
+        try {
+            spell.setName(spellNameEdit.getText().toString());
+            spell.setLevel(Integer.valueOf(spellLevelEdit.getText().toString()));
+            spell.setType(spellTypeEdit.getText().toString());
+            spell.setComponent(spellComponentEdit.getText().toString());
+            spell.setCastTime(spellCastTimeEdit.getText().toString());
+            spell.setRange(spellRangeEdit.getText().toString());
+            spell.setArea(spellAreaEdit.getText().toString());
+            spell.setDuration(spellDurationEdit.getText().toString());
+            spell.setSavingThrow(spellSavingThrowEdit.getText().toString());
+            spell.setNotes(spellNotesEdit.getText().toString());
+            spell.setSpellRes(spellResSwitch.isChecked());
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        setValues();
     }
 
     @Override
