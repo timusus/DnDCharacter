@@ -1,54 +1,48 @@
 package com.lavendergoons.dndcharacter.Fragments;
 
 import android.content.Context;
+import android.os.BadParcelableException;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
-import com.lavendergoons.dndcharacter.Dialogs.ArmorDialog;
-import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Objects.Armor;
-import com.lavendergoons.dndcharacter.Objects.TestCharacter;
 import com.lavendergoons.dndcharacter.R;
-import com.lavendergoons.dndcharacter.Utils.ArmorAdapter;
 
-import java.util.ArrayList;
+public class ArmorFragment extends Fragment {
 
-/**
- * Fragment to hold armor recycler view
- */
-public class ArmorFragment extends Fragment implements ArmorDialog.ArmorDialogListener, View.OnClickListener, ConfirmationDialog.ConfirmationDialogInterface {
-
-    //TODO Character should be passed in from CharacterNavDrawerActivity
-    private RecyclerView mArmorRecyclerView;
-    private RecyclerView.Adapter mArmorRecyclerAdapter;
-    private RecyclerView.LayoutManager mArmorRecyclerLayoutManager;
     private OnFragmentInteractionListener mListener;
-    private ArrayList<Armor> armorList = new ArrayList<>();
-    // TODO Get rid of test character
-    private TestCharacter character;
-    private FloatingActionButton fab;
+    private Armor armor;
+    private EditText armorNameEdit, armorTypeEdit, armorACEdit, armorDexEdit, armorCheckEdit, armorSpellEdit, armorSpeedEdit, armorWeightEdit, armorPropertiesEdit, armorQuantityEdit;
     public static final String TAG = "ARMOR_FRAG";
 
     public ArmorFragment() {
         // Required empty public constructor
     }
 
-    public static ArmorFragment newInstance(/*Character*/) {
-        return new ArmorFragment();
+    public static ArmorFragment newInstance(Armor armor) {
+        ArmorFragment frag = new ArmorFragment();
+        if (armor == null) {
+            armor = new Armor();
+        }
+        Bundle args = new Bundle();
+        args.putParcelable("ARMOR", armor);
+        frag.setArguments(args);
+        return frag;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO Get rid of test character
-        character = new TestCharacter();
-        armorList = character.getArmor();
+        try {
+            armor = getArguments() != null ? (Armor) getArguments().getParcelable("ARMOR") : new Armor();
+        }catch(BadParcelableException ex) {
+            Log.e("PARSE", "Bad Parcelable in ArmorFragment");
+        }
     }
 
     @Override
@@ -56,20 +50,58 @@ public class ArmorFragment extends Fragment implements ArmorDialog.ArmorDialogLi
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_armor, container, false);
-        mArmorRecyclerView = (RecyclerView) rootView.findViewById(R.id.armorRecyclerView);
-
-        // Keeps View same size on content change
-        mArmorRecyclerView.setHasFixedSize(true);
-
-        mArmorRecyclerLayoutManager = new LinearLayoutManager(this.getContext());
-        mArmorRecyclerView.setLayoutManager(mArmorRecyclerLayoutManager);
-
-        mArmorRecyclerAdapter = new ArmorAdapter(this, armorList);
-        mArmorRecyclerView.setAdapter(mArmorRecyclerAdapter);
-
-        fab = (FloatingActionButton) rootView.findViewById(R.id.addArmorFAB);
-        fab.setOnClickListener(this);
+        armorNameEdit = (EditText) rootView.findViewById(R.id.armorNameEdit);
+        armorTypeEdit = (EditText) rootView.findViewById(R.id.armorTypeEdit);
+        armorACEdit = (EditText) rootView.findViewById(R.id.armorACEdit);
+        armorDexEdit = (EditText) rootView.findViewById(R.id.armorDexEdit);
+        armorCheckEdit = (EditText) rootView.findViewById(R.id.armorCheckEdit);
+        armorSpellEdit = (EditText) rootView.findViewById(R.id.armorSpellEdit);
+        armorSpeedEdit = (EditText) rootView.findViewById(R.id.armorSpeedEdit);
+        armorWeightEdit = (EditText) rootView.findViewById(R.id.armorWeightEdit);
+        armorPropertiesEdit = (EditText) rootView.findViewById(R.id.armorPropertiesEdit);
+        armorQuantityEdit = (EditText) rootView.findViewById(R.id.armorQuantityEdit);
+        getValues();
         return rootView;
+    }
+
+    private void setValues() {
+        try {
+            armor.setName(armorNameEdit.getText().toString());
+            armor.setType(armorTypeEdit.getText().toString());
+            armor.setAcBonus(Integer.parseInt(armorACEdit.getText().toString()));
+            armor.setMaxDex(Integer.parseInt(armorDexEdit.getText().toString()));
+            armor.setCheckPenalty(Integer.parseInt(armorCheckEdit.getText().toString()));
+            armor.setSpellFailure(Integer.parseInt(armorSpellEdit.getText().toString()));
+            armor.setWeight(Integer.parseInt(armorSpeedEdit.getText().toString()));
+            armor.setSpeed(Integer.parseInt(armorWeightEdit.getText().toString()));
+            armor.setProperties(armorPropertiesEdit.getText().toString());
+            armor.setQuantity(Integer.parseInt(armorQuantityEdit.getText().toString()));
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void getValues() {
+        try {
+            armorNameEdit.setText(armor.getName());
+            armorTypeEdit.setText(armor.getType());
+            armorACEdit.setText(String.valueOf(armor.getAcBonus()));
+            armorDexEdit.setText(String.valueOf(armor.getMaxDex()));
+            armorCheckEdit.setText(String.valueOf(armor.getCheckPenalty()));
+            armorSpellEdit.setText(String.valueOf(armor.getSpellFailure()));
+            armorSpeedEdit.setText(String.valueOf(armor.getSpeed()));
+            armorWeightEdit.setText(String.valueOf(armor.getWeight()));
+            armorPropertiesEdit.setText(armor.getProperties());
+            armorQuantityEdit.setText(String.valueOf(armor.getQuantity()));
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        setValues();
     }
 
     @Override
@@ -89,41 +121,8 @@ public class ArmorFragment extends Fragment implements ArmorDialog.ArmorDialogLi
         mListener = null;
     }
 
-
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction();
     }
-
-    @Override
-    public void onClick(View view) {
-        ArmorDialog.showArmorDialog(this.getActivity(), this, null);
-    }
-
-    @Override
-    public void OnArmorPositive(Armor armor) {
-        if (armor != null) {
-            armorList.add(armor);
-        }
-        mArmorRecyclerAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void OnArmorNegative() {}
-
-    public void deleteArmor(Armor armor) {
-        ConfirmationDialog.showConfirmDialog(this.getContext(), getString(R.string.confirm_delete_armor), this, armor);
-    }
-
-    // This may be sketchy
-    @Override
-    public void ConfirmDialogOk(Object armor) {
-        if (armor instanceof Armor) {
-            armorList.remove(armor);
-            mArmorRecyclerAdapter.notifyDataSetChanged();
-        }
-    }
-
-    @Override
-    public void ConfirmDialogCancel(Object armor) {}
 }

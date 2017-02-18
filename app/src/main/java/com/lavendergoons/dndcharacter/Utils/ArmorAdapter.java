@@ -2,6 +2,7 @@ package com.lavendergoons.dndcharacter.Utils;
 
 import android.content.Context;
 import android.os.Vibrator;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.lavendergoons.dndcharacter.Dialogs.ArmorDialog;
 import com.lavendergoons.dndcharacter.Fragments.ArmorFragment;
+import com.lavendergoons.dndcharacter.Fragments.ArmorListFragment;
 import com.lavendergoons.dndcharacter.Objects.Armor;
 import com.lavendergoons.dndcharacter.R;
 
@@ -22,7 +24,7 @@ import java.util.ArrayList;
 public class ArmorAdapter extends RecyclerView.Adapter<ArmorAdapter.ViewHolder> {
 
     private ArrayList<Armor> mDataset;
-    private ArmorFragment armorFragment;
+    private ArmorListFragment armorListFragment;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public View cardView;
@@ -48,8 +50,8 @@ public class ArmorAdapter extends RecyclerView.Adapter<ArmorAdapter.ViewHolder> 
         }
     }
 
-    public ArmorAdapter(ArmorFragment fragment, ArrayList<Armor> dataset) {
-        this.armorFragment = fragment;
+    public ArmorAdapter(ArmorListFragment fragment, ArrayList<Armor> dataset) {
+        this.armorListFragment = fragment;
         this.mDataset = dataset;
     }
 
@@ -85,14 +87,19 @@ public class ArmorAdapter extends RecyclerView.Adapter<ArmorAdapter.ViewHolder> 
     }
 
     private boolean onCardLongClick(Armor armor) {
-        Vibrator v = (Vibrator) armorFragment.getContext().getSystemService(Context.VIBRATOR_SERVICE);
+        Vibrator v = (Vibrator) armorListFragment.getContext().getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(Constants.LONG_CLICK_VIBRATION);
-        armorFragment.deleteArmor(armor);
+        armorListFragment.deleteArmor(armor);
         return true;
     }
 
     private void onCardClick(Armor armor) {
-        ArmorDialog.showArmorDialog(armorFragment.getActivity(), armorFragment, armor);
+        launchArmorFragment(armor);
+    }
+
+    private void launchArmorFragment(Armor armor) {
+        FragmentTransaction fragTransaction = armorListFragment.getActivity().getSupportFragmentManager().beginTransaction();
+        fragTransaction.replace(R.id.content_character_nav, ArmorFragment.newInstance(armor), ArmorFragment.TAG).addToBackStack(ArmorFragment.TAG).commit();
     }
 
     @Override

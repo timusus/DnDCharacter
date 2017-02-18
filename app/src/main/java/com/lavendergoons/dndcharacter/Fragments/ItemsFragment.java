@@ -80,7 +80,7 @@ public class ItemsFragment extends Fragment implements AdapterView.OnItemSelecte
         Fragment fragment = new Fragment();
         switch (pos) {
             case Constants.SPINNER_ARMOR:
-                fragment = ArmorFragment.newInstance(/*Character*/);
+                fragment = ArmorListFragment.newInstance(/*Character*/);
                 break;
             case Constants.SPINNER_ITEM:
                 fragment = ItemsGeneralFragment.newInstance(/*Character*/);

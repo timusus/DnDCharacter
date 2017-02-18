@@ -5,10 +5,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.lavendergoons.dndcharacter.Objects.Armor;
@@ -129,5 +132,57 @@ public class ArmorDialog extends DialogFragment {
             }
         });
         builder.create().show();
+    }
+
+    public static void showSimpleArmorDialog(final Activity activity, final ArmorDialogListener target) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        LinearLayout dialogLayout = new LinearLayout(activity);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        final EditText armorDialogName, armorDialogWeight, armorDialogQuantity;
+
+        dialogLayout.setOrientation(LinearLayout.VERTICAL);
+        dialogLayout.setLayoutParams(params);
+        dialogLayout.setPadding(8, 8, 8, 8);
+
+        armorDialogName = new EditText(activity);
+        armorDialogName.setHint(R.string.hint_name);
+
+        armorDialogWeight = new EditText(activity);
+        armorDialogWeight.setInputType(InputType.TYPE_CLASS_NUMBER);
+        armorDialogWeight.setHint(R.string.gen_weight);
+
+        armorDialogQuantity = new EditText(activity);
+        armorDialogQuantity.setInputType(InputType.TYPE_CLASS_NUMBER);
+        armorDialogQuantity.setHint(R.string.gen_quantity);
+        // Set default quantity to one
+        armorDialogQuantity.setText(activity.getString(R.string.one));
+
+        dialogLayout.addView(armorDialogName, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        dialogLayout.addView(armorDialogWeight, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        dialogLayout.addView(armorDialogQuantity, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+        builder.setTitle(activity.getString(R.string.title_armor_dialog));
+        builder.setView(dialogLayout).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                boolean exceptionCheck = false;
+                String name = armorDialogName.getText().toString();
+                int weight = 0;
+                int quantity = 0;
+                try {
+                    weight = Integer.parseInt(armorDialogWeight.getText().toString());
+                    quantity = Integer.parseInt(armorDialogQuantity.getText().toString());
+                }catch (Exception ex) {
+                    ex.printStackTrace();
+                    exceptionCheck = true;
+                }
+                if (!Utils.isStringEmpty(name) && !exceptionCheck) {
+                    target.OnArmorPositive(new Armor(name, weight, quantity));
+                } else {
+                    Toast.makeText(activity, activity.getString(R.string.warning_enter_required_fields), Toast.LENGTH_LONG).show();
+                }
+            }
+        }).setNegativeButton(R.string.cancel, null).create().show();
     }
 }

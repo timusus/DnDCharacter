@@ -3,10 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.lavendergoons.dndcharacter.Fragments.AbilitiesFragment"
-    android:paddingStart="@dimen/activity_half_horizontal_margin"
-    android:paddingEnd="@dimen/activity_half_horizontal_margin"
-    android:paddingTop="@dimen/activity_half_horizontal_margin"
-    android:paddingBottom="@dimen/activity_half_horizontal_margin">
+    android:padding="@dimen/activity_half_horizontal_margin">
 
     <RelativeLayout
         android:layout_width="wrap_content"

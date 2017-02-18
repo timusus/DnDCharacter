@@ -1,9 +1,12 @@
 package com.lavendergoons.dndcharacter.Objects;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Armor object
  */
-public class Armor extends Item {
+public class Armor extends Item implements Parcelable {
     private String type;
     private int acBonus;
     private int maxDex;
@@ -22,6 +25,54 @@ public class Armor extends Item {
         this.speed = speed;
         this.properties = properties;
     }
+
+    public Armor(Parcel parcel) {
+        super(parcel);
+        this.type = parcel.readString();
+        this.acBonus = parcel.readInt();
+        this.maxDex = parcel.readInt();
+        this.checkPenalty = parcel.readInt();
+        this.spellFailure = parcel.readInt();
+        this.speed = parcel.readInt();
+        this.properties = parcel.readString();
+    }
+
+    public Armor(String name, int weight, int quantity) {
+        super(name, weight, quantity);
+    }
+
+    public Armor() {
+        super();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        super.writeToParcel(parcel, i);
+        parcel.writeString(type);
+        parcel.writeInt(acBonus);
+        parcel.writeInt(maxDex);
+        parcel.writeInt(checkPenalty);
+        parcel.writeInt(spellFailure);
+        parcel.writeInt(speed);
+        parcel.writeString(properties);
+    }
+
+    public static final Parcelable.Creator<Armor> CREATOR = new Parcelable.Creator<Armor>() {
+        @Override
+        public Armor createFromParcel(Parcel parcel) {
+            return new Armor(parcel);
+        }
+
+        @Override
+        public Armor[] newArray(int i) {
+            return new Armor[i];
+        }
+    };
 
     public String getType() {
         return type;

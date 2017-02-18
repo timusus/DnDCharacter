@@ -10,7 +10,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +18,7 @@ import android.widget.Toast;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Fragments.AbilitiesFragment;
 import com.lavendergoons.dndcharacter.Fragments.ArmorFragment;
+import com.lavendergoons.dndcharacter.Fragments.ArmorListFragment;
 import com.lavendergoons.dndcharacter.Fragments.AttacksFragment;
 import com.lavendergoons.dndcharacter.Fragments.AttributesFragment;
 import com.lavendergoons.dndcharacter.Fragments.ItemsFragment;
@@ -37,6 +37,7 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         AbilitiesFragment.OnFragmentInteractionListener,
         ArmorFragment.OnFragmentInteractionListener,
+        ArmorListFragment.OnFragmentInteractionListener,
         AttacksFragment.OnFragmentInteractionListener,
         AttributesFragment.OnFragmentInteractionListener,
         ItemsFragment.OnFragmentInteractionListener,
@@ -70,6 +71,10 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         getSupportFragmentManager().addOnBackStackChangedListener(this);
+
+        if (savedInstanceState == null) {
+            loadDefaultFragment();
+        }
     }
 
     @Override
@@ -125,7 +130,7 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
 
     @Override
     public void onBackStackChanged() {
-        if (isCurrentFragment(SpellFragment.TAG)) {
+        if (isCurrentFragment(SpellFragment.TAG) || isCurrentFragment(ArmorFragment.TAG)) {
             showBackButton(true);
             setDrawerLock(true);
         } else {
@@ -154,6 +159,11 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void loadDefaultFragment() {
+        FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();
+        fragTransaction.replace(R.id.content_character_nav, AttributesFragment.newInstance(/*Character*/),  AttributesFragment.TAG).commit();
     }
 
     @Override
