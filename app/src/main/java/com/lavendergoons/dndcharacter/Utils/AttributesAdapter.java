@@ -1,6 +1,8 @@
 package com.lavendergoons.dndcharacter.Utils;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,11 +29,14 @@ public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.Vi
         public View cardView;
         public TextView attributeNameView;
         public EditText attributeEdit;
-        public ViewHolder(View view) {
+        public AttributeTextWatcher textWatcher;
+        public ViewHolder(View view, AttributeTextWatcher watcher) {
             super(view);
             this.cardView = view;
             this.attributeNameView = (TextView) view.findViewById(R.id.attributeNameView);
             this.attributeEdit = (EditText) view.findViewById(R.id.attributeEdit);
+            this.textWatcher = watcher;
+            attributeEdit.addTextChangedListener(this.textWatcher);
         }
     }
 
@@ -43,17 +48,43 @@ public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.Vi
     @Override
     public AttributesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(attributesFragment.getContext()).inflate(R.layout.cardview_attributes, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, new AttributeTextWatcher());
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.attributeNameView.setText(mDataset.get(position).getName());
-        holder.attributeEdit.setHint(mDataset.get(position).getValue());
+        holder.attributeNameView.setText(mDataset.get(position).getName()+" "+position);
+        holder.attributeEdit.setHint(mDataset.get(position).getName());
+        holder.textWatcher.updatePosition(position);
+        holder.attributeEdit.setText(mDataset.get(position).getValue());
     }
 
     @Override
     public int getItemCount() {
         return mDataset.size();
+    }
+
+    // Stores edittext data on text change
+    // Stops attributes from moving to the wrong card
+    private class AttributeTextWatcher implements TextWatcher {
+        private int position;
+
+        public void updatePosition(int pos) {
+            this.position = pos;
+        }
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            mDataset.get(position).setValue(charSequence.toString());
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+
+        }
     }
 }

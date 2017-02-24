@@ -1,47 +1,52 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.lavendergoons.dndcharacter.Fragments.AbilitiesFragment"
-    android:padding="@dimen/activity_half_horizontal_margin">
+    tools:context="com.lavendergoons.dndcharacter.Fragments.AbilitiesFragment">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/scoresLayout">
+        android:padding="@dimen/activity_half_horizontal_margin">
 
-        <include
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            layout="@layout/content_ability_scores"/>
-    </RelativeLayout>
+            android:id="@+id/scoresLayout">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/grappleLayout"
-        android:layout_below="@+id/scoresLayout"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="@dimen/activity_half_vertical_margin">
+            <include
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                layout="@layout/content_ability_scores"/>
+        </RelativeLayout>
 
-        <include
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            layout="@layout/content_ability_grapple"
-            android:layout_alignParentStart="true"/>
-    </RelativeLayout>
+            android:id="@+id/grappleLayout"
+            android:layout_below="@+id/scoresLayout"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="@dimen/activity_half_vertical_margin">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/savesLayout"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true">
+            <include
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                layout="@layout/content_ability_grapple"
+                android:layout_alignParentStart="true"/>
+        </RelativeLayout>
 
-        <include
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            layout="@layout/content_ability_fort_ac"/>
+            android:id="@+id/savesLayout"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true">
+
+            <include
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                layout="@layout/content_ability_fort_ac"/>
+        </RelativeLayout>
     </RelativeLayout>
 
-</RelativeLayout>
+</ScrollView>

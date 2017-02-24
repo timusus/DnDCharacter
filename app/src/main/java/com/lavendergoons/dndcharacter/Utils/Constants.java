@@ -13,8 +13,6 @@ public final class Constants {
     public final static int SPINNER_ARMOR = 0;
     public final static int SPINNER_ITEM = 1;
 
-    //Fragments
-    final static String FRAGMENT_SKILLS = "SKILLS";
 
     // Arrays
     public final static String[] SKILLS = {

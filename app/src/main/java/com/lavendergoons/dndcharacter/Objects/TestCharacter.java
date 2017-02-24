@@ -40,7 +40,7 @@ public class TestCharacter {
         }
 
         for(String s : Constants.ATTRIBUTES) {
-            attributes.add(new Attribute(s, s));
+            attributes.add(new Attribute(s, ""));
         }
         // name, type, acBonus, maxDex, checkPenalty, spellFailure, weight, speed, properties, quantity
         armor.add(new Armor("Studded Leather", "Light", 3, 5, -1, 15, 20, 30, "This is my test string, the quick brown fox jumped over the lazy dog", 1));
