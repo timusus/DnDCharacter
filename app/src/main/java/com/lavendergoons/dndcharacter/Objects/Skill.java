@@ -77,4 +77,15 @@ public class Skill {
     public void setMisc(int misc) {
         this.misc = misc;
     }
+
+    @Override
+    public String toString() {
+        return "Skill{" +
+                "name='" + name + '\'' +
+                ", total=" + total +
+                ", mod=" + mod +
+                ", rank=" + rank +
+                ", misc=" + misc +
+                '}';
+    }
 }

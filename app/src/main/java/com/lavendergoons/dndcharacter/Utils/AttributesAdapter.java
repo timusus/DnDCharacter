@@ -14,6 +14,7 @@ import com.lavendergoons.dndcharacter.Objects.Attribute;
 import com.lavendergoons.dndcharacter.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Adapter for attributes RecyclerView
@@ -22,7 +23,8 @@ import java.util.ArrayList;
 public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.ViewHolder> {
 
     private AttributesFragment attributesFragment;
-    private ArrayList<Attribute> mDataset;
+    private ArrayList<String> mDataset = new ArrayList<>(Arrays.asList(Constants.ATTRIBUTES));
+    private ArrayList<String> attributeList;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -40,9 +42,9 @@ public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.Vi
         }
     }
 
-    public AttributesAdapter(AttributesFragment attributesFragment, ArrayList<Attribute> dataset) {
+    public AttributesAdapter(AttributesFragment attributesFragment, ArrayList<String> dataset) {
         this.attributesFragment = attributesFragment;
-        this.mDataset = dataset;
+        this.attributeList = dataset;
     }
 
     @Override
@@ -53,10 +55,12 @@ public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.attributeNameView.setText(mDataset.get(position).getName());
-        holder.attributeEdit.setHint(mDataset.get(position).getName());
+        holder.attributeNameView.setText(mDataset.get(position));
+        holder.attributeEdit.setHint(mDataset.get(position));
         holder.textWatcher.updatePosition(position);
-        holder.attributeEdit.setText(mDataset.get(position).getValue());
+        if (attributeList.size() > 0) {
+            holder.attributeEdit.setText(attributeList.get(position));
+        }
     }
 
     @Override
@@ -64,8 +68,8 @@ public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.Vi
         return mDataset.size();
     }
 
-    public ArrayList<Attribute> getAttributeList() {
-        return mDataset;
+    public ArrayList<String> getAttributeList() {
+        return attributeList;
     }
 
     // Stores edittext data on text change
@@ -83,7 +87,7 @@ public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.Vi
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            mDataset.get(position).setValue(charSequence.toString());
+            attributeList.set(position, charSequence.toString());
         }
 
         @Override

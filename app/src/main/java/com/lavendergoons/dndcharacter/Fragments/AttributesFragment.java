@@ -33,7 +33,8 @@ public class AttributesFragment extends Fragment {
     private RecyclerView mAttributesRecyclerView;
     private AttributesAdapter mAttributeRecyclerAdapter;
     private RecyclerView.LayoutManager mAttributeLayoutManager;
-    private ArrayList<Attribute> attributesList;
+    //private ArrayList<Attribute> attributesList;
+    private ArrayList<String> attributesList;
     //TODO Get Rid of TestCharacter
     private TestCharacter testCharacter;
     private Character character;
@@ -69,10 +70,10 @@ public class AttributesFragment extends Fragment {
         }
 
         // TODO Get rid of test testCharacter
-        attributesList = new ArrayList<>();
-        //TODO Issue that attribute list is based on array
-        testCharacter = new TestCharacter();
-        attributesList = testCharacter.getAttributes();
+        attributesList = new ArrayList<>(Constants.ATTRIBUTES.length);
+        for (int i=0;i<Constants.ATTRIBUTES.length;i++) {
+            attributesList.add(i, "");
+        }
         getAttributes();
     }
 
@@ -128,7 +129,7 @@ public class AttributesFragment extends Fragment {
             if (cursor != null) {
                 String json = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_ATTRIBUTES));
                 if (json != null && !Utils.isStringEmpty(json)) {
-                    Type attributeType = new TypeToken<ArrayList<Attribute>>(){}.getType();
+                    Type attributeType = new TypeToken<ArrayList<String>>(){}.getType();
                     attributesList = gson.fromJson(json, attributeType);
                 }
             }
