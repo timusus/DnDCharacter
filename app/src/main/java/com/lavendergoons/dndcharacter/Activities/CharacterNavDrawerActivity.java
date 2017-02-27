@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Fragments.AbilitiesFragment;
 import com.lavendergoons.dndcharacter.Fragments.ArmorFragment;
@@ -26,7 +27,9 @@ import com.lavendergoons.dndcharacter.Fragments.ItemsGeneralFragment;
 import com.lavendergoons.dndcharacter.Fragments.SkillsFragment;
 import com.lavendergoons.dndcharacter.Fragments.SpellFragment;
 import com.lavendergoons.dndcharacter.Fragments.SpellListFragment;
+import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.R;
+import com.lavendergoons.dndcharacter.Utils.Constants;
 
 /**
  * Nav Drawer Activity to display fragments,
@@ -52,11 +55,19 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
     private DrawerLayout mDrawerLayout;
     public static final String TAG = "CHARACTER_NAV";
     private boolean toolbarListenerRegister = false;
+    private Character character;
+    private long characterId;
+    private DBAdapter dbAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_nav);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            character = (extras.get(Constants.CHARACTER_KEY) instanceof Character)? (Character) extras.get(Constants.CHARACTER_KEY) : new Character();
+            characterId = extras.getLong(Constants.CHARACTER_ID);
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.character_nav_toolbar);
         setSupportActionBar(toolbar);
@@ -75,6 +86,8 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         if (savedInstanceState == null) {
             loadDefaultFragment();
         }
+        dbAdapter = new DBAdapter(this);
+        dbAdapter.open();
     }
 
     @Override
@@ -163,7 +176,7 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
 
     private void loadDefaultFragment() {
         FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();
-        fragTransaction.replace(R.id.content_character_nav, AttributesFragment.newInstance(/*Character*/),  AttributesFragment.TAG).commit();
+        fragTransaction.replace(R.id.content_character_nav, AttributesFragment.newInstance(character, characterId),  AttributesFragment.TAG).commit();
     }
 
     @Override
@@ -174,7 +187,7 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         String tag = "tag";
         switch (item.getItemId()) {
             case R.id.nav_attributes:
-                fragment = AttributesFragment.newInstance(/*Character*/);
+                fragment = AttributesFragment.newInstance(character, characterId);
                 tag = AttributesFragment.TAG;
                 break;
             case R.id.nav_abilities:
@@ -221,5 +234,9 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
     @Override
     public void onFragmentInteraction() {
 
+    }
+
+    public DBAdapter getDbAdapter() {
+        return dbAdapter;
     }
 }

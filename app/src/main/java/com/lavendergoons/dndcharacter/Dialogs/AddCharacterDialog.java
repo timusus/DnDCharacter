@@ -13,10 +13,12 @@ import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.lavendergoons.dndcharacter.Activities.CharacterListActivity;
 import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.R;
+import com.lavendergoons.dndcharacter.Utils.Utils;
 
 /**
  * Initial simple Character creation dialog.
@@ -68,13 +70,15 @@ public class AddCharacterDialog extends DialogFragment implements DialogInterfac
 
     @Override
     public void onClick(DialogInterface dialog, int position) {
-        //TODO Clean up click functions
-        Log.d("DEBUG / ADD_CHARACTER", "VALUES = "+nameEdit.getText().toString()+" "+levelEdit.getText().toString());
+        if (!Utils.isStringEmpty(nameEdit.getText().toString()) && !Utils.isStringEmpty(levelEdit.getText().toString())) {
+            Character character = new Character(nameEdit.getText().toString(), Integer.parseInt(levelEdit.getText().toString()));
+            CharacterListActivity activity = (CharacterListActivity) getActivity();
+            activity.onCharacterComplete(character);
+            dialog.dismiss();
+        } else {
+            Toast.makeText(getContext(), getString(R.string.warning_enter_required_fields), Toast.LENGTH_LONG).show();
+        }
 
-        Character character = new Character(nameEdit.getText().toString(), Integer.parseInt(levelEdit.getText().toString()));
-        CharacterListActivity activity = (CharacterListActivity) getActivity();
-        activity.onCharacterComplete(character);
-        dialog.dismiss();
     }
 
     @Override

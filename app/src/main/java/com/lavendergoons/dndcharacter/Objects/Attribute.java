@@ -1,8 +1,5 @@
 package com.lavendergoons.dndcharacter.Objects;
 
-/**
- * Created by rtas on 2017-01-26.
- */
 
 public class Attribute {
     private String name;

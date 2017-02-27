@@ -66,14 +66,12 @@ public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdap
     }
 
     private void onCardClick(ViewHolder holder) {
-        //TODO Clean up click functions
         String name = holder.mNameTextView.getText().toString();
         CharacterListActivity activity = (CharacterListActivity) mContext;
         activity.onCharacterClick(name);
     }
 
     private void onCardLongClick(ViewHolder holder) {
-        //TODO Clean up click functions
         Vibrator v = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(Constants.LONG_CLICK_VIBRATION);
         ConfirmationDialog.showConfirmDialog(mContext, "Are you sure long click?", (CharacterListActivity)mContext, null);

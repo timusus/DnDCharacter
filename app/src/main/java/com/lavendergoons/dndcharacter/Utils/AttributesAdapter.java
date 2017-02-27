@@ -53,7 +53,7 @@ public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.attributeNameView.setText(mDataset.get(position).getName()+" "+position);
+        holder.attributeNameView.setText(mDataset.get(position).getName());
         holder.attributeEdit.setHint(mDataset.get(position).getName());
         holder.textWatcher.updatePosition(position);
         holder.attributeEdit.setText(mDataset.get(position).getValue());
@@ -62,6 +62,10 @@ public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.Vi
     @Override
     public int getItemCount() {
         return mDataset.size();
+    }
+
+    public ArrayList<Attribute> getAttributeList() {
+        return mDataset;
     }
 
     // Stores edittext data on text change
