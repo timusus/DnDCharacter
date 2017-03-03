@@ -2,7 +2,6 @@ package com.lavendergoons.dndcharacter.Utils;
 
 import android.content.Context;
 import android.os.Vibrator;
-import android.support.v7.widget.ActivityChooserView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,6 +19,7 @@ import com.lavendergoons.dndcharacter.Objects.Skill;
 import com.lavendergoons.dndcharacter.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Adapter for skill RecyclerView
@@ -82,19 +82,18 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.skillCheckBox.setText(mDataset.get(position).getName());
         holder.skillCheckBox.setChecked(mDataset.get(position).isTrained());
-
         holder.skillModTypeText.setText(mDataset.get(position).getModType());
+
+        //Update postion before setting text
+        holder.totalTextWatcher.updatePosition(position);
+        holder.modTextWatcher.updatePosition(position);
+        holder.rankTextWatcher.updatePosition(position);
+        holder.miscTextWatcher.updatePosition(position);
 
         holder.skillTotalEdit.setText(String.valueOf(mDataset.get(position).getTotal()));
         holder.skillModEdit.setText(String.valueOf(mDataset.get(position).getMod()));
         holder.skillRankEdit.setText(String.valueOf(mDataset.get(position).getRank()));
         holder.skillMiscEdit.setText(String.valueOf(mDataset.get(position).getMisc()));
-        Log.d("SKILL_BIND", mDataset.get(position).toString());
-
-        holder.totalTextWatcher.updatePosition(position);
-        holder.modTextWatcher.updatePosition(position);
-        holder.rankTextWatcher.updatePosition(position);
-        holder.miscTextWatcher.updatePosition(position);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,6 +131,7 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
         return mDataset;
     }
 
+    // TextWatchers to save values
     private class TotalTextWatcher implements TextWatcher {
         private int position;
 

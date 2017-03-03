@@ -31,15 +31,13 @@ import java.util.ArrayList;
 
 public class SkillsFragment extends Fragment implements ConfirmationDialog.ConfirmationDialogInterface {
 
-    //TODO Character should be passed in from CharacterNavDrawerActivity
     private OnFragmentInteractionListener mListener;
     private RecyclerView mSkillsRecyclerView;
     private SkillsAdapter mSkillRecyclerAdapter;
     private RecyclerView.LayoutManager mSkillRecyclerLayoutManager;
     private ArrayList<Skill> skillsList = new ArrayList<>();
     private Gson gson = new Gson();
-    // TODO Get rid of test testCharacter
-    private TestCharacter testCharacter;
+
     public static final String TAG = "SKILLS_FRAG";
     private long id;
     private Character character;
@@ -72,8 +70,6 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
         }
         initSkills();
         getSkills();
-        // TODO Get rid of test testCharacter
-        testCharacter = new TestCharacter();
     }
 
     @Override
