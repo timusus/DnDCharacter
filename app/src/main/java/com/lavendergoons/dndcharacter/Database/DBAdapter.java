@@ -9,10 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.Utils.Utils;
-
-import static android.os.Build.ID;
 
 
 public class DBAdapter {
@@ -36,18 +33,6 @@ public class DBAdapter {
     public static final String COLUMN_SPELL = "spell";
 
     public static final String[] ALL_COLUMNS = {COLUMN_ID, COLUMN_CHARACTER, COLUMN_ABILITIES, COLUMN_ATTRIBUTES, COLUMN_ARMOR, COLUMN_ATTACK, COLUMN_ITEM_GENERAL, COLUMN_SKILL, COLUMN_SPELL};
-
-    /*public static final int INDEX_ID = 0;
-    public static final int INDEX_CHARACTER = 1;
-    public static final int INDEX_ABILITIES = 2;
-    public static final int INDEX_ATTRIBUTES = 3;
-    public static final int INDEX_ARMOR = 4;
-    public static final int INDEX_ATTACK = 5;
-    public static final int INDEX_ITEM_GENERAL = 6;
-    public static final int INDEX_SKILL = 7;
-    public static final int INDEX_SPELL = 8;
-
-    public static final int[] ALL_INDEXES = {INDEX_ID, INDEX_CHARACTER, INDEX_ABILITIES, INDEX_ATTRIBUTES, INDEX_ARMOR, INDEX_ATTACK, INDEX_ITEM_GENERAL, INDEX_SKILL, INDEX_SPELL};*/
 
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + TABLE_CHARACTERS + " (" + COLUMN_ID +
