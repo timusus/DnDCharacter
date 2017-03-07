@@ -6,47 +6,49 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:padding="@dimen/activity_half_horizontal_margin">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/scoresLayout">
-
-            <include
+        <include
+                layout="@layout/content_ability_fort_ac"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                layout="@layout/content_ability_scores"/>
-        </RelativeLayout>
+                android:id="@+id/savesLayout"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"/>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/grappleLayout"
-            android:layout_below="@+id/scoresLayout"
+        <include
+            layout="@layout/content_ability_general"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="@dimen/activity_half_vertical_margin">
-
-            <include
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                layout="@layout/content_ability_grapple"
-                android:layout_alignParentStart="true"/>
-        </RelativeLayout>
-
-        <RelativeLayout
+            android:layout_alignParentTop="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/savesLayout"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true">
+            android:id="@+id/generalInclude"/>
 
-            <include
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                layout="@layout/content_ability_fort_ac"/>
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/grappleLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="@string/gen_grapple"
+            android:layout_below="@+id/generalInclude"
+            android:layout_marginTop="@dimen/activity_half_vertical_margin"/>
+
+        <include
+            layout="@layout/content_ability_grapple"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/grappleInclude"
+            android:layout_below="@+id/grappleLabel"
+            android:layout_alignParentStart="true" />
+
+        <include
+            layout="@layout/content_ability_scores"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/savesLayout"/>
+
     </RelativeLayout>
 
 </ScrollView>

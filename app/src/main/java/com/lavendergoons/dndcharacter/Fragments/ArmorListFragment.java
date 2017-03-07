@@ -33,7 +33,7 @@ public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDial
     private RecyclerView.LayoutManager mArmorRecyclerLayoutManager;
     private OnFragmentInteractionListener mListener;
     private ArrayList<Armor> armorList = new ArrayList<>();
-    // TODO Get rid of test character
+    // TODO Get rid of test testCharacter
     private TestCharacter character;
     private FloatingActionButton fab;
     public static final String TAG = "ARMOR_LIST_FRAG";
@@ -49,7 +49,7 @@ public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDial
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO Get rid of test character
+        //TODO Get rid of test testCharacter
         character = new TestCharacter();
         armorList = character.getArmor();
     }

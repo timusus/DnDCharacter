@@ -28,6 +28,7 @@
 
     <!-- Warnings -->
     <string name="warning_enter_required_fields">Please Enter All Required Fields</string>
+    <string name="warning_database_not_initialized">Database not initialized</string>
 
     <!-- Confirmations -->
     <string name="confirm_delete_armor">Are you sure you want to delete this armor?</string>
@@ -49,6 +50,13 @@
     <string name="gen_time">Time</string>
     <string name="gen_type">Type</string>
     <string name="gen_duration">Duration</string>
+    <string name="gen_grapple">Grapple</string>
+    <string name="gen_hp">Hp</string>
+    <string name="gen_non_lethal_n">Non\nLethal</string>
+    <string name="gen_non_lethal">Non Lethal</string>
+    <string name="gen_base_attack_short">Base Atk.</string>
+    <string name="gen_base_attack">Base Attack</string>
+    <string name="gen_initiative">Initiative</string>
 
     <!-- Labels -->
     <string name="label_add_character_btn">Add Character</string>

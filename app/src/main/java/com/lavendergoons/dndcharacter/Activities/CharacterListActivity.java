@@ -25,8 +25,6 @@ import com.lavendergoons.dndcharacter.Utils.Constants;
 
 import java.util.ArrayList;
 
-import static com.lavendergoons.dndcharacter.Utils.Constants.CHARACTER_ID;
-import static com.lavendergoons.dndcharacter.Utils.Constants.CHARACTER_KEY;
 
 /**
   * Initial Activity to hold list of characters
@@ -58,10 +56,6 @@ public class CharacterListActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_character_list);
         gson = new Gson();
         characters = new ArrayList<Character>();
-        //characters.add(new Character("Silian Mord", 1));
-        //characters.add(new Character("Montgomery", 15));
-        //characters.add(new Character("Darth Vader", 13));
-        //characters.add(new Character("Boba Fett", 4));
         createView();
         dbAdapter = new DBAdapter(this);
         dbAdapter.open();
@@ -189,6 +183,7 @@ public class CharacterListActivity extends AppCompatActivity implements
         if (c != null) {
             for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
                 String json = c.getString(c.getColumnIndex(dbAdapter.COLUMN_CHARACTER));
+                Log.d("JSON", "Character json string "+json);
                 Character character = gson.fromJson(json, Character.class);
                 characters.add(character);
             }
@@ -197,7 +192,6 @@ public class CharacterListActivity extends AppCompatActivity implements
         }
     }
 
-    //TODO maybe put id inside character object
     private long getCharacterId(String name) {
         Cursor c = dbAdapter.getCharacterId();
         long id = -1;
@@ -215,15 +209,3 @@ public class CharacterListActivity extends AppCompatActivity implements
         return id;
     }
 }
-
-/*
-    NavDrawer Activity Layout
-
-    activity_main
-        include:
-            Appbar
-                include:
-                    content_main
-         NavigationMenu
-
- */

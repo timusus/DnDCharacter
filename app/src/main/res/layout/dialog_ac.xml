@@ -56,7 +56,6 @@
             android:id="@+id/acTen"
             android:layout_weight="1"
             android:textSize="14sp"
-            android:hint="00"
             android:gravity="center_vertical|center_horizontal" />
 
         <EditText
@@ -67,7 +66,7 @@
             android:id="@+id/acDialogArmorEdit"
             android:layout_weight="1"
             android:textSize="14sp"
-            android:hint="00"
+            android:text="00"
             android:gravity="center_vertical|center_horizontal"
             android:selectAllOnFocus="true" />
 
@@ -79,7 +78,7 @@
             android:id="@+id/acDialogShieldEdit"
             android:layout_weight="1"
             android:textSize="14sp"
-            android:hint="00"
+            android:text="00"
             android:gravity="center_vertical|center_horizontal"
             android:selectAllOnFocus="true" />
 
@@ -91,7 +90,7 @@
             android:id="@+id/acDialogDexEdit"
             android:layout_weight="1"
             android:textSize="14sp"
-            android:hint="00"
+            android:text="00"
             android:gravity="center_vertical|center_horizontal"
             android:selectAllOnFocus="true" />
 
@@ -149,7 +148,7 @@
             android:id="@+id/acDialogSizeEdit"
             android:layout_weight="1"
             android:textSize="14sp"
-            android:hint="00"
+            android:text="00"
             android:gravity="center_vertical|center_horizontal"
             android:selectAllOnFocus="true" />
 
@@ -161,7 +160,7 @@
             android:id="@+id/acDialogNaturalEdit"
             android:layout_weight="1"
             android:textSize="14sp"
-            android:hint="00"
+            android:text="00"
             android:gravity="center_vertical|center_horizontal"
             android:selectAllOnFocus="true" />
 
@@ -173,7 +172,7 @@
             android:id="@+id/acDialogDeflectionEdit"
             android:layout_weight="1"
             android:textSize="14sp"
-            android:hint="00"
+            android:text="00"
             android:gravity="center_vertical|center_horizontal"
             android:selectAllOnFocus="true" />
 
@@ -185,7 +184,7 @@
             android:id="@+id/acDialogMiscEdit"
             android:layout_weight="1"
             android:textSize="14sp"
-            android:hint="00"
+            android:text="00"
             android:layout_gravity="center_horizontal"
             android:gravity="center_vertical|center_horizontal"
             android:selectAllOnFocus="true" />
@@ -211,7 +210,7 @@
             android:ems="3"
             android:id="@+id/acDialogTotalEdit"
             android:layout_weight="1"
-            android:hint="00"
+            android:text="00"
             android:gravity="center_horizontal"
             android:selectAllOnFocus="true" />
 

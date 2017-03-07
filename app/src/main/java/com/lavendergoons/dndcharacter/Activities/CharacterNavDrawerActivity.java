@@ -191,7 +191,7 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
                 tag = AttributesFragment.TAG;
                 break;
             case R.id.nav_abilities:
-                fragment = AbilitiesFragment.newInstance(/*Character*/);
+                fragment = AbilitiesFragment.newInstance(character, characterId);
                 tag = AbilitiesFragment.TAG;
                 break;
             case R.id.nav_skills:

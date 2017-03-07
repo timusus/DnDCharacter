@@ -149,7 +149,7 @@ public class DBAdapter {
         return false;
     }
 
-   /* public void deleteRows() {
+   public void deleteRows() {
         Cursor cursor = getAllRows();
         long id = cursor.getColumnIndexOrThrow(COLUMN_ID);
         if (cursor.moveToFirst()) {
@@ -157,7 +157,7 @@ public class DBAdapter {
                 deleteRow(cursor.getLong((int) id));
             }while (cursor.moveToNext());
         }
-    }*/
+    }
 
     public int deleteRow(long id) {
         String where = COLUMN_ID + " = ?";

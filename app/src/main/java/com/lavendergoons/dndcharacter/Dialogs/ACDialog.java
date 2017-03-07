@@ -24,7 +24,7 @@ public class ACDialog extends DialogFragment {
     }
 
     public static interface ACDialogListener {
-        void OnACPositive();
+        void OnACPositive(Abilities abilities);
         void OnACNegative();
     }
 
@@ -55,10 +55,40 @@ public class ACDialog extends DialogFragment {
         final EditText acMiscEdit = (EditText) view.findViewById(R.id.acDialogMiscEdit);
         final EditText acTotalEdit = (EditText) view.findViewById(R.id.acDialogTotalEdit);
 
+        acArmorEdit.setText(String.valueOf(abilities.getAC(Abilities.AC_ARMOR)));
+        acShieldEdit.setText(String.valueOf(abilities.getAC(Abilities.AC_SHEILD)));
+        acDexEdit.setText(String.valueOf(abilities.getAC(Abilities.AC_DEX)));
+        acSizeEdit.setText(String.valueOf(abilities.getAC(Abilities.AC_SIZE)));
+        acNaturalEdit.setText(String.valueOf(abilities.getAC(Abilities.AC_NATURAL)));
+        acDeflectionEdit.setText(String.valueOf(abilities.getAC(Abilities.AC_DEFLECTION)));
+        acMiscEdit.setText(String.valueOf(abilities.getAC(Abilities.AC_MISC)));
+        acTotalEdit.setText(String.valueOf(abilities.getAC(Abilities.AC_TOTAL)));
+
         builder.setView(view).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                target.OnACPositive();
+                int armor=0, shield=0, dex=0, size=0, natural=0, deflection=0, misc=0, total=0;
+                try {
+                    armor = Integer.parseInt(acArmorEdit.getText().toString());
+                    shield = Integer.parseInt(acShieldEdit.getText().toString());
+                    dex = Integer.parseInt(acDexEdit.getText().toString());
+                    size = Integer.parseInt(acSizeEdit.getText().toString());
+                    natural = Integer.parseInt(acNaturalEdit.getText().toString());
+                    deflection = Integer.parseInt(acDeflectionEdit.getText().toString());
+                    misc = Integer.parseInt(acMiscEdit.getText().toString());
+                    total = Integer.parseInt(acTotalEdit.getText().toString());
+                }catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                abilities.setAC(armor, Abilities.AC_ARMOR);
+                abilities.setAC(shield, Abilities.AC_SHEILD);
+                abilities.setAC(dex, Abilities.AC_DEX);
+                abilities.setAC(size, Abilities.AC_SIZE);
+                abilities.setAC(natural, Abilities.AC_NATURAL);
+                abilities.setAC(deflection, Abilities.AC_DEFLECTION);
+                abilities.setAC(misc, Abilities.AC_MISC);
+                abilities.setAC(total, Abilities.AC_TOTAL);
+                target.OnACPositive(abilities);
             }
         }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override

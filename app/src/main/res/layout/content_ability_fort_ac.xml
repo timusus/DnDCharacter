@@ -1,71 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingEnd="@dimen/activity_horizontal_margin">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <TextView
-                android:text="@string/save_fortitude"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/saveFortLabel"
-                android:layout_marginBottom="@dimen/activity_half_horizontal_margin"/>
-
-            <TextView
-                android:text="@string/save_reflex"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_half_horizontal_margin"
+                android:text="@string/save_fortitude" />
+
+            <TextView
                 android:id="@+id/saveReflexLabel"
-                android:layout_marginBottom="@dimen/activity_half_horizontal_margin"/>
-
-            <TextView
-                android:text="@string/save_will"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_half_horizontal_margin"
+                android:text="@string/save_reflex" />
+
+            <TextView
                 android:id="@+id/saveWillLabel"
-                android:layout_marginBottom="@dimen/activity_half_horizontal_margin"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_half_horizontal_margin"
+                android:text="@string/save_will" />
 
             <Button
-                android:text="@string/edit"
+                android:id="@+id/savesEditBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/savesEditBtn" />
+                android:text="@string/edit" />
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <TextView
-                android:text="00"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/saveFortValue"
-                android:layout_marginBottom="@dimen/activity_half_horizontal_margin"/>
-
-            <TextView
-                android:text="00"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_half_horizontal_margin"
+                android:text="00" />
+
+            <TextView
                 android:id="@+id/saveReflexValue"
-                android:layout_marginBottom="@dimen/activity_half_horizontal_margin"/>
-
-            <TextView
-                android:text="00"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_half_horizontal_margin"
+                android:text="00" />
+
+            <TextView
                 android:id="@+id/saveWillValue"
-                android:layout_marginBottom="@dimen/activity_half_horizontal_margin"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_half_horizontal_margin"
+                android:text="00" />
         </LinearLayout>
 
     </LinearLayout>

@@ -9,14 +9,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lavendergoons.dndcharacter.Activities.CharacterNavDrawerActivity;
 import com.lavendergoons.dndcharacter.Database.DBAdapter;
-import com.lavendergoons.dndcharacter.Objects.Attribute;
 import com.lavendergoons.dndcharacter.Objects.Character;
-import com.lavendergoons.dndcharacter.Objects.TestCharacter;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.AttributesAdapter;
 import com.lavendergoons.dndcharacter.Utils.Constants;
@@ -28,20 +27,19 @@ import java.util.ArrayList;
 
 public class AttributesFragment extends Fragment {
 
+    public static final String TAG = "ATTRIBUTES_FRAG";
+
+    private Gson gson = new Gson();
 
     private OnFragmentInteractionListener mListener;
     private RecyclerView mAttributesRecyclerView;
     private AttributesAdapter mAttributeRecyclerAdapter;
     private RecyclerView.LayoutManager mAttributeLayoutManager;
-    //private ArrayList<Attribute> attributesList;
     private ArrayList<String> attributesList;
-    //TODO Get Rid of TestCharacter
-    private TestCharacter testCharacter;
-    private Character character;
-    public static final String TAG = "ATTRIBUTES_FRAG";
-    private long id;
     private DBAdapter dbAdapter;
-    private Gson gson = new Gson();
+    private Character character;
+
+    private long id;
 
     public AttributesFragment() {
         // Required empty public constructor
@@ -113,14 +111,18 @@ public class AttributesFragment extends Fragment {
 
     @Override
     public void onDestroy() {
-        writeAttibutes();
+        writeAttributes();
         super.onDestroy();
     }
 
-    private void writeAttibutes() {
+    private void writeAttributes() {
         attributesList = mAttributeRecyclerAdapter.getAttributeList();
         String json = gson.toJson(attributesList);
-        dbAdapter.fillColumn(id, DBAdapter.COLUMN_ATTRIBUTES, json);
+        if (dbAdapter != null) {
+            dbAdapter.fillColumn(id, DBAdapter.COLUMN_ATTRIBUTES, json);
+        } else {
+            Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void getAttributes() {

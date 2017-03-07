@@ -45,7 +45,7 @@ public class ItemsGeneralFragment extends Fragment implements View.OnClickListen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO Get rid of test character
+        //TODO Get rid of test testCharacter
         character = new TestCharacter();
         itemList = character.getItems();
     }

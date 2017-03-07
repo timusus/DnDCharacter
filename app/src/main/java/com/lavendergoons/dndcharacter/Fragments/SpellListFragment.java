@@ -34,7 +34,7 @@ public class SpellListFragment extends Fragment implements View.OnClickListener,
     private RecyclerView.Adapter mSpellRecyclerAdapter;
     private RecyclerView.LayoutManager mSpellRecyclerLayoutManager;
     private ArrayList<Spell> spellList = new ArrayList<>();
-    // TODO Get rid of test character
+    // TODO Get rid of test testCharacter
     private TestCharacter character;
     private FloatingActionButton fab;
     private OnFragmentInteractionListener mListener;
