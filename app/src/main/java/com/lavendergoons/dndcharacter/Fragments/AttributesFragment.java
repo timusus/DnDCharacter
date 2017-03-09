@@ -67,7 +67,6 @@ public class AttributesFragment extends Fragment {
             ex.printStackTrace();
         }
 
-        // TODO Get rid of test testCharacter
         attributesList = new ArrayList<>(Constants.ATTRIBUTES.length);
         for (int i=0;i<Constants.ATTRIBUTES.length;i++) {
             attributesList.add(i, "");
@@ -130,7 +129,7 @@ public class AttributesFragment extends Fragment {
             Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_ATTRIBUTES, id);
             if (cursor != null) {
                 String json = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_ATTRIBUTES));
-                if (json != null && !Utils.isStringEmpty(json)) {
+                if (json != null && !Utils.isStringEmpty(json) && !json.equals("[]") && !json.equals("[ ]")) {
                     Type attributeType = new TypeToken<ArrayList<String>>(){}.getType();
                     attributesList = gson.fromJson(json, attributeType);
                 }
