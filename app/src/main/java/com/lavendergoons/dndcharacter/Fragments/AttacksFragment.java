@@ -1,6 +1,7 @@
 package com.lavendergoons.dndcharacter.Fragments;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -9,41 +10,67 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.lavendergoons.dndcharacter.Activities.CharacterNavDrawerActivity;
+import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.AttackDialog;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Objects.Attack;
-import com.lavendergoons.dndcharacter.Objects.TestCharacter;
+import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.AttackAdapter;
+import com.lavendergoons.dndcharacter.Utils.Constants;
+import com.lavendergoons.dndcharacter.Utils.Utils;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class AttacksFragment extends Fragment implements View.OnClickListener, AttackDialog.AttackDialogListener, ConfirmationDialog.ConfirmationDialogInterface {
 
-    //TODO Character should be passed in from CharacterNavDrawerActivity
+    public static final String TAG = "ATTACKS_FRAG";
+
+    private Gson gson = new Gson();
+
     private RecyclerView mAttacksRecyclerView;
     private RecyclerView.Adapter mAttacksRecyclerAdapter;
     private RecyclerView.LayoutManager mAttacksRecyclerLayoutManager;
     private OnFragmentInteractionListener mListener;
+    private DBAdapter dbAdapter;
+    private Character character;
+    private long id = -1;
+
     private ArrayList<Attack> attackList = new ArrayList<>();
-    private TestCharacter character;
     private FloatingActionButton fab;
-    public static final String TAG = "ATTACKS_FRAG";
 
     public AttacksFragment() {
         // Required empty public constructor
     }
 
-    public static AttacksFragment newInstance() {
-        return new AttacksFragment();
+    public static AttacksFragment newInstance(Character character, long id) {
+        AttacksFragment frag = new AttacksFragment();
+        Bundle args = new Bundle();
+        args.putParcelable(Constants.CHARACTER_KEY, character);
+        args.putLong(Constants.CHARACTER_ID, id);
+        frag.setArguments(args);
+        return frag;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        character = new TestCharacter();
-        attackList = character.getAttacks();
+        if (getArguments() != null) {
+            id = getArguments().getLong(Constants.CHARACTER_ID);
+            character = getArguments().getParcelable(Constants.CHARACTER_KEY);
+        }
+        try {
+            dbAdapter = ((CharacterNavDrawerActivity) getActivity()).getDbAdapter();
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        getAttacks();
     }
 
     @Override
@@ -67,6 +94,30 @@ public class AttacksFragment extends Fragment implements View.OnClickListener, A
         return rootView;
     }
 
+    private void getAttacks() {
+        if (dbAdapter != null && id != -1) {
+            Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_ATTACK, id);
+            if (cursor != null) {
+                String json = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_ATTACK));
+                if (json != null && !Utils.isStringEmpty(json) && !json.equals("[]") && !json.equals("[ ]")) {
+                    Type attributeType = new TypeToken<ArrayList<Attack>>(){}.getType();
+                    attackList = gson.fromJson(json, attributeType);
+                }
+            }
+        } else {
+            Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void writeAttacks() {
+        String json = gson.toJson(attackList);
+        if (dbAdapter != null) {
+            dbAdapter.fillColumn(id, DBAdapter.COLUMN_ATTACK, json);
+        } else {
+            Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
+        }
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -80,8 +131,8 @@ public class AttacksFragment extends Fragment implements View.OnClickListener, A
     public void OnAttackDialogPositive(Attack attack) {
         if (attack != null) {
             attackList.add(attack);
-            mAttacksRecyclerAdapter.notifyDataSetChanged();
         }
+        mAttacksRecyclerAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -104,6 +155,12 @@ public class AttacksFragment extends Fragment implements View.OnClickListener, A
 
     public void deleteAttack(Attack attack) {
         ConfirmationDialog.showConfirmDialog(this.getContext(), getString(R.string.confirm_delete_attack), this, attack);
+    }
+
+    @Override
+    public void onDestroy() {
+        writeAttacks();
+        super.onDestroy();
     }
 
     @Override

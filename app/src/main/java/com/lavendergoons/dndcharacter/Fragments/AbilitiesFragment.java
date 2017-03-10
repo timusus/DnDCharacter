@@ -38,7 +38,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
 
     private OnFragmentInteractionListener mListener;
     private DBAdapter dbAdapter;
-    Character character;
+    private Character character;
     private Abilities abilities;
     private Button savesEditBtn, acEditBtn, scoresEditBtn;
 
@@ -56,7 +56,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
     // Grapple Editexts
     private EditText grappleBaseAttackEdit, grappleStrModEdit, grappleSizeModEdit, grappleMiscModEdit, grappleTotalEdit;
 
-    long id = 0;
+    long id = -1;
 
     public AbilitiesFragment() {
         // Required empty public constructor
@@ -376,7 +376,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
 
     // Read ability object from database
     private void readAbilityValues() {
-        if (dbAdapter != null) {
+        if (dbAdapter != null && id != -1) {
             Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_ABILITIES, id);
             if (cursor != null) {
                 String json = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_ABILITIES));
@@ -386,6 +386,8 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
                     abilities = new Abilities();
                 }
             }
+        } else {
+            Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
         }
     }
 

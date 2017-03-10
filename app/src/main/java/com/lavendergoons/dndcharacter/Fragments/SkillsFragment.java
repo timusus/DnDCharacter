@@ -39,7 +39,7 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
     private Gson gson = new Gson();
 
     public static final String TAG = "SKILLS_FRAG";
-    private long id;
+    private long id = -1;
     private Character character;
     private DBAdapter dbAdapter;
 
@@ -142,7 +142,7 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
     }
 
     private void getSkills() {
-        if (dbAdapter != null) {
+        if (dbAdapter != null && id != -1) {
             Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_SKILL, id);
             if (cursor != null) {
                 String json = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_SKILL));
@@ -151,6 +151,8 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
                     skillsList = gson.fromJson(json, skillType);
                 }
             }
+        }  else {
+            Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -8,7 +8,8 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/cardview_no_corner_radius">
+        app:cardCornerRadius="@dimen/cardview_no_corner_radius"
+        android:focusableInTouchMode="true">
 
         <RelativeLayout
             android:layout_width="match_parent"

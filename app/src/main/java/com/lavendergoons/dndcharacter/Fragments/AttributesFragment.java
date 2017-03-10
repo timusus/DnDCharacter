@@ -35,11 +35,11 @@ public class AttributesFragment extends Fragment {
     private RecyclerView mAttributesRecyclerView;
     private AttributesAdapter mAttributeRecyclerAdapter;
     private RecyclerView.LayoutManager mAttributeLayoutManager;
-    private ArrayList<String> attributesList;
+    private ArrayList<String> attributesList = new ArrayList<>(Constants.ATTRIBUTES.length);
     private DBAdapter dbAdapter;
     private Character character;
 
-    private long id;
+    private long id = -1;
 
     public AttributesFragment() {
         // Required empty public constructor
@@ -67,7 +67,6 @@ public class AttributesFragment extends Fragment {
             ex.printStackTrace();
         }
 
-        attributesList = new ArrayList<>(Constants.ATTRIBUTES.length);
         for (int i=0;i<Constants.ATTRIBUTES.length;i++) {
             attributesList.add(i, "");
         }
@@ -125,7 +124,7 @@ public class AttributesFragment extends Fragment {
     }
 
     private void getAttributes() {
-        if (dbAdapter != null) {
+        if (dbAdapter != null && id != -1) {
             Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_ATTRIBUTES, id);
             if (cursor != null) {
                 String json = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_ATTRIBUTES));
@@ -134,6 +133,8 @@ public class AttributesFragment extends Fragment {
                     attributesList = gson.fromJson(json, attributeType);
                 }
             }
+        } else {
+            Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
         }
     }
 
