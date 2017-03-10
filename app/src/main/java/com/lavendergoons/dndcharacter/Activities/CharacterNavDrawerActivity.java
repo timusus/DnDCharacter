@@ -27,6 +27,7 @@ import com.lavendergoons.dndcharacter.Fragments.ItemsGeneralFragment;
 import com.lavendergoons.dndcharacter.Fragments.SkillsFragment;
 import com.lavendergoons.dndcharacter.Fragments.SpellFragment;
 import com.lavendergoons.dndcharacter.Fragments.SpellListFragment;
+import com.lavendergoons.dndcharacter.Objects.Armor;
 import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.Constants;
@@ -234,6 +235,16 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
     @Override
     public void onFragmentInteraction() {
 
+    }
+
+    @Override
+    public void passBackArmor(Armor armor, int index) {
+        try {
+            ArmorListFragment frag = (ArmorListFragment) getSupportFragmentManager().findFragmentByTag(ArmorListFragment.TAG);
+            frag.retrieveArmor(armor, index);
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public DBAdapter getDbAdapter() {

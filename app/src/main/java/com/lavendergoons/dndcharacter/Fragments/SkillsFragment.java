@@ -39,7 +39,7 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
     private Gson gson = new Gson();
 
     public static final String TAG = "SKILLS_FRAG";
-    private long id = -1;
+    private long characterId = -1;
     private Character character;
     private DBAdapter dbAdapter;
 
@@ -60,7 +60,7 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            id = getArguments().getLong(Constants.CHARACTER_ID);
+            characterId = getArguments().getLong(Constants.CHARACTER_ID);
             character = getArguments().getParcelable(Constants.CHARACTER_KEY);
         }
         try {
@@ -138,12 +138,12 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
     private void writeSkills() {
         skillsList = mSkillRecyclerAdapter.getSkillList();
         String json = gson.toJson(skillsList);
-        dbAdapter.fillColumn(id, DBAdapter.COLUMN_SKILL, json);
+        dbAdapter.fillColumn(characterId, DBAdapter.COLUMN_SKILL, json);
     }
 
     private void getSkills() {
-        if (dbAdapter != null && id != -1) {
-            Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_SKILL, id);
+        if (dbAdapter != null && characterId != -1) {
+            Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_SKILL, characterId);
             if (cursor != null) {
                 String json = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_SKILL));
                 if (json != null && !Utils.isStringEmpty(json)) {

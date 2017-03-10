@@ -39,7 +39,7 @@ public class AttributesFragment extends Fragment {
     private DBAdapter dbAdapter;
     private Character character;
 
-    private long id = -1;
+    private long characterId = -1;
 
     public AttributesFragment() {
         // Required empty public constructor
@@ -58,7 +58,7 @@ public class AttributesFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            id = getArguments().getLong(Constants.CHARACTER_ID);
+            characterId = getArguments().getLong(Constants.CHARACTER_ID);
             character = getArguments().getParcelable(Constants.CHARACTER_KEY);
         }
         try {
@@ -117,15 +117,15 @@ public class AttributesFragment extends Fragment {
         attributesList = mAttributeRecyclerAdapter.getAttributeList();
         String json = gson.toJson(attributesList);
         if (dbAdapter != null) {
-            dbAdapter.fillColumn(id, DBAdapter.COLUMN_ATTRIBUTES, json);
+            dbAdapter.fillColumn(characterId, DBAdapter.COLUMN_ATTRIBUTES, json);
         } else {
             Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
         }
     }
 
     private void getAttributes() {
-        if (dbAdapter != null && id != -1) {
-            Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_ATTRIBUTES, id);
+        if (dbAdapter != null && characterId != -1) {
+            Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_ATTRIBUTES, characterId);
             if (cursor != null) {
                 String json = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_ATTRIBUTES));
                 if (json != null && !Utils.isStringEmpty(json) && !json.equals("[]") && !json.equals("[ ]")) {

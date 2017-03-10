@@ -28,7 +28,7 @@ public class ItemsFragment extends Fragment implements AdapterView.OnItemSelecte
     private ArrayAdapter<CharSequence> spinnerAdapter;
 
     private Character character;
-    private long id = -1;
+    private long characterId = -1;
 
     public ItemsFragment() {
         // Required empty public constructor
@@ -47,7 +47,7 @@ public class ItemsFragment extends Fragment implements AdapterView.OnItemSelecte
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            id = getArguments().getLong(Constants.CHARACTER_ID);
+            characterId = getArguments().getLong(Constants.CHARACTER_ID);
             character = getArguments().getParcelable(Constants.CHARACTER_KEY);
         }
         spinnerAdapter = ArrayAdapter.createFromResource(this.getActivity(), R.array.item_spinner, android.R.layout.simple_spinner_item);
@@ -63,8 +63,6 @@ public class ItemsFragment extends Fragment implements AdapterView.OnItemSelecte
         itemSelectionSpinner = (Spinner) rootView.findViewById(R.id.itemSelectionSpinner);
         itemSelectionSpinner.setAdapter(spinnerAdapter);
         itemSelectionSpinner.setOnItemSelectedListener(this);
-        itemSelectionSpinner.setSelection(1);
-
         return rootView;
     }
 
@@ -96,10 +94,10 @@ public class ItemsFragment extends Fragment implements AdapterView.OnItemSelecte
         Fragment fragment = new Fragment();
         switch (pos) {
             case Constants.SPINNER_ARMOR:
-                fragment = ArmorListFragment.newInstance(character, id);
+                fragment = ArmorListFragment.newInstance(character, characterId);
                 break;
             case Constants.SPINNER_ITEM:
-                fragment = ItemsGeneralFragment.newInstance(character, id);
+                fragment = ItemsGeneralFragment.newInstance(character, characterId);
                 break;
         }
         FragmentTransaction fragTransaction = this.getActivity().getSupportFragmentManager().beginTransaction();

@@ -56,7 +56,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
     // Grapple Editexts
     private EditText grappleBaseAttackEdit, grappleStrModEdit, grappleSizeModEdit, grappleMiscModEdit, grappleTotalEdit;
 
-    long id = -1;
+    long characterId = -1;
 
     public AbilitiesFragment() {
         // Required empty public constructor
@@ -75,7 +75,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            id = getArguments().getLong(Constants.CHARACTER_ID);
+            characterId = getArguments().getLong(Constants.CHARACTER_ID);
             character = getArguments().getParcelable(Constants.CHARACTER_KEY);
         }
         try {
@@ -376,8 +376,8 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
 
     // Read ability object from database
     private void readAbilityValues() {
-        if (dbAdapter != null && id != -1) {
-            Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_ABILITIES, id);
+        if (dbAdapter != null && characterId != -1) {
+            Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_ABILITIES, characterId);
             if (cursor != null) {
                 String json = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_ABILITIES));
                 if (json != null && !Utils.isStringEmpty(json)) {
@@ -397,7 +397,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
         readGrappleValues();
         String json = gson.toJson(abilities);
         if (dbAdapter != null) {
-            dbAdapter.fillColumn(id, DBAdapter.COLUMN_ABILITIES, json);
+            dbAdapter.fillColumn(characterId, DBAdapter.COLUMN_ABILITIES, json);
         } else {
             Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
         }

@@ -40,7 +40,7 @@ public class AttacksFragment extends Fragment implements View.OnClickListener, A
     private OnFragmentInteractionListener mListener;
     private DBAdapter dbAdapter;
     private Character character;
-    private long id = -1;
+    private long characterId = -1;
 
     private ArrayList<Attack> attackList = new ArrayList<>();
     private FloatingActionButton fab;
@@ -62,7 +62,7 @@ public class AttacksFragment extends Fragment implements View.OnClickListener, A
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            id = getArguments().getLong(Constants.CHARACTER_ID);
+            characterId = getArguments().getLong(Constants.CHARACTER_ID);
             character = getArguments().getParcelable(Constants.CHARACTER_KEY);
         }
         try {
@@ -95,8 +95,8 @@ public class AttacksFragment extends Fragment implements View.OnClickListener, A
     }
 
     private void getAttacks() {
-        if (dbAdapter != null && id != -1) {
-            Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_ATTACK, id);
+        if (dbAdapter != null && characterId != -1) {
+            Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_ATTACK, characterId);
             if (cursor != null) {
                 String json = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_ATTACK));
                 if (json != null && !Utils.isStringEmpty(json) && !json.equals("[]") && !json.equals("[ ]")) {
@@ -113,7 +113,7 @@ public class AttacksFragment extends Fragment implements View.OnClickListener, A
     private void writeAttacks() {
         String json = gson.toJson(attackList);
         if (dbAdapter != null) {
-            dbAdapter.fillColumn(id, DBAdapter.COLUMN_ATTACK, json);
+            dbAdapter.fillColumn(characterId, DBAdapter.COLUMN_ATTACK, json);
         } else {
             Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
         }

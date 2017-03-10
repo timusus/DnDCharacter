@@ -13,10 +13,13 @@ import android.widget.EditText;
 import com.lavendergoons.dndcharacter.Objects.Armor;
 import com.lavendergoons.dndcharacter.R;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
+
 public class ArmorFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private Armor armor;
+    private int index = -1;
     private EditText armorNameEdit, armorTypeEdit, armorACEdit, armorDexEdit, armorCheckEdit, armorSpellEdit, armorSpeedEdit, armorWeightEdit, armorPropertiesEdit, armorQuantityEdit;
     public static final String TAG = "ARMOR_FRAG";
 
@@ -24,13 +27,14 @@ public class ArmorFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static ArmorFragment newInstance(Armor armor) {
+    public static ArmorFragment newInstance(Armor armor, int index) {
         ArmorFragment frag = new ArmorFragment();
         if (armor == null) {
             armor = new Armor();
         }
         Bundle args = new Bundle();
         args.putParcelable("ARMOR", armor);
+        args.putInt("INDEX", index);
         frag.setArguments(args);
         return frag;
     }
@@ -40,6 +44,7 @@ public class ArmorFragment extends Fragment {
         super.onCreate(savedInstanceState);
         try {
             armor = getArguments() != null ? (Armor) getArguments().getParcelable("ARMOR") : new Armor();
+            index = getArguments().getInt("INDEX");
         }catch(BadParcelableException ex) {
             Log.e("PARSE", "Bad Parcelable in ArmorFragment");
         }
@@ -100,8 +105,23 @@ public class ArmorFragment extends Fragment {
 
     @Override
     public void onStop() {
-        super.onStop();
         setValues();
+//        try {
+//            ((OnFragmentInteractionListener) getActivity()).passBackArmor(armor, index);
+//        }catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+//        try {
+//            ((OnFragmentInteractionListener) getActivity()).passBackArmor(armor, index);
+//        }catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+        super.onDestroy();
     }
 
     @Override
@@ -117,12 +137,20 @@ public class ArmorFragment extends Fragment {
 
     @Override
     public void onDetach() {
+        try {
+            ((OnFragmentInteractionListener) getActivity()).passBackArmor(armor, index);
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
         super.onDetach();
         mListener = null;
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction();
+        /**
+         * Pass back armor to CharacterNavActivity
+         * to pass to ArmorListFragment
+         */
+        void passBackArmor(Armor armor, int index);
     }
 }

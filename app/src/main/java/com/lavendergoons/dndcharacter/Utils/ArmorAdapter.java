@@ -81,7 +81,7 @@ public class ArmorAdapter extends RecyclerView.Adapter<ArmorAdapter.ViewHolder> 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onCardClick(mDataset.get(position));
+                onCardClick(mDataset.get(position), position);
             }
         });
     }
@@ -93,13 +93,13 @@ public class ArmorAdapter extends RecyclerView.Adapter<ArmorAdapter.ViewHolder> 
         return true;
     }
 
-    private void onCardClick(Armor armor) {
-        launchArmorFragment(armor);
+    private void onCardClick(Armor armor, int i) {
+        launchArmorFragment(armor, i);
     }
 
-    private void launchArmorFragment(Armor armor) {
+    private void launchArmorFragment(Armor armor, int i) {
         FragmentTransaction fragTransaction = armorListFragment.getActivity().getSupportFragmentManager().beginTransaction();
-        fragTransaction.replace(R.id.content_character_nav, ArmorFragment.newInstance(armor), ArmorFragment.TAG).addToBackStack(ArmorFragment.TAG).commit();
+        fragTransaction.replace(R.id.content_character_nav, ArmorFragment.newInstance(armor, i), ArmorFragment.TAG).addToBackStack(ArmorFragment.TAG).commit();
     }
 
     @Override

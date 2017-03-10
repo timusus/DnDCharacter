@@ -47,7 +47,7 @@ public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDial
     private ArrayList<Armor> armorList = new ArrayList<>();
     private DBAdapter dbAdapter;
     private Character character;
-    private long id = -1;
+    private long characterId = -1;
 
     private TestCharacter testCharacter;
     private FloatingActionButton fab;
@@ -69,7 +69,7 @@ public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDial
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            id = getArguments().getLong(Constants.CHARACTER_ID);
+            characterId = getArguments().getLong(Constants.CHARACTER_ID);
             character = getArguments().getParcelable(Constants.CHARACTER_KEY);
         }
         try {
@@ -105,12 +105,10 @@ public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDial
     }
 
     private void getArmor() {
-        if (dbAdapter != null && id != -1) {
-            Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_ARMOR, id);
+        if (dbAdapter != null && characterId != -1) {
+            Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_ARMOR, characterId);
             if (cursor != null) {
-                cursor.moveToFirst();
-                int column = cursor.getColumnIndex(DBAdapter.COLUMN_ARMOR);
-                String json = cursor.getString(column);
+                String json = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_ARMOR));
                 if (json != null && !Utils.isStringEmpty(json) && !json.equals("[]") && !json.equals("[ ]")) {
                     Type attributeType = new TypeToken<ArrayList<Armor>>(){}.getType();
                     armorList = gson.fromJson(json, attributeType);
@@ -126,10 +124,17 @@ public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDial
     private void writeArmor() {
         String json = gson.toJson(armorList);
         if (dbAdapter != null) {
-            dbAdapter.fillColumn(id, DBAdapter.COLUMN_ARMOR, json);
+            dbAdapter.fillColumn(characterId, DBAdapter.COLUMN_ARMOR, json);
         } else {
             Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void retrieveArmor(Armor armor, int index) {
+        if (armor != null) {
+            armorList.set(index, armor);
+        }
+        mArmorRecyclerAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -166,18 +171,20 @@ public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDial
         ArmorDialog.showSimpleArmorDialog(this.getActivity(), this);
     }
 
-    private void launchArmorFragment(Armor armor) {
+    private void launchArmorFragment(Armor armor, int i) {
         FragmentTransaction fragTransaction = this.getActivity().getSupportFragmentManager().beginTransaction();
-        fragTransaction.replace(R.id.content_character_nav, ArmorFragment.newInstance(armor), ArmorFragment.TAG).addToBackStack(ArmorFragment.TAG).commit();
+        fragTransaction.replace(R.id.content_character_nav, ArmorFragment.newInstance(armor, i), ArmorFragment.TAG).addToBackStack(ArmorFragment.TAG).commit();
     }
 
     @Override
     public void OnArmorPositive(Armor armor) {
+        int i = -1;
         if (armor != null) {
             armorList.add(armor);
+            i = armorList.indexOf(armor);
         }
         mArmorRecyclerAdapter.notifyDataSetChanged();
-        launchArmorFragment(armor);
+        launchArmorFragment(armor, i);
     }
 
     @Override
@@ -198,4 +205,6 @@ public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDial
 
     @Override
     public void ConfirmDialogCancel(Object armor) {}
+
+
 }
