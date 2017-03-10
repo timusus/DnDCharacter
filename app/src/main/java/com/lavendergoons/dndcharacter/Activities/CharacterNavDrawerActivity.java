@@ -203,7 +203,7 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
                 tag = AttacksFragment.TAG;
                 break;
             case R.id.nav_items:
-                fragment = ItemsFragment.newInstance(/*Character*/);
+                fragment = ItemsFragment.newInstance(character, characterId);
                 tag = ItemsFragment.TAG;
                 break;
             case R.id.nav_spells:

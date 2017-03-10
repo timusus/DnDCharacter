@@ -131,6 +131,7 @@ public class AttributesFragment extends Fragment {
                 if (json != null && !Utils.isStringEmpty(json) && !json.equals("[]") && !json.equals("[ ]")) {
                     Type attributeType = new TypeToken<ArrayList<String>>(){}.getType();
                     attributesList = gson.fromJson(json, attributeType);
+                    cursor.close();
                 }
             }
         } else {

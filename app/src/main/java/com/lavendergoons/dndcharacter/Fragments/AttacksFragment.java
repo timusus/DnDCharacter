@@ -102,6 +102,7 @@ public class AttacksFragment extends Fragment implements View.OnClickListener, A
                 if (json != null && !Utils.isStringEmpty(json) && !json.equals("[]") && !json.equals("[ ]")) {
                     Type attributeType = new TypeToken<ArrayList<Attack>>(){}.getType();
                     attackList = gson.fromJson(json, attributeType);
+                    cursor.close();
                 }
             }
         } else {

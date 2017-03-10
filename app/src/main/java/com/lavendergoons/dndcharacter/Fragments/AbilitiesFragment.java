@@ -385,6 +385,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
                 } else {
                     abilities = new Abilities();
                 }
+                cursor.close();
             }
         } else {
             Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();

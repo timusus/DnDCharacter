@@ -5,10 +5,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.lavendergoons.dndcharacter.Fragments.AttacksFragment">
 
-    <android.support.v7.widget.RecyclerView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/attacksRecyclerView"/>
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/attackLabel"
+            android:paddingStart="@dimen/activity_half_horizontal_margin"
+            android:paddingEnd="@dimen/activity_half_horizontal_margin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/attack_name"
+                android:id="@+id/attackNameLabel"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_alignParentStart="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/attackNameLabel"
+                android:text="@string/attack_bonus_short"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@+id/attackCriticalLabel"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:text="@string/attack_damage"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/attack_critical"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/attackCriticalLabel"/>
+
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/attackLabel"
+            android:id="@+id/attacksRecyclerView"/>
+
+    </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"

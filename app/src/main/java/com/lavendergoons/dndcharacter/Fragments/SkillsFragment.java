@@ -149,6 +149,7 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
                 if (json != null && !Utils.isStringEmpty(json)) {
                     Type skillType = new TypeToken<ArrayList<Skill>>(){}.getType();
                     skillsList = gson.fromJson(json, skillType);
+                    cursor.close();
                 }
             }
         }  else {

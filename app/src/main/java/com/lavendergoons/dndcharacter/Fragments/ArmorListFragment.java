@@ -1,6 +1,7 @@
 package com.lavendergoons.dndcharacter.Fragments;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -10,48 +11,76 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.lavendergoons.dndcharacter.Activities.CharacterNavDrawerActivity;
+import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.ArmorDialog;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Objects.Armor;
+import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.Objects.TestCharacter;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.ArmorAdapter;
+import com.lavendergoons.dndcharacter.Utils.Constants;
+import com.lavendergoons.dndcharacter.Utils.Utils;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-
-import static android.R.attr.fragment;
 
 /**
  * Fragment to hold armor recycler view
  */
 public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDialogListener, View.OnClickListener, ConfirmationDialog.ConfirmationDialogInterface {
 
-    //TODO Character should be passed in from CharacterNavDrawerActivity
+    public static final String TAG = "ARMOR_LIST_FRAG";
+
+    private Gson gson = new Gson();
+
     private RecyclerView mArmorRecyclerView;
     private RecyclerView.Adapter mArmorRecyclerAdapter;
     private RecyclerView.LayoutManager mArmorRecyclerLayoutManager;
     private OnFragmentInteractionListener mListener;
+
     private ArrayList<Armor> armorList = new ArrayList<>();
-    // TODO Get rid of test testCharacter
-    private TestCharacter character;
+    private DBAdapter dbAdapter;
+    private Character character;
+    private long id = -1;
+
+    private TestCharacter testCharacter;
     private FloatingActionButton fab;
-    public static final String TAG = "ARMOR_LIST_FRAG";
 
     public ArmorListFragment() {
         // Required empty public constructor
     }
 
-    public static ArmorListFragment newInstance(/*Character*/) {
-        return new ArmorListFragment();
+    public static ArmorListFragment newInstance(Character character, long characterId) {
+        ArmorListFragment frag = new ArmorListFragment();
+        Bundle args = new Bundle();
+        args.putParcelable(Constants.CHARACTER_KEY, character);
+        args.putLong(Constants.CHARACTER_ID, characterId);
+        frag.setArguments(args);
+        return frag;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            id = getArguments().getLong(Constants.CHARACTER_ID);
+            character = getArguments().getParcelable(Constants.CHARACTER_KEY);
+        }
+        try {
+            dbAdapter = ((CharacterNavDrawerActivity) getActivity()).getDbAdapter();
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        getArmor();
         //TODO Get rid of test testCharacter
-        character = new TestCharacter();
-        armorList = character.getArmor();
+        //testCharacter = new TestCharacter();
+        //armorList = testCharacter.getArmor();
     }
 
     @Override
@@ -73,6 +102,40 @@ public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDial
         fab = (FloatingActionButton) rootView.findViewById(R.id.addArmorFAB);
         fab.setOnClickListener(this);
         return rootView;
+    }
+
+    private void getArmor() {
+        if (dbAdapter != null && id != -1) {
+            Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_ARMOR, id);
+            if (cursor != null) {
+                cursor.moveToFirst();
+                int column = cursor.getColumnIndex(DBAdapter.COLUMN_ARMOR);
+                String json = cursor.getString(column);
+                if (json != null && !Utils.isStringEmpty(json) && !json.equals("[]") && !json.equals("[ ]")) {
+                    Type attributeType = new TypeToken<ArrayList<Armor>>(){}.getType();
+                    armorList = gson.fromJson(json, attributeType);
+                    cursor.close();
+                }
+            }
+        } else {
+            Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void writeArmor() {
+        String json = gson.toJson(armorList);
+        if (dbAdapter != null) {
+            dbAdapter.fillColumn(id, DBAdapter.COLUMN_ARMOR, json);
+        } else {
+            Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        writeArmor();
+        super.onDestroy();
     }
 
     @Override
