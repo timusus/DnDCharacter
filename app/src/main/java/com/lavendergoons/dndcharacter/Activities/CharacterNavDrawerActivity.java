@@ -59,6 +59,8 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
     private Character character;
     private long characterId;
     private DBAdapter dbAdapter;
+    private Armor tempArmor;
+    private int tempArmorIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -238,13 +240,24 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
     }
 
     @Override
+    public Object[] retrieveArmor() {
+        Armor armor = tempArmor;
+        int index = tempArmorIndex;
+        tempArmor = null;
+        tempArmorIndex = -1;
+        return new Object[] {armor, index};
+    }
+
+    @Override
     public void passBackArmor(Armor armor, int index) {
-        try {
-            ArmorListFragment frag = (ArmorListFragment) getSupportFragmentManager().findFragmentByTag(ArmorListFragment.TAG);
-            frag.retrieveArmor(armor, index);
-        }catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        this.tempArmor = armor;
+        this.tempArmorIndex = index;
+//        try {
+//            ArmorListFragment frag = (ArmorListFragment) getSupportFragmentManager().findFragmentByTag(ArmorListFragment.TAG);
+//            frag.retrieveArmor(armor, index);
+//        }catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
     }
 
     public DBAdapter getDbAdapter() {

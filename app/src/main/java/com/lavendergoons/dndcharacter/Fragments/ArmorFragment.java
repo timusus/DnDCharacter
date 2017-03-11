@@ -106,21 +106,16 @@ public class ArmorFragment extends Fragment {
     @Override
     public void onStop() {
         setValues();
-//        try {
-//            ((OnFragmentInteractionListener) getActivity()).passBackArmor(armor, index);
-//        }catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
+        try {
+            ((OnFragmentInteractionListener) getActivity()).passBackArmor(armor, index);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         super.onStop();
     }
 
     @Override
     public void onDestroy() {
-//        try {
-//            ((OnFragmentInteractionListener) getActivity()).passBackArmor(armor, index);
-//        }catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
         super.onDestroy();
     }
 
@@ -137,11 +132,6 @@ public class ArmorFragment extends Fragment {
 
     @Override
     public void onDetach() {
-        try {
-            ((OnFragmentInteractionListener) getActivity()).passBackArmor(armor, index);
-        }catch (Exception ex) {
-            ex.printStackTrace();
-        }
         super.onDetach();
         mListener = null;
     }

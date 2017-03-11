@@ -78,14 +78,23 @@ public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDial
             ex.printStackTrace();
         }
         getArmor();
+        try {
+            Object[] array = ((CharacterNavDrawerActivity) getActivity()).retrieveArmor();
+            Armor armor = (Armor) array[0];
+            int index = (Integer) array[1];
+            if (armor != null && index != -1) {
+                armorList.add(armor);
+            }
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
         //TODO Get rid of test testCharacter
         //testCharacter = new TestCharacter();
         //armorList = testCharacter.getArmor();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_armor_list, container, false);
         mArmorRecyclerView = (RecyclerView) rootView.findViewById(R.id.armorRecyclerView);
@@ -98,6 +107,7 @@ public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDial
 
         mArmorRecyclerAdapter = new ArmorAdapter(this, armorList);
         mArmorRecyclerView.setAdapter(mArmorRecyclerAdapter);
+        mArmorRecyclerAdapter.notifyDataSetChanged();
 
         fab = (FloatingActionButton) rootView.findViewById(R.id.addArmorFAB);
         fab.setOnClickListener(this);
@@ -162,8 +172,7 @@ public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDial
 
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction();
+        Object[] retrieveArmor();
     }
 
     @Override
