@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "369544188265",
+    "firebase_url": "https://dndcharacter-46577.firebaseio.com",
+    "project_id": "dndcharacter-46577",
+    "storage_bucket": "dndcharacter-46577.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:369544188265:android:1a4824f5ea921de5",
+        "android_client_info": {
+          "package_name": "com.lavendergoons.dndcharacter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "369544188265-q0l5i1cve3gp8sqlas0m2ee8u2j20a9e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lavendergoons.dndcharacter",
+            "certificate_hash": "ebd0772fcbae2fc13fdf1ac40f3a15ef7c10aa33"
+          }
+        },
+        {
+          "client_id": "369544188265-2aoo05eubmlcr1o62vtq716i62ej8f5f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWAx3HxxIRLRWL5CFqcuIlmIU7tle2a9Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "369544188265-2aoo05eubmlcr1o62vtq716i62ej8f5f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
