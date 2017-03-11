@@ -2,6 +2,7 @@ package com.lavendergoons.dndcharacter.Fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
@@ -18,42 +19,68 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.lavendergoons.dndcharacter.Activities.CharacterNavDrawerActivity;
+import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
+import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.Objects.Spell;
 import com.lavendergoons.dndcharacter.Objects.TestCharacter;
 import com.lavendergoons.dndcharacter.R;
+import com.lavendergoons.dndcharacter.Utils.Constants;
 import com.lavendergoons.dndcharacter.Utils.SpellAdapter;
 import com.lavendergoons.dndcharacter.Utils.Utils;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class SpellListFragment extends Fragment implements View.OnClickListener, ConfirmationDialog.ConfirmationDialogInterface {
 
-    //TODO Character should be passed in from CharacterNavDrawerActivity
+    public static final String TAG = "SPELL_LIST_FRAG";
+
+    private Gson gson = new Gson();
+
     private RecyclerView mSpellRecyclerView;
     private RecyclerView.Adapter mSpellRecyclerAdapter;
     private RecyclerView.LayoutManager mSpellRecyclerLayoutManager;
-    private ArrayList<Spell> spellList = new ArrayList<>();
-    // TODO Get rid of test testCharacter
-    private TestCharacter character;
     private FloatingActionButton fab;
     private OnFragmentInteractionListener mListener;
-    public static final String TAG = "SPELL_LIST_FRAG";
-    private static final String DIALOG_TAG = "SPELL_LIST_DIALOG";
+
+    private ArrayList<Spell> spellList = new ArrayList<>();
+    private DBAdapter dbAdapter;
+    // TODO Get rid of test testCharacter
+    private TestCharacter testCharacter;
+    private Character character;
+    private long characterId = -1;
+
 
     public SpellListFragment() {
         // Required empty public constructor
     }
 
-    public static SpellListFragment newInstance() {
-        return new SpellListFragment();
+    public static SpellListFragment newInstance(Character character, long characterId) {
+        SpellListFragment frag = new SpellListFragment();
+        Bundle args = new Bundle();
+        args.putParcelable(Constants.CHARACTER_KEY, character);
+        args.putLong(Constants.CHARACTER_ID, characterId);
+        frag.setArguments(args);
+        return frag;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        character = new TestCharacter();
-        spellList = character.getSpells();
+        if (getArguments() != null) {
+            characterId = getArguments().getLong(Constants.CHARACTER_ID);
+            character = getArguments().getParcelable(Constants.CHARACTER_KEY);
+        }
+        try {
+            dbAdapter = ((CharacterNavDrawerActivity) getActivity()).getDbAdapter();
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        getSpells();
     }
 
     @Override
@@ -75,6 +102,31 @@ public class SpellListFragment extends Fragment implements View.OnClickListener,
         fab = (FloatingActionButton) rootView.findViewById(R.id.addSpellFAB);
         fab.setOnClickListener(this);
         return rootView;
+    }
+
+    private void getSpells() {
+        if (dbAdapter != null && characterId != -1) {
+            Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_SPELL, characterId);
+            if (cursor != null) {
+                String json = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_SPELL));
+                if (json != null && !Utils.isStringEmpty(json) && !json.equals("[]") && !json.equals("[ ]")) {
+                    Type attributeType = new TypeToken<ArrayList<Spell>>(){}.getType();
+                    spellList = gson.fromJson(json, attributeType);
+                    cursor.close();
+                }
+            }
+        } else {
+            Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void writeSpells() {
+        String json = gson.toJson(spellList);
+        if (dbAdapter != null) {
+            dbAdapter.fillColumn(characterId, DBAdapter.COLUMN_SPELL, json);
+        } else {
+            Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -103,11 +155,14 @@ public class SpellListFragment extends Fragment implements View.OnClickListener,
         ConfirmationDialog.showConfirmDialog(this.getContext(), getString(R.string.confirm_delete_spell), this, spell);
     }
 
-    private void addSpell(Spell spell) {
+    private int addSpell(Spell spell) {
+        int i = -1;
         if (spell != null) {
             spellList.add(spell);
+            i = spellList.indexOf(spell);
             mSpellRecyclerAdapter.notifyDataSetChanged();
         }
+        return i;
     }
 
     @Override
@@ -122,14 +177,24 @@ public class SpellListFragment extends Fragment implements View.OnClickListener,
     }
 
     @Override
+    public void onStop() {
+        writeSpells();
+        super.onStop();
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction();
+    public interface OnFragmentInteractionListener {}
+
+    public void retrieveSpell(Spell spell, int index) {
+        if (spell != null && index != -1) {
+            spellList.set(index, spell);
+        }
+        mSpellRecyclerAdapter.notifyDataSetChanged();
     }
 
     public static class SpellDialog extends DialogFragment {
@@ -171,9 +236,9 @@ public class SpellListFragment extends Fragment implements View.OnClickListener,
                     }
                     if (!Utils.isStringEmpty(name) && !exceptionCheck) {
                         Spell spell = new Spell(name, level);
-                        fragment.addSpell(spell);
+                        int index = fragment.addSpell(spell);
                         FragmentTransaction fragTransaction = fragment.getActivity().getSupportFragmentManager().beginTransaction();
-                        fragTransaction.replace(R.id.content_character_nav, SpellFragment.newInstance(spell), SpellFragment.TAG).addToBackStack(SpellFragment.TAG).commit();
+                        fragTransaction.replace(R.id.content_character_nav, SpellFragment.newInstance(spell, index), SpellFragment.TAG).addToBackStack(SpellFragment.TAG).commit();
                     } else {
                         Toast.makeText(fragment.getContext(), fragment.getString(R.string.warning_enter_required_fields), Toast.LENGTH_LONG).show();
                     }

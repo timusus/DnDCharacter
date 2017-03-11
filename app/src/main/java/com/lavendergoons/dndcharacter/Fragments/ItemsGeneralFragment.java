@@ -18,7 +18,6 @@ import com.lavendergoons.dndcharacter.Activities.CharacterNavDrawerActivity;
 import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Dialogs.ItemGeneralDialog;
-import com.lavendergoons.dndcharacter.Objects.Attack;
 import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.Objects.Item;
 import com.lavendergoons.dndcharacter.Objects.TestCharacter;
@@ -77,9 +76,6 @@ public class ItemsGeneralFragment extends Fragment implements View.OnClickListen
             ex.printStackTrace();
         }
         getItemsGeneral();
-        //TODO Get rid of test testCharacter
-        //testCharacter = new TestCharacter();
-        //itemList = testCharacter.getItems();
     }
 
     @Override
@@ -129,8 +125,13 @@ public class ItemsGeneralFragment extends Fragment implements View.OnClickListen
     }
 
     @Override
-    public void onDestroy() {
+    public void onStop() {
         writeItemsGeneral();
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
         super.onDestroy();
     }
 
@@ -191,7 +192,6 @@ public class ItemsGeneralFragment extends Fragment implements View.OnClickListen
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction();
     }
 }

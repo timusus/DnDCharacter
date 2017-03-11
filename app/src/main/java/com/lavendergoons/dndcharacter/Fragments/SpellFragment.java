@@ -24,19 +24,21 @@ public class SpellFragment extends Fragment {
     private Switch spellResSwitch;
     private OnFragmentInteractionListener mListener;
     private Spell spell;
+    private int index = -1;
     public static final String TAG = "SPELL_FRAG";
 
     public SpellFragment() {
         // Required empty public constructor
     }
 
-    public static SpellFragment newInstance(Spell spell) {
+    public static SpellFragment newInstance(Spell spell, int index) {
         SpellFragment frag = new SpellFragment();
         if (spell == null) {
             spell = new Spell();
         }
         Bundle args = new Bundle();
         args.putParcelable("SPELL", spell);
+        args.putInt("INDEX", index);
         frag.setArguments(args);
         return frag;
     }
@@ -46,6 +48,7 @@ public class SpellFragment extends Fragment {
         super.onCreate(savedInstanceState);
         try {
             spell = getArguments() != null ? (Spell) getArguments().getParcelable("SPELL") : new Spell();
+            index = getArguments().getInt("INDEX");
         }catch(BadParcelableException ex) {
             Log.e("PARSE", "Bad Parcelable in SpellFragment");
         }
@@ -110,8 +113,13 @@ public class SpellFragment extends Fragment {
 
     @Override
     public void onStop() {
-        super.onStop();
         setValues();
+        try {
+            ((OnFragmentInteractionListener) getActivity()).passBackSpell(spell, index);
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        super.onStop();
     }
 
     @Override
@@ -132,7 +140,6 @@ public class SpellFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction();
+        void passBackSpell(Spell spell, int i);
     }
 }

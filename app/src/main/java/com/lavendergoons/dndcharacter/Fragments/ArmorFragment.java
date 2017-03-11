@@ -13,7 +13,6 @@ import android.widget.EditText;
 import com.lavendergoons.dndcharacter.Objects.Armor;
 import com.lavendergoons.dndcharacter.R;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
 
 public class ArmorFragment extends Fragment {
 

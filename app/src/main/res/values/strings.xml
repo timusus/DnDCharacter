@@ -67,6 +67,7 @@
     <string name="label_nav_drawer_attacks">Attacks</string>
     <string name="label_nav_drawer_animals">Animals</string>
     <string name="label_nav_drawer_spells">Spells</string>
+    <string name="label_nav_drawer_armor">Armor</string>
     <string name="label_layout_ac_bonus">AC\nBonus</string>
     <string name="label_layout_max_dex">Max\nDex</string>
     <string name="label_layout_check_penalty">Check\nPenalty</string>

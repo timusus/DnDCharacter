@@ -23,6 +23,10 @@
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/label_nav_drawer_items" />
         <item
+            android:id="@+id/nav_armor"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/label_nav_drawer_armor" />
+        <item
             android:id="@+id/nav_spells"
             android:icon="@drawable/ic_menu_send"
             android:title="@string/label_nav_drawer_spells" />

@@ -63,7 +63,7 @@ public class SpellAdapter extends RecyclerView.Adapter<SpellAdapter.ViewHolder> 
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onCardClick(mDataset.get(position));
+                onCardClick(mDataset.get(position), position);
             }
         });
 
@@ -75,8 +75,8 @@ public class SpellAdapter extends RecyclerView.Adapter<SpellAdapter.ViewHolder> 
         });
     }
 
-    private void onCardClick(Spell spell) {
-        launchSpellFragment(spell);
+    private void onCardClick(Spell spell, int i) {
+        launchSpellFragment(spell, i);
     }
 
     private boolean onCardLongClick(Spell spell) {
@@ -86,9 +86,9 @@ public class SpellAdapter extends RecyclerView.Adapter<SpellAdapter.ViewHolder> 
         return true;
     }
 
-    private void launchSpellFragment(Spell spell) {
+    private void launchSpellFragment(Spell spell, int i) {
         FragmentTransaction fragTransaction = spellListFragment.getActivity().getSupportFragmentManager().beginTransaction();
-        fragTransaction.replace(R.id.content_character_nav, SpellFragment.newInstance(spell), SpellFragment.TAG).addToBackStack(SpellFragment.TAG).commit();
+        fragTransaction.replace(R.id.content_character_nav, SpellFragment.newInstance(spell, i), SpellFragment.TAG).addToBackStack(SpellFragment.TAG).commit();
     }
 
     @Override

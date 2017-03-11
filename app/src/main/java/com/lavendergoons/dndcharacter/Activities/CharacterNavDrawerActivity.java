@@ -22,13 +22,13 @@ import com.lavendergoons.dndcharacter.Fragments.ArmorFragment;
 import com.lavendergoons.dndcharacter.Fragments.ArmorListFragment;
 import com.lavendergoons.dndcharacter.Fragments.AttacksFragment;
 import com.lavendergoons.dndcharacter.Fragments.AttributesFragment;
-import com.lavendergoons.dndcharacter.Fragments.ItemsFragment;
 import com.lavendergoons.dndcharacter.Fragments.ItemsGeneralFragment;
 import com.lavendergoons.dndcharacter.Fragments.SkillsFragment;
 import com.lavendergoons.dndcharacter.Fragments.SpellFragment;
 import com.lavendergoons.dndcharacter.Fragments.SpellListFragment;
 import com.lavendergoons.dndcharacter.Objects.Armor;
 import com.lavendergoons.dndcharacter.Objects.Character;
+import com.lavendergoons.dndcharacter.Objects.Spell;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.Constants;
 
@@ -44,7 +44,6 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         ArmorListFragment.OnFragmentInteractionListener,
         AttacksFragment.OnFragmentInteractionListener,
         AttributesFragment.OnFragmentInteractionListener,
-        ItemsFragment.OnFragmentInteractionListener,
         ItemsGeneralFragment.OnFragmentInteractionListener,
         SkillsFragment.OnFragmentInteractionListener,
         SpellFragment.OnFragmentInteractionListener,
@@ -206,11 +205,15 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
                 tag = AttacksFragment.TAG;
                 break;
             case R.id.nav_items:
-                fragment = ItemsFragment.newInstance(character, characterId);
-                tag = ItemsFragment.TAG;
+                fragment = ItemsGeneralFragment.newInstance(character, characterId);
+                tag = ItemsGeneralFragment.TAG;
+                break;
+            case R.id.nav_armor:
+                fragment = ArmorListFragment.newInstance(character, characterId);
+                tag = ArmorListFragment.TAG;
                 break;
             case R.id.nav_spells:
-                fragment = SpellListFragment.newInstance(/*Character*/);
+                fragment = SpellListFragment.newInstance(character, characterId);
                 tag = SpellListFragment.TAG;
                 break;
         }
@@ -239,25 +242,36 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
 
     }
 
-    @Override
+    /*@Override
     public Object[] retrieveArmor() {
         Armor armor = tempArmor;
         int index = tempArmorIndex;
         tempArmor = null;
         tempArmorIndex = -1;
         return new Object[] {armor, index};
+    }*/
+
+
+    @Override
+    public void passBackSpell(Spell spell, int i) {
+        try {
+            SpellListFragment frag = (SpellListFragment) getSupportFragmentManager().findFragmentByTag(SpellListFragment.TAG);
+            frag.retrieveSpell(spell, i);
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
     public void passBackArmor(Armor armor, int index) {
-        this.tempArmor = armor;
-        this.tempArmorIndex = index;
-//        try {
-//            ArmorListFragment frag = (ArmorListFragment) getSupportFragmentManager().findFragmentByTag(ArmorListFragment.TAG);
-//            frag.retrieveArmor(armor, index);
-//        }catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
+        //this.tempArmor = armor;
+        //this.tempArmorIndex = index;
+        try {
+            ArmorListFragment frag = (ArmorListFragment) getSupportFragmentManager().findFragmentByTag(ArmorListFragment.TAG);
+            frag.retrieveArmor(armor, index);
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public DBAdapter getDbAdapter() {
