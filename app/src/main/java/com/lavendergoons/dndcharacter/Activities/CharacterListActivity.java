@@ -85,7 +85,7 @@ public class CharacterListActivity extends AppCompatActivity implements
 
     @Override
     protected void onStart() {
-        Log.d("APP", "onStart");
+        //Log.d("APP", "onStart");
         super.onStart();
     }
 
@@ -97,19 +97,19 @@ public class CharacterListActivity extends AppCompatActivity implements
 
     @Override
     protected void onResume() {
-        Log.d("APP", "onResume");
+        //Log.d("APP", "onResume");
         super.onResume();
     }
 
     @Override
     protected void onStop() {
-        Log.d("APP", "onStop");
+        //Log.d("APP", "onStop");
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        Log.d("APP", "onDestroy");
+        //Log.d("APP", "onDestroy");
         dbAdapter.close();
         super.onDestroy();
     }
@@ -161,14 +161,16 @@ public class CharacterListActivity extends AppCompatActivity implements
 
     @Override
     public void ConfirmDialogOk(Object o) {
-        //TODO Clean up
-        Toast.makeText(this, "CharacterListActivity Confirm", Toast.LENGTH_SHORT).show();
+        if (o instanceof Character) {
+            int i = characters.indexOf(o);
+            dbAdapter.deleteRow(getCharacterId(characters.get(i).getName()));
+            characters.remove(i);
+            mCharRecyclerAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
-    public void ConfirmDialogCancel(Object o) {
-        Toast.makeText(this, "CharacterListActivity Cancel", Toast.LENGTH_SHORT).show();
-    }
+    public void ConfirmDialogCancel(Object o) {}
 
     private Character getCharacterFromName(String name) {
         for(Character c : characters) {
@@ -193,19 +195,23 @@ public class CharacterListActivity extends AppCompatActivity implements
     }
 
     private long getCharacterId(String name) {
-        Cursor c = dbAdapter.getCharacterId();
         long id = -1;
-        if (c != null) {
-            for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
-                String json = c.getString(c.getColumnIndex(dbAdapter.COLUMN_CHARACTER));
-                Character character = gson.fromJson(json, Character.class);
-                if (character.getName().equals(name)) {
-                    id = (long) c.getInt(c.getColumnIndex(dbAdapter.COLUMN_ID));
-                    break;
+        try {
+            Cursor c = dbAdapter.getCharacterId();
+            if (c != null) {
+                for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
+                    String json = c.getString(c.getColumnIndex(DBAdapter.COLUMN_CHARACTER));
+                    Character character = gson.fromJson(json, Character.class);
+                    if (character.getName().equals(name)) {
+                        id = (long) c.getInt(c.getColumnIndex(DBAdapter.COLUMN_ID));
+                        break;
+                    }
                 }
             }
+            c.close();
+        }catch (Exception ex) {
+            ex.printStackTrace();
         }
-        c.close();
         return id;
     }
 }

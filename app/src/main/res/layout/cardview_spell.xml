@@ -63,6 +63,15 @@
                 android:text="@string/gen_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/cardSpellDurationLabel"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@+id/cardSpellDurationValue"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin" />
+
+            <TextView
+                android:text="@string/gen_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/cardSpellDurationValue"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true" />

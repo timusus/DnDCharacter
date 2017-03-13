@@ -4,31 +4,24 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_attributes"
-            android:icon="@drawable/ic_menu_camera"
             android:title="@string/label_nav_drawer_attributes" />
         <item
             android:id="@+id/nav_abilities"
-            android:icon="@drawable/ic_menu_gallery"
             android:title="@string/label_nav_drawer_abilities" />
         <item
             android:id="@+id/nav_skills"
-            android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/label_nav_drawer_skills" />
         <item
             android:id="@+id/nav_attacks"
-            android:icon="@drawable/ic_menu_share"
             android:title="@string/label_nav_drawer_attacks" />
         <item
             android:id="@+id/nav_items"
-            android:icon="@drawable/ic_menu_manage"
             android:title="@string/label_nav_drawer_items" />
         <item
             android:id="@+id/nav_armor"
-            android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/label_nav_drawer_armor" />
         <item
             android:id="@+id/nav_spells"
-            android:icon="@drawable/ic_menu_send"
             android:title="@string/label_nav_drawer_spells" />
     </group>
 </menu>

@@ -47,7 +47,7 @@ public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdap
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mNameTextView.setText(mDataset.get(position).getName());
         holder.mLevelTextView.setText(String.valueOf(mDataset.get(position).getLevel()));
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +59,7 @@ public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdap
         holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                onCardLongClick(holder);
+                onCardLongClick(holder, position);
                 return true;
             }
         });
@@ -71,10 +71,10 @@ public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdap
         activity.onCharacterClick(name);
     }
 
-    private void onCardLongClick(ViewHolder holder) {
+    private void onCardLongClick(ViewHolder holder, int position) {
         Vibrator v = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(Constants.LONG_CLICK_VIBRATION);
-        ConfirmationDialog.showConfirmDialog(mContext, "Are you sure long click?", (CharacterListActivity)mContext, null);
+        ConfirmationDialog.showConfirmDialog(mContext, mContext.getString(R.string.confirm_delete_character), (CharacterListActivity)mContext, mDataset.get(position));
     }
 
     @Override
