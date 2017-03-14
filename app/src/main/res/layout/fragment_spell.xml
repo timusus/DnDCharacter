@@ -32,7 +32,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
+                android:inputType="textCapWords"
                 android:hint="@string/hint_name"
                 android:ems="10"
                 android:id="@+id/spellNameEdit"
@@ -76,7 +76,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
+                android:inputType="textCapWords"
                 android:hint="@string/spell_type"
                 android:ems="10"
                 android:id="@+id/spellTypeEdit"
@@ -98,7 +98,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
+                android:inputType="textCapWords"
                 android:hint="@string/spell_component"
                 android:ems="10"
                 android:id="@+id/spellComponentEdit"
@@ -120,7 +120,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
+                android:inputType="textCapWords"
                 android:hint="@string/spell_cast_time"
                 android:ems="10"
                 android:id="@+id/spellCastTimeEdit"
@@ -142,7 +142,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
+                android:inputType="textCapWords"
                 android:hint="@string/gen_range"
                 android:ems="10"
                 android:id="@+id/spellRangeEdit"
@@ -164,7 +164,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
+                android:inputType="textCapWords"
                 android:hint="@string/spell_area"
                 android:ems="10"
                 android:id="@+id/spellAreaEdit"
@@ -186,7 +186,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
+                android:inputType="textCapWords"
                 android:hint="@string/gen_duration"
                 android:ems="10"
                 android:id="@+id/spellDurationEdit"
@@ -208,7 +208,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
+                android:inputType="textCapWords"
                 android:hint="@string/spell_saving_throw"
                 android:ems="10"
                 android:id="@+id/spellSavingThrowEdit"
