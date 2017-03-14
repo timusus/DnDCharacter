@@ -116,28 +116,6 @@ public class DBAdapter {
         return null;
     }
 
-    public Cursor getColumnCursor(String[] columns) {
-        if (!Utils.isStringArrayEmpty(columns)) {
-            Cursor cursor = database.query(true, TABLE_CHARACTERS, columns, null, null, null, null, null, null);
-            if (cursor != null) {
-                cursor.moveToFirst();
-                return cursor;
-            }
-        }
-        return null;
-    }
-
-    public boolean fillColumn(String character, String col, String value) {
-        if (!Utils.isStringEmpty(value) && !Utils.isStringEmpty(col) && !Utils.isStringEmpty(character) && database.isOpen()) {
-            ContentValues values = new ContentValues();
-            values.put(col, value);
-            // Update TABLE with values WHERE COLUMN_CHARACTER = character
-            database.update(TABLE_CHARACTERS, values, COLUMN_CHARACTER+" = ?", new String[] {character});
-            return true;
-        }
-        return false;
-    }
-
     public boolean fillColumn(long id, String col, String value) {
         if (!Utils.isStringEmpty(value) && !Utils.isStringEmpty(col) && database.isOpen()) {
             ContentValues values = new ContentValues();

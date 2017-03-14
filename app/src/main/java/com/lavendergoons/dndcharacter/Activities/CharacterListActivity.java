@@ -184,7 +184,7 @@ public class CharacterListActivity extends AppCompatActivity implements
         Cursor c = dbAdapter.getAllCharacterNames();
         if (c != null) {
             for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
-                String json = c.getString(c.getColumnIndex(dbAdapter.COLUMN_CHARACTER));
+                String json = c.getString(c.getColumnIndex(DBAdapter.COLUMN_CHARACTER));
                 Log.d("JSON", "Character json string "+json);
                 Character character = gson.fromJson(json, Character.class);
                 characters.add(character);

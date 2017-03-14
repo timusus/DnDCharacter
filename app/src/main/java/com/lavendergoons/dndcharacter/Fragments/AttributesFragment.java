@@ -40,6 +40,8 @@ public class AttributesFragment extends Fragment {
     private Character character;
 
     private long characterId = -1;
+    private final int NAME = 0;
+    private final int LEVEL = 2;
 
     public AttributesFragment() {
         // Required empty public constructor
@@ -86,7 +88,7 @@ public class AttributesFragment extends Fragment {
         mAttributeLayoutManager = new GridLayoutManager(this.getActivity(), Constants.ATTRIBUTES_GRID_SPAN);
         mAttributesRecyclerView.setLayoutManager(mAttributeLayoutManager);
 
-        mAttributeRecyclerAdapter = new AttributesAdapter(this, attributesList);
+        mAttributeRecyclerAdapter = new AttributesAdapter(this, attributesList, character);
         mAttributesRecyclerView.setAdapter(mAttributeRecyclerAdapter);
         return rootView;
     }
@@ -115,9 +117,23 @@ public class AttributesFragment extends Fragment {
 
     private void writeAttributes() {
         attributesList = mAttributeRecyclerAdapter.getAttributeList();
+        if (!Utils.isStringEmpty(attributesList.get(NAME))) {
+            character.setName(attributesList.get(NAME));
+        }
+        if (!Utils.isStringEmpty(String.valueOf(attributesList.get(LEVEL)))) {
+            int lvl = 0;
+            try {
+                lvl = Integer.parseInt(attributesList.get(LEVEL));
+            }catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            character.setLevel(lvl);
+        }
         String json = gson.toJson(attributesList);
+        String charJson = gson.toJson(character);
         if (dbAdapter != null) {
             dbAdapter.fillColumn(characterId, DBAdapter.COLUMN_ATTRIBUTES, json);
+            dbAdapter.fillColumn(characterId, DBAdapter.COLUMN_CHARACTER, charJson);
         } else {
             Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
         }

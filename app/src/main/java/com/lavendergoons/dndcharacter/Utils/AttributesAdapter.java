@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.lavendergoons.dndcharacter.Fragments.AttributesFragment;
 import com.lavendergoons.dndcharacter.Objects.Attribute;
+import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.R;
 
 import java.util.ArrayList;
@@ -25,6 +26,9 @@ public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.Vi
     private AttributesFragment attributesFragment;
     private ArrayList<String> mDataset = new ArrayList<>(Arrays.asList(Constants.ATTRIBUTES));
     private ArrayList<String> attributeList;
+    private Character character;
+    private final int NAME = 0;
+    private final int LEVEL = 2;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -42,9 +46,10 @@ public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.Vi
         }
     }
 
-    public AttributesAdapter(AttributesFragment attributesFragment, ArrayList<String> dataset) {
+    public AttributesAdapter(AttributesFragment attributesFragment, ArrayList<String> dataset, Character character) {
         this.attributesFragment = attributesFragment;
         this.attributeList = dataset;
+        this.character = character;
     }
 
     @Override
@@ -59,7 +64,13 @@ public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.Vi
         holder.attributeEdit.setHint(mDataset.get(position));
         holder.textWatcher.updatePosition(position);
         if (attributeList.size() > 0) {
-            holder.attributeEdit.setText(attributeList.get(position));
+            if (position == NAME) {
+                holder.attributeEdit.setText(character.getName());
+            } else if (position == LEVEL) {
+                holder.attributeEdit.setText(String.valueOf(character.getLevel()));
+            } else {
+                holder.attributeEdit.setText(attributeList.get(position));
+            }
         }
     }
 
