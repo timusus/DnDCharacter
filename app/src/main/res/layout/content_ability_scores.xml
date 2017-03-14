@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+    <!--
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content"
@@ -244,5 +245,249 @@
             android:id="@+id/scoresEditBtn"
             android:layout_weight="1" />
     </LinearLayout>
+-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/abilityNameLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/hint_name" />
+
+        <TextView
+            android:id="@+id/abilityModStr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/ability_str" />
+
+        <TextView
+            android:id="@+id/abilityModDex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/ability_dex" />
+
+        <TextView
+            android:id="@+id/abilityModCon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/ability_con" />
+
+        <TextView
+            android:id="@+id/abilityModInt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/ability_int" />
+
+        <TextView
+            android:id="@+id/abilityModWis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/ability_wis" />
+
+        <TextView
+            android:id="@+id/abilityModCha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/ability_cha" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/scoreNameLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/gen_score" />
+
+        <EditText
+            android:id="@+id/abilityStrScoreEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="3"
+            android:gravity="center_vertical|center_horizontal"
+            android:inputType="numberSigned"
+            android:selectAllOnFocus="true"
+            android:text="00"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/abilityDexScoreEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="3"
+            android:gravity="center_vertical|center_horizontal"
+            android:inputType="numberSigned"
+            android:selectAllOnFocus="true"
+            android:text="00"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/abilityConScoreEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="3"
+            android:gravity="center_vertical|center_horizontal"
+            android:inputType="numberSigned"
+            android:selectAllOnFocus="true"
+            android:text="00"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/abilityIntScoreEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="3"
+            android:gravity="center_vertical|center_horizontal"
+            android:inputType="numberSigned"
+            android:selectAllOnFocus="true"
+            android:text="00"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/abilityWisScoreEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="3"
+            android:gravity="center_vertical|center_horizontal"
+            android:inputType="numberSigned"
+            android:selectAllOnFocus="true"
+            android:text="00"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/abilityChaScoreEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="3"
+            android:gravity="center_vertical|center_horizontal"
+            android:inputType="numberSigned"
+            android:selectAllOnFocus="true"
+            android:text="00"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/modNameLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/gen_mod" />
+
+        <EditText
+            android:id="@+id/abilityStrModEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="3"
+            android:gravity="center_vertical|center_horizontal"
+            android:inputType="numberSigned"
+            android:selectAllOnFocus="true"
+            android:text="00"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/abilityDexModEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="3"
+            android:gravity="center_vertical|center_horizontal"
+            android:inputType="numberSigned"
+            android:selectAllOnFocus="true"
+            android:text="00"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/abilityConModEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="3"
+            android:gravity="center_vertical|center_horizontal"
+            android:inputType="numberSigned"
+            android:selectAllOnFocus="true"
+            android:text="00"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/abilityIntModEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="3"
+            android:gravity="center_vertical|center_horizontal"
+            android:inputType="numberSigned"
+            android:selectAllOnFocus="true"
+            android:text="00"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/abilityWisModEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="3"
+            android:gravity="center_vertical|center_horizontal"
+            android:inputType="numberSigned"
+            android:selectAllOnFocus="true"
+            android:text="00"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/abilityChaModEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="3"
+            android:gravity="center_vertical|center_horizontal"
+            android:inputType="numberSigned"
+            android:selectAllOnFocus="true"
+            android:text="00"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/edit"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/scoresEditBtn"/>
 
 </LinearLayout>

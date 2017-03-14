@@ -1,135 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
         <TextView
-            android:text="@string/gen_hp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/abilityHpLabel"
-            android:layout_weight="1"
-            android:gravity="center_vertical"/>
-
-        <TextView
-            android:text="@string/gen_non_lethal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/gen_hp" />
+
+        <TextView
             android:id="@+id/abilityNonLethalLabel"
-            android:layout_weight="1"
-            android:gravity="center_vertical"/>
-
-        <TextView
-            android:text="@string/gen_base_attack_short"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/gen_non_lethal" />
+
+        <TextView
             android:id="@+id/abilityBaseAtkLabel"
-            android:layout_weight="1"
-            android:gravity="center_vertical"/>
-
-        <TextView
-            android:text="@string/spell_resistance_short"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/gen_base_attack_short" />
+
+        <TextView
             android:id="@+id/abilitySpellResLabel"
-            android:layout_weight="1"
-            android:gravity="center_vertical"/>
-
-        <TextView
-            android:text="@string/gen_initiative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/spell_resistance_short" />
+
+        <TextView
             android:id="@+id/abilityInitiativeLabel"
-            android:layout_weight="1"
-            android:gravity="center_vertical"/>
-
-        <TextView
-            android:text="@string/gen_speed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/abilitySpeedLabel"
             android:layout_weight="1"
-            android:gravity="center_vertical"/>
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/gen_initiative" />
+
+        <TextView
+            android:id="@+id/abilitySpeedLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/gen_speed" />
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/abilityHpEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:ems="2"
             android:gravity="center_horizontal"
-            android:text="00"
             android:inputType="numberSigned"
             android:selectAllOnFocus="true"
+            android:text="00"
             android:textSize="14sp" />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="numberSigned"
-            android:ems="2"
             android:id="@+id/abilityNonLethalEdit"
-            android:text="00"
-            android:gravity="center_horizontal"
-            android:textSize="14sp"
-            android:selectAllOnFocus="true"/>
-
-        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberSigned"
+            android:layout_weight="1"
             android:ems="2"
+            android:gravity="center_horizontal"
+            android:inputType="numberSigned"
+            android:selectAllOnFocus="true"
+            android:text="00"
+            android:textSize="14sp" />
+
+        <EditText
             android:id="@+id/abilityBaseAtkEdit"
-            android:text="00"
-            android:gravity="center_horizontal"
-            android:textSize="14sp"
-            android:selectAllOnFocus="true"/>
-
-        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberSigned"
+            android:layout_weight="1"
             android:ems="2"
+            android:gravity="center_horizontal"
+            android:inputType="numberSigned"
+            android:selectAllOnFocus="true"
+            android:text="00"
+            android:textSize="14sp" />
+
+        <EditText
             android:id="@+id/abilitySpellResEdit"
-            android:text="00"
-            android:gravity="center_horizontal"
-            android:textSize="14sp"
-            android:selectAllOnFocus="true"/>
-
-        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberSigned"
+            android:layout_weight="1"
             android:ems="2"
+            android:gravity="center_horizontal"
+            android:inputType="numberSigned"
+            android:selectAllOnFocus="true"
+            android:text="00"
+            android:textSize="14sp" />
+
+        <EditText
             android:id="@+id/abilityInitiativeEdit"
-            android:text="00"
-            android:gravity="center_horizontal"
-            android:textSize="14sp"
-            android:selectAllOnFocus="true"/>
-
-        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberSigned"
+            android:layout_weight="1"
             android:ems="2"
-            android:id="@+id/abilitySpeedEdit"
-            android:text="00"
             android:gravity="center_horizontal"
-            android:textSize="14sp"
-            android:selectAllOnFocus="true"/>
+            android:inputType="numberSigned"
+            android:selectAllOnFocus="true"
+            android:text="00"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/abilitySpeedEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="2"
+            android:gravity="center_horizontal"
+            android:inputType="numberSigned"
+            android:selectAllOnFocus="true"
+            android:text="00"
+            android:textSize="14sp" />
     </LinearLayout>
 
 </LinearLayout>
