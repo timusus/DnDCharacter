@@ -11,7 +11,7 @@
     Other fields start with a lower case letter.
     Public static final fields (constants) are ALL_CAPS_WITH_UNDERSCORES.
     -->
-    <string name="app_name">"D&amp;D Character"</string>
+    <string name="app_name">"D&amp;D 3.5 Character"</string>
 
     <!-- Activity Titles -->
     <string name="title_activity_character_list">CharactersListActivity</string>
