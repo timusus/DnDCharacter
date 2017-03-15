@@ -26,7 +26,6 @@ import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.Objects.Spell;
-import com.lavendergoons.dndcharacter.Objects.TestCharacter;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.Constants;
 import com.lavendergoons.dndcharacter.Utils.SpellAdapter;
@@ -49,8 +48,6 @@ public class SpellListFragment extends Fragment implements View.OnClickListener,
 
     private ArrayList<Spell> spellList = new ArrayList<>();
     private DBAdapter dbAdapter;
-    // TODO Get rid of test testCharacter
-    private TestCharacter testCharacter;
     private Character character;
     private long characterId = -1;
 
@@ -212,6 +209,7 @@ public class SpellListFragment extends Fragment implements View.OnClickListener,
 
             spellDialogName = new EditText(fragment.getActivity());
             spellDialogName.setHint(R.string.hint_name);
+            spellDialogName.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS);
 
             spellDialogLevel = new EditText(fragment.getActivity());
             spellDialogLevel.setInputType(InputType.TYPE_CLASS_NUMBER);

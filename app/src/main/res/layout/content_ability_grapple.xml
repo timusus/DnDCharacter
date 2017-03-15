@@ -70,11 +70,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="2"
+            android:imeOptions="actionNext"
             android:gravity="center_horizontal"
             android:inputType="numberSigned"
             android:selectAllOnFocus="true"
             android:text="00"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:nextFocusForward="@+id/grappleStrModEdit"/>
 
         <EditText
             android:id="@+id/grappleStrModEdit"
@@ -82,11 +84,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="2"
+            android:imeOptions="actionNext"
             android:gravity="center_horizontal"
             android:inputType="numberSigned"
             android:selectAllOnFocus="true"
             android:text="00"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:nextFocusForward="@+id/grappleSizeModEdit"/>
 
         <EditText
             android:id="@+id/grappleSizeModEdit"
@@ -94,11 +98,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="2"
+            android:imeOptions="actionNext"
             android:gravity="center_horizontal"
             android:inputType="numberSigned"
             android:selectAllOnFocus="true"
             android:text="00"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:nextFocusForward="@+id/grappleMiscModEdit"/>
 
         <EditText
             android:id="@+id/grappleMiscModEdit"
@@ -106,11 +112,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="2"
+            android:imeOptions="actionNext"
             android:gravity="center_horizontal"
             android:inputType="numberSigned"
             android:selectAllOnFocus="true"
             android:text="00"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:nextFocusForward="@+id/grappleTotalEdit"/>
 
         <EditText
             android:id="@+id/grappleTotalEdit"

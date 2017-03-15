@@ -20,7 +20,6 @@ import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Dialogs.ItemGeneralDialog;
 import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.Objects.Item;
-import com.lavendergoons.dndcharacter.Objects.TestCharacter;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.Constants;
 import com.lavendergoons.dndcharacter.Utils.ItemsGeneralAdapter;
@@ -47,7 +46,6 @@ public class ItemsGeneralFragment extends Fragment implements View.OnClickListen
     private DBAdapter dbAdapter;
     private Character character;
     private long id = -1;
-    private TestCharacter testCharacter;
     private FloatingActionButton fab;
 
     public ItemsGeneralFragment() {

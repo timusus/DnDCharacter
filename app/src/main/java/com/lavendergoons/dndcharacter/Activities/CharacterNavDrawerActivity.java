@@ -55,6 +55,7 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
     private DrawerLayout mDrawerLayout;
     public static final String TAG = "CHARACTER_NAV";
     private boolean toolbarListenerRegister = false;
+    Toolbar mToolbar;
     private Character character;
     private long characterId;
     private DBAdapter dbAdapter;
@@ -71,12 +72,12 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
             characterId = extras.getLong(Constants.CHARACTER_ID);
         }
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.character_nav_toolbar);
-        setSupportActionBar(toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.character_nav_toolbar);
+        setSupportActionBar(mToolbar);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(
-                this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
 
@@ -88,6 +89,7 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         if (savedInstanceState == null) {
             loadDefaultFragment();
         }
+        mToolbar.setTitle(getString(R.string.title_fragment_attributes));
         dbAdapter = new DBAdapter(this);
         dbAdapter.open();
     }
@@ -163,16 +165,6 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.actionSettings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -184,42 +176,49 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        // TODO Clean up. Dont init fragment
         Fragment fragment = new Fragment();
         String tag = "tag";
+        String title = "";
         switch (item.getItemId()) {
             case R.id.nav_attributes:
                 fragment = AttributesFragment.newInstance(character, characterId);
                 tag = AttributesFragment.TAG;
+                title = getString(R.string.title_fragment_attributes);
                 break;
             case R.id.nav_abilities:
                 fragment = AbilitiesFragment.newInstance(character, characterId);
                 tag = AbilitiesFragment.TAG;
+                title = getString(R.string.title_fragment_abilities);
                 break;
             case R.id.nav_skills:
                 fragment = SkillsFragment.newInstance(character, characterId);
                 tag = SkillsFragment.TAG;
+                title = getString(R.string.title_fragment_skills);
                 break;
             case R.id.nav_attacks:
                 fragment = AttacksFragment.newInstance(character, characterId);
                 tag = AttacksFragment.TAG;
+                title = getString(R.string.title_fragment_attacks);
                 break;
             case R.id.nav_items:
                 fragment = ItemsGeneralFragment.newInstance(character, characterId);
                 tag = ItemsGeneralFragment.TAG;
+                title = getString(R.string.title_fragment_items);
                 break;
             case R.id.nav_armor:
                 fragment = ArmorListFragment.newInstance(character, characterId);
                 tag = ArmorListFragment.TAG;
+                title = getString(R.string.title_fragment_armor);
                 break;
             case R.id.nav_spells:
                 fragment = SpellListFragment.newInstance(character, characterId);
                 tag = SpellListFragment.TAG;
+                title = getString(R.string.title_fragment_spells);
                 break;
         }
 
         mDrawerLayout.closeDrawer(GravityCompat.START);
-
+        mToolbar.setTitle(title);
         FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();
         fragTransaction.replace(R.id.content_character_nav, fragment, tag).commit();
         return true;
@@ -227,30 +226,17 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
 
     @Override
     public void ConfirmDialogOk(Object o) {
-        //TODO Clean up
-        Toast.makeText(this, "CharacterNavDrawerActivity Confirm", Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
     public void ConfirmDialogCancel(Object o) {
-        //TODO Clean up
-        Toast.makeText(this, "CharacterNavDrawerActivity Cancel", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onFragmentInteraction() {
 
     }
-
-    /*@Override
-    public Object[] retrieveArmor() {
-        Armor armor = tempArmor;
-        int index = tempArmorIndex;
-        tempArmor = null;
-        tempArmorIndex = -1;
-        return new Object[] {armor, index};
-    }*/
-
 
     @Override
     public void passBackSpell(Spell spell, int i) {

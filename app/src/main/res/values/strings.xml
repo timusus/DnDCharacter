@@ -17,6 +17,14 @@
     <string name="title_activity_character_list">CharactersListActivity</string>
     <string name="title_activity_character_nav_drawer">CharacterNavDrawerActivity</string>
 
+    <string name="title_fragment_abilities">Abilities</string>
+    <string name="title_fragment_attributes">Attributes</string>
+    <string name="title_fragment_armor">Armor</string>
+    <string name="title_fragment_attacks">Attacks</string>
+    <string name="title_fragment_items">Items</string>
+    <string name="title_fragment_spells">Spells</string>
+    <string name="title_fragment_skills">Skills</string>
+
     <!-- General Strings -->
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>

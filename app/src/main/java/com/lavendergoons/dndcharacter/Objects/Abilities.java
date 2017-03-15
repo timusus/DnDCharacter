@@ -76,6 +76,10 @@ public class Abilities {
         return score;
     }
 
+    public void setScoreArray(int[] array) {
+        this.score = array;
+    }
+
     public void setScoreTemp(int value, int which) {
         scoreTemp[which] = value;
     }
@@ -98,6 +102,10 @@ public class Abilities {
 
     public int[] getModArray() {
         return mod;
+    }
+
+    public void setModArray(int[] array) {
+        this.mod = array;
     }
 
     public void setModTemp(int value, int which) {

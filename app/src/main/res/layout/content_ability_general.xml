@@ -8,7 +8,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:orientation="horizontal">
 
         <TextView
@@ -63,7 +62,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:orientation="horizontal">
 
         <EditText
@@ -72,11 +70,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="2"
+            android:imeOptions="actionNext"
             android:gravity="center_horizontal"
             android:inputType="numberSigned"
             android:selectAllOnFocus="true"
             android:text="00"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:nextFocusForward="@+id/abilityNonLethalEdit"/>
 
         <EditText
             android:id="@+id/abilityNonLethalEdit"
@@ -84,11 +84,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="2"
+            android:imeOptions="actionNext"
             android:gravity="center_horizontal"
             android:inputType="numberSigned"
             android:selectAllOnFocus="true"
             android:text="00"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:nextFocusForward="@+id/abilityBaseAtkEdit"/>
 
         <EditText
             android:id="@+id/abilityBaseAtkEdit"
@@ -96,11 +98,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="2"
+            android:imeOptions="actionNext"
             android:gravity="center_horizontal"
             android:inputType="numberSigned"
             android:selectAllOnFocus="true"
             android:text="00"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:nextFocusForward="@+id/abilitySpellResEdit"/>
 
         <EditText
             android:id="@+id/abilitySpellResEdit"
@@ -108,11 +112,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="2"
+            android:imeOptions="actionNext"
             android:gravity="center_horizontal"
             android:inputType="numberSigned"
             android:selectAllOnFocus="true"
             android:text="00"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:nextFocusForward="@+id/abilityInitiativeEdit"/>
 
         <EditText
             android:id="@+id/abilityInitiativeEdit"
@@ -120,11 +126,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="2"
+            android:imeOptions="actionNext"
             android:gravity="center_horizontal"
             android:inputType="numberSigned"
             android:selectAllOnFocus="true"
             android:text="00"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:nextFocusForward="@+id/abilitySpeedEdit"/>
 
         <EditText
             android:id="@+id/abilitySpeedEdit"
@@ -132,6 +140,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="2"
+            android:imeOptions="actionNext"
             android:gravity="center_horizontal"
             android:inputType="numberSigned"
             android:selectAllOnFocus="true"

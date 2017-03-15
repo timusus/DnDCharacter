@@ -328,11 +328,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="3"
+            android:imeOptions="actionNext"
             android:gravity="center_vertical|center_horizontal"
             android:inputType="numberSigned"
             android:selectAllOnFocus="true"
             android:text="00"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:nextFocusForward="@+id/abilityDexScoreEdit"/>
 
         <EditText
             android:id="@+id/abilityDexScoreEdit"
@@ -340,11 +342,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="3"
+            android:imeOptions="actionNext"
             android:gravity="center_vertical|center_horizontal"
             android:inputType="numberSigned"
             android:selectAllOnFocus="true"
             android:text="00"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:nextFocusForward="@+id/abilityConScoreEdit"/>
 
         <EditText
             android:id="@+id/abilityConScoreEdit"
@@ -352,11 +356,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="3"
+            android:imeOptions="actionNext"
             android:gravity="center_vertical|center_horizontal"
             android:inputType="numberSigned"
             android:selectAllOnFocus="true"
             android:text="00"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:nextFocusForward="@+id/abilityIntScoreEdit"/>
 
         <EditText
             android:id="@+id/abilityIntScoreEdit"
@@ -364,11 +370,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="3"
+            android:imeOptions="actionNext"
             android:gravity="center_vertical|center_horizontal"
             android:inputType="numberSigned"
             android:selectAllOnFocus="true"
             android:text="00"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:nextFocusForward="@+id/abilityWisScoreEdit"/>
 
         <EditText
             android:id="@+id/abilityWisScoreEdit"
@@ -376,11 +384,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="3"
+            android:imeOptions="actionNext"
             android:gravity="center_vertical|center_horizontal"
             android:inputType="numberSigned"
             android:selectAllOnFocus="true"
             android:text="00"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:nextFocusForward="@+id/abilityChaScoreEdit"/>
 
         <EditText
             android:id="@+id/abilityChaScoreEdit"
@@ -388,6 +398,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="3"
+            android:imeOptions="actionNext"
             android:gravity="center_vertical|center_horizontal"
             android:inputType="numberSigned"
             android:selectAllOnFocus="true"
@@ -415,11 +426,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="3"
+            android:imeOptions="actionNext"
             android:gravity="center_vertical|center_horizontal"
             android:inputType="numberSigned"
             android:selectAllOnFocus="true"
             android:text="00"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:nextFocusForward="@+id/abilityDexModEdit"/>
 
         <EditText
             android:id="@+id/abilityDexModEdit"
@@ -427,11 +440,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="3"
+            android:imeOptions="actionNext"
             android:gravity="center_vertical|center_horizontal"
             android:inputType="numberSigned"
             android:selectAllOnFocus="true"
             android:text="00"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:nextFocusForward="@+id/abilityConModEdit"/>
 
         <EditText
             android:id="@+id/abilityConModEdit"
@@ -439,11 +454,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="3"
+            android:imeOptions="actionNext"
             android:gravity="center_vertical|center_horizontal"
             android:inputType="numberSigned"
             android:selectAllOnFocus="true"
             android:text="00"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:nextFocusForward="@+id/abilityIntModEdit"/>
 
         <EditText
             android:id="@+id/abilityIntModEdit"
@@ -451,11 +468,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="3"
+            android:imeOptions="actionNext"
             android:gravity="center_vertical|center_horizontal"
             android:inputType="numberSigned"
             android:selectAllOnFocus="true"
             android:text="00"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:nextFocusForward="@+id/abilityWisModEdit"/>
 
         <EditText
             android:id="@+id/abilityWisModEdit"
@@ -463,11 +482,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="3"
+            android:imeOptions="actionNext"
             android:gravity="center_vertical|center_horizontal"
             android:inputType="numberSigned"
             android:selectAllOnFocus="true"
             android:text="00"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:nextFocusForward="@+id/abilityChaModEdit"/>
 
         <EditText
             android:id="@+id/abilityChaModEdit"

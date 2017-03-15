@@ -65,7 +65,7 @@ public class CharacterListActivity extends AppCompatActivity implements
 
     private void createView() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.character_list_toolbar);
-        toolbar.setTitle(getString(R.string.title_activity_character_list));
+        toolbar.setTitle(getString(R.string.app_name));
         setSupportActionBar(toolbar);
 
         mCharacterRecyclerView = (RecyclerView) findViewById(R.id.characterListRecyclerView);
@@ -126,13 +126,7 @@ public class CharacterListActivity extends AppCompatActivity implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.actionSettings:
-                Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

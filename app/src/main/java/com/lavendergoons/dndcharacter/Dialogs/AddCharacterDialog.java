@@ -9,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
-import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -44,6 +43,7 @@ public class AddCharacterDialog extends DialogFragment implements DialogInterfac
 
         nameEdit = new EditText(getActivity());
         nameEdit.setHint(R.string.hint_name);
+        nameEdit.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS);
 
         levelEdit = new EditText(getActivity());
         levelEdit.setInputType(InputType.TYPE_CLASS_NUMBER);

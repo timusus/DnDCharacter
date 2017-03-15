@@ -366,12 +366,31 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
         }catch (Exception ex) {
             ex.printStackTrace();
         }
-
         abilities.setGrappleArray(array);
     }
 
     private void readScoreModValues() {
-        // TODO get scores values from fragment and update
+        int[] scores = new int[]{0,0,0,0,0,0};
+        int[] mods = new int[]{0,0,0,0,0,0};
+        try {
+            scores[Abilities.STR] = Integer.parseInt(abilityStrScoreEdit.getText().toString());
+            scores[Abilities.DEX] = Integer.parseInt(abilityDexScoreEdit.getText().toString());
+            scores[Abilities.CON] = Integer.parseInt(abilityConScoreEdit.getText().toString());
+            scores[Abilities.INT] = Integer.parseInt(abilityIntScoreEdit.getText().toString());
+            scores[Abilities.WIS] = Integer.parseInt(abilityWisScoreEdit.getText().toString());
+            scores[Abilities.CHA] = Integer.parseInt(abilityChaScoreEdit.getText().toString());
+
+            mods[Abilities.STR] = Integer.parseInt(abilityStrModEdit.getText().toString());
+            mods[Abilities.DEX] = Integer.parseInt(abilityDexModEdit.getText().toString());
+            mods[Abilities.CON] = Integer.parseInt(abilityConModEdit.getText().toString());
+            mods[Abilities.INT] = Integer.parseInt(abilityIntModEdit.getText().toString());
+            mods[Abilities.WIS] = Integer.parseInt(abilityWisModEdit.getText().toString());
+            mods[Abilities.CHA] = Integer.parseInt(abilityChaModEdit.getText().toString());
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        abilities.setScoreArray(scores);
+        abilities.setModArray(mods);
     }
 
     // Read ability object from database
@@ -395,6 +414,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
     private void writeAbilities() {
         readAbilityGeneralValues();
         readGrappleValues();
+        readScoreModValues();
         String json = gson.toJson(abilities);
         if (dbAdapter != null) {
             dbAdapter.fillColumn(characterId, DBAdapter.COLUMN_ABILITIES, json);

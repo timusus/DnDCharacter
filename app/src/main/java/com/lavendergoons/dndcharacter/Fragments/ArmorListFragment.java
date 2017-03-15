@@ -221,6 +221,7 @@ public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDial
 
             armorDialogName = new EditText(fragment.getActivity());
             armorDialogName.setHint(R.string.hint_name);
+            armorDialogName.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS);
 
             armorDialogWeight = new EditText(fragment.getActivity());
             armorDialogWeight.setInputType(InputType.TYPE_CLASS_NUMBER);

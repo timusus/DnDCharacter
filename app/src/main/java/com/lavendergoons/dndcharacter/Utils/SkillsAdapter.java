@@ -4,12 +4,14 @@ import android.content.Context;
 import android.os.Vibrator;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -42,12 +44,15 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
         public ModTextWatcher modTextWatcher;
         public RankTextWatcher rankTextWatcher;
         public MiscTextWatcher miscTextWatcher;
+        public CheckBoxListener mCheckBoxListener;
 
-        public ViewHolder(View view, TotalTextWatcher totalWatcher, ModTextWatcher modWatcher, RankTextWatcher rankWatcher, MiscTextWatcher miscWatcher) {
+        public ViewHolder(View view, TotalTextWatcher totalWatcher, ModTextWatcher modWatcher, RankTextWatcher rankWatcher, MiscTextWatcher miscWatcher, CheckBoxListener checkBoxListener) {
             super(view);
             this.cardView = view;
             skillCheckBox = (CheckBox) view.findViewById(R.id.skillCheckBox);
             skillModTypeText = (TextView) view.findViewById(R.id.skillModTypeText);
+            this.mCheckBoxListener = checkBoxListener;
+            skillCheckBox.setOnCheckedChangeListener(this.mCheckBoxListener);
 
             skillTotalEdit = (EditText) view.findViewById(R.id.skillTotalEdit);
             this.totalTextWatcher = totalWatcher;
@@ -75,20 +80,21 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
     @Override
     public SkillsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_skills, parent, false);
-        return new ViewHolder(view, new TotalTextWatcher(), new ModTextWatcher(), new RankTextWatcher(), new MiscTextWatcher());
+        return new ViewHolder(view, new TotalTextWatcher(), new ModTextWatcher(), new RankTextWatcher(), new MiscTextWatcher(), new CheckBoxListener());
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.skillCheckBox.setText(mDataset.get(position).getName());
-        holder.skillCheckBox.setChecked(mDataset.get(position).isTrained());
-        holder.skillModTypeText.setText(mDataset.get(position).getModType());
-
         //Update postion before setting text
         holder.totalTextWatcher.updatePosition(position);
         holder.modTextWatcher.updatePosition(position);
         holder.rankTextWatcher.updatePosition(position);
         holder.miscTextWatcher.updatePosition(position);
+        holder.mCheckBoxListener.updatePostion(position);
+
+        holder.skillCheckBox.setText(mDataset.get(position).getName());
+        holder.skillCheckBox.setChecked(mDataset.get(position).isTrained());
+        holder.skillModTypeText.setText(mDataset.get(position).getModType());
 
         holder.skillTotalEdit.setText(String.valueOf(mDataset.get(position).getTotal()));
         holder.skillModEdit.setText(String.valueOf(mDataset.get(position).getMod()));
@@ -115,10 +121,6 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
     }
 
     private boolean onCardLongClick() {
-        //TODO Clean Up
-        Vibrator v = (Vibrator) skillsFragment.getContext().getSystemService(Context.VIBRATOR_SERVICE);
-        v.vibrate(Constants.LONG_CLICK_VIBRATION);
-        ConfirmationDialog.showConfirmDialog(skillsFragment.getContext(), "Skills?", skillsFragment, null);
         return true;
     }
 
@@ -250,6 +252,19 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
         @Override
         public void afterTextChanged(Editable editable) {
 
+        }
+    }
+
+    private class CheckBoxListener implements CompoundButton.OnCheckedChangeListener {
+        private int position;
+
+        public void updatePostion(int pos) {
+            this.position = pos;
+        }
+        @Override
+        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+            Log.d("SKILLS", mDataset.get(position).getName()+" isChecked "+b);
+            mDataset.get(position).setTrained(b);
         }
     }
 }

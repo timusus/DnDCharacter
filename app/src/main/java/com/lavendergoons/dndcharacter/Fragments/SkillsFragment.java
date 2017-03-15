@@ -20,7 +20,6 @@ import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.Objects.Skill;
-import com.lavendergoons.dndcharacter.Objects.TestCharacter;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.Constants;
 import com.lavendergoons.dndcharacter.Utils.SkillsAdapter;
