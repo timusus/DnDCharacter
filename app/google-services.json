@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "369544188265-sfgriugr1ou9vthnfrmpl9t536v24oda.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lavendergoons.dndcharacter",
+            "certificate_hash": "5a96c87fc66b8480e8eb0391a29b9699a3ee91a3"
+          }
+        },
+        {
           "client_id": "369544188265-q0l5i1cve3gp8sqlas0m2ee8u2j20a9e.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -30,6 +38,9 @@
       "api_key": [
         {
           "current_key": "AIzaSyDWAx3HxxIRLRWL5CFqcuIlmIU7tle2a9Y"
+        },
+        {
+          "current_key": "AIzaSyChmg6SxJELzB1JUOoH-GGUxBBVD-z-AZY"
         }
       ],
       "services": {
