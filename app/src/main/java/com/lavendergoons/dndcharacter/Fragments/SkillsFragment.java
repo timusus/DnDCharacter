@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.firebase.crash.FirebaseCrash;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lavendergoons.dndcharacter.Activities.CharacterNavDrawerActivity;
@@ -64,10 +65,10 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
         }
         try {
             dbAdapter = ((CharacterNavDrawerActivity) getActivity()).getDbAdapter();
+            FirebaseCrash.log("Is DBAdapter Null?"+(dbAdapter == null));
         }catch (Exception ex) {
             ex.printStackTrace();
         }
-        initSkills();
         getSkills();
     }
 
@@ -114,7 +115,6 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction();
     }
 
@@ -137,7 +137,14 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
     private void writeSkills() {
         skillsList = mSkillRecyclerAdapter.getSkillList();
         String json = gson.toJson(skillsList);
-        dbAdapter.fillColumn(characterId, DBAdapter.COLUMN_SKILL, json);
+        FirebaseCrash.log("Is DBAdapter Null?"+(dbAdapter == null));
+        try {
+            dbAdapter.fillColumn(characterId, DBAdapter.COLUMN_SKILL, json);
+        }catch (Exception ex) {
+            ex.printStackTrace();
+            FirebaseCrash.report(ex);
+        }
+
     }
 
     private void getSkills() {
@@ -149,6 +156,8 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
                     Type skillType = new TypeToken<ArrayList<Skill>>(){}.getType();
                     skillsList = gson.fromJson(json, skillType);
                     cursor.close();
+                } else {
+                    initSkills();
                 }
             }
         }  else {

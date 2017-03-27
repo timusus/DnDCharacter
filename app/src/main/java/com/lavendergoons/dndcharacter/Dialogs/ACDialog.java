@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.firebase.crash.FirebaseCrash;
 import com.lavendergoons.dndcharacter.Objects.Abilities;
 import com.lavendergoons.dndcharacter.R;
 
@@ -55,14 +56,18 @@ public class ACDialog extends DialogFragment {
         final EditText acMiscEdit = (EditText) view.findViewById(R.id.acDialogMiscEdit);
         final EditText acTotalEdit = (EditText) view.findViewById(R.id.acDialogTotalEdit);
 
-        acArmorEdit.setText(String.valueOf(abilities.getAC(Abilities.AC_ARMOR)));
-        acShieldEdit.setText(String.valueOf(abilities.getAC(Abilities.AC_SHEILD)));
-        acDexEdit.setText(String.valueOf(abilities.getAC(Abilities.AC_DEX)));
-        acSizeEdit.setText(String.valueOf(abilities.getAC(Abilities.AC_SIZE)));
-        acNaturalEdit.setText(String.valueOf(abilities.getAC(Abilities.AC_NATURAL)));
-        acDeflectionEdit.setText(String.valueOf(abilities.getAC(Abilities.AC_DEFLECTION)));
-        acMiscEdit.setText(String.valueOf(abilities.getAC(Abilities.AC_MISC)));
-        acTotalEdit.setText(String.valueOf(abilities.getAC(Abilities.AC_TOTAL)));
+        if (abilities != null) {
+            acArmorEdit.setText(String.valueOf(abilities.getAC(Abilities.AC_ARMOR)));
+            acShieldEdit.setText(String.valueOf(abilities.getAC(Abilities.AC_SHIELD)));
+            acDexEdit.setText(String.valueOf(abilities.getAC(Abilities.AC_DEX)));
+            acSizeEdit.setText(String.valueOf(abilities.getAC(Abilities.AC_SIZE)));
+            acNaturalEdit.setText(String.valueOf(abilities.getAC(Abilities.AC_NATURAL)));
+            acDeflectionEdit.setText(String.valueOf(abilities.getAC(Abilities.AC_DEFLECTION)));
+            acMiscEdit.setText(String.valueOf(abilities.getAC(Abilities.AC_MISC)));
+            acTotalEdit.setText(String.valueOf(abilities.getAC(Abilities.AC_TOTAL)));
+        } else {
+            FirebaseCrash.log("Abilities Null In ACDialog");
+        }
 
         builder.setView(view).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
@@ -81,7 +86,7 @@ public class ACDialog extends DialogFragment {
                     ex.printStackTrace();
                 }
                 abilities.setAC(armor, Abilities.AC_ARMOR);
-                abilities.setAC(shield, Abilities.AC_SHEILD);
+                abilities.setAC(shield, Abilities.AC_SHIELD);
                 abilities.setAC(dex, Abilities.AC_DEX);
                 abilities.setAC(size, Abilities.AC_SIZE);
                 abilities.setAC(natural, Abilities.AC_NATURAL);

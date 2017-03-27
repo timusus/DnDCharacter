@@ -28,7 +28,7 @@ public class Abilities {
     // AC Constants
     public static final int AC_DEFAULT = 0;
     public static final int AC_ARMOR = 1;
-    public static final int AC_SHEILD = 2;
+    public static final int AC_SHIELD = 2;
     public static final int AC_DEX = 3;
     public static final int AC_SIZE = 4;
     public static final int AC_NATURAL = 5;

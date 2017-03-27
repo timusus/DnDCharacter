@@ -182,7 +182,6 @@ public class AttacksFragment extends Fragment implements View.OnClickListener, A
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction();
     }
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.crash.FirebaseCrash;
 import com.google.gson.Gson;
 import com.lavendergoons.dndcharacter.Activities.CharacterNavDrawerActivity;
+import com.lavendergoons.dndcharacter.BuildConfig;
 import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.ACDialog;
 import com.lavendergoons.dndcharacter.Dialogs.SavesDialog;
@@ -25,6 +28,8 @@ import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.Constants;
 import com.lavendergoons.dndcharacter.Utils.Utils;
+
+import java.util.Arrays;
 
 
 /**
@@ -233,9 +238,28 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop");
+    }
+
+    @Override
     public void onDestroy() {
         writeAbilities();
         super.onDestroy();
+        Log.d(TAG, "onDestroy");
     }
 
     @Override
@@ -245,13 +269,15 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction();
     }
 
     @Override
     public void OnACPositive(Abilities abilities) {
         this.abilities = abilities;
+        if (this.abilities == null) {
+            FirebaseCrash.log("Abilities Null in AcPositive");
+        }
         setACValues();
     }
 
@@ -291,48 +317,85 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
     }
 
     private void setACValues() {
-        acGenValue.setText(String.valueOf(abilities.getAC(Abilities.AC_TOTAL)));
-        acTouchValue.setText(String.valueOf(abilities.getAcTouch()));
-        acFlatFootValue.setText(String.valueOf(abilities.getAcFlatFoot()));
+        try {
+            acGenValue.setText(String.valueOf(abilities.getAC(Abilities.AC_TOTAL)));
+            acTouchValue.setText(String.valueOf(abilities.getAcTouch()));
+            acFlatFootValue.setText(String.valueOf(abilities.getAcFlatFoot()));
+        }catch (Exception ex) {
+            ex.printStackTrace();
+            if (!BuildConfig.DEBUG) {
+                FirebaseCrash.report(ex);
+            }
+        }
     }
 
     private void setScoreValues() {
-        saveFortValue.setText(String.valueOf(abilities.getFort(Abilities.SAVE_TOTAL)));
-        saveReflexValue.setText(String.valueOf(abilities.getReflex(Abilities.SAVE_TOTAL)));
-        saveWillValue.setText(String.valueOf(abilities.getWill(Abilities.SAVE_TOTAL)));
+        try {
+            saveFortValue.setText(String.valueOf(abilities.getFort(Abilities.SAVE_TOTAL)));
+            saveReflexValue.setText(String.valueOf(abilities.getReflex(Abilities.SAVE_TOTAL)));
+            saveWillValue.setText(String.valueOf(abilities.getWill(Abilities.SAVE_TOTAL)));
+        }catch (Exception ex) {
+            ex.printStackTrace();
+            if (!BuildConfig.DEBUG) {
+                FirebaseCrash.report(ex);
+            }
+        }
     }
 
     private void setSaveModValues() {
-        abilityStrScoreEdit.setText(String.valueOf(abilities.getScore(Abilities.STR)));
-        abilityDexScoreEdit.setText(String.valueOf(abilities.getScore(Abilities.DEX)));
-        abilityConScoreEdit.setText(String.valueOf(abilities.getScore(Abilities.CON)));
-        abilityIntScoreEdit.setText(String.valueOf(abilities.getScore(Abilities.INT)));
-        abilityWisScoreEdit.setText(String.valueOf(abilities.getScore(Abilities.WIS)));
-        abilityChaScoreEdit.setText(String.valueOf(abilities.getScore(Abilities.CHA)));
+        try {
+            abilityStrScoreEdit.setText(String.valueOf(abilities.getScore(Abilities.STR)));
+            abilityDexScoreEdit.setText(String.valueOf(abilities.getScore(Abilities.DEX)));
+            abilityConScoreEdit.setText(String.valueOf(abilities.getScore(Abilities.CON)));
+            abilityIntScoreEdit.setText(String.valueOf(abilities.getScore(Abilities.INT)));
+            abilityWisScoreEdit.setText(String.valueOf(abilities.getScore(Abilities.WIS)));
+            abilityChaScoreEdit.setText(String.valueOf(abilities.getScore(Abilities.CHA)));
 
-        abilityStrModEdit.setText(String.valueOf(abilities.getMod(Abilities.STR)));
-        abilityDexModEdit.setText(String.valueOf(abilities.getMod(Abilities.DEX)));
-        abilityConModEdit.setText(String.valueOf(abilities.getMod(Abilities.CON)));
-        abilityIntModEdit.setText(String.valueOf(abilities.getMod(Abilities.INT)));
-        abilityWisModEdit.setText(String.valueOf(abilities.getMod(Abilities.WIS)));
-        abilityChaModEdit.setText(String.valueOf(abilities.getMod(Abilities.CHA)));
+            abilityStrModEdit.setText(String.valueOf(abilities.getMod(Abilities.STR)));
+            abilityDexModEdit.setText(String.valueOf(abilities.getMod(Abilities.DEX)));
+            abilityConModEdit.setText(String.valueOf(abilities.getMod(Abilities.CON)));
+            abilityIntModEdit.setText(String.valueOf(abilities.getMod(Abilities.INT)));
+            abilityWisModEdit.setText(String.valueOf(abilities.getMod(Abilities.WIS)));
+            abilityChaModEdit.setText(String.valueOf(abilities.getMod(Abilities.CHA)));
+        }catch (Exception ex) {
+            ex.printStackTrace();
+            FirebaseCrash.log("Scores Array: "+Arrays.toString(abilities.getScoreArray()));
+            FirebaseCrash.log("Scores Array: "+Arrays.toString(abilities.getModArray()));
+            if (!BuildConfig.DEBUG) {
+                FirebaseCrash.report(ex);
+            }
+        }
     }
 
     private void setAbilityGeneralValues() {
-        abilityHpEdit.setText(String.valueOf(abilities.getHp()));
-        abilityNonLethalEdit.setText(String.valueOf(abilities.getNonLethal()));
-        abilityBaseAtkEdit.setText(String.valueOf(abilities.getBaseAtk()));
-        abilitySpellResEdit.setText(String.valueOf(abilities.getSpellRes()));
-        abilityInitiativeEdit.setText(String.valueOf(abilities.getInitiative()));
-        abilitySpeedEdit.setText(String.valueOf(abilities.getSpeed()));
+        try {
+            abilityHpEdit.setText(String.valueOf(abilities.getHp()));
+            abilityNonLethalEdit.setText(String.valueOf(abilities.getNonLethal()));
+            abilityBaseAtkEdit.setText(String.valueOf(abilities.getBaseAtk()));
+            abilitySpellResEdit.setText(String.valueOf(abilities.getSpellRes()));
+            abilityInitiativeEdit.setText(String.valueOf(abilities.getInitiative()));
+            abilitySpeedEdit.setText(String.valueOf(abilities.getSpeed()));
+        }catch (Exception ex) {
+            ex.printStackTrace();
+            if (!BuildConfig.DEBUG) {
+                FirebaseCrash.report(ex);
+            }
+        }
     }
 
     private void setGrappleValues() {
-        grappleBaseAttackEdit.setText(String.valueOf(abilities.getGrapple(Abilities.GRAPPLE_BASE)));
-        grappleStrModEdit.setText(String.valueOf(abilities.getGrapple(Abilities.GRAPPLE_STR)));
-        grappleSizeModEdit.setText(String.valueOf(abilities.getGrapple(Abilities.GRAPPLE_SIZE)));
-        grappleMiscModEdit.setText(String.valueOf(abilities.getGrapple(Abilities.GRAPPLE_MISC)));
-        grappleTotalEdit.setText(String.valueOf(abilities.getGrapple(Abilities.GRAPPLE_TOTAL)));
+        try {
+            grappleBaseAttackEdit.setText(String.valueOf(abilities.getGrapple(Abilities.GRAPPLE_BASE)));
+            grappleStrModEdit.setText(String.valueOf(abilities.getGrapple(Abilities.GRAPPLE_STR)));
+            grappleSizeModEdit.setText(String.valueOf(abilities.getGrapple(Abilities.GRAPPLE_SIZE)));
+            grappleMiscModEdit.setText(String.valueOf(abilities.getGrapple(Abilities.GRAPPLE_MISC)));
+            grappleTotalEdit.setText(String.valueOf(abilities.getGrapple(Abilities.GRAPPLE_TOTAL)));
+        }catch (Exception ex) {
+            ex.printStackTrace();
+            if (!BuildConfig.DEBUG) {
+                FirebaseCrash.report(ex);
+            }
+        }
     }
 
     private void readAbilityGeneralValues() {
@@ -346,6 +409,17 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
             speed = Integer.parseInt(abilitySpeedEdit.getText().toString());
         }catch (Exception ex) {
             ex.printStackTrace();
+            FirebaseCrash.log("EditText Values:\n"+
+                    "HP: "+abilityHpEdit.getText().toString()+
+                    " NonLethal: "+abilityNonLethalEdit.getText().toString()+
+                    " BaseAtk: "+abilityBaseAtkEdit.getText().toString()+
+                    " SpellRes: "+abilitySpellResEdit.getText().toString()+
+                    " Initiative: "+abilityInitiativeEdit.getText().toString()+
+                    " Speed: "+abilitySpeedEdit.getText().toString()
+            );
+            if (!BuildConfig.DEBUG) {
+                FirebaseCrash.report(ex);
+            }
         }
         abilities.setHp(hp);
         abilities.setNonLethal(nonLethal);
@@ -364,6 +438,17 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
             array[Abilities.GRAPPLE_MISC] = Integer.parseInt(grappleMiscModEdit.getText().toString());
             array[Abilities.GRAPPLE_TOTAL] = Integer.parseInt(grappleTotalEdit.getText().toString());
         }catch (Exception ex) {
+            FirebaseCrash.log("EditText Values:\n"+
+                    " BaseAtk: "+grappleBaseAttackEdit.getText().toString()+
+                    " StrMod: "+grappleStrModEdit.getText().toString()+
+                    " Size: "+grappleSizeModEdit.getText().toString()+
+                    " Misc: "+grappleMiscModEdit.getText().toString()+
+                    " Total: "+grappleTotalEdit.getText().toString()
+            );
+            FirebaseCrash.log("Array: "+ Arrays.toString(array));
+            if (!BuildConfig.DEBUG) {
+                FirebaseCrash.report(ex);
+            }
             ex.printStackTrace();
         }
         abilities.setGrappleArray(array);
@@ -388,6 +473,27 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
             mods[Abilities.CHA] = Integer.parseInt(abilityChaModEdit.getText().toString());
         }catch (Exception ex) {
             ex.printStackTrace();
+            FirebaseCrash.log("Score EditText Values:\n"+
+                    " STR: "+abilityStrScoreEdit.getText().toString()+
+                    " DEX: "+abilityDexScoreEdit.getText().toString()+
+                    " CON: "+abilityConScoreEdit.getText().toString()+
+                    " INT: "+abilityIntScoreEdit.getText().toString()+
+                    " WIS: "+abilityWisScoreEdit.getText().toString()+
+                    " CHA: "+abilityChaScoreEdit.getText().toString()
+            );
+            FirebaseCrash.log("Mod EditText Values:\n"+
+                    " STR: "+abilityStrModEdit.getText().toString()+
+                    " DEX: "+abilityDexModEdit.getText().toString()+
+                    " CON: "+abilityConModEdit.getText().toString()+
+                    " INT: "+abilityIntModEdit.getText().toString()+
+                    " WIS: "+abilityWisModEdit.getText().toString()+
+                    " CHA: "+abilityChaModEdit.getText().toString()
+            );
+            FirebaseCrash.log("Score Array: "+Arrays.toString(scores));
+            FirebaseCrash.log("Mod Array: "+Arrays.toString(mods));
+            if (!BuildConfig.DEBUG) {
+                FirebaseCrash.report(ex);
+            }
         }
         abilities.setScoreArray(scores);
         abilities.setModArray(mods);
@@ -401,8 +507,10 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
                 String json = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_ABILITIES));
                 if (json != null && !Utils.isStringEmpty(json)) {
                     abilities = gson.fromJson(json, Abilities.class);
+                    FirebaseCrash.log("Abilities from JSON");
                 } else {
                     abilities = new Abilities();
+                    FirebaseCrash.log("New Abilities Object");
                 }
                 cursor.close();
             }

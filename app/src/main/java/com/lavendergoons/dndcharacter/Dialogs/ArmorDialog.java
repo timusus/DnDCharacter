@@ -78,7 +78,6 @@ public class ArmorDialog extends DialogFragment {
         builder.setView(view).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                //TODO Update onClicks
                 boolean exceptionCheck = false;
 
                 String name = armorNameEdit.getText().toString();

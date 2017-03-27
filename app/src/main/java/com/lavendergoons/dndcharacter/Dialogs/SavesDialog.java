@@ -86,7 +86,6 @@ public class SavesDialog extends DialogFragment {
         builder.create().show();
     }
 
-    //TODO maybe refactor
     private static void getSaveValues(EditText totalEdit, EditText baseEdit, EditText abilityEdit, EditText magicEdit, EditText miscEdit, EditText tempEdit, Abilities abilities, int which) {
         int[] array;
         switch (which) {
