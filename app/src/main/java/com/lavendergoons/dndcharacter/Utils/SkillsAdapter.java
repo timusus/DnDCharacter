@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Fragments.SkillsFragment;
+import com.lavendergoons.dndcharacter.Objects.Abilities;
 import com.lavendergoons.dndcharacter.Objects.Skill;
 import com.lavendergoons.dndcharacter.R;
 
@@ -31,6 +32,7 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
 
     private SkillsFragment skillsFragment;
     private ArrayList<Skill> mDataset;
+    private Abilities abilities;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public View cardView;
@@ -72,9 +74,10 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
         }
     }
 
-    public SkillsAdapter(SkillsFragment skillsFragment, ArrayList<Skill> dataset) {
+    public SkillsAdapter(SkillsFragment skillsFragment, ArrayList<Skill> dataset, Abilities abilities) {
         this.skillsFragment = skillsFragment;
         this.mDataset = dataset;
+        this.abilities = abilities;
     }
 
     @Override
@@ -85,11 +88,12 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        //Update postion before setting text
-        holder.totalTextWatcher.updatePosition(position);
-        holder.modTextWatcher.updatePosition(position);
-        holder.rankTextWatcher.updatePosition(position);
-        holder.miscTextWatcher.updatePosition(position);
+        //Update position before setting text
+        int mod = modTypeToInt(mDataset.get(position).getModType());
+        holder.totalTextWatcher.updatePosition(position, holder);
+        holder.modTextWatcher.updatePosition(position, holder);
+        holder.rankTextWatcher.updatePosition(position, holder);
+        holder.miscTextWatcher.updatePosition(position, holder);
         holder.mCheckBoxListener.updatePostion(position);
 
         holder.skillCheckBox.setText(mDataset.get(position).getName());
@@ -97,7 +101,7 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
         holder.skillModTypeText.setText(mDataset.get(position).getModType());
 
         holder.skillTotalEdit.setText(String.valueOf(mDataset.get(position).getTotal()));
-        holder.skillModEdit.setText(String.valueOf(mDataset.get(position).getMod()));
+        holder.skillModEdit.setText(String.valueOf(abilities.getMod(mod)));
         holder.skillRankEdit.setText(String.valueOf(mDataset.get(position).getRank()));
         holder.skillMiscEdit.setText(String.valueOf(mDataset.get(position).getMisc()));
 
@@ -133,25 +137,50 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
         return mDataset;
     }
 
+    public int modTypeToInt(String type) {
+        int mod = 0;
+        switch (type) {
+            case "STR":
+                mod = Abilities.STR;
+                break;
+            case "DEX":
+                mod = Abilities.DEX;
+                break;
+            case "CON":
+                mod = Abilities.CON;
+                break;
+            case "INT":
+                mod = Abilities.INT;
+                break;
+            case "WIS":
+                mod = Abilities.WIS;
+                break;
+            case "CHA":
+                mod = Abilities.CHA;
+                break;
+        }
+        return mod;
+    }
+
     // TextWatchers to save values
     private class TotalTextWatcher implements TextWatcher {
         private int position;
+        private ViewHolder holder;
 
-        public void updatePosition(int pos) {
+        public void updatePosition(int pos, ViewHolder holder) {
             this.position = pos;
+            this.holder = holder;
         }
 
         @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             int value = -1;
             try {
                 value = Integer.parseInt(charSequence.toString());
-            }catch (Exception ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
                 Log.e("PARSE", "Error parsing int in SkillsAdapter");
             }
@@ -160,29 +189,27 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
         }
 
         @Override
-        public void afterTextChanged(Editable editable) {
-
-        }
+        public void afterTextChanged(Editable editable) {}
     }
 
     private class ModTextWatcher implements TextWatcher {
         private int position;
+        private ViewHolder holder;
 
-        public void updatePosition(int pos) {
+        public void updatePosition(int pos, ViewHolder holder) {
             this.position = pos;
+            this.holder = holder;
         }
 
         @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             int value = -1;
             try {
                 value = Integer.parseInt(charSequence.toString());
-            }catch (Exception ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
                 Log.e("PARSE", "Error parsing int in SkillsAdapter");
             }
@@ -190,16 +217,16 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
         }
 
         @Override
-        public void afterTextChanged(Editable editable) {
-
-        }
+        public void afterTextChanged(Editable editable) {}
     }
 
     private class RankTextWatcher implements TextWatcher {
         private int position;
+        private ViewHolder holder;
 
-        public void updatePosition(int pos) {
+        public void updatePosition(int pos, ViewHolder holder) {
             this.position = pos;
+            this.holder = holder;
         }
 
         @Override
@@ -212,7 +239,7 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
             int value = -1;
             try {
                 value = Integer.parseInt(charSequence.toString());
-            }catch (Exception ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
                 Log.e("PARSE", "Error parsing int in SkillsAdapter");
             }
@@ -227,9 +254,11 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
 
     private class MiscTextWatcher implements TextWatcher {
         private int position;
+        private ViewHolder holder;
 
-        public void updatePosition(int pos) {
+        public void updatePosition(int pos, ViewHolder holder) {
             this.position = pos;
+            this.holder = holder;
         }
 
         @Override
@@ -242,7 +271,7 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
             int value = -1;
             try {
                 value = Integer.parseInt(charSequence.toString());
-            }catch (Exception ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
                 Log.e("PARSE", "Error parsing int in SkillsAdapter");
             }

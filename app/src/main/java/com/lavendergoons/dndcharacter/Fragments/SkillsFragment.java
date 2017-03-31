@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +17,7 @@ import com.google.gson.reflect.TypeToken;
 import com.lavendergoons.dndcharacter.Activities.CharacterNavDrawerActivity;
 import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
+import com.lavendergoons.dndcharacter.Objects.Abilities;
 import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.Objects.Skill;
 import com.lavendergoons.dndcharacter.R;
@@ -41,6 +40,7 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
     public static final String TAG = "SKILLS_FRAG";
     private long characterId = -1;
     private Character character;
+    private Abilities abilities;
     private DBAdapter dbAdapter;
 
     public SkillsFragment() {
@@ -70,6 +70,7 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
             ex.printStackTrace();
         }
         getSkills();
+        readAbilityValues();
     }
 
     @Override
@@ -85,7 +86,7 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
         mSkillRecyclerLayoutManager = new LinearLayoutManager(this.getContext());
         mSkillsRecyclerView.setLayoutManager(mSkillRecyclerLayoutManager);
 
-        mSkillRecyclerAdapter = new SkillsAdapter(this, skillsList);
+        mSkillRecyclerAdapter = new SkillsAdapter(this, skillsList, abilities);
         mSkillsRecyclerView.setAdapter(mSkillRecyclerAdapter);
 
         return rootView;
@@ -155,12 +156,33 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
                 if (json != null && !Utils.isStringEmpty(json)) {
                     Type skillType = new TypeToken<ArrayList<Skill>>(){}.getType();
                     skillsList = gson.fromJson(json, skillType);
+                    FirebaseCrash.log("Skills from JSON");
                     cursor.close();
                 } else {
                     initSkills();
                 }
             }
         }  else {
+            Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // Read ability object from database
+    private void readAbilityValues() {
+        if (dbAdapter != null && characterId != -1) {
+            Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_ABILITIES, characterId);
+            if (cursor != null) {
+                String json = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_ABILITIES));
+                if (json != null && !Utils.isStringEmpty(json)) {
+                    abilities = gson.fromJson(json, Abilities.class);
+                    FirebaseCrash.log("Abilities from JSON");
+                } else {
+                    abilities = new Abilities();
+                    FirebaseCrash.log("New Abilities Object");
+                }
+                cursor.close();
+            }
+        } else {
             Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
         }
     }
