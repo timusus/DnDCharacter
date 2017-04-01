@@ -11,13 +11,14 @@
     Other fields start with a lower case letter.
     Public static final fields (constants) are ALL_CAPS_WITH_UNDERSCORES.
     -->
-    <string name="app_name">"D&amp;D 3.5 Character"</string>
+    <string name="app_name">D&amp;D 3.5 Character</string>
 
     <!-- Activity Titles -->
     <string name="title_activity_character_list">CharactersListActivity</string>
     <string name="title_activity_character_nav_drawer">CharacterNavDrawerActivity</string>
 
     <string name="title_fragment_abilities">Abilities</string>
+    <string name="title_fragment_about">About</string>
     <string name="title_fragment_attributes">Attributes</string>
     <string name="title_fragment_armor">Armor</string>
     <string name="title_fragment_attacks">Attacks</string>
@@ -33,6 +34,21 @@
     <string name="no">NO</string>
     <string name="edit">Edit</string>
     <string name="notes">Notes</string>
+
+    <!-- About -->
+    <string name="about">About</string>
+    <string name="about_title_colon">About:</string>
+    <string name="about_content">
+        The D&amp;D 3.5 Character sheet app lets users store all aspects of their D&amp;D 3.5 Characters.
+        \n\nNote: This app is in a initial release state, with new features and performance improvements planned for future updates.
+    </string>
+    <string name="about_art">Art:</string>
+    <string name="about_nolan">Icon provided by Nolan Snow (Nolsworld).</string>
+    <string name="about_instagram_title">Nolsworld Instagram:</string>
+    <string name="about_instagram_link">https://www.instagram.com/nolsworld/</string>
+    <string name="about_issues">Issues/Suggestions:</string>
+    <string name="about_issues_content">To report any issues or make suggestions, please email:</string>
+    <string name="about_issues_email">lavenderdevelopment@gmail.com</string>
 
     <!-- Warnings -->
     <string name="warning_enter_required_fields">Please Enter All Required Fields</string>
@@ -244,4 +260,5 @@
 
     <!-- DEV STRINGS -->
     <string name="lavender_goons">Lavender Goons</string>
+
 </resources>

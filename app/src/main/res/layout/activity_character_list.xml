@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".Activities.CharacterListActivity">
+    tools:context=".Activities.CharacterListActivity"
+    android:id="@+id/activity_character_list">
 
     <include layout="@layout/app_bar_character_list"/>
 

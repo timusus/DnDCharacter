@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.lavendergoons.dndcharacter.Database.DBAdapter;
@@ -45,6 +44,7 @@ public class CharacterListActivity extends AppCompatActivity implements
     private ArrayList<Character> characters;
     private AddCharacterDialog addCharacterDialog;
     private FloatingActionButton fab;
+    Toolbar mToolbar;
     private DBAdapter dbAdapter;
     public static final String TAG = "CHARACTER_LIST";
 
@@ -64,9 +64,9 @@ public class CharacterListActivity extends AppCompatActivity implements
     }
 
     private void createView() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.character_list_toolbar);
-        toolbar.setTitle(getString(R.string.app_name));
-        setSupportActionBar(toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.character_list_toolbar);
+        mToolbar.setTitle(getString(R.string.app_name));
+        setSupportActionBar(mToolbar);
 
         mCharacterRecyclerView = (RecyclerView) findViewById(R.id.characterListRecyclerView);
 
@@ -131,7 +131,7 @@ public class CharacterListActivity extends AppCompatActivity implements
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.activity_character_list_menu, menu);
         return true;
     }
 
@@ -208,4 +208,5 @@ public class CharacterListActivity extends AppCompatActivity implements
         }
         return id;
     }
+
 }

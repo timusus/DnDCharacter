@@ -1,0 +1,91 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.lavendergoons.dndcharacter.Fragments.AboutFragment"
+    android:padding="@dimen/activity_half_horizontal_margin">
+
+    <TextView
+        android:id="@+id/aboutTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/about_title_colon"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/aboutContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/aboutTitle"
+        android:text="@string/about_content"
+        android:layout_marginTop="@dimen/activity_half_vertical_margin"/>
+
+    <TextView
+        android:id="@+id/aboutArtTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/aboutContent"
+        android:text="@string/about_art"
+        android:textSize="20sp"
+        android:layout_marginTop="@dimen/activity_half_vertical_margin"/>
+
+    <TextView
+        android:id="@+id/aboutNolan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/aboutArtTitle"
+        android:text="@string/about_nolan"
+        android:layout_marginTop="@dimen/activity_half_vertical_margin"/>
+
+    <TextView
+        android:id="@+id/aboutInstagramTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/aboutNolan"
+        android:text="@string/about_instagram_title"
+        android:layout_marginTop="@dimen/activity_half_vertical_margin"/>
+
+    <ImageButton
+        android:id="@+id/skullImageBtn"
+        android:layout_width="130sp"
+        android:layout_height="130sp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/aboutInstagramTitle"
+        android:layout_marginTop="16dp"
+        app:srcCompat="@drawable/skull_icon"
+        android:layout_alignEnd="@+id/aboutInstagramTitle" />
+
+    <TextView
+        android:id="@+id/aboutIssuesTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/skullImageBtn"
+        android:text="@string/about_issues"
+        android:textSize="20sp"
+        android:layout_marginTop="@dimen/activity_half_vertical_margin"/>
+
+    <TextView
+        android:id="@+id/aboutIssuesContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/aboutIssuesTitle"
+        android:text="@string/about_issues_content"
+        android:layout_marginTop="@dimen/activity_half_vertical_margin"/>
+
+    <TextView
+        android:id="@+id/aboutIssuesEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/aboutIssuesContent"
+        android:text="@string/about_issues_email"
+        android:autoLink="email"
+        android:layout_marginTop="@dimen/activity_half_vertical_margin"/>
+</RelativeLayout>

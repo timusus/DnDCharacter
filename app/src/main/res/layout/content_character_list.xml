@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Activities.CharacterListActivity"
-    tools:showIn="@layout/activity_character_list">
+    tools:showIn="@layout/activity_character_list"
+    android:id="@+id/content_character_list">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/characterListRecyclerView"

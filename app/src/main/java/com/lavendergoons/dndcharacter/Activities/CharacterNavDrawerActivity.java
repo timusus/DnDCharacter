@@ -13,11 +13,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Fragments.AbilitiesFragment;
+import com.lavendergoons.dndcharacter.Fragments.AboutFragment;
 import com.lavendergoons.dndcharacter.Fragments.ArmorFragment;
 import com.lavendergoons.dndcharacter.Fragments.ArmorListFragment;
 import com.lavendergoons.dndcharacter.Fragments.AttacksFragment;
@@ -40,6 +40,7 @@ import com.lavendergoons.dndcharacter.Utils.Constants;
 public class CharacterNavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         AbilitiesFragment.OnFragmentInteractionListener,
+        AboutFragment.OnFragmentInteractionListener,
         ArmorFragment.OnFragmentInteractionListener,
         ArmorListFragment.OnFragmentInteractionListener,
         AttacksFragment.OnFragmentInteractionListener,
@@ -147,13 +148,39 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
 
     @Override
     public void onBackStackChanged() {
-        if (isCurrentFragment(SpellFragment.TAG) || isCurrentFragment(ArmorFragment.TAG)) {
+        if (isCurrentFragment(SpellFragment.TAG) || isCurrentFragment(ArmorFragment.TAG) || isCurrentFragment(AboutFragment.TAG)) {
             showBackButton(true);
             setDrawerLock(true);
         } else {
             showBackButton(false);
             setDrawerLock(false);
         }
+        mToolbar.setTitle(getCurrentFragmentTitle());
+    }
+
+    private String getCurrentFragmentTitle() {
+        Fragment frag = getSupportFragmentManager().findFragmentById(R.id.content_character_nav);
+        String title = getString(R.string.app_name);
+        if (frag != null) {
+            if (frag instanceof AttributesFragment) {
+                title = getString(R.string.title_fragment_attributes);
+            } else if (frag instanceof AboutFragment) {
+                title = getString(R.string.title_fragment_about);
+            } else if (frag instanceof AbilitiesFragment) {
+                title = getString(R.string.title_fragment_abilities);
+            } else if (frag instanceof SkillsFragment) {
+                title = getString(R.string.title_fragment_skills);
+            } else if (frag instanceof AttacksFragment) {
+                title = getString(R.string.title_fragment_attacks);
+            } else if (frag instanceof ItemsGeneralFragment) {
+                title = getString(R.string.title_fragment_items);
+            } else if (frag instanceof ArmorListFragment) {
+                title = getString(R.string.title_fragment_armor);
+            } else if (frag instanceof SpellListFragment) {
+                title = getString(R.string.title_fragment_spells);
+            }
+        }
+        return title;
     }
 
     @Override
@@ -165,6 +192,12 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.actionAbout) {
+            mToolbar.setTitle(getString(R.string.title_fragment_about));
+            FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();
+            fragTransaction.replace(R.id.content_character_nav, AboutFragment.newInstance(), AboutFragment.TAG).addToBackStack(AboutFragment.TAG).commit();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
