@@ -1,0 +1,30 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.lavendergoons.dndcharacter.Fragments.NoteFragment">
+
+
+    <EditText
+        android:id="@+id/noteTitleEdit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:inputType="textCapWords"
+        android:hint="@string/title" />
+
+    <EditText
+        android:id="@+id/noteContentEdit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/noteTitleEdit"
+        android:ems="10"
+        android:maxLines="15"
+        android:inputType="textMultiLine"
+        android:hint="@string/notes"
+        android:gravity="top|left"/>
+
+</RelativeLayout>

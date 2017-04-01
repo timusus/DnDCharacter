@@ -1,11 +1,15 @@
 package com.lavendergoons.dndcharacter.Utils;
 
+import android.content.Context;
+import android.os.Vibrator;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.lavendergoons.dndcharacter.Fragments.NoteFragment;
 import com.lavendergoons.dndcharacter.Fragments.NotesListFragment;
 import com.lavendergoons.dndcharacter.Objects.Note;
 import com.lavendergoons.dndcharacter.R;
@@ -59,11 +63,19 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
     }
 
     private void onCardClick(int position) {
-
+        launchNoteFragment(mDataset.get(position), position);
     }
 
     private boolean onCardLongClick(int position) {
+        Vibrator v = (Vibrator) fragment.getContext().getSystemService(Context.VIBRATOR_SERVICE);
+        v.vibrate(Constants.LONG_CLICK_VIBRATION);
+        fragment.deleteNote(mDataset.get(position));
         return true;
+    }
+
+    private void launchNoteFragment(Note note, int i) {
+        FragmentTransaction fragTransaction = fragment.getActivity().getSupportFragmentManager().beginTransaction();
+        fragTransaction.replace(R.id.content_character_nav, NoteFragment.newInstance(note, i), NoteFragment.TAG).addToBackStack(NoteFragment.TAG).commit();
     }
 
     @Override

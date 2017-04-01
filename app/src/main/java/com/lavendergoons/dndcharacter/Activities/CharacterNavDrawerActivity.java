@@ -23,11 +23,14 @@ import com.lavendergoons.dndcharacter.Fragments.ArmorListFragment;
 import com.lavendergoons.dndcharacter.Fragments.AttacksFragment;
 import com.lavendergoons.dndcharacter.Fragments.AttributesFragment;
 import com.lavendergoons.dndcharacter.Fragments.ItemsGeneralFragment;
+import com.lavendergoons.dndcharacter.Fragments.NoteFragment;
+import com.lavendergoons.dndcharacter.Fragments.NotesListFragment;
 import com.lavendergoons.dndcharacter.Fragments.SkillsFragment;
 import com.lavendergoons.dndcharacter.Fragments.SpellFragment;
 import com.lavendergoons.dndcharacter.Fragments.SpellListFragment;
 import com.lavendergoons.dndcharacter.Objects.Armor;
 import com.lavendergoons.dndcharacter.Objects.Character;
+import com.lavendergoons.dndcharacter.Objects.Note;
 import com.lavendergoons.dndcharacter.Objects.Spell;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.Constants;
@@ -46,6 +49,8 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         AttacksFragment.OnFragmentInteractionListener,
         AttributesFragment.OnFragmentInteractionListener,
         ItemsGeneralFragment.OnFragmentInteractionListener,
+        NotesListFragment.OnFragmentInteractionListener,
+        NoteFragment.OnFragmentInteractionListener,
         SkillsFragment.OnFragmentInteractionListener,
         SpellFragment.OnFragmentInteractionListener,
         SpellListFragment.OnFragmentInteractionListener,
@@ -148,7 +153,8 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
 
     @Override
     public void onBackStackChanged() {
-        if (isCurrentFragment(SpellFragment.TAG) || isCurrentFragment(ArmorFragment.TAG) || isCurrentFragment(AboutFragment.TAG)) {
+        if (isCurrentFragment(SpellFragment.TAG) || isCurrentFragment(ArmorFragment.TAG)
+                || isCurrentFragment(AboutFragment.TAG) || isCurrentFragment(NoteFragment.TAG)) {
             showBackButton(true);
             setDrawerLock(true);
         } else {
@@ -178,6 +184,10 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
                 title = getString(R.string.title_fragment_armor);
             } else if (frag instanceof SpellListFragment) {
                 title = getString(R.string.title_fragment_spells);
+            } else if (frag instanceof NotesListFragment) {
+                title = getString(R.string.title_fragment_notes);
+            }else if (frag instanceof NoteFragment) {
+                title = getString(R.string.title_fragment_notes);
             }
         }
         return title;
@@ -248,6 +258,11 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
                 tag = SpellListFragment.TAG;
                 title = getString(R.string.title_fragment_spells);
                 break;
+            case R.id.nav_notes:
+                fragment = NotesListFragment.newInstance(character, characterId);
+                tag = NotesListFragment.TAG;
+                title = getString(R.string.title_fragment_notes);
+                break;
         }
 
         mDrawerLayout.closeDrawer(GravityCompat.START);
@@ -283,11 +298,19 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
 
     @Override
     public void passBackArmor(Armor armor, int index) {
-        //this.tempArmor = armor;
-        //this.tempArmorIndex = index;
         try {
             ArmorListFragment frag = (ArmorListFragment) getSupportFragmentManager().findFragmentByTag(ArmorListFragment.TAG);
             frag.retrieveArmor(armor, index);
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void passBackNote(Note note, int index) {
+        try {
+            NotesListFragment frag = (NotesListFragment) getSupportFragmentManager().findFragmentByTag(NotesListFragment.TAG);
+            frag.retrieveNote(note, index);
         }catch (Exception ex) {
             ex.printStackTrace();
         }

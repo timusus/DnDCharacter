@@ -31,6 +31,7 @@ public class DBAdapter {
     public static final String COLUMN_ITEM_GENERAL = "item_general";
     public static final String COLUMN_SKILL = "skill";
     public static final String COLUMN_SPELL = "spell";
+    public static final String COLUMN_NOTES = "notes";
 
     public static final String[] ALL_COLUMNS = {COLUMN_ID, COLUMN_CHARACTER, COLUMN_ABILITIES, COLUMN_ATTRIBUTES, COLUMN_ARMOR, COLUMN_ATTACK, COLUMN_ITEM_GENERAL, COLUMN_SKILL, COLUMN_SPELL};
 
