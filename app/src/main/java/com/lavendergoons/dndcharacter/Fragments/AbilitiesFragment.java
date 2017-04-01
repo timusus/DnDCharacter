@@ -251,13 +251,13 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onStop() {
+        writeAbilities();
         super.onStop();
         Log.d(TAG, "onStop");
     }
 
     @Override
     public void onDestroy() {
-        writeAbilities();
         super.onDestroy();
         Log.d(TAG, "onDestroy");
     }

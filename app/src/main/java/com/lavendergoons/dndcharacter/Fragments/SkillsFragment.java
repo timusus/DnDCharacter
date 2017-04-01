@@ -69,13 +69,13 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
         }catch (Exception ex) {
             ex.printStackTrace();
         }
-        getSkills();
-        readAbilityValues();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        getSkills();
+        readAbilityValues();
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_skills, container, false);
         mSkillsRecyclerView = (RecyclerView) rootView.findViewById(R.id.skillsRecyclerView);
