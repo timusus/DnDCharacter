@@ -91,7 +91,7 @@ public class CharacterListActivity extends AppCompatActivity implements
 
     @Override
     protected void onPause() {
-        Log.d("APP", "onPause");
+        //Log.d("APP", "onPause");
         super.onPause();
     }
 

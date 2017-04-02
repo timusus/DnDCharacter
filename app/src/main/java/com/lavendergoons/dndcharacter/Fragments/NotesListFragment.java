@@ -3,6 +3,7 @@ package com.lavendergoons.dndcharacter.Fragments;
 import android.content.Context;
 
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
@@ -19,6 +20,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lavendergoons.dndcharacter.Activities.CharacterNavDrawerActivity;
 import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
@@ -29,14 +32,15 @@ import com.lavendergoons.dndcharacter.Utils.Constants;
 import com.lavendergoons.dndcharacter.Utils.NotesAdapter;
 import com.lavendergoons.dndcharacter.Utils.Utils;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-
-import static android.R.attr.level;
 
 
 public class NotesListFragment extends Fragment implements ConfirmationDialog.ConfirmationDialogInterface, View.OnClickListener {
 
     public static final String TAG = "NOTES_LIST_FRAG";
+
+    private Gson gson = new Gson();
 
     private RecyclerView mNotesRecyclerView;
     private NotesAdapter mNotesRecyclerAdapter;
@@ -74,9 +78,7 @@ public class NotesListFragment extends Fragment implements ConfirmationDialog.Co
         }catch (Exception ex) {
             ex.printStackTrace();
         }
-        notesList.add(new Note("Character Stats"));
-        notesList.add(new Note("Stuff"));
-        notesList.add(new Note("Test notes"));
+        getNotes();
     }
 
     @Override
@@ -100,6 +102,31 @@ public class NotesListFragment extends Fragment implements ConfirmationDialog.Co
         return rootView;
     }
 
+    private void getNotes() {
+        if (dbAdapter != null && characterId != -1) {
+            Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_NOTES, characterId);
+            if (cursor != null) {
+                String json = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_NOTES));
+                if (json != null && !Utils.isStringEmpty(json) && !json.equals("[]") && !json.equals("[ ]")) {
+                    Type attributeType = new TypeToken<ArrayList<Note>>(){}.getType();
+                    notesList = gson.fromJson(json, attributeType);
+                    cursor.close();
+                }
+            }
+        } else {
+            Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void writeNotes() {
+        String json = gson.toJson(notesList);
+        if (dbAdapter != null) {
+            dbAdapter.fillColumn(characterId, DBAdapter.COLUMN_NOTES, json);
+        } else {
+            Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
+        }
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -115,6 +142,12 @@ public class NotesListFragment extends Fragment implements ConfirmationDialog.Co
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onStop() {
+        writeNotes();
+        super.onStop();
     }
 
     @Override

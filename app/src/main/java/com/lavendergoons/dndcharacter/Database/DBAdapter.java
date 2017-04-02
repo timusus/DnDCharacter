@@ -11,6 +11,8 @@ import android.util.Log;
 
 import com.lavendergoons.dndcharacter.Utils.Utils;
 
+import static android.graphics.PorterDuff.Mode.ADD;
+
 
 public class DBAdapter {
 
@@ -18,7 +20,7 @@ public class DBAdapter {
 
     private static final String TABLE_CHARACTERS = "characters";
     private static final String DATABASE_NAME = "DnD_Characters.db";
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
 
 
     public static final String COLUMN_ID = "_id";
@@ -33,19 +35,30 @@ public class DBAdapter {
     public static final String COLUMN_SPELL = "spell";
     public static final String COLUMN_NOTES = "notes";
 
-    public static final String[] ALL_COLUMNS = {COLUMN_ID, COLUMN_CHARACTER, COLUMN_ABILITIES, COLUMN_ATTRIBUTES, COLUMN_ARMOR, COLUMN_ATTACK, COLUMN_ITEM_GENERAL, COLUMN_SKILL, COLUMN_SPELL};
+    public static final String[] ALL_COLUMNS = {
+            COLUMN_ID,
+            COLUMN_CHARACTER,
+            COLUMN_ABILITIES,
+            COLUMN_ATTRIBUTES,
+            COLUMN_ARMOR,
+            COLUMN_ATTACK,
+            COLUMN_ITEM_GENERAL,
+            COLUMN_SKILL,
+            COLUMN_SPELL,
+            COLUMN_NOTES};
 
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + TABLE_CHARACTERS + " (" + COLUMN_ID +
                     " integer primary key autoincrement, " +
-                    COLUMN_CHARACTER + " text not null, " +
-                    COLUMN_ABILITIES + " text not null, " +
-                    COLUMN_ATTRIBUTES + " text not null, " +
-                    COLUMN_ARMOR + " text not null, " +
-                    COLUMN_ATTACK + " text not null, " +
-                    COLUMN_ITEM_GENERAL + " text not null, " +
-                    COLUMN_SKILL + " text not null, " +
-                    COLUMN_SPELL + " text not null " +
+                    COLUMN_CHARACTER + " text not null default '', " +
+                    COLUMN_ABILITIES + " text not null default '', " +
+                    COLUMN_ATTRIBUTES + " text not null default '', " +
+                    COLUMN_ARMOR + " text not null default '', " +
+                    COLUMN_ATTACK + " text not null default '', " +
+                    COLUMN_ITEM_GENERAL + " text not null default '', " +
+                    COLUMN_SKILL + " text not null default '', " +
+                    COLUMN_SPELL + " text not null default '', " +
+                    COLUMN_NOTES + " text not null default ''" +
                     " );";
 
     private final Context context;
@@ -151,6 +164,7 @@ public class DBAdapter {
         values.put(COLUMN_ITEM_GENERAL, "");
         values.put(COLUMN_SKILL, "");
         values.put(COLUMN_SPELL, "");
+        values.put(COLUMN_NOTES, "");
         return values;
     }
 
@@ -173,11 +187,10 @@ public class DBAdapter {
         public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
             Log.w(TAG, "Upgrading SQLite Table");
 
-            // Destroy old table
-            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+TABLE_CHARACTERS);
-
-            //Create new table
-            onCreate(sqLiteDatabase);
+            // Upgrading from 1 to 2 add notes column
+            if (newVersion == 2 && oldVersion == 1) {
+                sqLiteDatabase.execSQL("ALTER TABLE "+TABLE_CHARACTERS+" ADD COLUMN "+COLUMN_NOTES +" text not null default ''");
+            }
         }
     }
 }
