@@ -106,12 +106,12 @@ public class AttributesFragment extends Fragment {
 
     @Override
     public void onStop() {
+        writeAttributes();
         super.onStop();
     }
 
     @Override
     public void onDestroy() {
-        writeAttributes();
         super.onDestroy();
     }
 

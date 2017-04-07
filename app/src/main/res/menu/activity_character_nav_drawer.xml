@@ -3,6 +3,9 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_characters"
+            android:title="@string/title_list_characters" />
+        <item
             android:id="@+id/nav_attributes"
             android:title="@string/label_nav_drawer_attributes" />
         <item

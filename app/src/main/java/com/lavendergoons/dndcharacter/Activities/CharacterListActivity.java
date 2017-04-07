@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,12 +19,16 @@ import com.google.gson.Gson;
 import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.AddCharacterDialog;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
+import com.lavendergoons.dndcharacter.Fragments.AboutFragment;
+import com.lavendergoons.dndcharacter.Fragments.CharacterListFragment;
 import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.CharacterListAdapter;
 import com.lavendergoons.dndcharacter.Utils.Constants;
 
 import java.util.ArrayList;
+
+import static android.R.attr.name;
 
 
 /**
@@ -33,13 +39,15 @@ import java.util.ArrayList;
  */
 
 public class CharacterListActivity extends AppCompatActivity implements
-        AddCharacterDialog.OnCharacterCompleteListener,
+        /*AddCharacterDialog.OnCharacterCompleteListener,
         CharacterListAdapter.OnCharacterClickListener,
         ConfirmationDialog.ConfirmationDialogInterface,
-        View.OnClickListener {
+        View.OnClickListener,*/
+        AboutFragment.OnFragmentInteractionListener,
+        CharacterListFragment.OnCharacterClickListener{
 
     private RecyclerView mCharacterRecyclerView;
-    private RecyclerView.Adapter mCharRecyclerAdapter;
+    private CharacterListAdapter mCharRecyclerAdapter;
     private RecyclerView.LayoutManager mCharRecyclerLayoutManager;
     private ArrayList<Character> characters;
     private AddCharacterDialog addCharacterDialog;
@@ -56,10 +64,10 @@ public class CharacterListActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_character_list);
         gson = new Gson();
         characters = new ArrayList<Character>();
-        createView();
         dbAdapter = new DBAdapter(this);
         dbAdapter.open();
-        getCharacters();
+        createView();
+        //getCharacters();
         Log.d("APP", "onCreate");
     }
 
@@ -68,6 +76,9 @@ public class CharacterListActivity extends AppCompatActivity implements
         mToolbar.setTitle(getString(R.string.app_name));
         setSupportActionBar(mToolbar);
 
+        FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();
+        fragTransaction.replace(R.id.content_character_list, CharacterListFragment.newInstance(), CharacterListFragment.TAG).commit();
+/*
         mCharacterRecyclerView = (RecyclerView) findViewById(R.id.characterListRecyclerView);
 
         // Keeps View same size on content change
@@ -81,6 +92,7 @@ public class CharacterListActivity extends AppCompatActivity implements
 
         fab = (FloatingActionButton) findViewById(R.id.addCharacterFAB);
         fab.setOnClickListener(this);
+        */
     }
 
     @Override
@@ -115,6 +127,29 @@ public class CharacterListActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void onFragmentCharacterClick(Character character, long id) {
+        Intent intent = new Intent(this, CharacterNavDrawerActivity.class);
+        intent.putExtra(Constants.CHARACTER_KEY, character);
+        intent.putExtra(Constants.CHARACTER_ID, id);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isCurrentFragment(AboutFragment.TAG)) {
+            mToolbar.setTitle(getString(R.string.app_name));
+        }
+        super.onBackPressed();
+    }
+
+    private boolean isCurrentFragment(String tag) {
+        Fragment frag = getSupportFragmentManager().findFragmentByTag(tag);
+        return frag != null && frag.isVisible();
+    }
+
+    /*
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.addCharacterFAB:
@@ -122,19 +157,26 @@ public class CharacterListActivity extends AppCompatActivity implements
                 addCharacterDialog.show(getSupportFragmentManager(), getString(R.string.tag_add_character_dialog));
                 break;
         }
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.actionAbout:
+                mToolbar.setTitle(getString(R.string.title_fragment_about));
+                FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();
+                fragTransaction.replace(R.id.content_character_list, AboutFragment.newInstance(), AboutFragment.TAG).addToBackStack(AboutFragment.TAG).commit();
+                return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_character_list_menu, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-
+/*
     @Override
     public void onCharacterComplete(Character character) {
         String characterJson = gson.toJson(character);
@@ -207,6 +249,14 @@ public class CharacterListActivity extends AppCompatActivity implements
             ex.printStackTrace();
         }
         return id;
+    }*/
+
+    @Override
+    public void onFragmentInteraction() {
+
     }
 
+    public DBAdapter getDbAdapter() {
+        return dbAdapter;
+    }
 }

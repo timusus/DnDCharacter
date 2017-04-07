@@ -17,6 +17,7 @@
     <string name="title_activity_character_list">CharactersListActivity</string>
     <string name="title_activity_character_nav_drawer">CharacterNavDrawerActivity</string>
 
+    <string name="title_list_characters">Characters</string>
     <string name="title_fragment_abilities">Abilities</string>
     <string name="title_fragment_about">About</string>
     <string name="title_fragment_attributes">Attributes</string>

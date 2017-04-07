@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.lavendergoons.dndcharacter.Activities.CharacterListActivity;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
+import com.lavendergoons.dndcharacter.Fragments.CharacterListFragment;
 import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.R;
 
@@ -22,6 +23,7 @@ public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdap
 
     private ArrayList<Character> mDataset;
     private Context mContext;
+    private CharacterListFragment fragment;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public View cardView;
@@ -40,6 +42,11 @@ public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdap
         this.mDataset = dataset;
     }
 
+    public CharacterListAdapter(CharacterListFragment fragment, ArrayList<Character> dataset) {
+        this.fragment = fragment;
+        this.mDataset = dataset;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_character_list, parent, false);
@@ -53,7 +60,7 @@ public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdap
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onCardClick(holder);
+                onCardClick(holder, position);
             }
         });
         holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -65,16 +72,15 @@ public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdap
         });
     }
 
-    private void onCardClick(ViewHolder holder) {
+    private void onCardClick(ViewHolder holder, int position) {
         String name = holder.mNameTextView.getText().toString();
-        CharacterListActivity activity = (CharacterListActivity) mContext;
-        activity.onCharacterClick(name);
+        fragment.onCharacterClick(name);
     }
 
     private void onCardLongClick(ViewHolder holder, int position) {
-        Vibrator v = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
+        Vibrator v = (Vibrator) fragment.getContext().getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(Constants.LONG_CLICK_VIBRATION);
-        ConfirmationDialog.showConfirmDialog(mContext, mContext.getString(R.string.confirm_delete_character), (CharacterListActivity)mContext, mDataset.get(position));
+        fragment.deleteCharacter(mDataset.get(position));
     }
 
     @Override

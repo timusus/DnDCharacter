@@ -1,5 +1,6 @@
 package com.lavendergoons.dndcharacter.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -194,6 +195,12 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onStop() {
+        dbAdapter.close();
+        super.onStop();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
@@ -223,6 +230,11 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         String tag = "tag";
         String title = "";
         switch (item.getItemId()) {
+            case R.id.nav_characters:
+                Intent intent = new Intent(this, CharacterListActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
             case R.id.nav_attributes:
                 fragment = AttributesFragment.newInstance(character, characterId);
                 tag = AttributesFragment.TAG;
@@ -266,9 +278,11 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         }
 
         mDrawerLayout.closeDrawer(GravityCompat.START);
-        mToolbar.setTitle(title);
-        FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();
-        fragTransaction.replace(R.id.content_character_nav, fragment, tag).commit();
+        if (!isCurrentFragment(tag)) {
+            mToolbar.setTitle(title);
+            FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();
+            fragTransaction.replace(R.id.content_character_nav, fragment, tag).commit();
+        }
         return true;
     }
 
