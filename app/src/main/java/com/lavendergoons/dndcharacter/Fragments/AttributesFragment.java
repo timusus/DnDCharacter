@@ -17,7 +17,7 @@ import com.lavendergoons.dndcharacter.Activities.CharacterNavDrawerActivity;
 import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.R;
-import com.lavendergoons.dndcharacter.Utils.AttributesAdapter;
+import com.lavendergoons.dndcharacter.Adapters.AttributesAdapter;
 import com.lavendergoons.dndcharacter.Utils.Constants;
 import com.lavendergoons.dndcharacter.Utils.Utils;
 

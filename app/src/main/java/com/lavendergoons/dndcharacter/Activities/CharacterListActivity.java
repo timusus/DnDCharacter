@@ -1,7 +1,6 @@
 package com.lavendergoons.dndcharacter.Activities;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -13,22 +12,18 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.google.gson.Gson;
 import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.AddCharacterDialog;
-import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Fragments.AboutFragment;
 import com.lavendergoons.dndcharacter.Fragments.CharacterListFragment;
 import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.R;
-import com.lavendergoons.dndcharacter.Utils.CharacterListAdapter;
+import com.lavendergoons.dndcharacter.Adapters.CharacterListAdapter;
 import com.lavendergoons.dndcharacter.Utils.Constants;
 
 import java.util.ArrayList;
-
-import static android.R.attr.name;
 
 
 /**

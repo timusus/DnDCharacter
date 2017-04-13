@@ -21,7 +21,7 @@ import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Objects.Attack;
 import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.R;
-import com.lavendergoons.dndcharacter.Utils.AttackAdapter;
+import com.lavendergoons.dndcharacter.Adapters.AttackAdapter;
 import com.lavendergoons.dndcharacter.Utils.Constants;
 import com.lavendergoons.dndcharacter.Utils.Utils;
 

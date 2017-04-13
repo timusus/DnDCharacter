@@ -1,4 +1,4 @@
-package com.lavendergoons.dndcharacter.Utils;
+package com.lavendergoons.dndcharacter.Adapters;
 
 import android.content.Context;
 import android.os.Vibrator;
@@ -9,11 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.lavendergoons.dndcharacter.Dialogs.ArmorDialog;
 import com.lavendergoons.dndcharacter.Fragments.ArmorFragment;
 import com.lavendergoons.dndcharacter.Fragments.ArmorListFragment;
 import com.lavendergoons.dndcharacter.Objects.Armor;
 import com.lavendergoons.dndcharacter.R;
+import com.lavendergoons.dndcharacter.Utils.Constants;
 
 import java.util.ArrayList;
 

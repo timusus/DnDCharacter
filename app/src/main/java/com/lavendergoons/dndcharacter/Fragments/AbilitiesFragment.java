@@ -26,6 +26,7 @@ import com.lavendergoons.dndcharacter.Dialogs.ScoresDialog;
 import com.lavendergoons.dndcharacter.Objects.Abilities;
 import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.R;
+import com.lavendergoons.dndcharacter.Utils.CharacterManager;
 import com.lavendergoons.dndcharacter.Utils.Constants;
 import com.lavendergoons.dndcharacter.Utils.Utils;
 
@@ -42,6 +43,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
     private Gson gson = new Gson();
 
     private OnFragmentInteractionListener mListener;
+    private CharacterManager characterManager;
     private DBAdapter dbAdapter;
     private Character character;
     private Abilities abilities;
@@ -88,6 +90,8 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
         }catch (Exception ex) {
             ex.printStackTrace();
         }
+        characterManager.getInstance();
+        Abilities abil = characterManager.getCharacterAbilities();
     }
 
     @Override
@@ -252,6 +256,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onStop() {
         writeAbilities();
+        characterManager.setCharacterAbilities(abilities);
         super.onStop();
         Log.d(TAG, "onStop");
     }

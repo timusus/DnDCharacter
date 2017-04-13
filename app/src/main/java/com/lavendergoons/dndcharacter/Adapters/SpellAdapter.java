@@ -1,4 +1,4 @@
-package com.lavendergoons.dndcharacter.Utils;
+package com.lavendergoons.dndcharacter.Adapters;
 
 import android.content.Context;
 import android.os.Vibrator;
@@ -13,6 +13,7 @@ import com.lavendergoons.dndcharacter.Fragments.SpellFragment;
 import com.lavendergoons.dndcharacter.Fragments.SpellListFragment;
 import com.lavendergoons.dndcharacter.Objects.Spell;
 import com.lavendergoons.dndcharacter.R;
+import com.lavendergoons.dndcharacter.Utils.Constants;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.lavendergoons.dndcharacter.Utils;
+package com.lavendergoons.dndcharacter.Adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -10,9 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.lavendergoons.dndcharacter.Fragments.AttributesFragment;
-import com.lavendergoons.dndcharacter.Objects.Attribute;
 import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.R;
+import com.lavendergoons.dndcharacter.Utils.Constants;
 
 import java.util.ArrayList;
 import java.util.Arrays;

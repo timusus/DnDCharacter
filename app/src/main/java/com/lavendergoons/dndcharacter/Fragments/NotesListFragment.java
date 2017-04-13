@@ -29,7 +29,7 @@ import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.Objects.Note;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.Constants;
-import com.lavendergoons.dndcharacter.Utils.NotesAdapter;
+import com.lavendergoons.dndcharacter.Adapters.NotesAdapter;
 import com.lavendergoons.dndcharacter.Utils.Utils;
 
 import java.lang.reflect.Type;

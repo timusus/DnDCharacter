@@ -34,6 +34,7 @@ import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.Objects.Note;
 import com.lavendergoons.dndcharacter.Objects.Spell;
 import com.lavendergoons.dndcharacter.R;
+import com.lavendergoons.dndcharacter.Utils.CharacterManager;
 import com.lavendergoons.dndcharacter.Utils.Constants;
 
 /**
@@ -60,14 +61,17 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
 
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
+    private Toolbar mToolbar;
+
     public static final String TAG = "CHARACTER_NAV";
+
     private boolean toolbarListenerRegister = false;
-    Toolbar mToolbar;
-    private Character character;
-    private long characterId;
+
     private DBAdapter dbAdapter;
-    private Armor tempArmor;
-    private int tempArmorIndex;
+    private Character character;
+    private CharacterManager characterManager;
+    private long characterId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +103,10 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         mToolbar.setTitle(getString(R.string.title_fragment_attributes));
         dbAdapter = new DBAdapter(this);
         dbAdapter.open();
+
+        //Load database in CharacterManager
+        characterManager.getInstance().loadDatabase(dbAdapter);
+        characterManager.loadCharacter(characterId);
     }
 
     @Override

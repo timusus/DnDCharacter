@@ -28,7 +28,7 @@ import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Objects.Armor;
 import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.R;
-import com.lavendergoons.dndcharacter.Utils.ArmorAdapter;
+import com.lavendergoons.dndcharacter.Adapters.ArmorAdapter;
 import com.lavendergoons.dndcharacter.Utils.Constants;
 import com.lavendergoons.dndcharacter.Utils.Utils;
 

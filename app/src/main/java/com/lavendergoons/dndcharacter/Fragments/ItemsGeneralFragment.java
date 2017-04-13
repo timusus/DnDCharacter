@@ -22,7 +22,7 @@ import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.Objects.Item;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.Constants;
-import com.lavendergoons.dndcharacter.Utils.ItemsGeneralAdapter;
+import com.lavendergoons.dndcharacter.Adapters.ItemsGeneralAdapter;
 import com.lavendergoons.dndcharacter.Utils.Utils;
 
 import java.lang.reflect.Type;

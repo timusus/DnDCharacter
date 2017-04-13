@@ -19,7 +19,7 @@ import com.lavendergoons.dndcharacter.Dialogs.AddCharacterDialog;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.R;
-import com.lavendergoons.dndcharacter.Utils.CharacterListAdapter;
+import com.lavendergoons.dndcharacter.Adapters.CharacterListAdapter;
 
 import java.util.ArrayList;
 

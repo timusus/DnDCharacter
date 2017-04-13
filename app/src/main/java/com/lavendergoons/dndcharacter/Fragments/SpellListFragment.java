@@ -28,7 +28,7 @@ import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.Objects.Spell;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.Constants;
-import com.lavendergoons.dndcharacter.Utils.SpellAdapter;
+import com.lavendergoons.dndcharacter.Adapters.SpellAdapter;
 import com.lavendergoons.dndcharacter.Utils.Utils;
 
 import java.lang.reflect.Type;
