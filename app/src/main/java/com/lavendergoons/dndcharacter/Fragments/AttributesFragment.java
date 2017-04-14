@@ -18,6 +18,7 @@ import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Objects.Character;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Adapters.AttributesAdapter;
+import com.lavendergoons.dndcharacter.Utils.CharacterManager;
 import com.lavendergoons.dndcharacter.Utils.Constants;
 import com.lavendergoons.dndcharacter.Utils.Utils;
 
@@ -38,6 +39,7 @@ public class AttributesFragment extends Fragment {
     private ArrayList<String> attributesList = new ArrayList<>(Constants.ATTRIBUTES.length);
     private DBAdapter dbAdapter;
     private Character character;
+    private CharacterManager characterManager;
 
     private long characterId = -1;
     private final int NAME = 0;
@@ -72,7 +74,8 @@ public class AttributesFragment extends Fragment {
         for (int i=0;i<Constants.ATTRIBUTES.length;i++) {
             attributesList.add(i, "");
         }
-        getAttributes();
+        characterManager = CharacterManager.getInstance(this.getContext());
+        attributesList = characterManager.getCharacterAttributes();
     }
 
     @Override
@@ -124,7 +127,7 @@ public class AttributesFragment extends Fragment {
             int lvl = 0;
             try {
                 lvl = Integer.parseInt(attributesList.get(LEVEL));
-            }catch (Exception ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
             character.setLevel(lvl);
@@ -139,7 +142,7 @@ public class AttributesFragment extends Fragment {
         }
     }
 
-    private void getAttributes() {
+    /*private void getAttributes() {
         if (dbAdapter != null && characterId != -1) {
             Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_ATTRIBUTES, characterId);
             if (cursor != null) {
@@ -153,7 +156,7 @@ public class AttributesFragment extends Fragment {
         } else {
             Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
 
     @Override
     public void onDetach() {

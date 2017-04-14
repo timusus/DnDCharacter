@@ -47,6 +47,8 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
     private DBAdapter dbAdapter;
     private Character character;
     private Abilities abilities;
+    private long characterId = -1;
+
     private Button savesEditBtn, acEditBtn, scoresEditBtn;
 
     // Saves and AC Edittexts
@@ -62,8 +64,6 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
 
     // Grapple Editexts
     private EditText grappleBaseAttackEdit, grappleStrModEdit, grappleSizeModEdit, grappleMiscModEdit, grappleTotalEdit;
-
-    long characterId = -1;
 
     public AbilitiesFragment() {
         // Required empty public constructor
@@ -90,8 +90,8 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
         }catch (Exception ex) {
             ex.printStackTrace();
         }
-        characterManager.getInstance();
-        Abilities abil = characterManager.getCharacterAbilities();
+        characterManager = CharacterManager.getInstance(this.getContext());
+        abilities = characterManager.getCharacterAbilities();
     }
 
     @Override
@@ -207,7 +207,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
         abilityWisModEdit = (EditText) rootView.findViewById(R.id.abilityWisModEdit);
         abilityChaModEdit = (EditText) rootView.findViewById(R.id.abilityChaModEdit);
 
-        readAbilityValues();
+        //readAbilityValues();
         setValues();
         return rootView;
     }
@@ -241,30 +241,12 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
         }
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d(TAG, "onStart");
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause");
-    }
 
     @Override
     public void onStop() {
         writeAbilities();
-        characterManager.setCharacterAbilities(abilities);
         super.onStop();
         Log.d(TAG, "onStop");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy");
     }
 
     @Override
@@ -272,6 +254,17 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
         super.onDetach();
         mListener = null;
     }
+
+    private void writeAbilities() {
+        readAbilityGeneralValues();
+        readGrappleValues();
+        readScoreModValues();
+        characterManager.setCharacterAbilities(abilities);
+    }
+
+    //**********************************************************
+    // Listeners
+    //**********************************************************
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction();
@@ -307,10 +300,12 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
     }
 
     @Override
-    public void OnScoresNegative() {
-    }
+    public void OnScoresNegative() {}
 
-    // Set textview and edittext values
+    //**********************************************************
+    // Set Values To EditTexts
+    //**********************************************************
+
     private void setValues() {
         if (abilities != null) {
             setACValues();
@@ -402,6 +397,10 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
             }
         }
     }
+
+    //**********************************************************
+    // Read Values From EditTexts
+    //**********************************************************
 
     private void readAbilityGeneralValues() {
         int hp = 0, nonLethal = 0, baseAtk = 0, spellRes = 0, init = 0, speed = 0;
@@ -502,38 +501,6 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
         }
         abilities.setScoreArray(scores);
         abilities.setModArray(mods);
-    }
-
-    // Read ability object from database
-    private void readAbilityValues() {
-        if (dbAdapter != null && characterId != -1) {
-            Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_ABILITIES, characterId);
-            if (cursor != null) {
-                String json = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_ABILITIES));
-                if (json != null && !Utils.isStringEmpty(json)) {
-                    abilities = gson.fromJson(json, Abilities.class);
-                    FirebaseCrash.log("Abilities from JSON");
-                } else {
-                    abilities = new Abilities();
-                    FirebaseCrash.log("New Abilities Object");
-                }
-                cursor.close();
-            }
-        } else {
-            Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void writeAbilities() {
-        readAbilityGeneralValues();
-        readGrappleValues();
-        readScoreModValues();
-        String json = gson.toJson(abilities);
-        if (dbAdapter != null) {
-            dbAdapter.fillColumn(characterId, DBAdapter.COLUMN_ABILITIES, json);
-        } else {
-            Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
-        }
     }
 
     private String modValue(CharSequence score) {
