@@ -46,6 +46,8 @@ public class CharacterManager {
 
     }
 
+    //TODO CLEAN UP CASTING FOR CHARACTER SETS
+
     public static synchronized CharacterManager getInstance(Context context) {
         mContext = context;
         if (mInstance == null) {
@@ -239,6 +241,50 @@ public class CharacterManager {
     }
 
     //**********************************************************
+    // Skills
+    //**********************************************************
+    @SuppressWarnings("unchecked")
+    private synchronized void readCharacterSkills() {
+        if (dbAdapter != null && characterId != -1) {
+            Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_SKILL, characterId);
+            if (cursor != null) {
+                String json = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_SKILL));
+                if (json != null && !Utils.isStringEmpty(json)) {
+                    Type skillType = new TypeToken<ArrayList<Skill>>(){}.getType();
+                    character.setSkillsList((ArrayList<Skill>) gson.fromJson(json, skillType));
+                    FirebaseCrash.log("Skills from JSON");
+                    cursor.close();
+                } else {
+                    initSkills();
+                }
+            }
+        }  else {
+            Toast.makeText(mContext, mContext.getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public ArrayList<Skill> getCharacterSkills() {
+        if (character.getSkillsList() == null || character.getSkillsList().size() == 0) {
+            readCharacterSkills();
+        }
+        return character.getSkillsList();
+    }
+
+    public void setCharacterSkills(ArrayList<Skill> skills) {
+        character.setSkillsList(skills);
+        //TODO Move to AsyncTask
+        writeToDatabase(DBAdapter.COLUMN_SKILL, gson.toJson(skills));
+    }
+
+    private void initSkills() {
+        ArrayList<Skill> skillsList = new ArrayList<>();
+        for (Constants.Skills s : Constants.Skills.values()) {
+            skillsList.add(new Skill(s.getName(), s.getMod(), s.getDefault(), 0, 0, 0, 0));
+        }
+        character.setSkillsList(skillsList);
+    }
+
+    //**********************************************************
     // Database
     //**********************************************************
 
@@ -350,11 +396,17 @@ public class CharacterManager {
 
 
     private class WriteToDatabaseTask extends AsyncTask<String, Void, Void> {
-        final int COLUMN = 0;
-        final int JSON = 1;
+        final int JSON = 0;
+        private String column;
+
+        public WriteToDatabaseTask(String column) {
+            super();
+            this.column = column;
+        }
+
         @Override
         protected Void doInBackground(String... strings) {
-            dbAdapter.fillColumn(characterId, strings[COLUMN], strings[JSON]);
+            dbAdapter.fillColumn(characterId, column, strings[JSON]);
             return null;
         }
     }
