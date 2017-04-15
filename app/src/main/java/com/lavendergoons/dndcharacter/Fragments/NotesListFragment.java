@@ -25,7 +25,7 @@ import com.google.gson.reflect.TypeToken;
 import com.lavendergoons.dndcharacter.Activities.CharacterNavDrawerActivity;
 import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
-import com.lavendergoons.dndcharacter.Objects.Character;
+import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
 import com.lavendergoons.dndcharacter.Objects.Note;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.Constants;
@@ -49,7 +49,7 @@ public class NotesListFragment extends Fragment implements ConfirmationDialog.Co
 
     private OnFragmentInteractionListener mListener;
     private DBAdapter dbAdapter;
-    private Character character;
+    private SimpleCharacter simpleCharacter;
     private ArrayList<Note> notesList = new ArrayList<>();
     long characterId = -1;
 
@@ -57,7 +57,7 @@ public class NotesListFragment extends Fragment implements ConfirmationDialog.Co
         // Required empty public constructor
     }
 
-    public static NotesListFragment newInstance(Character charIn, long characterId) {
+    public static NotesListFragment newInstance(SimpleCharacter charIn, long characterId) {
         NotesListFragment fragment = new NotesListFragment();
         Bundle args = new Bundle();
         args.putParcelable(Constants.CHARACTER_KEY, charIn);
@@ -71,7 +71,7 @@ public class NotesListFragment extends Fragment implements ConfirmationDialog.Co
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             characterId = getArguments().getLong(Constants.CHARACTER_ID);
-            character = getArguments().getParcelable(Constants.CHARACTER_KEY);
+            simpleCharacter = getArguments().getParcelable(Constants.CHARACTER_KEY);
         }
         try {
             dbAdapter = ((CharacterNavDrawerActivity) getActivity()).getDbAdapter();

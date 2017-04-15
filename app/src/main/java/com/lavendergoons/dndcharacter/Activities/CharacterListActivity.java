@@ -6,7 +6,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -18,7 +17,7 @@ import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.AddCharacterDialog;
 import com.lavendergoons.dndcharacter.Fragments.AboutFragment;
 import com.lavendergoons.dndcharacter.Fragments.CharacterListFragment;
-import com.lavendergoons.dndcharacter.Objects.Character;
+import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Adapters.CharacterListAdapter;
 import com.lavendergoons.dndcharacter.Utils.Constants;
@@ -27,10 +26,10 @@ import java.util.ArrayList;
 
 
 /**
-  * Initial Activity to hold list of characters
-  * Add and delete characters.
-  * Selecting Character will launch CharacterNavDrawerActivity,
-  * to show all Character info.
+  * Initial Activity to hold list of simpleCharacters
+  * Add and delete simpleCharacters.
+  * Selecting SimpleCharacter will launch CharacterNavDrawerActivity,
+  * to show all SimpleCharacter info.
  */
 
 public class CharacterListActivity extends AppCompatActivity implements
@@ -44,7 +43,7 @@ public class CharacterListActivity extends AppCompatActivity implements
     private RecyclerView mCharacterRecyclerView;
     private CharacterListAdapter mCharRecyclerAdapter;
     private RecyclerView.LayoutManager mCharRecyclerLayoutManager;
-    private ArrayList<Character> characters;
+    private ArrayList<SimpleCharacter> simpleCharacters;
     private AddCharacterDialog addCharacterDialog;
     private FloatingActionButton fab;
     Toolbar mToolbar;
@@ -58,7 +57,7 @@ public class CharacterListActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_list);
         gson = new Gson();
-        characters = new ArrayList<Character>();
+        simpleCharacters = new ArrayList<SimpleCharacter>();
         dbAdapter = new DBAdapter(this);
         dbAdapter.open();
         createView();
@@ -82,7 +81,7 @@ public class CharacterListActivity extends AppCompatActivity implements
         mCharRecyclerLayoutManager = new LinearLayoutManager(this);
         mCharacterRecyclerView.setLayoutManager(mCharRecyclerLayoutManager);
 
-        mCharRecyclerAdapter = new CharacterListAdapter(this, characters);
+        mCharRecyclerAdapter = new CharacterListAdapter(this, simpleCharacters);
         mCharacterRecyclerView.setAdapter(mCharRecyclerAdapter);
 
         fab = (FloatingActionButton) findViewById(R.id.addCharacterFAB);
@@ -122,9 +121,9 @@ public class CharacterListActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onFragmentCharacterClick(Character character, long id) {
+    public void onFragmentCharacterClick(SimpleCharacter simpleCharacter, long id) {
         Intent intent = new Intent(this, CharacterNavDrawerActivity.class);
-        intent.putExtra(Constants.CHARACTER_KEY, character);
+        intent.putExtra(Constants.CHARACTER_KEY, simpleCharacter);
         intent.putExtra(Constants.CHARACTER_ID, id);
         startActivity(intent);
         finish();
@@ -173,10 +172,10 @@ public class CharacterListActivity extends AppCompatActivity implements
     }
 /*
     @Override
-    public void onCharacterComplete(Character character) {
+    public void onCharacterComplete(SimpleCharacter character) {
         String characterJson = gson.toJson(character);
         dbAdapter.insertRow(characterJson);
-        characters.add(character);
+        simpleCharacters.add(character);
         mCharRecyclerAdapter.notifyDataSetChanged();
     }
 
@@ -192,10 +191,10 @@ public class CharacterListActivity extends AppCompatActivity implements
 
     @Override
     public void ConfirmDialogOk(Object o) {
-        if (o instanceof Character) {
-            int i = characters.indexOf(o);
-            dbAdapter.deleteRow(getCharacterId(characters.get(i).getName()));
-            characters.remove(i);
+        if (o instanceof SimpleCharacter) {
+            int i = simpleCharacters.indexOf(o);
+            dbAdapter.deleteRow(getCharacterId(simpleCharacters.get(i).getName()));
+            simpleCharacters.remove(i);
             mCharRecyclerAdapter.notifyDataSetChanged();
         }
     }
@@ -203,8 +202,8 @@ public class CharacterListActivity extends AppCompatActivity implements
     @Override
     public void ConfirmDialogCancel(Object o) {}
 
-    private Character getCharacterFromName(String name) {
-        for(Character c : characters) {
+    private SimpleCharacter getCharacterFromName(String name) {
+        for(SimpleCharacter c : simpleCharacters) {
             if (c.getName().equals(name))
                 return c;
         }
@@ -216,9 +215,9 @@ public class CharacterListActivity extends AppCompatActivity implements
         if (c != null) {
             for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
                 String json = c.getString(c.getColumnIndex(DBAdapter.COLUMN_CHARACTER));
-                Log.d("JSON", "Character json string "+json);
-                Character character = gson.fromJson(json, Character.class);
-                characters.add(character);
+                Log.d("JSON", "SimpleCharacter json string "+json);
+                SimpleCharacter character = gson.fromJson(json, SimpleCharacter.class);
+                simpleCharacters.add(character);
             }
             mCharRecyclerAdapter.notifyDataSetChanged();
             c.close();
@@ -232,7 +231,7 @@ public class CharacterListActivity extends AppCompatActivity implements
             if (c != null) {
                 for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
                     String json = c.getString(c.getColumnIndex(DBAdapter.COLUMN_CHARACTER));
-                    Character character = gson.fromJson(json, Character.class);
+                    SimpleCharacter character = gson.fromJson(json, SimpleCharacter.class);
                     if (character.getName().equals(name)) {
                         id = (long) c.getInt(c.getColumnIndex(DBAdapter.COLUMN_ID));
                         break;

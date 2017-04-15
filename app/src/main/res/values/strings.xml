@@ -62,7 +62,7 @@
     <string name="confirm_delete_item">Are you sure you want to delete this item?</string>
     <string name="confirm_delete_attack">Are you sure you want to delete this attack?</string>
     <string name="confirm_delete_spell">Are you sure you want to delete this spell?</string>
-    <string name="confirm_delete_character">Are you sure you want to delete this character?</string>
+    <string name="confirm_delete_character">Are you sure you want to delete this simpleCharacter?</string>
     <string name="confirm_delete_note">Are you sure you want to delete this note?</string>
 
     <!-- General D&D -->

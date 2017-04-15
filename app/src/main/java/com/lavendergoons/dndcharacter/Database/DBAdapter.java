@@ -11,8 +11,6 @@ import android.util.Log;
 
 import com.lavendergoons.dndcharacter.Utils.Utils;
 
-import static android.graphics.PorterDuff.Mode.ADD;
-
 
 public class DBAdapter {
 

@@ -17,7 +17,7 @@ import com.lavendergoons.dndcharacter.Activities.CharacterListActivity;
 import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.AddCharacterDialog;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
-import com.lavendergoons.dndcharacter.Objects.Character;
+import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Adapters.CharacterListAdapter;
 
@@ -33,7 +33,7 @@ public class CharacterListFragment extends Fragment implements
     private RecyclerView mCharacterRecyclerView;
     private CharacterListAdapter mCharRecyclerAdapter;
     private RecyclerView.LayoutManager mCharRecyclerLayoutManager;
-    private ArrayList<Character> characters = new ArrayList<>();
+    private ArrayList<SimpleCharacter> simpleCharacters = new ArrayList<>();
     private FloatingActionButton fab;
     private OnCharacterClickListener mListener;
 
@@ -77,7 +77,7 @@ public class CharacterListFragment extends Fragment implements
         mCharRecyclerLayoutManager = new LinearLayoutManager(this.getContext());
         mCharacterRecyclerView.setLayoutManager(mCharRecyclerLayoutManager);
 
-        mCharRecyclerAdapter = new CharacterListAdapter(this, characters);
+        mCharRecyclerAdapter = new CharacterListAdapter(this, simpleCharacters);
         mCharacterRecyclerView.setAdapter(mCharRecyclerAdapter);
 
         fab = (FloatingActionButton) rootView.findViewById(R.id.addCharacterFAB);
@@ -103,13 +103,13 @@ public class CharacterListFragment extends Fragment implements
 
     private void getCharacters() {
         Cursor c = dbAdapter.getAllCharacterNames();
-        characters.clear();
+        simpleCharacters.clear();
         if (c != null) {
             for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
                 String json = c.getString(c.getColumnIndex(DBAdapter.COLUMN_CHARACTER));
-                Log.d("JSON", "Character json string "+json);
-                Character character = gson.fromJson(json, Character.class);
-                characters.add(character);
+                Log.d("JSON", "SimpleCharacter json string "+json);
+                SimpleCharacter simpleCharacter = gson.fromJson(json, SimpleCharacter.class);
+                simpleCharacters.add(simpleCharacter);
             }
             //mCharRecyclerAdapter.notifyDataSetChanged();
             c.close();
@@ -123,8 +123,8 @@ public class CharacterListFragment extends Fragment implements
             if (c != null) {
                 for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
                     String json = c.getString(c.getColumnIndex(DBAdapter.COLUMN_CHARACTER));
-                    Character character = gson.fromJson(json, Character.class);
-                    if (character.getName().equals(name)) {
+                    SimpleCharacter simpleCharacter = gson.fromJson(json, SimpleCharacter.class);
+                    if (simpleCharacter.getName().equals(name)) {
                         id = (long) c.getInt(c.getColumnIndex(DBAdapter.COLUMN_ID));
                         break;
                     }
@@ -137,8 +137,8 @@ public class CharacterListFragment extends Fragment implements
         return id;
     }
 
-    private Character getCharacterFromName(String name) {
-        for(Character c : characters) {
+    private SimpleCharacter getCharacterFromName(String name) {
+        for(SimpleCharacter c : simpleCharacters) {
             if (c.getName().equals(name))
                 return c;
         }
@@ -147,10 +147,10 @@ public class CharacterListFragment extends Fragment implements
 
     @Override
     public void ConfirmDialogOk(Object o) {
-        if (o instanceof Character) {
-            int i = characters.indexOf(o);
-            dbAdapter.deleteRow(getCharacterId(characters.get(i).getName()));
-            characters.remove(i);
+        if (o instanceof SimpleCharacter) {
+            int i = simpleCharacters.indexOf(o);
+            dbAdapter.deleteRow(getCharacterId(simpleCharacters.get(i).getName()));
+            simpleCharacters.remove(i);
             mCharRecyclerAdapter.notifyDataSetChanged();
         }
     }
@@ -161,10 +161,10 @@ public class CharacterListFragment extends Fragment implements
     }
 
     @Override
-    public void onCharacterComplete(Character character) {
-        String characterJson = gson.toJson(character);
+    public void onCharacterComplete(SimpleCharacter simpleCharacter) {
+        String characterJson = gson.toJson(simpleCharacter);
         dbAdapter.insertRow(characterJson);
-        characters.add(character);
+        simpleCharacters.add(simpleCharacter);
         mCharRecyclerAdapter.notifyDataSetChanged();
     }
 
@@ -174,8 +174,8 @@ public class CharacterListFragment extends Fragment implements
         mListener.onFragmentCharacterClick(getCharacterFromName(name), getCharacterId(name));
     }
 
-    public void deleteCharacter(Character character) {
-        ConfirmationDialog.showConfirmDialog(this.getContext(), getString(R.string.confirm_delete_character), this, character);
+    public void deleteCharacter(SimpleCharacter simpleCharacter) {
+        ConfirmationDialog.showConfirmDialog(this.getContext(), getString(R.string.confirm_delete_character), this, simpleCharacter);
     }
 
     @Override
@@ -196,6 +196,6 @@ public class CharacterListFragment extends Fragment implements
     }
 
     public interface OnCharacterClickListener {
-        void onFragmentCharacterClick(Character name, long id);
+        void onFragmentCharacterClick(SimpleCharacter name, long id);
     }
 }

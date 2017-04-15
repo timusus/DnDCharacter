@@ -1,12 +1,8 @@
 package com.lavendergoons.dndcharacter.Dialogs;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
@@ -15,15 +11,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.lavendergoons.dndcharacter.Activities.CharacterListActivity;
 import com.lavendergoons.dndcharacter.Fragments.CharacterListFragment;
-import com.lavendergoons.dndcharacter.Objects.Attack;
-import com.lavendergoons.dndcharacter.Objects.Character;
+import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.Utils;
 
 /**
- * Initial simple Character creation dialog.
+ * Initial simple SimpleCharacter creation dialog.
  */
 public class AddCharacterDialog extends DialogFragment {
 
@@ -61,8 +55,8 @@ public class AddCharacterDialog extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (!Utils.isStringEmpty(nameEdit.getText().toString()) && !Utils.isStringEmpty(levelEdit.getText().toString())) {
-                    Character character = new Character(nameEdit.getText().toString(), Integer.parseInt(levelEdit.getText().toString()));
-                    target.onCharacterComplete(character);
+                    SimpleCharacter simpleCharacter = new SimpleCharacter(nameEdit.getText().toString(), Integer.parseInt(levelEdit.getText().toString()));
+                    target.onCharacterComplete(simpleCharacter);
                 } else {
                     Toast.makeText(activity, activity.getString(R.string.warning_enter_required_fields), Toast.LENGTH_LONG).show();
                 }
@@ -74,7 +68,7 @@ public class AddCharacterDialog extends DialogFragment {
 
 
     public static interface OnCharacterCompleteListener {
-        void onCharacterComplete(Character character);
+        void onCharacterComplete(SimpleCharacter simpleCharacter);
     }
 
     @Override

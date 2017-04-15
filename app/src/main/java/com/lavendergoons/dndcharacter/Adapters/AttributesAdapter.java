@@ -9,13 +9,15 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.crash.FirebaseCrash;
 import com.lavendergoons.dndcharacter.Fragments.AttributesFragment;
-import com.lavendergoons.dndcharacter.Objects.Character;
+import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.Constants;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
 
 /**
  * Adapter for attributes RecyclerView
@@ -26,7 +28,7 @@ public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.Vi
     private AttributesFragment attributesFragment;
     private ArrayList<String> mDataset = new ArrayList<>(Arrays.asList(Constants.ATTRIBUTES));
     private ArrayList<String> attributeList;
-    private Character character;
+    private SimpleCharacter simpleCharacter;
     private final int NAME = 0;
     private final int LEVEL = 2;
 
@@ -46,10 +48,10 @@ public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.Vi
         }
     }
 
-    public AttributesAdapter(AttributesFragment attributesFragment, ArrayList<String> dataset, Character character) {
+    public AttributesAdapter(AttributesFragment attributesFragment, ArrayList<String> dataset, SimpleCharacter simpleCharacter) {
         this.attributesFragment = attributesFragment;
         this.attributeList = dataset;
-        this.character = character;
+        this.simpleCharacter = simpleCharacter;
     }
 
     @Override
@@ -65,9 +67,9 @@ public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.Vi
         holder.textWatcher.updatePosition(position);
         if (attributeList.size() > 0) {
             if (position == NAME) {
-                holder.attributeEdit.setText(character.getName());
+                holder.attributeEdit.setText(simpleCharacter.getName());
             } else if (position == LEVEL) {
-                holder.attributeEdit.setText(String.valueOf(character.getLevel()));
+                holder.attributeEdit.setText(String.valueOf(simpleCharacter.getLevel()));
             } else {
                 holder.attributeEdit.setText(attributeList.get(position));
             }
@@ -83,7 +85,7 @@ public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.Vi
         return attributeList;
     }
 
-    // Stores edittext data on text change
+    // Stores EditText data on text change
     // Stops attributes from moving to the wrong card
     private class AttributeTextWatcher implements TextWatcher {
         private int position;
@@ -99,6 +101,19 @@ public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.Vi
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             attributeList.set(position, charSequence.toString());
+            if (position == NAME) {
+                simpleCharacter.setName(charSequence.toString());
+            }
+            if (position == LEVEL) {
+                int lvl = simpleCharacter.getLevel();
+                try {
+                    lvl = Integer.parseInt(charSequence.toString());
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    FirebaseCrash.log(ex.toString());
+                }
+                simpleCharacter.setLevel(lvl);
+            }
         }
 
         @Override

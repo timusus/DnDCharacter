@@ -2,6 +2,8 @@ package com.lavendergoons.dndcharacter.Utils;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.firebase.crash.FirebaseCrash;
@@ -14,6 +16,7 @@ import com.lavendergoons.dndcharacter.Objects.Armor;
 import com.lavendergoons.dndcharacter.Objects.Attack;
 import com.lavendergoons.dndcharacter.Objects.Item;
 import com.lavendergoons.dndcharacter.Objects.Note;
+import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
 import com.lavendergoons.dndcharacter.Objects.Skill;
 import com.lavendergoons.dndcharacter.Objects.Spell;
 import com.lavendergoons.dndcharacter.R;
@@ -81,17 +84,23 @@ public class CharacterManager {
         this.dbAdapter = dbAdapter;
     }
 
-    //**********************************************************
-    // Character
-    //**********************************************************
-    public void setCharacter(com.lavendergoons.dndcharacter.Objects.Character character) {
+    public void destroy() {
+        mInstance = null;
+        dbAdapter = null;
+    }
 
+    //**********************************************************
+    // SimpleCharacter
+    //**********************************************************
+    public void setSimpleCharacter(SimpleCharacter simpleCharacter) {
+        writeToDatabase(DBAdapter.COLUMN_CHARACTER, gson.toJson(simpleCharacter));
+        Log.d(TAG, simpleCharacter.toString());
     }
 
     //**********************************************************
     // Abilities
     //**********************************************************
-    private void readCharacterAbilities() {
+    private synchronized void readCharacterAbilities() {
         if (dbAdapter != null && characterId != -1) {
             Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_ABILITIES, characterId);
             if (cursor != null) {
@@ -112,8 +121,9 @@ public class CharacterManager {
 
     public Abilities getCharacterAbilities() {
         //TODO Move to AsyncTask
-        readCharacterAbilities();
-
+        if (character.getAbilities() == null) {
+            readCharacterAbilities();
+        }
         return character.getAbilities();
     }
 
@@ -128,7 +138,7 @@ public class CharacterManager {
     //**********************************************************
     //TODO CLEAN UP
     @SuppressWarnings("unchecked")
-    private void readCharacterArmor() {
+    private synchronized void readCharacterArmor() {
         if (dbAdapter != null && characterId != -1) {
             Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_ARMOR, characterId);
             if (cursor != null) {
@@ -146,7 +156,10 @@ public class CharacterManager {
     }
 
     public ArrayList<Armor> getCharacterArmor() {
-        readCharacterArmor();
+        //TODO Move to AsyncTask
+        if (character.getArmorList() == null || character.getArmorList().size() == 0) {
+            readCharacterArmor();
+        }
         return character.getArmorList();
     }
 
@@ -161,7 +174,7 @@ public class CharacterManager {
     // Attacks
     //**********************************************************
     @SuppressWarnings("unchecked")
-    private void readCharacterAttacks() {
+    private synchronized void readCharacterAttacks() {
         if (dbAdapter != null && characterId != -1) {
             Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_ATTACK, characterId);
             if (cursor != null) {
@@ -178,7 +191,10 @@ public class CharacterManager {
     }
 
     public ArrayList<Attack> getCharacterAttacks() {
-        readCharacterAttacks();
+        //TODO Move to AsyncTask
+        if (character.getAttackList() == null || character.getAttackList().size() == 0) {
+            readCharacterAttacks();
+        }
         return character.getAttackList();
     }
 
@@ -192,7 +208,7 @@ public class CharacterManager {
     // Attributes
     //**********************************************************
     @SuppressWarnings("unchecked")
-    private void readCharacterAttributes() {
+    private synchronized void readCharacterAttributes() {
         if (dbAdapter != null && characterId != -1) {
             Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_ATTRIBUTES, characterId);
             if (cursor != null) {
@@ -209,7 +225,10 @@ public class CharacterManager {
     }
 
     public ArrayList<String> getCharacterAttributes() {
-        readCharacterAttributes();
+        //TODO Move to AsyncTask
+        if (character.getAttributesList() == null || character.getAttributesList().size() == 0) {
+            readCharacterAttributes();
+        }
         return character.getAttributesList();
     }
 
@@ -326,6 +345,17 @@ public class CharacterManager {
 
         void setSpellList(ArrayList<Spell> spellList) {
             this.spellList = spellList;
+        }
+    }
+
+
+    private class WriteToDatabaseTask extends AsyncTask<String, Void, Void> {
+        final int COLUMN = 0;
+        final int JSON = 1;
+        @Override
+        protected Void doInBackground(String... strings) {
+            dbAdapter.fillColumn(characterId, strings[COLUMN], strings[JSON]);
+            return null;
         }
     }
 }

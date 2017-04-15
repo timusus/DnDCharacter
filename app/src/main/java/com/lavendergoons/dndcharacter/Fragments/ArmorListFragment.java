@@ -26,7 +26,7 @@ import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.ArmorDialog;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Objects.Armor;
-import com.lavendergoons.dndcharacter.Objects.Character;
+import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Adapters.ArmorAdapter;
 import com.lavendergoons.dndcharacter.Utils.Constants;
@@ -51,7 +51,7 @@ public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDial
 
     private ArrayList<Armor> armorList = new ArrayList<>();
     private DBAdapter dbAdapter;
-    private Character character;
+    private SimpleCharacter simpleCharacter;
     private long characterId = -1;
 
     private FloatingActionButton fab;
@@ -60,10 +60,10 @@ public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDial
         // Required empty public constructor
     }
 
-    public static ArmorListFragment newInstance(Character character, long characterId) {
+    public static ArmorListFragment newInstance(SimpleCharacter simpleCharacter, long characterId) {
         ArmorListFragment frag = new ArmorListFragment();
         Bundle args = new Bundle();
-        args.putParcelable(Constants.CHARACTER_KEY, character);
+        args.putParcelable(Constants.CHARACTER_KEY, simpleCharacter);
         args.putLong(Constants.CHARACTER_ID, characterId);
         frag.setArguments(args);
         return frag;
@@ -74,7 +74,7 @@ public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDial
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             characterId = getArguments().getLong(Constants.CHARACTER_ID);
-            character = getArguments().getParcelable(Constants.CHARACTER_KEY);
+            simpleCharacter = getArguments().getParcelable(Constants.CHARACTER_KEY);
         }
         try {
             dbAdapter = ((CharacterNavDrawerActivity) getActivity()).getDbAdapter();

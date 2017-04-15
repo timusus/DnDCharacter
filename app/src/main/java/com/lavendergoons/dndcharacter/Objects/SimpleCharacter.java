@@ -5,23 +5,23 @@ import android.os.Parcelable;
 
 
 /**
- * Base Character Object
+ * Base SimpleCharacter Object
  * To Hold all sub character objects
  */
-public class Character implements Parcelable {
+public class SimpleCharacter implements Parcelable {
     public String name;
     public int level;
 
-    public Character() {
+    public SimpleCharacter() {
 
     }
 
-    public Character(String name, int level) {
+    public SimpleCharacter(String name, int level) {
         this.name = name;
         this.level = level;
     }
 
-    public Character(Parcel parcel) {
+    public SimpleCharacter(Parcel parcel) {
         this.name = parcel.readString();
         this.level = parcel.readInt();
     }
@@ -37,15 +37,15 @@ public class Character implements Parcelable {
         parcel.writeInt(level);
     }
 
-    public static final Parcelable.Creator<Character> CREATOR = new Parcelable.Creator<Character>() {
+    public static final Parcelable.Creator<SimpleCharacter> CREATOR = new Parcelable.Creator<SimpleCharacter>() {
         @Override
-        public Character createFromParcel(Parcel parcel) {
-            return new Character(parcel);
+        public SimpleCharacter createFromParcel(Parcel parcel) {
+            return new SimpleCharacter(parcel);
         }
 
         @Override
-        public Character[] newArray(int i) {
-            return new Character[i];
+        public SimpleCharacter[] newArray(int i) {
+            return new SimpleCharacter[i];
         }
     };
 
@@ -63,5 +63,13 @@ public class Character implements Parcelable {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    @Override
+    public String toString() {
+        return "SimpleCharacter{" +
+                "name='" + name + '\'' +
+                ", level=" + level +
+                '}';
     }
 }

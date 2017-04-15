@@ -19,7 +19,7 @@ import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.AttackDialog;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Objects.Attack;
-import com.lavendergoons.dndcharacter.Objects.Character;
+import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Adapters.AttackAdapter;
 import com.lavendergoons.dndcharacter.Utils.Constants;
@@ -39,7 +39,7 @@ public class AttacksFragment extends Fragment implements View.OnClickListener, A
     private RecyclerView.LayoutManager mAttacksRecyclerLayoutManager;
     private OnFragmentInteractionListener mListener;
     private DBAdapter dbAdapter;
-    private Character character;
+    private SimpleCharacter simpleCharacter;
     private long characterId = -1;
 
     private ArrayList<Attack> attackList = new ArrayList<>();
@@ -49,10 +49,10 @@ public class AttacksFragment extends Fragment implements View.OnClickListener, A
         // Required empty public constructor
     }
 
-    public static AttacksFragment newInstance(Character character, long id) {
+    public static AttacksFragment newInstance(SimpleCharacter simpleCharacter, long id) {
         AttacksFragment frag = new AttacksFragment();
         Bundle args = new Bundle();
-        args.putParcelable(Constants.CHARACTER_KEY, character);
+        args.putParcelable(Constants.CHARACTER_KEY, simpleCharacter);
         args.putLong(Constants.CHARACTER_ID, id);
         frag.setArguments(args);
         return frag;
@@ -63,7 +63,7 @@ public class AttacksFragment extends Fragment implements View.OnClickListener, A
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             characterId = getArguments().getLong(Constants.CHARACTER_ID);
-            character = getArguments().getParcelable(Constants.CHARACTER_KEY);
+            simpleCharacter = getArguments().getParcelable(Constants.CHARACTER_KEY);
         }
         try {
             dbAdapter = ((CharacterNavDrawerActivity) getActivity()).getDbAdapter();

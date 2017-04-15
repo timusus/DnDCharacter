@@ -18,7 +18,7 @@ import com.lavendergoons.dndcharacter.Activities.CharacterNavDrawerActivity;
 import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Objects.Abilities;
-import com.lavendergoons.dndcharacter.Objects.Character;
+import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
 import com.lavendergoons.dndcharacter.Objects.Skill;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.Constants;
@@ -39,7 +39,7 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
 
     public static final String TAG = "SKILLS_FRAG";
     private long characterId = -1;
-    private Character character;
+    private SimpleCharacter simpleCharacter;
     private Abilities abilities;
     private DBAdapter dbAdapter;
 
@@ -47,7 +47,7 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
         // Required empty public constructor
     }
 
-    public static SkillsFragment newInstance(Character charIn, long characterId) {
+    public static SkillsFragment newInstance(SimpleCharacter charIn, long characterId) {
         SkillsFragment frag = new SkillsFragment();
         Bundle args = new Bundle();
         args.putParcelable(Constants.CHARACTER_KEY, charIn);
@@ -61,7 +61,7 @@ public class SkillsFragment extends Fragment implements ConfirmationDialog.Confi
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             characterId = getArguments().getLong(Constants.CHARACTER_ID);
-            character = getArguments().getParcelable(Constants.CHARACTER_KEY);
+            simpleCharacter = getArguments().getParcelable(Constants.CHARACTER_KEY);
         }
         try {
             dbAdapter = ((CharacterNavDrawerActivity) getActivity()).getDbAdapter();

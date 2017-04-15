@@ -30,7 +30,7 @@ import com.lavendergoons.dndcharacter.Fragments.SkillsFragment;
 import com.lavendergoons.dndcharacter.Fragments.SpellFragment;
 import com.lavendergoons.dndcharacter.Fragments.SpellListFragment;
 import com.lavendergoons.dndcharacter.Objects.Armor;
-import com.lavendergoons.dndcharacter.Objects.Character;
+import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
 import com.lavendergoons.dndcharacter.Objects.Note;
 import com.lavendergoons.dndcharacter.Objects.Spell;
 import com.lavendergoons.dndcharacter.R;
@@ -39,7 +39,7 @@ import com.lavendergoons.dndcharacter.Utils.Constants;
 
 /**
  * Nav Drawer Activity to display fragments,
- * with all Character info.
+ * with all SimpleCharacter info.
  */
 
 public class CharacterNavDrawerActivity extends AppCompatActivity
@@ -68,7 +68,7 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
     private boolean toolbarListenerRegister = false;
 
     private DBAdapter dbAdapter;
-    private Character character;
+    private SimpleCharacter simpleCharacter;
     private CharacterManager characterManager;
     private long characterId;
 
@@ -79,7 +79,7 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         setContentView(R.layout.activity_character_nav);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            character = (extras.get(Constants.CHARACTER_KEY) instanceof Character)? (Character) extras.get(Constants.CHARACTER_KEY) : new Character();
+            simpleCharacter = (extras.get(Constants.CHARACTER_KEY) instanceof SimpleCharacter)? (SimpleCharacter) extras.get(Constants.CHARACTER_KEY) : new SimpleCharacter();
             characterId = extras.getLong(Constants.CHARACTER_ID);
         }
 
@@ -229,7 +229,7 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
 
     private void loadDefaultFragment() {
         FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();
-        fragTransaction.replace(R.id.content_character_nav, AttributesFragment.newInstance(character, characterId),  AttributesFragment.TAG).commit();
+        fragTransaction.replace(R.id.content_character_nav, AttributesFragment.newInstance(simpleCharacter, characterId),  AttributesFragment.TAG).commit();
     }
 
     @Override
@@ -240,47 +240,52 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         String title = "";
         switch (item.getItemId()) {
             case R.id.nav_characters:
+                // Stop Attributes Fragment to Write Name/Level Changes
+                if (isCurrentFragment(AttributesFragment.TAG)) {
+                    Fragment frag = getSupportFragmentManager().findFragmentByTag(AttributesFragment.TAG);
+                    frag.onStop();
+                }
                 Intent intent = new Intent(this, CharacterListActivity.class);
                 startActivity(intent);
                 finish();
                 return true;
             case R.id.nav_attributes:
-                fragment = AttributesFragment.newInstance(character, characterId);
+                fragment = AttributesFragment.newInstance(simpleCharacter, characterId);
                 tag = AttributesFragment.TAG;
                 title = getString(R.string.title_fragment_attributes);
                 break;
             case R.id.nav_abilities:
-                fragment = AbilitiesFragment.newInstance(character, characterId);
+                fragment = AbilitiesFragment.newInstance(simpleCharacter, characterId);
                 tag = AbilitiesFragment.TAG;
                 title = getString(R.string.title_fragment_abilities);
                 break;
             case R.id.nav_skills:
-                fragment = SkillsFragment.newInstance(character, characterId);
+                fragment = SkillsFragment.newInstance(simpleCharacter, characterId);
                 tag = SkillsFragment.TAG;
                 title = getString(R.string.title_fragment_skills);
                 break;
             case R.id.nav_attacks:
-                fragment = AttacksFragment.newInstance(character, characterId);
+                fragment = AttacksFragment.newInstance(simpleCharacter, characterId);
                 tag = AttacksFragment.TAG;
                 title = getString(R.string.title_fragment_attacks);
                 break;
             case R.id.nav_items:
-                fragment = ItemsGeneralFragment.newInstance(character, characterId);
+                fragment = ItemsGeneralFragment.newInstance(simpleCharacter, characterId);
                 tag = ItemsGeneralFragment.TAG;
                 title = getString(R.string.title_fragment_items);
                 break;
             case R.id.nav_armor:
-                fragment = ArmorListFragment.newInstance(character, characterId);
+                fragment = ArmorListFragment.newInstance(simpleCharacter, characterId);
                 tag = ArmorListFragment.TAG;
                 title = getString(R.string.title_fragment_armor);
                 break;
             case R.id.nav_spells:
-                fragment = SpellListFragment.newInstance(character, characterId);
+                fragment = SpellListFragment.newInstance(simpleCharacter, characterId);
                 tag = SpellListFragment.TAG;
                 title = getString(R.string.title_fragment_spells);
                 break;
             case R.id.nav_notes:
-                fragment = NotesListFragment.newInstance(character, characterId);
+                fragment = NotesListFragment.newInstance(simpleCharacter, characterId);
                 tag = NotesListFragment.TAG;
                 title = getString(R.string.title_fragment_notes);
                 break;

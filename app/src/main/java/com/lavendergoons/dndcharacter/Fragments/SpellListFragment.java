@@ -24,7 +24,7 @@ import com.google.gson.reflect.TypeToken;
 import com.lavendergoons.dndcharacter.Activities.CharacterNavDrawerActivity;
 import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
-import com.lavendergoons.dndcharacter.Objects.Character;
+import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
 import com.lavendergoons.dndcharacter.Objects.Spell;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.Constants;
@@ -48,7 +48,7 @@ public class SpellListFragment extends Fragment implements View.OnClickListener,
 
     private ArrayList<Spell> spellList = new ArrayList<>();
     private DBAdapter dbAdapter;
-    private Character character;
+    private SimpleCharacter simpleCharacter;
     private long characterId = -1;
 
 
@@ -56,10 +56,10 @@ public class SpellListFragment extends Fragment implements View.OnClickListener,
         // Required empty public constructor
     }
 
-    public static SpellListFragment newInstance(Character character, long characterId) {
+    public static SpellListFragment newInstance(SimpleCharacter simpleCharacter, long characterId) {
         SpellListFragment frag = new SpellListFragment();
         Bundle args = new Bundle();
-        args.putParcelable(Constants.CHARACTER_KEY, character);
+        args.putParcelable(Constants.CHARACTER_KEY, simpleCharacter);
         args.putLong(Constants.CHARACTER_ID, characterId);
         frag.setArguments(args);
         return frag;
@@ -70,7 +70,7 @@ public class SpellListFragment extends Fragment implements View.OnClickListener,
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             characterId = getArguments().getLong(Constants.CHARACTER_ID);
-            character = getArguments().getParcelable(Constants.CHARACTER_KEY);
+            simpleCharacter = getArguments().getParcelable(Constants.CHARACTER_KEY);
         }
         try {
             dbAdapter = ((CharacterNavDrawerActivity) getActivity()).getDbAdapter();

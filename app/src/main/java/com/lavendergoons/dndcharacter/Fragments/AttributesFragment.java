@@ -1,7 +1,6 @@
 package com.lavendergoons.dndcharacter.Fragments;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -9,20 +8,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.lavendergoons.dndcharacter.Activities.CharacterNavDrawerActivity;
-import com.lavendergoons.dndcharacter.Database.DBAdapter;
-import com.lavendergoons.dndcharacter.Objects.Character;
+import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Adapters.AttributesAdapter;
 import com.lavendergoons.dndcharacter.Utils.CharacterManager;
 import com.lavendergoons.dndcharacter.Utils.Constants;
 import com.lavendergoons.dndcharacter.Utils.Utils;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 
@@ -30,15 +23,12 @@ public class AttributesFragment extends Fragment {
 
     public static final String TAG = "ATTRIBUTES_FRAG";
 
-    private Gson gson = new Gson();
-
     private OnFragmentInteractionListener mListener;
     private RecyclerView mAttributesRecyclerView;
     private AttributesAdapter mAttributeRecyclerAdapter;
     private RecyclerView.LayoutManager mAttributeLayoutManager;
     private ArrayList<String> attributesList = new ArrayList<>(Constants.ATTRIBUTES.length);
-    private DBAdapter dbAdapter;
-    private Character character;
+    private SimpleCharacter simpleCharacter;
     private CharacterManager characterManager;
 
     private long characterId = -1;
@@ -49,7 +39,7 @@ public class AttributesFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static AttributesFragment newInstance(Character charIn, long characterId) {
+    public static AttributesFragment newInstance(SimpleCharacter charIn, long characterId) {
         AttributesFragment frag = new AttributesFragment();
         Bundle args = new Bundle();
         args.putParcelable(Constants.CHARACTER_KEY, charIn);
@@ -63,14 +53,8 @@ public class AttributesFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             characterId = getArguments().getLong(Constants.CHARACTER_ID);
-            character = getArguments().getParcelable(Constants.CHARACTER_KEY);
+            simpleCharacter = getArguments().getParcelable(Constants.CHARACTER_KEY);
         }
-        try {
-            dbAdapter = ((CharacterNavDrawerActivity) getActivity()).getDbAdapter();
-        }catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
         for (int i=0;i<Constants.ATTRIBUTES.length;i++) {
             attributesList.add(i, "");
         }
@@ -91,7 +75,7 @@ public class AttributesFragment extends Fragment {
         mAttributeLayoutManager = new GridLayoutManager(this.getActivity(), Constants.ATTRIBUTES_GRID_SPAN);
         mAttributesRecyclerView.setLayoutManager(mAttributeLayoutManager);
 
-        mAttributeRecyclerAdapter = new AttributesAdapter(this, attributesList, character);
+        mAttributeRecyclerAdapter = new AttributesAdapter(this, attributesList, simpleCharacter);
         mAttributesRecyclerView.setAdapter(mAttributeRecyclerAdapter);
         return rootView;
     }
@@ -113,15 +97,10 @@ public class AttributesFragment extends Fragment {
         super.onStop();
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
     private void writeAttributes() {
         attributesList = mAttributeRecyclerAdapter.getAttributeList();
         if (!Utils.isStringEmpty(attributesList.get(NAME))) {
-            character.setName(attributesList.get(NAME));
+            simpleCharacter.setName(attributesList.get(NAME));
         }
         if (!Utils.isStringEmpty(String.valueOf(attributesList.get(LEVEL)))) {
             int lvl = 0;
@@ -130,33 +109,12 @@ public class AttributesFragment extends Fragment {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-            character.setLevel(lvl);
+            simpleCharacter.setLevel(lvl);
         }
-        String json = gson.toJson(attributesList);
-        String charJson = gson.toJson(character);
-        if (dbAdapter != null) {
-            dbAdapter.fillColumn(characterId, DBAdapter.COLUMN_ATTRIBUTES, json);
-            dbAdapter.fillColumn(characterId, DBAdapter.COLUMN_CHARACTER, charJson);
-        } else {
-            Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
-        }
+        characterManager.setSimpleCharacter(simpleCharacter);
+        characterManager.setCharacterAttributes(attributesList);
     }
 
-    /*private void getAttributes() {
-        if (dbAdapter != null && characterId != -1) {
-            Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_ATTRIBUTES, characterId);
-            if (cursor != null) {
-                String json = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_ATTRIBUTES));
-                if (json != null && !Utils.isStringEmpty(json) && !json.equals("[]") && !json.equals("[ ]")) {
-                    Type attributeType = new TypeToken<ArrayList<String>>(){}.getType();
-                    attributesList = gson.fromJson(json, attributeType);
-                    cursor.close();
-                }
-            }
-        } else {
-            Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
-        }
-    }*/
 
     @Override
     public void onDetach() {

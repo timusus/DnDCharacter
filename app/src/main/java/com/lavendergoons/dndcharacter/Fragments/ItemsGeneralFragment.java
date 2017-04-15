@@ -18,7 +18,7 @@ import com.lavendergoons.dndcharacter.Activities.CharacterNavDrawerActivity;
 import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Dialogs.ItemGeneralDialog;
-import com.lavendergoons.dndcharacter.Objects.Character;
+import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
 import com.lavendergoons.dndcharacter.Objects.Item;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.Constants;
@@ -44,7 +44,7 @@ public class ItemsGeneralFragment extends Fragment implements View.OnClickListen
 
     private ArrayList<Item> itemList = new ArrayList<>();
     private DBAdapter dbAdapter;
-    private Character character;
+    private SimpleCharacter simpleCharacter;
     private long id = -1;
     private FloatingActionButton fab;
 
@@ -52,10 +52,10 @@ public class ItemsGeneralFragment extends Fragment implements View.OnClickListen
         // Required empty public constructor
     }
 
-    public static ItemsGeneralFragment newInstance(Character character, long characterId) {
+    public static ItemsGeneralFragment newInstance(SimpleCharacter simpleCharacter, long characterId) {
         ItemsGeneralFragment frag = new ItemsGeneralFragment();
         Bundle args = new Bundle();
-        args.putParcelable(Constants.CHARACTER_KEY, character);
+        args.putParcelable(Constants.CHARACTER_KEY, simpleCharacter);
         args.putLong(Constants.CHARACTER_ID, characterId);
         frag.setArguments(args);
         return frag;
@@ -66,7 +66,7 @@ public class ItemsGeneralFragment extends Fragment implements View.OnClickListen
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             id = getArguments().getLong(Constants.CHARACTER_ID);
-            character = getArguments().getParcelable(Constants.CHARACTER_KEY);
+            simpleCharacter = getArguments().getParcelable(Constants.CHARACTER_KEY);
         }
         try {
             dbAdapter = ((CharacterNavDrawerActivity) getActivity()).getDbAdapter();

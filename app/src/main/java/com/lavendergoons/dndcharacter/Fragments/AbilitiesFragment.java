@@ -1,7 +1,6 @@
 package com.lavendergoons.dndcharacter.Fragments;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -24,11 +23,10 @@ import com.lavendergoons.dndcharacter.Dialogs.ACDialog;
 import com.lavendergoons.dndcharacter.Dialogs.SavesDialog;
 import com.lavendergoons.dndcharacter.Dialogs.ScoresDialog;
 import com.lavendergoons.dndcharacter.Objects.Abilities;
-import com.lavendergoons.dndcharacter.Objects.Character;
+import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.CharacterManager;
 import com.lavendergoons.dndcharacter.Utils.Constants;
-import com.lavendergoons.dndcharacter.Utils.Utils;
 
 import java.util.Arrays;
 
@@ -45,7 +43,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
     private OnFragmentInteractionListener mListener;
     private CharacterManager characterManager;
     private DBAdapter dbAdapter;
-    private Character character;
+    private SimpleCharacter simpleCharacter;
     private Abilities abilities;
     private long characterId = -1;
 
@@ -69,7 +67,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
         // Required empty public constructor
     }
 
-    public static AbilitiesFragment newInstance(Character charIn, long characterId) {
+    public static AbilitiesFragment newInstance(SimpleCharacter charIn, long characterId) {
         AbilitiesFragment frag = new AbilitiesFragment();
         Bundle args = new Bundle();
         args.putParcelable(Constants.CHARACTER_KEY, charIn);
@@ -83,7 +81,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             characterId = getArguments().getLong(Constants.CHARACTER_ID);
-            character = getArguments().getParcelable(Constants.CHARACTER_KEY);
+            simpleCharacter = getArguments().getParcelable(Constants.CHARACTER_KEY);
         }
         try {
             dbAdapter = ((CharacterNavDrawerActivity) getActivity()).getDbAdapter();
@@ -207,7 +205,6 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
         abilityWisModEdit = (EditText) rootView.findViewById(R.id.abilityWisModEdit);
         abilityChaModEdit = (EditText) rootView.findViewById(R.id.abilityChaModEdit);
 
-        //readAbilityValues();
         setValues();
         return rootView;
     }
@@ -240,7 +237,6 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
                     + " must implement OnFragmentInteractionListener");
         }
     }
-
 
     @Override
     public void onStop() {

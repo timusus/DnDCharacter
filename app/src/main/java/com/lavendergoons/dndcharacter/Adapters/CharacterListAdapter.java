@@ -9,18 +9,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.lavendergoons.dndcharacter.Fragments.CharacterListFragment;
-import com.lavendergoons.dndcharacter.Objects.Character;
+import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.Constants;
 
 import java.util.ArrayList;
 
 /**
- * RecyclerView list adapter for Character list.
+ * RecyclerView list adapter for SimpleCharacter list.
  */
 public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdapter.ViewHolder> {
 
-    private ArrayList<Character> mDataset;
+    private ArrayList<SimpleCharacter> mDataset;
     private Context mContext;
     private CharacterListFragment fragment;
 
@@ -36,12 +36,12 @@ public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdap
         }
     }
 
-    public CharacterListAdapter(Context context, ArrayList<Character> dataset) {
+    public CharacterListAdapter(Context context, ArrayList<SimpleCharacter> dataset) {
         this.mContext = context;
         this.mDataset = dataset;
     }
 
-    public CharacterListAdapter(CharacterListFragment fragment, ArrayList<Character> dataset) {
+    public CharacterListAdapter(CharacterListFragment fragment, ArrayList<SimpleCharacter> dataset) {
         this.fragment = fragment;
         this.mDataset = dataset;
     }
