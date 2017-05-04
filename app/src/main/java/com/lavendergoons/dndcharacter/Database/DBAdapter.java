@@ -118,7 +118,7 @@ public class DBAdapter {
     }
 
     public Cursor getColumnCursor(String column, long id) {
-        if (!Utils.isStringEmpty(column)) {
+        if (!Utils.isStringEmpty(column) && database.isOpen()) {
             Cursor cursor = database.query(true, TABLE_CHARACTERS, new String[]{COLUMN_ID, column}, COLUMN_ID+ " = ?", new String[]{String.valueOf(id)}, null, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();

@@ -13,6 +13,9 @@ import android.widget.Switch;
 
 import com.lavendergoons.dndcharacter.Objects.Spell;
 import com.lavendergoons.dndcharacter.R;
+import com.lavendergoons.dndcharacter.Utils.CharacterManager;
+
+import java.util.ArrayList;
 
 
 /**
@@ -23,6 +26,8 @@ public class SpellFragment extends Fragment {
     private EditText spellNameEdit, spellLevelEdit, spellTypeEdit, spellComponentEdit, spellCastTimeEdit, spellRangeEdit, spellAreaEdit, spellDurationEdit, spellSavingThrowEdit, spellNotesEdit;
     private Switch spellResSwitch;
     private OnFragmentInteractionListener mListener;
+    private CharacterManager characterManager;
+    private ArrayList<Spell> spellList = new ArrayList<>();
     private Spell spell;
     private int index = -1;
     public static final String TAG = "SPELL_FRAG";
@@ -52,6 +57,8 @@ public class SpellFragment extends Fragment {
         }catch(BadParcelableException ex) {
             Log.e("PARSE", "Bad Parcelable in SpellFragment");
         }
+        characterManager = CharacterManager.getInstance(this.getContext());
+        spellList = characterManager.getCharacterSpells();
     }
 
     @Override
@@ -114,11 +121,8 @@ public class SpellFragment extends Fragment {
     @Override
     public void onStop() {
         setValues();
-        try {
-            ((OnFragmentInteractionListener) getActivity()).passBackSpell(spell, index);
-        }catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        spellList.set(index, spell);
+        characterManager.setCharacterSpells(spellList);
         super.onStop();
     }
 
@@ -140,6 +144,6 @@ public class SpellFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        void passBackSpell(Spell spell, int i);
+
     }
 }

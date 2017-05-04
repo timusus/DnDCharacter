@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -101,6 +102,10 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
             loadDefaultFragment();
         }
         mToolbar.setTitle(getString(R.string.title_fragment_attributes));
+    }
+
+    // Initialize CharacterManager and Database
+    private void init() {
         dbAdapter = new DBAdapter(this);
         dbAdapter.open();
 
@@ -204,9 +209,23 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onStart() {
+        init();
+        super.onStart();
+        Log.d(TAG, "onStart");
+    }
+
+    @Override
     protected void onStop() {
         dbAdapter.close();
         super.onStop();
+        Log.d(TAG, "onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy");
     }
 
     @Override
@@ -309,25 +328,6 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
     @Override
     public void onFragmentInteraction() {}
 
-    @Override
-    public void passBackSpell(Spell spell, int i) {
-        try {
-            SpellListFragment frag = (SpellListFragment) getSupportFragmentManager().findFragmentByTag(SpellListFragment.TAG);
-            frag.retrieveSpell(spell, i);
-        }catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    @Override
-    public void passBackNote(Note note, int index) {
-        try {
-            NotesListFragment frag = (NotesListFragment) getSupportFragmentManager().findFragmentByTag(NotesListFragment.TAG);
-            frag.retrieveNote(note, index);
-        }catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
 
     public DBAdapter getDbAdapter() {
         return dbAdapter;

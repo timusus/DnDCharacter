@@ -19,7 +19,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 
-import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.ArmorDialog;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Objects.Armor;
@@ -46,7 +45,6 @@ public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDial
     private CharacterManager characterManager;
 
     private ArrayList<Armor> armorList = new ArrayList<>();
-    private DBAdapter dbAdapter;
     private SimpleCharacter simpleCharacter;
     private long characterId = -1;
 

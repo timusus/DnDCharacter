@@ -10,17 +10,22 @@ import android.widget.EditText;
 
 import com.lavendergoons.dndcharacter.Objects.Note;
 import com.lavendergoons.dndcharacter.R;
+import com.lavendergoons.dndcharacter.Utils.CharacterManager;
 import com.lavendergoons.dndcharacter.Utils.Utils;
+
+import java.util.ArrayList;
 
 public class NoteFragment extends Fragment {
 
     public static final String TAG = "NOTE_FRAG";
 
     private OnFragmentInteractionListener mListener;
+    private CharacterManager characterManager;
     private EditText titleEdit, contentEdit;
 
     private static final String NOTE_KEY = "NOTE";
     private static final String INDEX_KEY = "INDEX";
+    private ArrayList<Note> noteList = new ArrayList<>();
     private Note note;
     private int index = -1;
 
@@ -44,6 +49,8 @@ public class NoteFragment extends Fragment {
             note = getArguments().getParcelable(NOTE_KEY);
             index = getArguments().getInt(INDEX_KEY);
         }
+        characterManager = CharacterManager.getInstance(this.getContext());
+        noteList = characterManager.getCharacterNotes();
     }
 
     @Override
@@ -83,15 +90,10 @@ public class NoteFragment extends Fragment {
         if (!Utils.isStringEmpty(contentEdit.getText().toString())) {
             note.setContent(contentEdit.getText().toString());
         }
-        try {
-            ((OnFragmentInteractionListener) getActivity()).passBackNote(note, index);
-        }catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        noteList.set(index, note);
+        characterManager.setCharacterNotes(noteList);
         super.onStop();
     }
 
-    public interface OnFragmentInteractionListener {
-        void passBackNote(Note note, int index);
-    }
+    public interface OnFragmentInteractionListener {}
 }

@@ -277,6 +277,39 @@ public class CharacterManager {
     }
 
     //**********************************************************
+    // Notes
+    //**********************************************************
+    @SuppressWarnings("unchecked")
+    private void readCharacterNotes() {
+        if (dbAdapter != null && characterId != -1) {
+            Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_NOTES, characterId);
+            if (cursor != null) {
+                String json = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_NOTES));
+                if (json != null && !Utils.isStringEmpty(json) && !json.equals("[]") && !json.equals("[ ]")) {
+                    Type attributeType = new TypeToken<ArrayList<Note>>(){}.getType();
+                    character.setNotesList((ArrayList<Note>) gson.fromJson(json, attributeType));
+                    cursor.close();
+                }
+            }
+        } else {
+            Toast.makeText(mContext, mContext.getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public ArrayList<Note> getCharacterNotes() {
+        if (character.getNotesList() == null || character.getNotesList().size() == 0) {
+            readCharacterNotes();
+        }
+        return character.getNotesList();
+    }
+
+    public void setCharacterNotes(ArrayList<Note> notes) {
+        character.setNotesList(notes);
+        //TODO Move to AsyncTask
+        writeToDatabase(DBAdapter.COLUMN_NOTES, gson.toJson(notes));
+    }
+
+    //**********************************************************
     // Skills
     //**********************************************************
     @SuppressWarnings("unchecked")
@@ -318,6 +351,39 @@ public class CharacterManager {
             skillsList.add(new Skill(s.getName(), s.getMod(), s.getDefault(), 0, 0, 0, 0));
         }
         character.setSkillsList(skillsList);
+    }
+
+    //**********************************************************
+    // Spells
+    //**********************************************************
+    @SuppressWarnings("unchecked")
+    private synchronized void readCharacterSpells() {
+        if (dbAdapter != null && characterId != -1) {
+            Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_SPELL, characterId);
+            if (cursor != null) {
+                String json = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_SPELL));
+                if (json != null && !Utils.isStringEmpty(json) && !json.equals("[]") && !json.equals("[ ]")) {
+                    Type attributeType = new TypeToken<ArrayList<Spell>>(){}.getType();
+                    character.setSpellList((ArrayList<Spell>) gson.fromJson(json, attributeType));
+                    cursor.close();
+                }
+            }
+        } else {
+            Toast.makeText(mContext, mContext.getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public ArrayList<Spell> getCharacterSpells() {
+        if (character.getSpellList() == null || character.getSpellList().size() == 0) {
+            readCharacterSpells();
+        }
+        return character.getSpellList();
+    }
+
+    public void setCharacterSpells(ArrayList<Spell> spells) {
+        character.setSpellList(spells);
+        //TODO Move to AsyncTask
+        writeToDatabase(DBAdapter.COLUMN_SPELL, gson.toJson(spells));
     }
 
     //**********************************************************

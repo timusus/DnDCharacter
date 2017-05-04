@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Dialogs.ItemGeneralDialog;
 import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
@@ -37,7 +36,6 @@ public class ItemsGeneralFragment extends Fragment implements View.OnClickListen
     private CharacterManager characterManager;
 
     private ArrayList<Item> itemList = new ArrayList<>();
-    private DBAdapter dbAdapter;
     private SimpleCharacter simpleCharacter;
     private long id = -1;
     private FloatingActionButton fab;

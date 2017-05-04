@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.AttackDialog;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Objects.Attack;
@@ -33,7 +32,6 @@ public class AttacksFragment extends Fragment implements View.OnClickListener, A
     private OnFragmentInteractionListener mListener;
 
     private CharacterManager characterManager;
-    private DBAdapter dbAdapter;
     private SimpleCharacter simpleCharacter;
     private long characterId = -1;
 

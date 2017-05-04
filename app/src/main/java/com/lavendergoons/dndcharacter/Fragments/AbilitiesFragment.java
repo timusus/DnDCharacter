@@ -15,10 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.crash.FirebaseCrash;
-import com.google.gson.Gson;
-import com.lavendergoons.dndcharacter.Activities.CharacterNavDrawerActivity;
 import com.lavendergoons.dndcharacter.BuildConfig;
-import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.ACDialog;
 import com.lavendergoons.dndcharacter.Dialogs.SavesDialog;
 import com.lavendergoons.dndcharacter.Dialogs.ScoresDialog;
@@ -38,11 +35,8 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
 
     public static final String TAG = "ABILITIES_FRAG";
 
-    private Gson gson = new Gson();
-
     private OnFragmentInteractionListener mListener;
     private CharacterManager characterManager;
-    private DBAdapter dbAdapter;
     private SimpleCharacter simpleCharacter;
     private Abilities abilities;
     private long characterId = -1;
@@ -82,11 +76,6 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
         if (getArguments() != null) {
             characterId = getArguments().getLong(Constants.CHARACTER_ID);
             simpleCharacter = getArguments().getParcelable(Constants.CHARACTER_KEY);
-        }
-        try {
-            dbAdapter = ((CharacterNavDrawerActivity) getActivity()).getDbAdapter();
-        }catch (Exception ex) {
-            ex.printStackTrace();
         }
         characterManager = CharacterManager.getInstance(this.getContext());
         abilities = characterManager.getCharacterAbilities();

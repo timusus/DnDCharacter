@@ -23,7 +23,7 @@ public class ArmorFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private CharacterManager characterManager;
-    private ArrayList<Armor> armorList;
+    private ArrayList<Armor> armorList = new ArrayList<>();
     private Armor armor;
     private int index = -1;
     private EditText armorNameEdit, armorTypeEdit, armorACEdit, armorDexEdit, armorCheckEdit, armorSpellEdit, armorSpeedEdit, armorWeightEdit, armorPropertiesEdit, armorQuantityEdit;

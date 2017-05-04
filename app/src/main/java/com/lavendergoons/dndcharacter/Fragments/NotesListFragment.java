@@ -28,6 +28,7 @@ import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
 import com.lavendergoons.dndcharacter.Objects.Note;
 import com.lavendergoons.dndcharacter.R;
+import com.lavendergoons.dndcharacter.Utils.CharacterManager;
 import com.lavendergoons.dndcharacter.Utils.Constants;
 import com.lavendergoons.dndcharacter.Adapters.NotesAdapter;
 import com.lavendergoons.dndcharacter.Utils.Utils;
@@ -46,9 +47,9 @@ public class NotesListFragment extends Fragment implements ConfirmationDialog.Co
     private NotesAdapter mNotesRecyclerAdapter;
     private RecyclerView.LayoutManager mNotesLayoutManager;
     private FloatingActionButton addNotesFAB;
-
     private OnFragmentInteractionListener mListener;
-    private DBAdapter dbAdapter;
+    private CharacterManager characterManager;
+
     private SimpleCharacter simpleCharacter;
     private ArrayList<Note> notesList = new ArrayList<>();
     long characterId = -1;
@@ -73,12 +74,8 @@ public class NotesListFragment extends Fragment implements ConfirmationDialog.Co
             characterId = getArguments().getLong(Constants.CHARACTER_ID);
             simpleCharacter = getArguments().getParcelable(Constants.CHARACTER_KEY);
         }
-        try {
-            dbAdapter = ((CharacterNavDrawerActivity) getActivity()).getDbAdapter();
-        }catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        getNotes();
+        characterManager = CharacterManager.getInstance(this.getContext());
+        notesList = characterManager.getCharacterNotes();
     }
 
     @Override
@@ -102,29 +99,10 @@ public class NotesListFragment extends Fragment implements ConfirmationDialog.Co
         return rootView;
     }
 
-    private void getNotes() {
-        if (dbAdapter != null && characterId != -1) {
-            Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_NOTES, characterId);
-            if (cursor != null) {
-                String json = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_NOTES));
-                if (json != null && !Utils.isStringEmpty(json) && !json.equals("[]") && !json.equals("[ ]")) {
-                    Type attributeType = new TypeToken<ArrayList<Note>>(){}.getType();
-                    notesList = gson.fromJson(json, attributeType);
-                    cursor.close();
-                }
-            }
-        } else {
-            Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
-        }
-    }
+
 
     private void writeNotes() {
-        String json = gson.toJson(notesList);
-        if (dbAdapter != null) {
-            dbAdapter.fillColumn(characterId, DBAdapter.COLUMN_NOTES, json);
-        } else {
-            Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
-        }
+        characterManager.setCharacterNotes(notesList);
     }
 
     @Override
@@ -180,12 +158,6 @@ public class NotesListFragment extends Fragment implements ConfirmationDialog.Co
         void onFragmentInteraction();
     }
 
-    public void retrieveNote(Note note, int index) {
-        if (note != null && index != -1) {
-            notesList.set(index, note);
-        }
-        mNotesRecyclerAdapter.notifyDataSetChanged();
-    }
 
     private int addNote(Note note) {
         int i = -1;
@@ -197,6 +169,7 @@ public class NotesListFragment extends Fragment implements ConfirmationDialog.Co
         return i;
     }
 
+    // Simple Dialog to Create New Note
     public static class NotesDialog extends DialogFragment {
 
         public static void newInstance(final NotesListFragment fragment) {
