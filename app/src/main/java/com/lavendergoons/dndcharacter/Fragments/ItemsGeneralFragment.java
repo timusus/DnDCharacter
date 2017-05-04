@@ -1,7 +1,6 @@
 package com.lavendergoons.dndcharacter.Fragments;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -10,22 +9,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.lavendergoons.dndcharacter.Activities.CharacterNavDrawerActivity;
 import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Dialogs.ItemGeneralDialog;
 import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
 import com.lavendergoons.dndcharacter.Objects.Item;
 import com.lavendergoons.dndcharacter.R;
+import com.lavendergoons.dndcharacter.Utils.CharacterManager;
 import com.lavendergoons.dndcharacter.Utils.Constants;
 import com.lavendergoons.dndcharacter.Adapters.ItemsGeneralAdapter;
-import com.lavendergoons.dndcharacter.Utils.Utils;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
@@ -35,12 +29,12 @@ public class ItemsGeneralFragment extends Fragment implements View.OnClickListen
 
     public static final String TAG = "ITEMS_GENERAL_FRAG";
 
-    private Gson gson = new Gson();
 
     private RecyclerView mItemsRecyclerView;
     private RecyclerView.Adapter mItemsRecyclerAdapter;
     private RecyclerView.LayoutManager mItemsRecyclerLayoutManager;
     private OnFragmentInteractionListener mListener;
+    private CharacterManager characterManager;
 
     private ArrayList<Item> itemList = new ArrayList<>();
     private DBAdapter dbAdapter;
@@ -68,12 +62,8 @@ public class ItemsGeneralFragment extends Fragment implements View.OnClickListen
             id = getArguments().getLong(Constants.CHARACTER_ID);
             simpleCharacter = getArguments().getParcelable(Constants.CHARACTER_KEY);
         }
-        try {
-            dbAdapter = ((CharacterNavDrawerActivity) getActivity()).getDbAdapter();
-        }catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        getItemsGeneral();
+        characterManager = CharacterManager.getInstance(this.getContext());
+        itemList = characterManager.getCharacterItems();
     }
 
     @Override
@@ -97,29 +87,8 @@ public class ItemsGeneralFragment extends Fragment implements View.OnClickListen
         return rootView;
     }
 
-    private void getItemsGeneral() {
-        if (dbAdapter != null && id != -1) {
-            Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_ITEM_GENERAL, id);
-            if (cursor != null) {
-                String json = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_ITEM_GENERAL));
-                if (json != null && !Utils.isStringEmpty(json) && !json.equals("[]") && !json.equals("[ ]")) {
-                    Type attributeType = new TypeToken<ArrayList<Item>>(){}.getType();
-                    itemList = gson.fromJson(json, attributeType);
-                    cursor.close();
-                }
-            }
-        } else {
-            Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
-        }
-    }
-
     private void writeItemsGeneral() {
-        String json = gson.toJson(itemList);
-        if (dbAdapter != null) {
-            dbAdapter.fillColumn(id, DBAdapter.COLUMN_ITEM_GENERAL, json);
-        } else {
-            Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
-        }
+        characterManager.setCharacterItems(itemList);
     }
 
     @Override

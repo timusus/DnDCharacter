@@ -301,34 +301,19 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
     }
 
     @Override
-    public void ConfirmDialogOk(Object o) {
-
-    }
+    public void ConfirmDialogOk(Object o) {}
 
     @Override
-    public void ConfirmDialogCancel(Object o) {
-    }
+    public void ConfirmDialogCancel(Object o) {}
 
     @Override
-    public void onFragmentInteraction() {
-
-    }
+    public void onFragmentInteraction() {}
 
     @Override
     public void passBackSpell(Spell spell, int i) {
         try {
             SpellListFragment frag = (SpellListFragment) getSupportFragmentManager().findFragmentByTag(SpellListFragment.TAG);
             frag.retrieveSpell(spell, i);
-        }catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    @Override
-    public void passBackArmor(Armor armor, int index) {
-        try {
-            ArmorListFragment frag = (ArmorListFragment) getSupportFragmentManager().findFragmentByTag(ArmorListFragment.TAG);
-            frag.retrieveArmor(armor, index);
         }catch (Exception ex) {
             ex.printStackTrace();
         }

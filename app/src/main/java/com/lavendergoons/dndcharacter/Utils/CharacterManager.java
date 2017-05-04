@@ -24,6 +24,9 @@ import com.lavendergoons.dndcharacter.R;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import static android.R.attr.id;
+
+
 /**
  * Managing all read and writes to Character
  * Communicates with database
@@ -238,6 +241,39 @@ public class CharacterManager {
         character.setAttributesList(attributes);
         //TODO Move to AsyncTask
         writeToDatabase(DBAdapter.COLUMN_ATTRIBUTES, gson.toJson(attributes));
+    }
+
+    //**********************************************************
+    // Items
+    //**********************************************************
+    @SuppressWarnings("unchecked")
+    private synchronized void readCharacterItems() {
+        if (dbAdapter != null && characterId != -1) {
+            Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_ITEM_GENERAL, characterId);
+            if (cursor != null) {
+                String json = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_ITEM_GENERAL));
+                if (json != null && !Utils.isStringEmpty(json) && !json.equals("[]") && !json.equals("[ ]")) {
+                    Type attributeType = new TypeToken<ArrayList<Item>>(){}.getType();
+                    character.setItemList((ArrayList<Item>) gson.fromJson(json, attributeType));
+                    cursor.close();
+                }
+            }
+        } else {
+            Toast.makeText(mContext, mContext.getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public ArrayList<Item> getCharacterItems() {
+        if (character.getItemList() == null || character.getItemList().size() == 0) {
+            readCharacterItems();
+        }
+        return character.getItemList();
+    }
+
+    public void setCharacterItems(ArrayList<Item> items) {
+        character.setItemList(items);
+        //TODO Move to AsyncTask
+        writeToDatabase(DBAdapter.COLUMN_ITEM_GENERAL, gson.toJson(items));
     }
 
     //**********************************************************

@@ -2,7 +2,6 @@ package com.lavendergoons.dndcharacter.Fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
@@ -19,9 +18,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.lavendergoons.dndcharacter.Activities.CharacterNavDrawerActivity;
+
 import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.ArmorDialog;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
@@ -29,10 +26,10 @@ import com.lavendergoons.dndcharacter.Objects.Armor;
 import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Adapters.ArmorAdapter;
+import com.lavendergoons.dndcharacter.Utils.CharacterManager;
 import com.lavendergoons.dndcharacter.Utils.Constants;
 import com.lavendergoons.dndcharacter.Utils.Utils;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
@@ -42,12 +39,11 @@ public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDial
 
     public static final String TAG = "ARMOR_LIST_FRAG";
 
-    private Gson gson = new Gson();
-
     private RecyclerView mArmorRecyclerView;
     private RecyclerView.Adapter mArmorRecyclerAdapter;
     private RecyclerView.LayoutManager mArmorRecyclerLayoutManager;
     private OnFragmentInteractionListener mListener;
+    private CharacterManager characterManager;
 
     private ArrayList<Armor> armorList = new ArrayList<>();
     private DBAdapter dbAdapter;
@@ -76,12 +72,8 @@ public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDial
             characterId = getArguments().getLong(Constants.CHARACTER_ID);
             simpleCharacter = getArguments().getParcelable(Constants.CHARACTER_KEY);
         }
-        try {
-            dbAdapter = ((CharacterNavDrawerActivity) getActivity()).getDbAdapter();
-        }catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        getArmor();
+        characterManager = CharacterManager.getInstance(this.getContext());
+        armorList = characterManager.getCharacterArmor();
     }
 
     @Override
@@ -104,36 +96,8 @@ public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDial
         return rootView;
     }
 
-    private void getArmor() {
-        if (dbAdapter != null && characterId != -1) {
-            Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_ARMOR, characterId);
-            if (cursor != null) {
-                String json = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_ARMOR));
-                if (json != null && !Utils.isStringEmpty(json) && !json.equals("[]") && !json.equals("[ ]")) {
-                    Type attributeType = new TypeToken<ArrayList<Armor>>(){}.getType();
-                    armorList = gson.fromJson(json, attributeType);
-                    cursor.close();
-                }
-            }
-        } else {
-            Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
-        }
-    }
-
     private void writeArmor() {
-        String json = gson.toJson(armorList);
-        if (dbAdapter != null) {
-            dbAdapter.fillColumn(characterId, DBAdapter.COLUMN_ARMOR, json);
-        } else {
-            Toast.makeText(this.getActivity(), getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void retrieveArmor(Armor armor, int index) {
-        if (armor != null && index != -1) {
-            armorList.set(index, armor);
-        }
-        mArmorRecyclerAdapter.notifyDataSetChanged();
+        characterManager.setCharacterArmor(armorList);
     }
 
     @Override
@@ -166,7 +130,7 @@ public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDial
 
 
     public interface OnFragmentInteractionListener {
-        //Object[] retrieveArmor();
+
     }
 
     @Override
@@ -207,6 +171,7 @@ public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDial
     public void ConfirmDialogCancel(Object armor) {}
 
 
+    // Simple Dialog for Creating New Armor
     public static class ArmorDialog extends DialogFragment {
         public static void newInstance(final ArmorListFragment fragment) {
             AlertDialog.Builder builder = new AlertDialog.Builder(fragment.getActivity());

@@ -12,15 +12,21 @@ import android.widget.EditText;
 
 import com.lavendergoons.dndcharacter.Objects.Armor;
 import com.lavendergoons.dndcharacter.R;
+import com.lavendergoons.dndcharacter.Utils.CharacterManager;
+
+import java.util.ArrayList;
 
 
 public class ArmorFragment extends Fragment {
 
+    public static final String TAG = "ARMOR_FRAG";
+
     private OnFragmentInteractionListener mListener;
+    private CharacterManager characterManager;
+    private ArrayList<Armor> armorList;
     private Armor armor;
     private int index = -1;
     private EditText armorNameEdit, armorTypeEdit, armorACEdit, armorDexEdit, armorCheckEdit, armorSpellEdit, armorSpeedEdit, armorWeightEdit, armorPropertiesEdit, armorQuantityEdit;
-    public static final String TAG = "ARMOR_FRAG";
 
     public ArmorFragment() {
         // Required empty public constructor
@@ -47,6 +53,8 @@ public class ArmorFragment extends Fragment {
         }catch(BadParcelableException ex) {
             Log.e("PARSE", "Bad Parcelable in ArmorFragment");
         }
+        characterManager = CharacterManager.getInstance(this.getContext());
+        armorList = characterManager.getCharacterArmor();
     }
 
     @Override
@@ -105,11 +113,8 @@ public class ArmorFragment extends Fragment {
     @Override
     public void onStop() {
         setValues();
-        try {
-            ((OnFragmentInteractionListener) getActivity()).passBackArmor(armor, index);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        armorList.set(index, armor);
+        characterManager.setCharacterArmor(armorList);
         super.onStop();
     }
 
@@ -135,11 +140,5 @@ public class ArmorFragment extends Fragment {
         mListener = null;
     }
 
-    public interface OnFragmentInteractionListener {
-        /**
-         * Pass back armor to CharacterNavActivity
-         * to pass to ArmorListFragment
-         */
-        void passBackArmor(Armor armor, int index);
-    }
+    public interface OnFragmentInteractionListener {}
 }
