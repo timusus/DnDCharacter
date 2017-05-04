@@ -57,11 +57,6 @@ public class CharacterListFragment extends Fragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         gson = new Gson();
-        try {
-            dbAdapter = ((CharacterListActivity) getActivity()).getDbAdapter();
-        }catch (Exception ex) {
-            ex.printStackTrace();
-        }
     }
 
     @Override
@@ -82,13 +77,17 @@ public class CharacterListFragment extends Fragment implements
 
         fab = (FloatingActionButton) rootView.findViewById(R.id.addCharacterFAB);
         fab.setOnClickListener(this);
-        //getCharacters();
         return rootView;
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        try {
+            dbAdapter = ((CharacterListActivity) getActivity()).getDbAdapter();
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
         getCharacters();
     }
 

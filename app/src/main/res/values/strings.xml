@@ -13,6 +13,9 @@
     -->
     <string name="app_name">D&amp;D 3.5 Character</string>
 
+    <!-- Shared Preferences -->
+    <string name="prefs_file">com.lavendergoons.dndcharacter.SHARED_PREFS</string>
+
     <!-- Activity Titles -->
     <string name="title_activity_character_list">CharactersListActivity</string>
     <string name="title_activity_character_nav_drawer">CharacterNavDrawerActivity</string>
@@ -43,7 +46,7 @@
     <string name="about_title_colon">About:</string>
     <string name="about_content">
         The D&amp;D 3.5 Character sheet app lets users store all aspects of their D&amp;D 3.5 Characters.
-        \n\nNote: This app is in a initial release state, with new features and performance improvements planned for future updates.
+        \n\nNote: This app is in an initial release state, with new features and performance improvements planned for future updates.
     </string>
     <string name="about_art">Art:</string>
     <string name="about_nolan">Icon provided by Nolan Snow (Nolsworld).</string>
@@ -52,6 +55,33 @@
     <string name="about_issues">Issues/Suggestions:</string>
     <string name="about_issues_content">To report any issues or make suggestions, please email:</string>
     <string name="about_issues_email">lavenderdevelopment@gmail.com</string>
+
+    <!-- Announcements -->
+    <string name="announcement_title">Announcement</string>
+    <string name="announcement_notes">Notes</string>
+    <string name="announcement_changelog">Change-Log</string>
+    <string name="announcement_first_open_message">Thank you for trying out the The D&amp;D 3.5 Character sheet app.
+        \n\nNote: \nThis app is in an initial release state, with new features and performance improvements planned for future updates.
+        \n\nPlanned Features Include:
+        \n&#8226;Auto Adding of Skills and Abilities
+        \n&#8226;Expanded Character Sections (Languages, Feats, Money, Animal Companion)
+        \n&#8226;Google Account Login (Remote Character Saving)
+        \n&#8226;Various Usability Fixes
+        \n&#8226;Theme Support
+        \n\nFor more information please see the about page.
+    </string>
+    <string name="announcement_first_open_message_list">Thank you for trying out the The D&amp;D 3.5 Character sheet app.
+        \n\nNote: \nThis app is in an initial release state, with new features and performance improvements planned for future updates.
+        \n\nPlanned Features Include:
+        <ul>
+            <li>\n&#8226;Auto Adding of Skills and Abilities</li>
+            <li>\n&#8226;Expanded Character Sections (Languages, Feats, Money, Animal Companion)</li>
+            <li>\n&#8226;Google Account Login (Remote Character Saving)</li>
+            <li>\n&#8226;Various Usability Fixes</li>
+            <li>\n&#8226;Theme Support</li>
+        </ul>
+        \n\nFor more information please see the about page.
+    </string>
 
     <!-- Warnings -->
     <string name="warning_enter_required_fields">Please Enter All Required Fields</string>

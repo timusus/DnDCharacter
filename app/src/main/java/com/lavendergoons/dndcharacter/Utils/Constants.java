@@ -10,9 +10,6 @@ public final class Constants {
     public final static int ATTRIBUTES_GRID_SPAN = 2;
     public final static int AC_DEFAULT = 10;
 
-    public final static int SPINNER_ARMOR = 0;
-    public final static int SPINNER_ITEM = 1;
-
     public static final String CHARACTER_KEY = "CHARACTER_NAME";
     public static final String CHARACTER_ID = "CHARACTER_ID";
 

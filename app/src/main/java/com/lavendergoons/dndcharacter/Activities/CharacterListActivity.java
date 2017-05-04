@@ -1,28 +1,24 @@
 package com.lavendergoons.dndcharacter.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.google.gson.Gson;
 import com.lavendergoons.dndcharacter.Database.DBAdapter;
-import com.lavendergoons.dndcharacter.Dialogs.AddCharacterDialog;
 import com.lavendergoons.dndcharacter.Fragments.AboutFragment;
 import com.lavendergoons.dndcharacter.Fragments.CharacterListFragment;
 import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
 import com.lavendergoons.dndcharacter.R;
-import com.lavendergoons.dndcharacter.Adapters.CharacterListAdapter;
 import com.lavendergoons.dndcharacter.Utils.Constants;
 
-import java.util.ArrayList;
 
 
 /**
@@ -33,36 +29,40 @@ import java.util.ArrayList;
  */
 
 public class CharacterListActivity extends AppCompatActivity implements
-        /*AddCharacterDialog.OnCharacterCompleteListener,
-        CharacterListAdapter.OnCharacterClickListener,
-        ConfirmationDialog.ConfirmationDialogInterface,
-        View.OnClickListener,*/
         AboutFragment.OnFragmentInteractionListener,
         CharacterListFragment.OnCharacterClickListener{
 
-    private RecyclerView mCharacterRecyclerView;
-    private CharacterListAdapter mCharRecyclerAdapter;
-    private RecyclerView.LayoutManager mCharRecyclerLayoutManager;
-    private ArrayList<SimpleCharacter> simpleCharacters;
-    private AddCharacterDialog addCharacterDialog;
-    private FloatingActionButton fab;
+    public static final String TAG = "CHARACTER_LIST";
+    private static final String FIRST_OPEN = "FIRST_OPEN";
+
     Toolbar mToolbar;
     private DBAdapter dbAdapter;
-    public static final String TAG = "CHARACTER_LIST";
 
-    private Gson gson;
+    boolean isFirstOpen = true;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor sharedEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_list);
-        gson = new Gson();
-        simpleCharacters = new ArrayList<SimpleCharacter>();
-        dbAdapter = new DBAdapter(this);
-        dbAdapter.open();
+
         createView();
-        //getCharacters();
-        Log.d("APP", "onCreate");
+
+        sharedPreferences = this.getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
+        sharedEditor = sharedPreferences.edit();
+        isFirstOpen = sharedPreferences.getBoolean(FIRST_OPEN, true);
+
+        //if (isFirstOpen) {
+            new AlertDialog.Builder(this).setTitle(getString(R.string.announcement_title))
+                    .setMessage(getString(R.string.announcement_first_open_message))
+                    .setPositiveButton(R.string.ok, null)
+                    .create().show();
+            isFirstOpen = false;
+        //}
+        sharedEditor.putBoolean(FIRST_OPEN, isFirstOpen);
+        sharedEditor.apply();
     }
 
     private void createView() {
@@ -72,52 +72,19 @@ public class CharacterListActivity extends AppCompatActivity implements
 
         FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();
         fragTransaction.replace(R.id.content_character_list, CharacterListFragment.newInstance(), CharacterListFragment.TAG).commit();
-/*
-        mCharacterRecyclerView = (RecyclerView) findViewById(R.id.characterListRecyclerView);
-
-        // Keeps View same size on content change
-        mCharacterRecyclerView.setHasFixedSize(true);
-
-        mCharRecyclerLayoutManager = new LinearLayoutManager(this);
-        mCharacterRecyclerView.setLayoutManager(mCharRecyclerLayoutManager);
-
-        mCharRecyclerAdapter = new CharacterListAdapter(this, simpleCharacters);
-        mCharacterRecyclerView.setAdapter(mCharRecyclerAdapter);
-
-        fab = (FloatingActionButton) findViewById(R.id.addCharacterFAB);
-        fab.setOnClickListener(this);
-        */
     }
 
     @Override
     protected void onStart() {
-        //Log.d("APP", "onStart");
+        dbAdapter = new DBAdapter(this);
+        dbAdapter.open();
         super.onStart();
     }
 
     @Override
-    protected void onPause() {
-        //Log.d("APP", "onPause");
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        //Log.d("APP", "onResume");
-        super.onResume();
-    }
-
-    @Override
     protected void onStop() {
-        //Log.d("APP", "onStop");
-        super.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        //Log.d("APP", "onDestroy");
         dbAdapter.close();
-        super.onDestroy();
+        super.onStop();
     }
 
     @Override
@@ -142,17 +109,6 @@ public class CharacterListActivity extends AppCompatActivity implements
         return frag != null && frag.isVisible();
     }
 
-    /*
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.addCharacterFAB:
-                addCharacterDialog = new AddCharacterDialog();
-                addCharacterDialog.show(getSupportFragmentManager(), getString(R.string.tag_add_character_dialog));
-                break;
-        }
-    }*/
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -170,80 +126,6 @@ public class CharacterListActivity extends AppCompatActivity implements
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-/*
-    @Override
-    public void onCharacterComplete(SimpleCharacter character) {
-        String characterJson = gson.toJson(character);
-        dbAdapter.insertRow(characterJson);
-        simpleCharacters.add(character);
-        mCharRecyclerAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onCharacterClick(String name) {
-        Intent intent = new Intent(this, CharacterNavDrawerActivity.class);
-        intent.putExtra(Constants.CHARACTER_KEY, getCharacterFromName(name));
-        intent.putExtra(Constants.CHARACTER_ID, getCharacterId(name));
-        startActivity(intent);
-        finish();
-    }
-
-
-    @Override
-    public void ConfirmDialogOk(Object o) {
-        if (o instanceof SimpleCharacter) {
-            int i = simpleCharacters.indexOf(o);
-            dbAdapter.deleteRow(getCharacterId(simpleCharacters.get(i).getName()));
-            simpleCharacters.remove(i);
-            mCharRecyclerAdapter.notifyDataSetChanged();
-        }
-    }
-
-    @Override
-    public void ConfirmDialogCancel(Object o) {}
-
-    private SimpleCharacter getCharacterFromName(String name) {
-        for(SimpleCharacter c : simpleCharacters) {
-            if (c.getName().equals(name))
-                return c;
-        }
-        return null;
-    }
-
-    private void getCharacters() {
-        Cursor c = dbAdapter.getAllCharacterNames();
-        if (c != null) {
-            for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
-                String json = c.getString(c.getColumnIndex(DBAdapter.COLUMN_CHARACTER));
-                Log.d("JSON", "SimpleCharacter json string "+json);
-                SimpleCharacter character = gson.fromJson(json, SimpleCharacter.class);
-                simpleCharacters.add(character);
-            }
-            mCharRecyclerAdapter.notifyDataSetChanged();
-            c.close();
-        }
-    }
-
-    private long getCharacterId(String name) {
-        long id = -1;
-        try {
-            Cursor c = dbAdapter.getCharacterId();
-            if (c != null) {
-                for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
-                    String json = c.getString(c.getColumnIndex(DBAdapter.COLUMN_CHARACTER));
-                    SimpleCharacter character = gson.fromJson(json, SimpleCharacter.class);
-                    if (character.getName().equals(name)) {
-                        id = (long) c.getInt(c.getColumnIndex(DBAdapter.COLUMN_ID));
-                        break;
-                    }
-                }
-            }
-            c.close();
-        }catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return id;
-    }*/
 
     @Override
     public void onFragmentInteraction() {
