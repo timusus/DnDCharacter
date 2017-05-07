@@ -1,10 +1,10 @@
 package com.lavendergoons.dndcharacter.Dialogs;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -16,10 +16,26 @@ import com.lavendergoons.dndcharacter.R;
  * Dialog to Edit Saves
  */
 
-public class SavesDialog extends DialogFragment {
+public class SavesDialog {
 
-    public SavesDialog() {
-        super();
+    public static final String TAG = "SAVES_DIALOG";
+
+    private Activity activity;
+    private SavesDialogListener target;
+    private Abilities abilities;
+
+    public static final int FORT = 0;
+    public static final int REFLEX = 1;
+    public static final int WILL = 2;
+
+    EditText saveDialogFortTotalEdit, saveDialogFortBaseEdit, saveDialogFortAbilityEdit, saveDialogFortMagicEdit, saveDialogFortMiscEdit, saveDialogFortTempEdit;
+    EditText saveDialogReflexTotalEdit, saveDialogReflexBaseEdit, saveDialogReflexAbilityEdit, saveDialogReflexMagicEdit, saveDialogReflexMiscEdit, saveDialogReflexTempEdit;
+    EditText saveDialogWillTotalEdit, saveDialogWillBaseEdit, saveDialogWillAbilityEdit, saveDialogWillMagicEdit, saveDialogWillMiscEdit, saveDialogWillTempEdit;
+
+    public SavesDialog(Activity activity, SavesDialogListener target, Abilities abilities) {
+        this.activity = activity;
+        this.target = target;
+        this.abilities = abilities;
     }
 
     public static interface SavesDialogListener {
@@ -27,53 +43,45 @@ public class SavesDialog extends DialogFragment {
         void OnSavesNegative();
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        try {
-            SavesDialog.SavesDialogListener mInterface = (SavesDialog.SavesDialogListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() +" must implement SavesDialogListener");
-        }
-    }
-
-    public static void showSavesDialog(Activity activity, final SavesDialog.SavesDialogListener target, final Abilities abilities) {
+    public void showDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(activity.getString(R.string.title_saves_dialog));
 
         LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_saves, null);
 
-        final EditText saveDialogFortTotalEdit = (EditText) view.findViewById(R.id.saveDialogFortTotalEdit);
-        final EditText saveDialogFortBaseEdit = (EditText) view.findViewById(R.id.saveDialogFortBaseEdit);
-        final EditText saveDialogFortAbilityEdit = (EditText) view.findViewById(R.id.saveDialogFortAbilityEdit);
-        final EditText saveDialogFortMagicEdit = (EditText) view.findViewById(R.id.saveDialogFortMagicEdit);
-        final EditText saveDialogFortMiscEdit = (EditText) view.findViewById(R.id.saveDialogFortMiscEdit);
-        final EditText saveDialogFortTempEdit = (EditText) view.findViewById(R.id.saveDialogFortTempEdit);
-        getSaveValues(saveDialogFortTotalEdit, saveDialogFortBaseEdit, saveDialogFortAbilityEdit, saveDialogFortMagicEdit, saveDialogFortMiscEdit, saveDialogFortTempEdit, abilities, 0);
+        saveDialogFortTotalEdit = (EditText) view.findViewById(R.id.saveDialogFortTotalEdit);
+        saveDialogFortBaseEdit = (EditText) view.findViewById(R.id.saveDialogFortBaseEdit);
+        saveDialogFortAbilityEdit = (EditText) view.findViewById(R.id.saveDialogFortAbilityEdit);
+        saveDialogFortMagicEdit = (EditText) view.findViewById(R.id.saveDialogFortMagicEdit);
+        saveDialogFortMiscEdit = (EditText) view.findViewById(R.id.saveDialogFortMiscEdit);
+        saveDialogFortTempEdit = (EditText) view.findViewById(R.id.saveDialogFortTempEdit);
+        getSaveValues(saveDialogFortTotalEdit, saveDialogFortBaseEdit, saveDialogFortAbilityEdit, saveDialogFortMagicEdit, saveDialogFortMiscEdit, saveDialogFortTempEdit, FORT);
 
-        final EditText saveDialogReflexTotalEdit = (EditText) view.findViewById(R.id.saveDialogReflexTotalEdit);
-        final EditText saveDialogReflexBaseEdit = (EditText) view.findViewById(R.id.saveDialogReflexBaseEdit);
-        final EditText saveDialogReflexAbilityEdit = (EditText) view.findViewById(R.id.saveDialogReflexAbilityEdit);
-        final EditText saveDialogReflexMagicEdit = (EditText) view.findViewById(R.id.saveDialogReflexMagicEdit);
-        final EditText saveDialogReflexMiscEdit = (EditText) view.findViewById(R.id.saveDialogReflexMiscEdit);
-        final EditText saveDialogReflexTempEdit = (EditText) view.findViewById(R.id.saveDialogReflexTempEdit);
-        getSaveValues(saveDialogReflexTotalEdit, saveDialogReflexBaseEdit, saveDialogReflexAbilityEdit, saveDialogReflexMagicEdit, saveDialogReflexMiscEdit, saveDialogReflexTempEdit, abilities, 1);
+        saveDialogReflexTotalEdit = (EditText) view.findViewById(R.id.saveDialogReflexTotalEdit);
+        saveDialogReflexBaseEdit = (EditText) view.findViewById(R.id.saveDialogReflexBaseEdit);
+        saveDialogReflexAbilityEdit = (EditText) view.findViewById(R.id.saveDialogReflexAbilityEdit);
+        saveDialogReflexMagicEdit = (EditText) view.findViewById(R.id.saveDialogReflexMagicEdit);
+        saveDialogReflexMiscEdit = (EditText) view.findViewById(R.id.saveDialogReflexMiscEdit);
+        saveDialogReflexTempEdit = (EditText) view.findViewById(R.id.saveDialogReflexTempEdit);
+        getSaveValues(saveDialogReflexTotalEdit, saveDialogReflexBaseEdit, saveDialogReflexAbilityEdit, saveDialogReflexMagicEdit, saveDialogReflexMiscEdit, saveDialogReflexTempEdit, REFLEX);
 
-        final EditText saveDialogWillTotalEdit = (EditText) view.findViewById(R.id.saveDialogWillTotalEdit);
-        final EditText saveDialogWillBaseEdit = (EditText) view.findViewById(R.id.saveDialogWillBaseEdit);
-        final EditText saveDialogWillAbilityEdit = (EditText) view.findViewById(R.id.saveDialogWillAbilityEdit);
-        final EditText saveDialogWillMagicEdit = (EditText) view.findViewById(R.id.saveDialogWillMagicEdit);
-        final EditText saveDialogWillMiscEdit = (EditText) view.findViewById(R.id.saveDialogWillMiscEdit);
-        final EditText saveDialogWillTempEdit = (EditText) view.findViewById(R.id.saveDialogWillTempEdit);
-        getSaveValues(saveDialogWillTotalEdit, saveDialogWillBaseEdit, saveDialogWillAbilityEdit, saveDialogWillMagicEdit, saveDialogWillMiscEdit, saveDialogWillTempEdit, abilities, 2);
+        saveDialogWillTotalEdit = (EditText) view.findViewById(R.id.saveDialogWillTotalEdit);
+        saveDialogWillBaseEdit = (EditText) view.findViewById(R.id.saveDialogWillBaseEdit);
+        saveDialogWillAbilityEdit = (EditText) view.findViewById(R.id.saveDialogWillAbilityEdit);
+        saveDialogWillMagicEdit = (EditText) view.findViewById(R.id.saveDialogWillMagicEdit);
+        saveDialogWillMiscEdit = (EditText) view.findViewById(R.id.saveDialogWillMiscEdit);
+        saveDialogWillTempEdit = (EditText) view.findViewById(R.id.saveDialogWillTempEdit);
+        getSaveValues(saveDialogWillTotalEdit, saveDialogWillBaseEdit, saveDialogWillAbilityEdit, saveDialogWillMagicEdit, saveDialogWillMiscEdit, saveDialogWillTempEdit, WILL);
+
+        setTextWatchers();
 
         builder.setView(view).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                setSaveValues(saveDialogFortTotalEdit, saveDialogFortBaseEdit, saveDialogFortAbilityEdit, saveDialogFortMagicEdit, saveDialogFortMiscEdit, saveDialogFortTempEdit, abilities, 0);
-                setSaveValues(saveDialogReflexTotalEdit, saveDialogReflexBaseEdit, saveDialogReflexAbilityEdit, saveDialogReflexMagicEdit, saveDialogReflexMiscEdit, saveDialogReflexTempEdit, abilities, 1);
-                setSaveValues(saveDialogWillTotalEdit, saveDialogWillBaseEdit, saveDialogWillAbilityEdit, saveDialogWillMagicEdit, saveDialogWillMiscEdit, saveDialogWillTempEdit, abilities, 2);
+                setSaveValues(saveDialogFortTotalEdit, saveDialogFortBaseEdit, saveDialogFortAbilityEdit, saveDialogFortMagicEdit, saveDialogFortMiscEdit, saveDialogFortTempEdit, FORT);
+                setSaveValues(saveDialogReflexTotalEdit, saveDialogReflexBaseEdit, saveDialogReflexAbilityEdit, saveDialogReflexMagicEdit, saveDialogReflexMiscEdit, saveDialogReflexTempEdit, REFLEX);
+                setSaveValues(saveDialogWillTotalEdit, saveDialogWillBaseEdit, saveDialogWillAbilityEdit, saveDialogWillMagicEdit, saveDialogWillMiscEdit, saveDialogWillTempEdit, WILL);
                 target.OnSavesPositive(abilities);
             }
         }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -86,16 +94,16 @@ public class SavesDialog extends DialogFragment {
         builder.create().show();
     }
 
-    private static void getSaveValues(EditText totalEdit, EditText baseEdit, EditText abilityEdit, EditText magicEdit, EditText miscEdit, EditText tempEdit, Abilities abilities, int which) {
+    private void getSaveValues(EditText totalEdit, EditText baseEdit, EditText abilityEdit, EditText magicEdit, EditText miscEdit, EditText tempEdit, int which) {
         int[] array;
         switch (which) {
-            case 0:
+            case FORT:
                 array = abilities.getFortArray();
                 break;
-            case 1:
+            case REFLEX:
                 array = abilities.getReflexArray();
                 break;
-            case 2:
+            case WILL:
                 array = abilities.getWillArray();
                 break;
             default:
@@ -109,22 +117,10 @@ public class SavesDialog extends DialogFragment {
         tempEdit.setText(String.valueOf(array[Abilities.SAVE_TEMP]));
     }
 
-    private static void setSaveValues(EditText totalEdit, EditText baseEdit, EditText abilityEdit, EditText magicEdit, EditText miscEdit, EditText tempEdit, Abilities abilities, int which) {
+    private void setSaveValues(EditText totalEdit, EditText baseEdit, EditText abilityEdit, EditText magicEdit, EditText miscEdit, EditText tempEdit, int which) {
         int total=0, base=0, ability=0, magic=0, misc=0, temp=0;
-        int[] array;
-        switch (which) {
-            case 0:
-                array = abilities.getFortArray();
-                break;
-            case 1:
-                array = abilities.getReflexArray();
-                break;
-            case 2:
-                array = abilities.getWillArray();
-                break;
-            default:
-                array = new int[]{0, 0, 0, 0, 0, 0};
-        }
+        int[] array = new int[]{0, 0, 0, 0, 0, 0};
+
         try {
             total = Integer.parseInt(totalEdit.getText().toString());
             base = Integer.parseInt(baseEdit.getText().toString());
@@ -141,5 +137,85 @@ public class SavesDialog extends DialogFragment {
         array[Abilities.SAVE_MAGIC] = magic;
         array[Abilities.SAVE_MISC] = misc;
         array[Abilities.SAVE_TEMP] = temp;
+        switch (which) {
+            case FORT:
+                abilities.setFortArray(array);
+                break;
+            case REFLEX:
+                abilities.setReflexArray(array);
+                break;
+            case WILL:
+                abilities.setWillArray(array);
+                break;
+        }
+    }
+
+    private void setTextWatchers() {
+        saveDialogFortBaseEdit.addTextChangedListener(new SavesTextWatcher(FORT));
+        saveDialogFortAbilityEdit.addTextChangedListener(new SavesTextWatcher(FORT));
+        saveDialogFortMagicEdit.addTextChangedListener(new SavesTextWatcher(FORT));
+        saveDialogFortMiscEdit.addTextChangedListener(new SavesTextWatcher(FORT));
+        saveDialogFortTempEdit.addTextChangedListener(new SavesTextWatcher(FORT));
+
+        saveDialogReflexBaseEdit.addTextChangedListener(new SavesTextWatcher(REFLEX));
+        saveDialogReflexAbilityEdit.addTextChangedListener(new SavesTextWatcher(REFLEX));
+        saveDialogReflexMagicEdit.addTextChangedListener(new SavesTextWatcher(REFLEX));
+        saveDialogReflexMiscEdit.addTextChangedListener(new SavesTextWatcher(REFLEX));
+        saveDialogReflexTempEdit.addTextChangedListener(new SavesTextWatcher(REFLEX));
+
+        saveDialogWillBaseEdit.addTextChangedListener(new SavesTextWatcher(WILL));
+        saveDialogWillAbilityEdit.addTextChangedListener(new SavesTextWatcher(WILL));
+        saveDialogWillMagicEdit.addTextChangedListener(new SavesTextWatcher(WILL));
+        saveDialogWillMiscEdit.addTextChangedListener(new SavesTextWatcher(WILL));
+        saveDialogWillTempEdit.addTextChangedListener(new SavesTextWatcher(WILL));
+    }
+
+    private class SavesTextWatcher implements TextWatcher {
+
+        int which;
+        public SavesTextWatcher(int which) {
+            this.which = which;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            int[] array = new int[]{0, 0, 0, 0, 0, 0};
+            int total = 0;
+            switch (which) {
+                case FORT:
+                    setSaveValues(saveDialogFortTotalEdit, saveDialogFortBaseEdit, saveDialogFortAbilityEdit, saveDialogFortMagicEdit, saveDialogFortMiscEdit, saveDialogFortTempEdit, FORT);
+                    array = abilities.getFortArray();
+                    break;
+                case REFLEX:
+                    setSaveValues(saveDialogReflexTotalEdit, saveDialogReflexBaseEdit, saveDialogReflexAbilityEdit, saveDialogReflexMagicEdit, saveDialogReflexMiscEdit, saveDialogReflexTempEdit, REFLEX);
+                    array = abilities.getReflexArray();
+                    break;
+                case WILL:
+                    setSaveValues(saveDialogWillTotalEdit, saveDialogWillBaseEdit, saveDialogWillAbilityEdit, saveDialogWillMagicEdit, saveDialogWillMiscEdit, saveDialogWillTempEdit, WILL);
+                    array = abilities.getWillArray();
+                    break;
+            }
+            for (int j = 0; j<array.length; j++) {
+                if (j != Abilities.SAVE_TOTAL) {
+                    total += array[j];
+                }
+            }
+            if (which == FORT) {
+                abilities.setFort(total, Abilities.SAVE_TOTAL);
+                saveDialogFortTotalEdit.setText(String.valueOf(total));
+            } else if(which == REFLEX) {
+                abilities.setReflex(total, Abilities.SAVE_TOTAL);
+                saveDialogReflexTotalEdit.setText(String.valueOf(total));
+            }else if(which == WILL) {
+                abilities.setWill(total, Abilities.SAVE_TOTAL);
+                saveDialogWillTotalEdit.setText(String.valueOf(total));
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {}
     }
 }

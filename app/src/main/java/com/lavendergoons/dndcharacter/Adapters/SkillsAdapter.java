@@ -19,6 +19,7 @@ import com.lavendergoons.dndcharacter.R;
 
 import java.util.ArrayList;
 
+
 /**
  * Adapter for skill RecyclerView
  */
@@ -209,6 +210,10 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
                 Log.e("PARSE", "Error parsing int in SkillsAdapter");
             }
             mDataset.get(position).setMod(value);
+            int mod = mDataset.get(position).getMisc();
+            int rank = mDataset.get(position).getRank();
+            mDataset.get(position).setTotal(value+mod+rank);
+            holder.skillTotalEdit.setText(String.valueOf(value+mod+rank));
         }
 
         @Override
@@ -239,6 +244,10 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
                 Log.e("PARSE", "Error parsing int in SkillsAdapter");
             }
             mDataset.get(position).setRank(value);
+            int misc = mDataset.get(position).getMisc();
+            int mod = mDataset.get(position).getMod();
+            mDataset.get(position).setTotal(value+misc+mod);
+            holder.skillTotalEdit.setText(String.valueOf(value+misc+mod));
         }
 
         @Override
@@ -271,6 +280,10 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
                 Log.e("PARSE", "Error parsing int in SkillsAdapter");
             }
             mDataset.get(position).setMisc(value);
+            int mod = mDataset.get(position).getMod();
+            int rank = mDataset.get(position).getRank();
+            mDataset.get(position).setTotal(value+mod+rank);
+            holder.skillTotalEdit.setText(String.valueOf(value+mod+rank));
         }
 
         @Override

@@ -4,60 +4,6 @@
     android:layout_height="match_parent"
     android:padding="@dimen/activity_half_horizontal_margin">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:text="@string/hint_total"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/saveDialogTotalLabel"
-            android:layout_weight="1"
-            android:gravity="center_horizontal|center_vertical" />
-
-        <TextView
-            android:text="@string/gen_base"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/saveDialogBaseLabel"
-            android:layout_weight="1"
-            android:gravity="center_horizontal|center_vertical" />
-
-        <TextView
-            android:text="@string/label_layout_ability_mod"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/saveDialogAbilityLabel"
-            android:layout_weight="1"
-            android:gravity="center_horizontal|center_vertical" />
-
-        <TextView
-            android:text="@string/label_layout_magic_mod"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/saveDialogMagicLabel"
-            android:layout_weight="1"
-            android:gravity="center_horizontal|center_vertical" />
-
-        <TextView
-            android:text="@string/label_layout_misc_mod"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/saveDialogMiscLabel"
-            android:layout_weight="1"
-            android:gravity="center_horizontal|center_vertical" />
-
-        <TextView
-            android:text="@string/label_layout_temp_mod"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/saveDialogTempLabel"
-            android:layout_weight="1"
-            android:gravity="center_horizontal|center_vertical" />
-    </LinearLayout>
-
     <TextView
         android:text="@string/save_fortitude"
         android:layout_width="match_parent"
@@ -291,4 +237,60 @@
             android:gravity="center_horizontal"
             android:selectAllOnFocus="true"/>
     </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/hint_total"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/saveDialogTotalLabel"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical" />
+
+        <TextView
+            android:text="@string/gen_base"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/saveDialogBaseLabel"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical" />
+
+        <TextView
+            android:text="@string/label_layout_ability_mod"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/saveDialogAbilityLabel"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical" />
+
+        <TextView
+            android:text="@string/label_layout_magic_mod"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/saveDialogMagicLabel"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical" />
+
+        <TextView
+            android:text="@string/label_layout_misc_mod"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/saveDialogMiscLabel"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical" />
+
+        <TextView
+            android:text="@string/label_layout_temp_mod"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/saveDialogTempLabel"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical" />
+    </LinearLayout>
 </LinearLayout>
+
+<!-- TODO Change Totals to TextViews-->

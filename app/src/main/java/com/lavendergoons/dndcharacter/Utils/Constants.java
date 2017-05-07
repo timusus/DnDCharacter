@@ -3,7 +3,6 @@ package com.lavendergoons.dndcharacter.Utils;
 /**
  * Constants
  */
-// ??
 public final class Constants {
 
     public final static int LONG_CLICK_VIBRATION = 100;

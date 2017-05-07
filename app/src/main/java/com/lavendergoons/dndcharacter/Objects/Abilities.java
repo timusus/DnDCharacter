@@ -2,6 +2,7 @@ package com.lavendergoons.dndcharacter.Objects;
 
 import com.lavendergoons.dndcharacter.Utils.Constants;
 
+
 /**
  * Object to Scores, Mod, Saves, AC, HP, etc.
  */
@@ -64,6 +65,10 @@ public class Abilities {
         ac[AC_DEFAULT] = Constants.AC_DEFAULT;
     }
 
+    //**********************************************************
+    // Score
+    //**********************************************************
+
     public void setScore(int value, int which) {
         score[which] = value;
     }
@@ -91,6 +96,10 @@ public class Abilities {
     public int[] getScoreTempArray(){
         return scoreTemp;
     }
+
+    //**********************************************************
+    // Mod
+    //**********************************************************
 
     public void setMod(int value, int which) {
         mod[which] = value;
@@ -120,6 +129,10 @@ public class Abilities {
         return modTemp;
     }
 
+    //**********************************************************
+    // Saves
+    //**********************************************************
+
     public void setFort(int value, int which) {
         fort[which] = value;
     }
@@ -132,6 +145,15 @@ public class Abilities {
 
     public void setFortArray(int[] array) {
         fort = array;
+    }
+
+    public int getFortTotal() {
+        int total = 0;
+        for (int i=0;i<fort.length;i++){
+            if (i!=SAVE_TOTAL){total+=fort[i];}
+        }
+        fort[SAVE_TOTAL] = total;
+        return total;
     }
 
     public void setReflex(int value, int which) {
@@ -148,6 +170,15 @@ public class Abilities {
         reflex = array;
     }
 
+    public int getReflexTotal() {
+        int total = 0;
+        for (int i=0;i<reflex.length;i++){
+            if (i!=SAVE_TOTAL){total+=reflex[i];}
+        }
+        reflex[SAVE_TOTAL] = total;
+        return total;
+    }
+
     public void setWill(int value, int which) {
         will[which] = value;
     }
@@ -162,12 +193,37 @@ public class Abilities {
         will = array;
     }
 
+    public int getWillTotal() {
+        int total = 0;
+        for (int i=0;i<will.length;i++){
+            if (i!=SAVE_TOTAL){total+=will[i];}
+        }
+        will[SAVE_TOTAL] = total;
+        return total;
+    }
+
+    //**********************************************************
+    // AC
+    //**********************************************************
+
     public void setAC(int value, int which) {
         ac[which] = value;
     }
 
     public int getAC(int which) {
         return ac[which];
+    }
+
+    public int[] getACArray(){ return ac; }
+
+    public int getACTotal() {
+        int out = 0;
+        for (int i=0;i<ac.length;i++) {
+            if (i != AC_TOTAL) {
+                out+=ac[i];
+            }
+        }
+        return out;
     }
 
     public int getAcTouch() {
@@ -184,6 +240,10 @@ public class Abilities {
         return out;
     }
 
+    //**********************************************************
+    // Grapple
+    //**********************************************************
+
     public void setGrapple(int value, int which) {grapple[which] = value;}
 
     public int getGrapple(int which) {return grapple[which];}
@@ -191,6 +251,10 @@ public class Abilities {
     public void setGrappleArray(int[] array) {
         this.grapple = array;
     }
+
+    //**********************************************************
+    // General
+    //**********************************************************
 
     public int getHp() {
         return hp;

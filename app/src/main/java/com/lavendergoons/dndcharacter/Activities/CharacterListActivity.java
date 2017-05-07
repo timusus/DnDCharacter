@@ -54,13 +54,13 @@ public class CharacterListActivity extends AppCompatActivity implements
         sharedEditor = sharedPreferences.edit();
         isFirstOpen = sharedPreferences.getBoolean(FIRST_OPEN, true);
 
-        //if (isFirstOpen) {
+        if (isFirstOpen) {
             new AlertDialog.Builder(this).setTitle(getString(R.string.announcement_title))
                     .setMessage(getString(R.string.announcement_first_open_message))
                     .setPositiveButton(R.string.ok, null)
                     .create().show();
             isFirstOpen = false;
-        //}
+        }
         sharedEditor.putBoolean(FIRST_OPEN, isFirstOpen);
         sharedEditor.apply();
     }

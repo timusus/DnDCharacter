@@ -5,21 +5,40 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v4.app.DialogFragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.lavendergoons.dndcharacter.Objects.Abilities;
 import com.lavendergoons.dndcharacter.R;
+
+import static java.lang.Integer.parseInt;
+
 
 /**
  * Dialog to edit full score values
  */
 
-public class ScoresDialog extends DialogFragment {
+public class ScoresDialog {
 
-    public ScoresDialog() {
-        super();
+    private Activity activity;
+    private ScoresDialogListener target;
+    private Abilities abilities;
+
+    EditText strScoreEdit, strModEdit, strScoreTempEdit, strModTempEdit;
+    EditText dexScoreEdit, dexModEdit, dexScoreTempEdit, dexModTempEdit;
+    EditText conScoreEdit, conModEdit, conScoreTempEdit, conModTempEdit;
+    EditText intScoreEdit, intModEdit, intScoreTempEdit, intModTempEdit;
+    EditText wisScoreEdit, wisModEdit, wisScoreTempEdit, wisModTempEdit;
+    EditText chaScoreEdit, chaModEdit, chaScoreTempEdit, chaModTempEdit;
+
+    public ScoresDialog(Activity activity, ScoresDialogListener target, Abilities abilities) {
+        this.activity = activity;
+        this.target = target;
+        this.abilities = abilities;
     }
 
     public static interface ScoresDialogListener {
@@ -27,69 +46,60 @@ public class ScoresDialog extends DialogFragment {
         void OnScoresNegative();
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        try {
-            ScoresDialog.ScoresDialogListener mInterface = (ScoresDialog.ScoresDialogListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() +" must implement ScoresDialogListener");
-        }
-    }
-
-    public static void showScoresDialog(Activity activity, final ScoresDialog.ScoresDialogListener target, final Abilities abiliities) {
+    public void showDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(activity.getString(R.string.title_scores_dialog));
-        //TODO make temp values effect total
+
         LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_ability_scores, null);
 
-        final EditText strScoreEdit = (EditText) view.findViewById(R.id.strScoreEdit);
-        final EditText strModEdit = (EditText) view.findViewById(R.id.strModEdit);
-        final EditText strScoreTempEdit = (EditText) view.findViewById(R.id.strScoreTempEdit);
-        final EditText strModTempEdit = (EditText) view.findViewById(R.id.strModTempEdit);
-        getAbilityValues(strScoreEdit, strModEdit, strScoreTempEdit, strModTempEdit, abiliities, Abilities.STR);
+        strScoreEdit = (EditText) view.findViewById(R.id.strScoreEdit);
+        strModEdit = (EditText) view.findViewById(R.id.strModEdit);
+        strScoreTempEdit = (EditText) view.findViewById(R.id.strScoreTempEdit);
+        strModTempEdit = (EditText) view.findViewById(R.id.strModTempEdit);
+        getAbilityValues(strScoreEdit, strModEdit, strScoreTempEdit, strModTempEdit, Abilities.STR);
 
-        final EditText dexScoreEdit = (EditText) view.findViewById(R.id.dexScoreEdit);
-        final EditText dexModEdit = (EditText) view.findViewById(R.id.dexModEdit);
-        final EditText dexScoreTempEdit = (EditText) view.findViewById(R.id.dexScoreTempEdit);
-        final EditText dexModTempEdit = (EditText) view.findViewById(R.id.dexModTempEdit);
-        getAbilityValues(dexScoreEdit, dexModEdit, dexScoreTempEdit, dexModTempEdit, abiliities, Abilities.DEX);
+        dexScoreEdit = (EditText) view.findViewById(R.id.dexScoreEdit);
+        dexModEdit = (EditText) view.findViewById(R.id.dexModEdit);
+        dexScoreTempEdit = (EditText) view.findViewById(R.id.dexScoreTempEdit);
+        dexModTempEdit = (EditText) view.findViewById(R.id.dexModTempEdit);
+        getAbilityValues(dexScoreEdit, dexModEdit, dexScoreTempEdit, dexModTempEdit, Abilities.DEX);
 
-        final EditText conScoreEdit = (EditText) view.findViewById(R.id.conScoreEdit);
-        final EditText conModEdit = (EditText) view.findViewById(R.id.conModEdit);
-        final EditText conScoreTempEdit = (EditText) view.findViewById(R.id.conScoreTempEdit);
-        final EditText conModTempEdit = (EditText) view.findViewById(R.id.conModTempEdit);
-        getAbilityValues(conScoreEdit, conModEdit, conScoreTempEdit, conModTempEdit, abiliities, Abilities.CON);
+        conScoreEdit = (EditText) view.findViewById(R.id.conScoreEdit);
+        conModEdit = (EditText) view.findViewById(R.id.conModEdit);
+        conScoreTempEdit = (EditText) view.findViewById(R.id.conScoreTempEdit);
+        conModTempEdit = (EditText) view.findViewById(R.id.conModTempEdit);
+        getAbilityValues(conScoreEdit, conModEdit, conScoreTempEdit, conModTempEdit, Abilities.CON);
 
-        final EditText intScoreEdit = (EditText) view.findViewById(R.id.intScoreEdit);
-        final EditText intModEdit = (EditText) view.findViewById(R.id.intModEdit);
-        final EditText intScoreTempEdit = (EditText) view.findViewById(R.id.intScoreTempEdit);
-        final EditText intModTempEdit = (EditText) view.findViewById(R.id.intModTempEdit);
-        getAbilityValues(intScoreEdit, intModEdit, intScoreTempEdit, intModTempEdit, abiliities, Abilities.INT);
+        intScoreEdit = (EditText) view.findViewById(R.id.intScoreEdit);
+        intModEdit = (EditText) view.findViewById(R.id.intModEdit);
+        intScoreTempEdit = (EditText) view.findViewById(R.id.intScoreTempEdit);
+        intModTempEdit = (EditText) view.findViewById(R.id.intModTempEdit);
+        getAbilityValues(intScoreEdit, intModEdit, intScoreTempEdit, intModTempEdit, Abilities.INT);
 
-        final EditText wisScoreEdit = (EditText) view.findViewById(R.id.wisScoreEdit);
-        final EditText wisModEdit = (EditText) view.findViewById(R.id.wisModEdit);
-        final EditText wisScoreTempEdit = (EditText) view.findViewById(R.id.wisScoreTempEdit);
-        final EditText wisModTempEdit = (EditText) view.findViewById(R.id.wisModTempEdit);
-        getAbilityValues(wisScoreEdit, wisModEdit, wisScoreTempEdit, wisModTempEdit, abiliities, Abilities.WIS);
+        wisScoreEdit = (EditText) view.findViewById(R.id.wisScoreEdit);
+        wisModEdit = (EditText) view.findViewById(R.id.wisModEdit);
+        wisScoreTempEdit = (EditText) view.findViewById(R.id.wisScoreTempEdit);
+        wisModTempEdit = (EditText) view.findViewById(R.id.wisModTempEdit);
+        getAbilityValues(wisScoreEdit, wisModEdit, wisScoreTempEdit, wisModTempEdit, Abilities.WIS);
 
-        final EditText chaScoreEdit = (EditText) view.findViewById(R.id.chaScoreEdit);
-        final EditText chaModEdit = (EditText) view.findViewById(R.id.chaModEdit);
-        final EditText chaScoreTempEdit = (EditText) view.findViewById(R.id.chaScoreTempEdit);
-        final EditText chaModTempEdit = (EditText) view.findViewById(R.id.chaModTempEdit);
-        getAbilityValues(chaScoreEdit, chaModEdit, chaScoreTempEdit, chaModTempEdit, abiliities, Abilities.CHA);
+        chaScoreEdit = (EditText) view.findViewById(R.id.chaScoreEdit);
+        chaModEdit = (EditText) view.findViewById(R.id.chaModEdit);
+        chaScoreTempEdit = (EditText) view.findViewById(R.id.chaScoreTempEdit);
+        chaModTempEdit = (EditText) view.findViewById(R.id.chaModTempEdit);
+        getAbilityValues(chaScoreEdit, chaModEdit, chaScoreTempEdit, chaModTempEdit, Abilities.CHA);
 
+        setTextWatchers();
         builder.setView(view).setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                setAbilityValues(strScoreEdit, strModEdit, strScoreTempEdit, strModTempEdit, abiliities, Abilities.STR);
-                setAbilityValues(dexScoreEdit, dexModEdit, dexScoreTempEdit, dexModTempEdit, abiliities, Abilities.DEX);
-                setAbilityValues(conScoreEdit, conModEdit, conScoreTempEdit, conModTempEdit, abiliities, Abilities.CON);
-                setAbilityValues(intScoreEdit, intModEdit, intScoreTempEdit, intModTempEdit, abiliities, Abilities.INT);
-                setAbilityValues(wisScoreEdit, wisModEdit, wisScoreTempEdit, wisModTempEdit, abiliities, Abilities.WIS);
-                setAbilityValues(chaScoreEdit, chaModEdit, chaScoreTempEdit, chaModTempEdit, abiliities, Abilities.CHA);
-                target.OnScoresPositive(abiliities);
+                setAbilityValues(strScoreEdit, strModEdit, strScoreTempEdit, strModTempEdit, Abilities.STR);
+                setAbilityValues(dexScoreEdit, dexModEdit, dexScoreTempEdit, dexModTempEdit, Abilities.DEX);
+                setAbilityValues(conScoreEdit, conModEdit, conScoreTempEdit, conModTempEdit, Abilities.CON);
+                setAbilityValues(intScoreEdit, intModEdit, intScoreTempEdit, intModTempEdit, Abilities.INT);
+                setAbilityValues(wisScoreEdit, wisModEdit, wisScoreTempEdit, wisModTempEdit, Abilities.WIS);
+                setAbilityValues(chaScoreEdit, chaModEdit, chaScoreTempEdit, chaModTempEdit, Abilities.CHA);
+                target.OnScoresPositive(abilities);
             }
         }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
@@ -102,7 +112,7 @@ public class ScoresDialog extends DialogFragment {
     }
 
     // Set the values of the edittexts
-    private static void getAbilityValues(EditText score, EditText mod, EditText scoreTemp, EditText modTemp, Abilities abilities, int which) {
+    private void getAbilityValues(EditText score, EditText mod, EditText scoreTemp, EditText modTemp, int which) {
         score.setText(String.valueOf(abilities.getScore(which)));
         mod.setText(String.valueOf(abilities.getMod(which)));
         scoreTemp.setText(String.valueOf(abilities.getScoreTemp(which)));
@@ -110,13 +120,13 @@ public class ScoresDialog extends DialogFragment {
     }
 
     // Set abilities values based on new data
-    private static void setAbilityValues(EditText scoreEdit, EditText modEdit, EditText scoreTempEdit, EditText modTempEdit, Abilities abilities, int which) {
+    private void setAbilityValues(EditText scoreEdit, EditText modEdit, EditText scoreTempEdit, EditText modTempEdit, int which) {
         int score=0, mod=0, scoreTemp=0, modTemp=0;
         try {
-            score = Integer.parseInt(scoreEdit.getText().toString());
-            mod = Integer.parseInt(modEdit.getText().toString());
-            scoreTemp = Integer.parseInt(scoreTempEdit.getText().toString());
-            modTemp = Integer.parseInt(modTempEdit.getText().toString());
+            score = parseInt(scoreEdit.getText().toString());
+            mod = parseInt(modEdit.getText().toString());
+            scoreTemp = parseInt(scoreTempEdit.getText().toString());
+            modTemp = parseInt(modTempEdit.getText().toString());
         }catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -124,5 +134,57 @@ public class ScoresDialog extends DialogFragment {
         abilities.setScoreTemp(scoreTemp, which);
         abilities.setMod(mod, which);
         abilities.setModTemp(modTemp, which);
+    }
+
+    private void setTextWatchers() {
+        strScoreEdit.addTextChangedListener(new ScoreWatcher(strModEdit));
+        strScoreTempEdit.addTextChangedListener(new ScoreWatcher(strModTempEdit));
+
+        dexScoreEdit.addTextChangedListener(new ScoreWatcher(dexModEdit));
+        dexScoreTempEdit.addTextChangedListener(new ScoreWatcher(dexModTempEdit));
+
+        conScoreEdit.addTextChangedListener(new ScoreWatcher(conModEdit));
+        conScoreTempEdit.addTextChangedListener(new ScoreWatcher(conModTempEdit));
+
+        intScoreEdit.addTextChangedListener(new ScoreWatcher(intModEdit));
+        intScoreTempEdit.addTextChangedListener(new ScoreWatcher(intModTempEdit));
+
+        wisScoreEdit.addTextChangedListener(new ScoreWatcher(wisModEdit));
+        wisScoreTempEdit.addTextChangedListener(new ScoreWatcher(wisModTempEdit));
+
+        chaScoreEdit.addTextChangedListener(new ScoreWatcher(chaModEdit));
+        chaScoreTempEdit.addTextChangedListener(new ScoreWatcher(chaModTempEdit));
+    }
+
+    private class ScoreWatcher implements TextWatcher {
+        EditText modEdit;
+        public ScoreWatcher(EditText modEdit) {
+            this.modEdit = modEdit;
+        }
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            modEdit.setText(modValue(charSequence));
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {}
+    }
+
+    private String modValue(CharSequence score) {
+        int mod = 0;
+        if (score.length() <= 0) {
+            return String.valueOf(mod);
+        }
+        try {
+            mod = parseInt(score.toString());
+        }catch (NumberFormatException ex) {
+            ex.printStackTrace();
+            Toast.makeText(activity, ex.toString(), Toast.LENGTH_SHORT).show();
+        }
+        mod = (mod%2==0)? (mod - 10)/2 : (mod - 11)/2;
+        return String.valueOf(mod);
     }
 }

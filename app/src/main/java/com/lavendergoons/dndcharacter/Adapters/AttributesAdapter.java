@@ -2,6 +2,7 @@ package com.lavendergoons.dndcharacter.Adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,10 @@ public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.Vi
     private SimpleCharacter simpleCharacter;
     private final int NAME = 0;
     private final int LEVEL = 2;
+    private final int XP = 3;
+    private final int AGE = 8;
+    private final int HEIGHT = 10;
+    private final int WEIGHT = 11;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -70,8 +75,25 @@ public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.Vi
                 holder.attributeEdit.setText(simpleCharacter.getName());
             } else if (position == LEVEL) {
                 holder.attributeEdit.setText(String.valueOf(simpleCharacter.getLevel()));
+                holder.attributeEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
             } else {
                 holder.attributeEdit.setText(attributeList.get(position));
+            }
+
+            // Set InputType of Numeric Attributes
+            switch (position) {
+                case XP:
+                    holder.attributeEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+                    break;
+                case AGE:
+                    holder.attributeEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+                    break;
+                case HEIGHT:
+                    holder.attributeEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+                    break;
+                case WEIGHT:
+                    holder.attributeEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+                    break;
             }
         }
     }
