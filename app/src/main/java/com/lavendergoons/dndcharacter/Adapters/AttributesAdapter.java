@@ -1,5 +1,6 @@
 package com.lavendergoons.dndcharacter.Adapters;
 
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputType;
@@ -26,10 +27,11 @@ import java.util.Arrays;
 
 public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.ViewHolder> {
 
-    private AttributesFragment attributesFragment;
+    private Fragment fragment;
     private ArrayList<String> mDataset = new ArrayList<>(Arrays.asList(Constants.ATTRIBUTES));
     private ArrayList<String> attributeList;
     private SimpleCharacter simpleCharacter;
+
     private final int NAME = 0;
     private final int LEVEL = 2;
     private final int XP = 3;
@@ -53,15 +55,21 @@ public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.Vi
         }
     }
 
-    public AttributesAdapter(AttributesFragment attributesFragment, ArrayList<String> dataset, SimpleCharacter simpleCharacter) {
-        this.attributesFragment = attributesFragment;
+    public AttributesAdapter(Fragment fragment, ArrayList<String> dataset, SimpleCharacter simpleCharacter) {
+        this.fragment = fragment;
         this.attributeList = dataset;
         this.simpleCharacter = simpleCharacter;
+        if (!(fragment instanceof AttributesAdapterListener)) {
+            throw new RuntimeException(fragment.toString()
+                    + " must implement AttributesAdapterListener");
+        }
     }
+
+    public interface AttributesAdapterListener { }
 
     @Override
     public AttributesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(attributesFragment.getContext()).inflate(R.layout.cardview_attributes, parent, false);
+        View view = LayoutInflater.from(fragment.getContext()).inflate(R.layout.cardview_attributes, parent, false);
         return new ViewHolder(view, new AttributeTextWatcher());
     }
 

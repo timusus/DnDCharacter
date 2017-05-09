@@ -46,15 +46,13 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         AbilitiesFragment.OnFragmentInteractionListener,
         AboutFragment.OnFragmentInteractionListener,
         AttacksFragment.OnFragmentInteractionListener,
-        AttributesFragment.OnFragmentInteractionListener,
         ItemsGeneralFragment.OnFragmentInteractionListener,
         NotesListFragment.OnFragmentInteractionListener,
         NoteFragment.OnFragmentInteractionListener,
         SkillsFragment.OnFragmentInteractionListener,
         SpellFragment.OnFragmentInteractionListener,
         SpellListFragment.OnFragmentInteractionListener,
-        FragmentManager.OnBackStackChangedListener,
-        ConfirmationDialog.ConfirmationDialogInterface {
+        FragmentManager.OnBackStackChangedListener {
 
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
@@ -320,12 +318,6 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         }
         return true;
     }
-
-    @Override
-    public void ConfirmDialogOk(Object o) {}
-
-    @Override
-    public void ConfirmDialogCancel(Object o) {}
 
     @Override
     public void onFragmentInteraction() {}

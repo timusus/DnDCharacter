@@ -19,11 +19,10 @@ import com.lavendergoons.dndcharacter.Utils.Utils;
 import java.util.ArrayList;
 
 
-public class AttributesFragment extends Fragment {
+public class AttributesFragment extends Fragment implements AttributesAdapter.AttributesAdapterListener{
 
     public static final String TAG = "ATTRIBUTES_FRAG";
 
-    private OnFragmentInteractionListener mListener;
     private RecyclerView mAttributesRecyclerView;
     private AttributesAdapter mAttributeRecyclerAdapter;
     private RecyclerView.LayoutManager mAttributeLayoutManager;
@@ -85,17 +84,6 @@ public class AttributesFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
     public void onStop() {
         writeAttributes();
         super.onStop();
@@ -117,16 +105,5 @@ public class AttributesFragment extends Fragment {
         }
         characterManager.setSimpleCharacter(simpleCharacter);
         characterManager.setCharacterAttributes(attributesList);
-    }
-
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction();
     }
 }
