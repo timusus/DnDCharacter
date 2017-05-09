@@ -37,7 +37,6 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
 
     public static final String TAG = "ABILITIES_FRAG";
 
-    private OnFragmentInteractionListener mListener;
     private CharacterManager characterManager;
     private SimpleCharacter simpleCharacter;
     private Abilities abilities;
@@ -267,27 +266,10 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
     public void onStop() {
         writeAbilities();
         super.onStop();
         Log.d(TAG, "onStop");
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
     }
 
     private void writeAbilities() {
@@ -301,10 +283,6 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
     //**********************************************************
     // Listeners
     //**********************************************************
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction();
-    }
 
     @Override
     public void OnACPositive(Abilities abilities) {
