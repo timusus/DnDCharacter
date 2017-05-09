@@ -18,7 +18,7 @@ public class DBAdapter {
 
     private static final String TABLE_CHARACTERS = "characters";
     private static final String DATABASE_NAME = "DnD_Characters.db";
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 3;
 
 
     public static final String COLUMN_ID = "_id";
@@ -32,7 +32,6 @@ public class DBAdapter {
     public static final String COLUMN_SKILL = "skill";
     public static final String COLUMN_SPELL = "spell";
     public static final String COLUMN_NOTES = "notes";
-
     public static final String COLUMN_FEATS = "feats";
 
     public static final String[] ALL_COLUMNS = {
@@ -45,7 +44,9 @@ public class DBAdapter {
             COLUMN_ITEM_GENERAL,
             COLUMN_SKILL,
             COLUMN_SPELL,
-            COLUMN_NOTES};
+            COLUMN_NOTES,
+            COLUMN_FEATS
+    };
 
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + TABLE_CHARACTERS + " (" + COLUMN_ID +
@@ -59,6 +60,7 @@ public class DBAdapter {
                     COLUMN_SKILL + " text not null default '', " +
                     COLUMN_SPELL + " text not null default '', " +
                     COLUMN_NOTES + " text not null default ''" +
+                    COLUMN_FEATS + " text not null default ''" +
                     " );";
 
     private final Context context;
@@ -165,6 +167,7 @@ public class DBAdapter {
         values.put(COLUMN_SKILL, "");
         values.put(COLUMN_SPELL, "");
         values.put(COLUMN_NOTES, "");
+        values.put(COLUMN_FEATS, "");
         return values;
     }
 
@@ -192,12 +195,12 @@ public class DBAdapter {
                 sqLiteDatabase.execSQL("ALTER TABLE "+TABLE_CHARACTERS+" ADD COLUMN "+COLUMN_NOTES +" text not null default ''");
             }
 
-            // Upgrading from 2 to 3 add notes column
+            // Upgrading from 2 to 3 add feats column
             if (newVersion == 3 && oldVersion == 2) {
                 sqLiteDatabase.execSQL("ALTER TABLE "+TABLE_CHARACTERS+" ADD COLUMN "+COLUMN_FEATS +" text not null default ''");
             }
 
-            // Upgrading from 1 to 3 add notes column
+            // Upgrading from 1 to 3 add notes & feats column
             if (newVersion == 3 && oldVersion == 1) {
                 sqLiteDatabase.execSQL("ALTER TABLE "+TABLE_CHARACTERS+" ADD COLUMN "+COLUMN_NOTES +" text not null default ''");
                 sqLiteDatabase.execSQL("ALTER TABLE "+TABLE_CHARACTERS+" ADD COLUMN "+COLUMN_FEATS +" text not null default ''");

@@ -247,15 +247,33 @@ public class CharacterManager {
     //**********************************************************
     @SuppressWarnings("unchecked")
     private synchronized void readCharacterFeats() {
-
+        if (dbAdapter != null && characterId != -1) {
+            Cursor cursor = dbAdapter.getColumnCursor(DBAdapter.COLUMN_FEATS, characterId);
+            if (cursor != null) {
+                String json = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_FEATS));
+                if (json != null && !Utils.isStringEmpty(json) && !json.equals("[]") && !json.equals("[ ]")) {
+                    Type attributeType = new TypeToken<ArrayList<Feat>>(){}.getType();
+                    character.setFeatList((ArrayList<Feat>) gson.fromJson(json, attributeType));
+                    cursor.close();
+                }
+            }
+        } else {
+            Toast.makeText(mContext, mContext.getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
+        }
     }
-    /*
+
     public ArrayList<Feat> getCharacterFeats() {
-
+        //TODO Move to AsyncTask
+        if (character.getFeatList() == null || character.getFeatList().size() == 0) {
+            readCharacterFeats();
+        }
+        return character.getFeatList();
     }
-    */
-    public void setCharacterFeats(ArrayList<Feat> feats) {
 
+    public void setCharacterFeats(ArrayList<Feat> feats) {
+        character.setFeatList(feats);
+        //TODO Move to AsyncTask
+        writeToDatabase(DBAdapter.COLUMN_FEATS, gson.toJson(feats));
     }
 
     //**********************************************************
@@ -421,6 +439,7 @@ public class CharacterManager {
         private ArrayList<Armor> armorList = new ArrayList<>();
         private ArrayList<Attack> attackList = new ArrayList<>();
         private ArrayList<String> attributesList = new ArrayList<>(Constants.ATTRIBUTES.length);
+        private ArrayList<Feat> featList = new ArrayList<>();
         private ArrayList<Item> itemList = new ArrayList<>();
         private ArrayList<Note> notesList = new ArrayList<>();
         private ArrayList<Skill> skillsList = new ArrayList<>();
@@ -476,6 +495,14 @@ public class CharacterManager {
 
         void setAttributesList(ArrayList<String> attributesList) {
             this.attributesList = attributesList;
+        }
+
+        ArrayList<Feat> getFeatList() {
+            return featList;
+        }
+
+        void setFeatList(ArrayList<Feat> featList) {
+            this.featList = featList;
         }
 
         ArrayList<Item> getItemList() {

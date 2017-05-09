@@ -259,11 +259,10 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         String title = "";
         switch (item.getItemId()) {
             case R.id.nav_characters:
-                // Stop Attributes Fragment to Write Name/Level Changes
-                if (isCurrentFragment(AttributesFragment.TAG)) {
-                    Fragment frag = getSupportFragmentManager().findFragmentByTag(AttributesFragment.TAG);
-                    frag.onStop();
-                }
+                // Stop Fragment to Write Changes
+                Fragment frag = getSupportFragmentManager().findFragmentById(R.id.content_character_nav);
+                Log.d(TAG, frag.toString());
+                frag.onStop();
                 Intent intent = new Intent(this, CharacterListActivity.class);
                 startActivity(intent);
                 finish();

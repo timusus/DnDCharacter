@@ -64,8 +64,8 @@
     <string name="announcement_first_open_message">Thank you for trying out the The D&amp;D 3.5 Character sheet app.
         \n\nNote: \nThis app is in an initial release state, with new features and performance improvements planned for future updates.
         \n\nPlanned Features Include:
-        \n&#8226;Auto Adding of Skills and Abilities
-        \n&#8226;Expanded Character Sections (Languages, Feats, Money, Animal Companion)
+        \n&#8226;Sharing Characters
+        \n&#8226;Expanded Character Sections (Animal Companion, Better Spell Creation)
         \n&#8226;Google Account Login (Remote Character Saving)
         \n&#8226;Various Usability Fixes
         \n&#8226;Theme Support
@@ -75,8 +75,8 @@
         \n\nNote: \nThis app is in an initial release state, with new features and performance improvements planned for future updates.
         \n\nPlanned Features Include:
         <ul>
-            <li>\n&#8226;Auto Adding of Skills and Abilities</li>
-            <li>\n&#8226;Expanded Character Sections (Languages, Feats, Money, Animal Companion)</li>
+            <li>\n&#8226;Sharing Characters</li>
+            <li>\n&#8226;Expanded Character Sections (Animal Companion, Better Spell Creation)</li>
             <li>\n&#8226;Google Account Login (Remote Character Saving)</li>
             <li>\n&#8226;Various Usability Fixes</li>
             <li>\n&#8226;Theme Support</li>

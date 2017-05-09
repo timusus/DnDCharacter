@@ -55,11 +55,15 @@ public class AttributesFragment extends Fragment {
             characterId = getArguments().getLong(Constants.CHARACTER_ID);
             simpleCharacter = getArguments().getParcelable(Constants.CHARACTER_KEY);
         }
-        for (int i=0;i<Constants.ATTRIBUTES.length;i++) {
-            attributesList.add(i, "");
-        }
         characterManager = CharacterManager.getInstance(this.getContext());
         attributesList = characterManager.getCharacterAttributes();
+
+        // Fill attribute list with empty data
+        if (attributesList.size() == 0) {
+            for (int i=0;i<Constants.ATTRIBUTES.length;i++) {
+                attributesList.add(i, "");
+            }
+        }
     }
 
     @Override

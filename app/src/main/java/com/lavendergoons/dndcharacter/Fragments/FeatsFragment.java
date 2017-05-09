@@ -60,6 +60,7 @@ public class FeatsFragment extends Fragment implements
             simpleCharacter = getArguments().getParcelable(Constants.CHARACTER_KEY);
         }
         characterManager = CharacterManager.getInstance(this.getContext());
+        featList = characterManager.getCharacterFeats();
     }
 
     @Override
@@ -84,6 +85,12 @@ public class FeatsFragment extends Fragment implements
         addFeatFAB.setOnClickListener(this);
 
         return rootView;
+    }
+
+    @Override
+    public void onStop() {
+        characterManager.setCharacterFeats(featList);
+        super.onStop();
     }
 
     @Override
