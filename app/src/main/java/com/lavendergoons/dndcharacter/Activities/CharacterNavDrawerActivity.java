@@ -45,8 +45,6 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         AbilitiesFragment.OnFragmentInteractionListener,
         AboutFragment.OnFragmentInteractionListener,
-        ArmorFragment.OnFragmentInteractionListener,
-        ArmorListFragment.OnFragmentInteractionListener,
         AttacksFragment.OnFragmentInteractionListener,
         AttributesFragment.OnFragmentInteractionListener,
         ItemsGeneralFragment.OnFragmentInteractionListener,

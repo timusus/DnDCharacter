@@ -1,10 +1,8 @@
 package com.lavendergoons.dndcharacter.Fragments;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -18,8 +16,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-
-import com.lavendergoons.dndcharacter.Dialogs.ArmorDialog;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Objects.Armor;
 import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
@@ -31,24 +27,25 @@ import com.lavendergoons.dndcharacter.Utils.Utils;
 
 import java.util.ArrayList;
 
+
 /**
  * Fragment to hold armor recycler view
  */
-public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDialogListener, View.OnClickListener, ConfirmationDialog.ConfirmationDialogInterface {
+public class ArmorListFragment extends Fragment implements
+        View.OnClickListener, ConfirmationDialog.ConfirmationDialogInterface, ArmorAdapter.ArmorAdapterListener {
 
     public static final String TAG = "ARMOR_LIST_FRAG";
 
     private RecyclerView mArmorRecyclerView;
     private RecyclerView.Adapter mArmorRecyclerAdapter;
     private RecyclerView.LayoutManager mArmorRecyclerLayoutManager;
-    private OnFragmentInteractionListener mListener;
     private CharacterManager characterManager;
 
     private ArrayList<Armor> armorList = new ArrayList<>();
     private SimpleCharacter simpleCharacter;
     private long characterId = -1;
 
-    private FloatingActionButton fab;
+    private FloatingActionButton addArmorFAB;
 
     public ArmorListFragment() {
         // Required empty public constructor
@@ -89,51 +86,20 @@ public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDial
         mArmorRecyclerAdapter = new ArmorAdapter(this, armorList);
         mArmorRecyclerView.setAdapter(mArmorRecyclerAdapter);
 
-        fab = (FloatingActionButton) rootView.findViewById(R.id.addArmorFAB);
-        fab.setOnClickListener(this);
+        addArmorFAB = (FloatingActionButton) rootView.findViewById(R.id.addArmorFAB);
+        addArmorFAB.setOnClickListener(this);
         return rootView;
-    }
-
-    private void writeArmor() {
-        characterManager.setCharacterArmor(armorList);
     }
 
     @Override
     public void onStop() {
-        writeArmor();
+        characterManager.setCharacterArmor(armorList);
         super.onStop();
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-
-    public interface OnFragmentInteractionListener {
-
-    }
-
-    @Override
     public void onClick(View view) {
-        ArmorDialog.newInstance(this);
+        new ArmorDialog().showDialog();
     }
 
     private int addArmor(Armor armor) {
@@ -147,13 +113,7 @@ public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDial
     }
 
     @Override
-    public void OnArmorPositive(Armor armor) {
-    }
-
-    @Override
-    public void OnArmorNegative() {}
-
-    public void deleteArmor(Armor armor) {
+    public void removeArmor(Armor armor) {
         ConfirmationDialog.showConfirmDialog(this.getContext(), getString(R.string.confirm_delete_armor), this, armor);
     }
 
@@ -170,8 +130,10 @@ public class ArmorListFragment extends Fragment implements ArmorDialog.ArmorDial
 
 
     // Simple Dialog for Creating New Armor
-    public static class ArmorDialog extends DialogFragment {
-        public static void newInstance(final ArmorListFragment fragment) {
+    public class ArmorDialog {
+        public void showDialog() {
+            final ArmorListFragment fragment = ArmorListFragment.this;
+
             AlertDialog.Builder builder = new AlertDialog.Builder(fragment.getActivity());
             LinearLayout dialogLayout = new LinearLayout(fragment.getActivity());
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);

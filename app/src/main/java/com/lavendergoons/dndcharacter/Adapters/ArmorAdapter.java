@@ -2,6 +2,7 @@ package com.lavendergoons.dndcharacter.Adapters;
 
 import android.content.Context;
 import android.os.Vibrator;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.lavendergoons.dndcharacter.Fragments.ArmorFragment;
-import com.lavendergoons.dndcharacter.Fragments.ArmorListFragment;
 import com.lavendergoons.dndcharacter.Objects.Armor;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.Constants;
@@ -24,7 +24,9 @@ import java.util.ArrayList;
 public class ArmorAdapter extends RecyclerView.Adapter<ArmorAdapter.ViewHolder> {
 
     private ArrayList<Armor> mDataset;
-    private ArmorListFragment armorListFragment;
+    private Context context;
+    private Fragment fragment;
+    private ArmorAdapterListener listener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public View cardView;
@@ -50,9 +52,20 @@ public class ArmorAdapter extends RecyclerView.Adapter<ArmorAdapter.ViewHolder> 
         }
     }
 
-    public ArmorAdapter(ArmorListFragment fragment, ArrayList<Armor> dataset) {
-        this.armorListFragment = fragment;
+    public ArmorAdapter(Fragment fragment, ArrayList<Armor> dataset) {
         this.mDataset = dataset;
+        this.context = fragment.getContext();
+        this.fragment = fragment;
+        if (fragment instanceof ArmorAdapterListener) {
+            this.listener = (ArmorAdapterListener) fragment;
+        } else {
+            throw new RuntimeException(fragment.toString()
+                    + " must implement ArmorAdapterListener");
+        }
+    }
+
+    public interface ArmorAdapterListener {
+        void removeArmor(Armor armor);
     }
 
     @Override
@@ -87,9 +100,9 @@ public class ArmorAdapter extends RecyclerView.Adapter<ArmorAdapter.ViewHolder> 
     }
 
     private boolean onCardLongClick(Armor armor) {
-        Vibrator v = (Vibrator) armorListFragment.getContext().getSystemService(Context.VIBRATOR_SERVICE);
+        Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(Constants.LONG_CLICK_VIBRATION);
-        armorListFragment.deleteArmor(armor);
+        listener.removeArmor(armor);
         return true;
     }
 
@@ -98,7 +111,7 @@ public class ArmorAdapter extends RecyclerView.Adapter<ArmorAdapter.ViewHolder> 
     }
 
     private void launchArmorFragment(Armor armor, int i) {
-        FragmentTransaction fragTransaction = armorListFragment.getActivity().getSupportFragmentManager().beginTransaction();
+        FragmentTransaction fragTransaction = fragment.getActivity().getSupportFragmentManager().beginTransaction();
         fragTransaction.replace(R.id.content_character_nav, ArmorFragment.newInstance(armor, i), ArmorFragment.TAG).addToBackStack(ArmorFragment.TAG).commit();
     }
 

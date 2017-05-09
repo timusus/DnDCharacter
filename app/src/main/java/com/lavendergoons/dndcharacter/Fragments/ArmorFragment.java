@@ -1,6 +1,5 @@
 package com.lavendergoons.dndcharacter.Fragments;
 
-import android.content.Context;
 import android.os.BadParcelableException;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,7 +20,6 @@ public class ArmorFragment extends Fragment {
 
     public static final String TAG = "ARMOR_FRAG";
 
-    private OnFragmentInteractionListener mListener;
     private CharacterManager characterManager;
     private ArrayList<Armor> armorList = new ArrayList<>();
     private Armor armor;
@@ -123,22 +121,9 @@ public class ArmorFragment extends Fragment {
         super.onDestroy();
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
-
-    public interface OnFragmentInteractionListener {}
 }
