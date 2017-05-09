@@ -26,6 +26,7 @@
     <string name="title_fragment_attributes">Attributes</string>
     <string name="title_fragment_armor">Armor</string>
     <string name="title_fragment_attacks">Attacks</string>
+    <string name="title_fragment_feats">Feats</string>
     <string name="title_fragment_items">Items</string>
     <string name="title_fragment_spells">Spells</string>
     <string name="title_fragment_skills">Skills</string>
@@ -94,6 +95,7 @@
     <string name="confirm_delete_spell">Are you sure you want to delete this spell?</string>
     <string name="confirm_delete_character">Are you sure you want to delete this simpleCharacter?</string>
     <string name="confirm_delete_note">Are you sure you want to delete this note?</string>
+    <string name="confirm_delete_feat">Are you sure you want to delete this feat?</string>
 
     <!-- General D&D -->
     <string name="gen_weight">Weight</string>
@@ -117,10 +119,16 @@
     <string name="gen_base_attack">Base Attack</string>
     <string name="gen_initiative">Initiative</string>
 
+    <string name="gen_platinum">Platinum</string>
+    <string name="gen_gold">Gold</string>
+    <string name="gen_silver">Silver</string>
+    <string name="gen_copper">Copper</string>
+
     <!-- Labels -->
     <string name="label_add_character_btn">Add Character</string>
     <string name="label_nav_drawer_attributes">Attributes</string>
     <string name="label_nav_drawer_abilities">Abilities</string>
+    <string name="label_nav_drawer_feats">Feats</string>
     <string name="label_nav_drawer_skills">Skills</string>
     <string name="label_nav_drawer_items">Items</string>
     <string name="label_nav_drawer_attacks">Attacks</string>
@@ -148,6 +156,7 @@
     <string name="title_attack_dialog">Attack Details</string>
     <string name="title_spell_dialog">Create New Spell</string>
     <string name="title_note_dialog">Create New Note</string>
+    <string name="title_select_feat_type">Select Feat Type</string>
 
     <!-- Hints/Placeholders -->
     <string name="hint_name">Name</string>
@@ -171,9 +180,10 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <!-- Arrays -->
-    <string-array name="item_spinner">
-        <item>Armor</item>
-        <item>Items</item>
+    <string-array name="feat_type_items">
+        <item>Feat</item>
+        <item>Special Ability</item>
+        <item>Language</item>
     </string-array>
 
     <!-- Numbers -->
@@ -235,6 +245,8 @@
     <string name="attr_eyes">Eyes</string>
     <string name="attr_hair">Hair</string>
     <string name="attr_skin">Skin</string>
+
+    <!-- Feats -->
 
     <!-- Grapple -->
     <string name="grapple_base_attack">Base Atk.</string>
@@ -298,6 +310,6 @@
     <string name="lavender_goons">Lavender Goons</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Hello blank context</string>
 
 </resources>

@@ -39,6 +39,14 @@
             android:id="@+id/includeAcFort"
             android:layout_below="@+id/includeScores"
             android:layout_marginBottom="@dimen/activity_half_horizontal_margin"/>
+
+        <include
+            layout="@layout/content_ability_money"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/includeAbilityMoney"
+            android:layout_below="@+id/includeAcFort"
+            android:layout_marginBottom="@dimen/activity_half_horizontal_margin"/>
     </RelativeLayout>
 
 </ScrollView>

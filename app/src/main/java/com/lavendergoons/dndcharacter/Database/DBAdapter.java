@@ -33,6 +33,8 @@ public class DBAdapter {
     public static final String COLUMN_SPELL = "spell";
     public static final String COLUMN_NOTES = "notes";
 
+    public static final String COLUMN_FEATS = "feats";
+
     public static final String[] ALL_COLUMNS = {
             COLUMN_ID,
             COLUMN_CHARACTER,
@@ -188,6 +190,17 @@ public class DBAdapter {
             // Upgrading from 1 to 2 add notes column
             if (newVersion == 2 && oldVersion == 1) {
                 sqLiteDatabase.execSQL("ALTER TABLE "+TABLE_CHARACTERS+" ADD COLUMN "+COLUMN_NOTES +" text not null default ''");
+            }
+
+            // Upgrading from 2 to 3 add notes column
+            if (newVersion == 3 && oldVersion == 2) {
+                sqLiteDatabase.execSQL("ALTER TABLE "+TABLE_CHARACTERS+" ADD COLUMN "+COLUMN_FEATS +" text not null default ''");
+            }
+
+            // Upgrading from 1 to 3 add notes column
+            if (newVersion == 3 && oldVersion == 1) {
+                sqLiteDatabase.execSQL("ALTER TABLE "+TABLE_CHARACTERS+" ADD COLUMN "+COLUMN_NOTES +" text not null default ''");
+                sqLiteDatabase.execSQL("ALTER TABLE "+TABLE_CHARACTERS+" ADD COLUMN "+COLUMN_FEATS +" text not null default ''");
             }
         }
     }

@@ -45,7 +45,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
 
     private Button savesEditBtn, acEditBtn, scoresEditBtn;
 
-    // Saves and AC Edittexts
+    // Saves and AC EditTexts
     private TextView saveFortValue, saveReflexValue, saveWillValue, acGenValue, acTouchValue, acFlatFootValue;
 
     // Ability Edits
@@ -53,11 +53,14 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
             abilityWisScoreEdit, abilityChaScoreEdit, abilityStrModEdit, abilityDexModEdit, abilityConModEdit,
             abilityIntModEdit, abilityWisModEdit, abilityChaModEdit;
 
-    // General Edittexts
+    // General EditTexts
     private EditText abilityHpEdit, abilityNonLethalEdit, abilityBaseAtkEdit, abilitySpellResEdit, abilityInitiativeEdit, abilitySpeedEdit;
 
-    // Grapple Editexts
+    // Grapple EditTexts
     private EditText grappleBaseAttackEdit, grappleStrModEdit, grappleSizeModEdit, grappleMiscModEdit, grappleTotalEdit;
+
+    // Money EditTexts
+    private EditText platinumEdit, goldEdit, silverEdit, copperEdit;
 
     public AbilitiesFragment() {
         // Required empty public constructor
@@ -122,6 +125,12 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
         grappleMiscModEdit = (EditText) rootView.findViewById(R.id.grappleMiscModEdit);
         grappleTotalEdit = (EditText) rootView.findViewById(R.id.grappleTotalEdit);
 
+        // Money
+        platinumEdit = (EditText) rootView.findViewById(R.id.abilityPlatinumEdit);
+        goldEdit = (EditText) rootView.findViewById(R.id.abilityGoldEdit);
+        silverEdit = (EditText) rootView.findViewById(R.id.abilitySilverEdit);
+        copperEdit = (EditText) rootView.findViewById(R.id.abilityCopperEdit);
+
         // Ability Score
         abilityStrScoreEdit = (EditText) rootView.findViewById(R.id.abilityStrScoreEdit);
         abilityStrScoreEdit.addTextChangedListener(new TextWatcher() {
@@ -130,6 +139,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
             @Override
             public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
                 abilityStrModEdit.setText(modValue(charSequence));
+                grappleStrModEdit.setText(modValue(charSequence));
             }
             @Override
             public void afterTextChanged(Editable editable) {}
@@ -284,6 +294,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
         readAbilityGeneralValues();
         readGrappleValues();
         readScoreModValues();
+        readMoneyValues();
         characterManager.setCharacterAbilities(abilities);
     }
 
@@ -339,6 +350,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
             setScoreModValues();
             setAbilityGeneralValues();
             setGrappleValues();
+            setMoneyValues();
         }
     }
 
@@ -492,6 +504,20 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
         }
     }
 
+    private void setMoneyValues() {
+        try {
+            platinumEdit.setText(String.valueOf(abilities.getPlatinum()));
+            goldEdit.setText(String.valueOf(abilities.getGold()));
+            silverEdit.setText(String.valueOf(abilities.getSilver()));
+            copperEdit.setText(String.valueOf(abilities.getCopper()));
+        }catch (Exception ex) {
+            ex.printStackTrace();
+            if (!BuildConfig.DEBUG) {
+                FirebaseCrash.report(ex);
+            }
+        }
+    }
+
     //**********************************************************
     // Read Values From EditTexts
     //**********************************************************
@@ -569,6 +595,30 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
             ex.printStackTrace();
         }
         abilities.setGrappleArray(array);
+    }
+
+    private void readMoneyValues() {
+        int platinum=0, gold=0, silver=0, copper=0;
+        try {
+            platinum = parseInt(platinumEdit.getText().toString());
+            gold = parseInt(goldEdit.getText().toString());
+            silver = parseInt(silverEdit.getText().toString());
+            copper = parseInt(copperEdit.getText().toString());
+        }catch (Exception ex) {
+            ex.printStackTrace();
+            FirebaseCrash.log("Money: "+
+                    platinumEdit.getText().toString()+" \nG"+
+                    goldEdit.getText().toString()+" \nS"+
+                    silverEdit.getText().toString()+" \nC"+
+                    copperEdit.getText().toString());
+            if (!BuildConfig.DEBUG) {
+                FirebaseCrash.report(ex);
+            }
+        }
+        abilities.setPlatinum(platinum);
+        abilities.setGold(gold);
+        abilities.setSilver(silver);
+        abilities.setCopper(copper);
     }
 
     private void readScoreModValues() {

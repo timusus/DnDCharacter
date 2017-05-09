@@ -6,4 +6,4 @@
     android:id="@+id/content_items_view">
 
 </LinearLayout>
-<!-- View to hold fragment of either Armor, or General Items -->
+<!-- View to hold context of either Armor, or General Items -->

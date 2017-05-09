@@ -61,6 +61,8 @@ public class Abilities {
 
     private int hp, nonLethal, baseAtk, spellRes, initiative, speed;
 
+    private int platinum, gold, silver, copper;
+
     public Abilities() {
         ac[AC_DEFAULT] = Constants.AC_DEFAULT;
     }
@@ -302,5 +304,42 @@ public class Abilities {
 
     public void setSpeed(int speed) {
         this.speed = speed;
+    }
+
+    //**********************************************************
+    // Money
+    //**********************************************************
+
+
+    public int getPlatinum() {
+        return platinum;
+    }
+
+    public void setPlatinum(int platinum) {
+        this.platinum = platinum;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
+    }
+
+    public int getSilver() {
+        return silver;
+    }
+
+    public void setSilver(int silver) {
+        this.silver = silver;
+    }
+
+    public int getCopper() {
+        return copper;
+    }
+
+    public void setCopper(int copper) {
+        this.copper = copper;
     }
 }

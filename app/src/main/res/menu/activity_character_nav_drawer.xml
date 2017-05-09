@@ -12,6 +12,9 @@
             android:id="@+id/nav_abilities"
             android:title="@string/label_nav_drawer_abilities" />
         <item
+            android:id="@+id/nav_feats"
+            android:title="@string/label_nav_drawer_feats" />
+        <item
             android:id="@+id/nav_skills"
             android:title="@string/label_nav_drawer_skills" />
         <item

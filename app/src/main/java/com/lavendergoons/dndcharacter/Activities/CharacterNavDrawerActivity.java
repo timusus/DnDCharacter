@@ -24,16 +24,14 @@ import com.lavendergoons.dndcharacter.Fragments.ArmorFragment;
 import com.lavendergoons.dndcharacter.Fragments.ArmorListFragment;
 import com.lavendergoons.dndcharacter.Fragments.AttacksFragment;
 import com.lavendergoons.dndcharacter.Fragments.AttributesFragment;
+import com.lavendergoons.dndcharacter.Fragments.FeatsFragment;
 import com.lavendergoons.dndcharacter.Fragments.ItemsGeneralFragment;
 import com.lavendergoons.dndcharacter.Fragments.NoteFragment;
 import com.lavendergoons.dndcharacter.Fragments.NotesListFragment;
 import com.lavendergoons.dndcharacter.Fragments.SkillsFragment;
 import com.lavendergoons.dndcharacter.Fragments.SpellFragment;
 import com.lavendergoons.dndcharacter.Fragments.SpellListFragment;
-import com.lavendergoons.dndcharacter.Objects.Armor;
 import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
-import com.lavendergoons.dndcharacter.Objects.Note;
-import com.lavendergoons.dndcharacter.Objects.Spell;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.CharacterManager;
 import com.lavendergoons.dndcharacter.Utils.Constants;
@@ -189,6 +187,8 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
                 title = getString(R.string.title_fragment_about);
             } else if (frag instanceof AbilitiesFragment) {
                 title = getString(R.string.title_fragment_abilities);
+            } else if (frag instanceof FeatsFragment) {
+                title = getString(R.string.title_fragment_feats);
             } else if (frag instanceof SkillsFragment) {
                 title = getString(R.string.title_fragment_skills);
             } else if (frag instanceof AttacksFragment) {
@@ -277,6 +277,11 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
                 fragment = AbilitiesFragment.newInstance(simpleCharacter, characterId);
                 tag = AbilitiesFragment.TAG;
                 title = getString(R.string.title_fragment_abilities);
+                break;
+            case R.id.nav_feats:
+                fragment = FeatsFragment.newInstance(simpleCharacter, characterId);
+                tag = FeatsFragment.TAG;
+                title = getString(R.string.title_fragment_feats);
                 break;
             case R.id.nav_skills:
                 fragment = SkillsFragment.newInstance(simpleCharacter, characterId);

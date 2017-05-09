@@ -14,6 +14,7 @@ import com.lavendergoons.dndcharacter.Exceptions.DatabaseNotInitializedException
 import com.lavendergoons.dndcharacter.Objects.Abilities;
 import com.lavendergoons.dndcharacter.Objects.Armor;
 import com.lavendergoons.dndcharacter.Objects.Attack;
+import com.lavendergoons.dndcharacter.Objects.Feat;
 import com.lavendergoons.dndcharacter.Objects.Item;
 import com.lavendergoons.dndcharacter.Objects.Note;
 import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
@@ -23,8 +24,6 @@ import com.lavendergoons.dndcharacter.R;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-
-import static android.R.attr.id;
 
 
 /**
@@ -241,6 +240,22 @@ public class CharacterManager {
         character.setAttributesList(attributes);
         //TODO Move to AsyncTask
         writeToDatabase(DBAdapter.COLUMN_ATTRIBUTES, gson.toJson(attributes));
+    }
+
+    //**********************************************************
+    // Items
+    //**********************************************************
+    @SuppressWarnings("unchecked")
+    private synchronized void readCharacterFeats() {
+
+    }
+    /*
+    public ArrayList<Feat> getCharacterFeats() {
+
+    }
+    */
+    public void setCharacterFeats(ArrayList<Feat> feats) {
+
     }
 
     //**********************************************************
