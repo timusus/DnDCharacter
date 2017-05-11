@@ -1,6 +1,5 @@
 package com.lavendergoons.dndcharacter.Fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -24,7 +23,8 @@ import java.util.ArrayList;
 /**
  * Fragment to display General Items ie. Bedroll, Potions, Flint/Steel
  */
-public class ItemsGeneralFragment extends Fragment implements View.OnClickListener, ItemGeneralDialog.ItemsGeneralDialogListener, ConfirmationDialog.ConfirmationDialogInterface {
+public class ItemsGeneralFragment extends Fragment
+        implements View.OnClickListener, ItemGeneralDialog.ItemsGeneralDialogListener, ItemsGeneralAdapter.ItemsGeneralAdapterListener, ConfirmationDialog.ConfirmationDialogInterface {
 
     public static final String TAG = "ITEMS_GENERAL_FRAG";
 
@@ -32,13 +32,12 @@ public class ItemsGeneralFragment extends Fragment implements View.OnClickListen
     private RecyclerView mItemsRecyclerView;
     private RecyclerView.Adapter mItemsRecyclerAdapter;
     private RecyclerView.LayoutManager mItemsRecyclerLayoutManager;
-    private OnFragmentInteractionListener mListener;
     private CharacterManager characterManager;
 
     private ArrayList<Item> itemList = new ArrayList<>();
     private SimpleCharacter simpleCharacter;
     private long id = -1;
-    private FloatingActionButton fab;
+    private FloatingActionButton addItemFAB;
 
     public ItemsGeneralFragment() {
         // Required empty public constructor
@@ -80,8 +79,8 @@ public class ItemsGeneralFragment extends Fragment implements View.OnClickListen
         mItemsRecyclerAdapter = new ItemsGeneralAdapter(this, itemList);
         mItemsRecyclerView.setAdapter(mItemsRecyclerAdapter);
 
-        fab = (FloatingActionButton) rootView.findViewById(R.id.addItemFAB);
-        fab.setOnClickListener(this);
+        addItemFAB = (FloatingActionButton) rootView.findViewById(R.id.addItemFAB);
+        addItemFAB.setOnClickListener(this);
         return rootView;
     }
 
@@ -96,28 +95,6 @@ public class ItemsGeneralFragment extends Fragment implements View.OnClickListen
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    @Override
     public void OnItemsPositive(Item item) {
         if (item != null) {
             itemList.add(item);
@@ -126,9 +103,7 @@ public class ItemsGeneralFragment extends Fragment implements View.OnClickListen
     }
 
     @Override
-    public void OnItemsNegative() {
-
-    }
+    public void OnItemsNegative() {}
 
     @Override
     public void ConfirmDialogOk(Object item) {
@@ -139,11 +114,10 @@ public class ItemsGeneralFragment extends Fragment implements View.OnClickListen
     }
 
     @Override
-    public void ConfirmDialogCancel(Object o) {
+    public void ConfirmDialogCancel(Object o) {}
 
-    }
-
-    public void deleteItem(Item item) {
+    @Override
+    public void removeItem(Item item) {
         ConfirmationDialog.showConfirmDialog(this.getActivity(), getString(R.string.confirm_delete_item), this, item);
     }
 
@@ -151,12 +125,9 @@ public class ItemsGeneralFragment extends Fragment implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.addItemFAB:
-                ItemGeneralDialog.showItemsDialog(this.getActivity(), this, null);
+                new ItemGeneralDialog(this, null).showDialog();
                 break;
         }
     }
 
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction();
-    }
 }

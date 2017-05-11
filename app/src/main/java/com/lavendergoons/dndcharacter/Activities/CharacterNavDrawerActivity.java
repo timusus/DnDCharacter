@@ -17,7 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.lavendergoons.dndcharacter.Database.DBAdapter;
-import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Fragments.AbilitiesFragment;
 import com.lavendergoons.dndcharacter.Fragments.AboutFragment;
 import com.lavendergoons.dndcharacter.Fragments.ArmorFragment;
@@ -44,7 +43,6 @@ import com.lavendergoons.dndcharacter.Utils.Constants;
 public class CharacterNavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         AboutFragment.OnFragmentInteractionListener,
-        ItemsGeneralFragment.OnFragmentInteractionListener,
         NotesListFragment.OnFragmentInteractionListener,
         NoteFragment.OnFragmentInteractionListener,
         SpellFragment.OnFragmentInteractionListener,

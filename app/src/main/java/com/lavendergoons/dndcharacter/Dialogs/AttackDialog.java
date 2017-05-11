@@ -22,7 +22,6 @@ import com.lavendergoons.dndcharacter.Utils.Utils;
 
 public class AttackDialog {
 
-    private Context context;
     private Fragment fragment;
     private Activity activity;
     private Attack attack;
@@ -31,7 +30,6 @@ public class AttackDialog {
     private EditText atkDialogNameEdit, atkDialogBonusEdit, atkDialogDamageEdit, atkDialogCriticalEdit, atkDialogRangeEdit, atkDialogTypeEdit, atkDialogAmmoEdit, atkDialogNotesEdit;
 
     public AttackDialog(Fragment fragment, Attack attack) {
-        this.context = fragment.getContext();
         this.fragment = fragment;
         this.activity = fragment.getActivity();
         this.attack = attack;
@@ -44,13 +42,12 @@ public class AttackDialog {
     }
 
     public AttackDialog(Activity activity, Attack attack) {
-        this.context = activity;
         this.activity = activity;
         this.attack = attack;
-        if (fragment instanceof AttackDialogListener) {
-            this.listener = (AttackDialogListener) fragment;
+        if (activity instanceof AttackDialogListener) {
+            this.listener = (AttackDialogListener) activity;
         } else {
-            throw new RuntimeException(fragment.toString()
+            throw new RuntimeException(activity.toString()
                     + " must implement AttackDialogListener.");
         }
     }
@@ -61,8 +58,8 @@ public class AttackDialog {
     }
 
     public void showDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(context.getString(R.string.title_attack_dialog));
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle(activity.getString(R.string.title_attack_dialog));
 
         LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_attack, null);

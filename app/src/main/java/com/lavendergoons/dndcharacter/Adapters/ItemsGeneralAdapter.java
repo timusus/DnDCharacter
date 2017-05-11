@@ -2,6 +2,7 @@ package com.lavendergoons.dndcharacter.Adapters;
 
 import android.content.Context;
 import android.os.Vibrator;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,12 +10,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.lavendergoons.dndcharacter.Dialogs.ItemGeneralDialog;
-import com.lavendergoons.dndcharacter.Fragments.ItemsGeneralFragment;
 import com.lavendergoons.dndcharacter.Objects.Item;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.Constants;
 
 import java.util.ArrayList;
+
 
 /**
  * Adapter for ItemsGeneral Recycler View.
@@ -23,7 +24,9 @@ import java.util.ArrayList;
 public class ItemsGeneralAdapter extends RecyclerView.Adapter<ItemsGeneralAdapter.ViewHolder> {
 
     private ArrayList<Item> mDataset;
-    private ItemsGeneralFragment itemsGeneralFragment;
+    private Fragment fragment;
+    private Context context;
+    private ItemsGeneralAdapterListener listener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public View cardview;
@@ -37,9 +40,21 @@ public class ItemsGeneralAdapter extends RecyclerView.Adapter<ItemsGeneralAdapte
         }
     }
 
-    public ItemsGeneralAdapter(ItemsGeneralFragment fragment, ArrayList<Item> dataset) {
-        this.itemsGeneralFragment = fragment;
+
+    public ItemsGeneralAdapter(Fragment fragment, ArrayList<Item> dataset) {
+        this.fragment = fragment;
         this.mDataset = dataset;
+        this.context = fragment.getContext();
+        if (fragment instanceof ItemsGeneralAdapterListener) {
+            this.listener = (ItemsGeneralAdapterListener) fragment;
+        } else {
+            throw new RuntimeException(fragment.toString()
+                + " must implement ItemsGeneralAdapterListener.");
+        }
+    }
+
+    public interface ItemsGeneralAdapterListener {
+        void removeItem(Item item);
     }
 
     @Override
@@ -70,13 +85,13 @@ public class ItemsGeneralAdapter extends RecyclerView.Adapter<ItemsGeneralAdapte
 
 
     private void onCardClick(Item item) {
-        ItemGeneralDialog.showItemsDialog(itemsGeneralFragment.getActivity(), itemsGeneralFragment, item);
+        new ItemGeneralDialog(fragment, item).showDialog();
     }
 
     private boolean onCardLongClick(Item item) {
-        Vibrator v = (Vibrator) itemsGeneralFragment.getContext().getSystemService(Context.VIBRATOR_SERVICE);
+        Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(Constants.LONG_CLICK_VIBRATION);
-        itemsGeneralFragment.deleteItem(item);
+        listener.removeItem(item);
         return true;
     }
 
