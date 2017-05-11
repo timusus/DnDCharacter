@@ -5,32 +5,37 @@
         <item
             android:id="@+id/nav_characters"
             android:title="@string/title_list_characters" />
-        <item
-            android:id="@+id/nav_attributes"
-            android:title="@string/label_nav_drawer_attributes" />
-        <item
-            android:id="@+id/nav_abilities"
-            android:title="@string/label_nav_drawer_abilities" />
-        <item
-            android:id="@+id/nav_feats"
-            android:title="@string/label_nav_drawer_feats" />
-        <item
-            android:id="@+id/nav_skills"
-            android:title="@string/label_nav_drawer_skills" />
-        <item
-            android:id="@+id/nav_attacks"
-            android:title="@string/label_nav_drawer_attacks" />
-        <item
-            android:id="@+id/nav_items"
-            android:title="@string/label_nav_drawer_items" />
-        <item
-            android:id="@+id/nav_armor"
-            android:title="@string/label_nav_drawer_armor" />
-        <item
-            android:id="@+id/nav_spells"
-            android:title="@string/label_nav_drawer_spells" />
-        <item
-            android:id="@+id/nav_notes"
-            android:title="@string/label_nav_drawer_notes" />
     </group>
+
+    <item android:title="@string/label_nav_character_sections">
+        <menu android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_attributes"
+                android:title="@string/label_nav_drawer_attributes" />
+            <item
+                android:id="@+id/nav_abilities"
+                android:title="@string/label_nav_drawer_abilities" />
+            <item
+                android:id="@+id/nav_feats"
+                android:title="@string/label_nav_drawer_feats" />
+            <item
+                android:id="@+id/nav_skills"
+                android:title="@string/label_nav_drawer_skills" />
+            <item
+                android:id="@+id/nav_attacks"
+                android:title="@string/label_nav_drawer_attacks" />
+            <item
+                android:id="@+id/nav_items"
+                android:title="@string/label_nav_drawer_items" />
+            <item
+                android:id="@+id/nav_armor"
+                android:title="@string/label_nav_drawer_armor" />
+            <item
+                android:id="@+id/nav_spells"
+                android:title="@string/label_nav_drawer_spells" />
+            <item
+                android:id="@+id/nav_notes"
+                android:title="@string/label_nav_drawer_notes" />
+        </menu>
+    </item>
 </menu>

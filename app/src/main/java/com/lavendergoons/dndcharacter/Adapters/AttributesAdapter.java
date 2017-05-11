@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.crash.FirebaseCrash;
-import com.lavendergoons.dndcharacter.Fragments.AttributesFragment;
 import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.Constants;
@@ -27,6 +26,8 @@ import java.util.Arrays;
 
 public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.ViewHolder> {
 
+    public static final String TAG = "ATTRIBUTES_ADAPTER";
+
     private Fragment fragment;
     private ArrayList<String> mDataset = new ArrayList<>(Arrays.asList(Constants.ATTRIBUTES));
     private ArrayList<String> attributeList;
@@ -38,6 +39,13 @@ public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.Vi
     private final int AGE = 8;
     private final int HEIGHT = 10;
     private final int WEIGHT = 11;
+
+    public static final String Name = "Name";
+    public static final String Level = "Level";
+    public static final String Xp = "XP";
+    public static final String Age = "Age";
+    public static final String Height = "Height";
+    public static final String Weight = "Weight";
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -75,32 +83,38 @@ public class AttributesAdapter extends RecyclerView.Adapter<AttributesAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.attributeNameView.setText(mDataset.get(position));
-        holder.attributeEdit.setHint(mDataset.get(position));
-        holder.textWatcher.updatePosition(position);
+        holder.attributeNameView.setText(mDataset.get(holder.getAdapterPosition()));
+        holder.attributeEdit.setHint(mDataset.get(holder.getAdapterPosition()));
+        holder.textWatcher.updatePosition(holder.getAdapterPosition());
+
         if (attributeList.size() > 0) {
-            if (position == NAME) {
+            if (mDataset.get(holder.getAdapterPosition()).equals(Name)) {
                 holder.attributeEdit.setText(simpleCharacter.getName());
-            } else if (position == LEVEL) {
+            } else if (mDataset.get(holder.getAdapterPosition()).equals(Level)) {
                 holder.attributeEdit.setText(String.valueOf(simpleCharacter.getLevel()));
-                holder.attributeEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
             } else {
-                holder.attributeEdit.setText(attributeList.get(position));
+                holder.attributeEdit.setText(attributeList.get(holder.getAdapterPosition()));
             }
 
             // Set InputType of Numeric Attributes
-            switch (position) {
-                case XP:
+            switch (mDataset.get(holder.getAdapterPosition())) {
+                case Xp:
                     holder.attributeEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
                     break;
-                case AGE:
+                case Age:
                     holder.attributeEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
                     break;
-                case HEIGHT:
+                case Height:
                     holder.attributeEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
                     break;
-                case WEIGHT:
+                case Weight:
                     holder.attributeEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+                    break;
+                case Level:
+                    holder.attributeEdit.setInputType(InputType.TYPE_CLASS_NUMBER);
+                    break;
+                default:
+                    holder.attributeEdit.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS);
                     break;
             }
         }

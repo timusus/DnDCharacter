@@ -81,7 +81,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
             simpleCharacter = getArguments().getParcelable(Constants.CHARACTER_KEY);
         }
 
-        characterManager = CharacterManager.getInstance(this.getContext());
+        characterManager = CharacterManager.getInstance();
         abilities = characterManager.getCharacterAbilities();
     }
 

@@ -93,7 +93,7 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         dbAdapter.open();
 
         //Load database in CharacterManager
-        characterManager = CharacterManager.getInstance(this);
+        characterManager = CharacterManager.getInstance();
         characterManager.loadDatabase(dbAdapter);
         characterManager.loadCharacter(characterId);
     }

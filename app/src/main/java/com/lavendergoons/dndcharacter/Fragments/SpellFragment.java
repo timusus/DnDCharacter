@@ -55,7 +55,7 @@ public class SpellFragment extends Fragment {
         }catch(BadParcelableException ex) {
             Log.e("PARSE", "Bad Parcelable in SpellFragment");
         }
-        characterManager = CharacterManager.getInstance(this.getContext());
+        characterManager = CharacterManager.getInstance();
         spellList = characterManager.getCharacterSpells();
     }
 

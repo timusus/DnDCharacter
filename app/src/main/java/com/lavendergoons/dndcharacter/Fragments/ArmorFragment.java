@@ -51,7 +51,7 @@ public class ArmorFragment extends Fragment {
         }catch(BadParcelableException ex) {
             Log.e("PARSE", "Bad Parcelable in ArmorFragment");
         }
-        characterManager = CharacterManager.getInstance(this.getContext());
+        characterManager = CharacterManager.getInstance();
         armorList = characterManager.getCharacterArmor();
     }
 

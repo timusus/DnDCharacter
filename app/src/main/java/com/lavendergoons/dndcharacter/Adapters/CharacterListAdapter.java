@@ -2,6 +2,7 @@ package com.lavendergoons.dndcharacter.Adapters;
 
 import android.content.Context;
 import android.os.Vibrator;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,8 +22,8 @@ import java.util.ArrayList;
 public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdapter.ViewHolder> {
 
     private ArrayList<SimpleCharacter> mDataset;
-    private Context mContext;
-    private CharacterListFragment fragment;
+    private CharacterListAdapterListener listener;
+    private Fragment fragment;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public View cardView;
@@ -36,14 +37,20 @@ public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdap
         }
     }
 
-    public CharacterListAdapter(Context context, ArrayList<SimpleCharacter> dataset) {
-        this.mContext = context;
-        this.mDataset = dataset;
-    }
-
-    public CharacterListAdapter(CharacterListFragment fragment, ArrayList<SimpleCharacter> dataset) {
+    public CharacterListAdapter(Fragment fragment, ArrayList<SimpleCharacter> dataset) {
         this.fragment = fragment;
         this.mDataset = dataset;
+        if (fragment instanceof CharacterListAdapterListener) {
+            this.listener = (CharacterListAdapterListener) fragment;
+        } else {
+            throw new RuntimeException(fragment.toString()
+                + " must implement CharacterListAdapterListener.");
+        }
+    }
+
+    public interface CharacterListAdapterListener {
+        void onCharacterClick(String name);
+        void remoteCharacter(SimpleCharacter simpleCharacter);
     }
 
     @Override
@@ -59,13 +66,13 @@ public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdap
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onCardClick(holder, position);
+                onCardClick(holder, holder.getAdapterPosition());
             }
         });
         holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                onCardLongClick(holder, position);
+                onCardLongClick(holder, holder.getAdapterPosition());
                 return true;
             }
         });
@@ -73,21 +80,17 @@ public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListAdap
 
     private void onCardClick(ViewHolder holder, int position) {
         String name = holder.mNameTextView.getText().toString();
-        fragment.onCharacterClick(name);
+        listener.onCharacterClick(name);
     }
 
     private void onCardLongClick(ViewHolder holder, int position) {
         Vibrator v = (Vibrator) fragment.getContext().getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(Constants.LONG_CLICK_VIBRATION);
-        fragment.deleteCharacter(mDataset.get(position));
+        listener.remoteCharacter(mDataset.get(position));
     }
 
     @Override
     public int getItemCount() {
         return mDataset.size();
-    }
-
-    public static interface OnCharacterClickListener {
-        void onCharacterClick(String name);
     }
 }

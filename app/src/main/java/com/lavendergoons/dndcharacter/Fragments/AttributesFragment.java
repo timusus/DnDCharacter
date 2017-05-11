@@ -54,7 +54,7 @@ public class AttributesFragment extends Fragment implements AttributesAdapter.At
             characterId = getArguments().getLong(Constants.CHARACTER_ID);
             simpleCharacter = getArguments().getParcelable(Constants.CHARACTER_KEY);
         }
-        characterManager = CharacterManager.getInstance(this.getContext());
+        characterManager = CharacterManager.getInstance();
         attributesList = characterManager.getCharacterAttributes();
 
         // Fill attribute list with empty data

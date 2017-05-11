@@ -59,7 +59,7 @@ public class FeatsFragment extends Fragment implements
             characterId = getArguments().getLong(Constants.CHARACTER_ID);
             simpleCharacter = getArguments().getParcelable(Constants.CHARACTER_KEY);
         }
-        characterManager = CharacterManager.getInstance(this.getContext());
+        characterManager = CharacterManager.getInstance();
         featList = characterManager.getCharacterFeats();
     }
 

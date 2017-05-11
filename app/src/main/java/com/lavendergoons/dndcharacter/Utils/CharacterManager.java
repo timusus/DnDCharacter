@@ -1,16 +1,15 @@
 package com.lavendergoons.dndcharacter.Utils;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.firebase.crash.FirebaseCrash;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Exceptions.DatabaseNotInitializedException;
+import com.lavendergoons.dndcharacter.Exceptions.IllegalCharacterIdException;
 import com.lavendergoons.dndcharacter.Objects.Abilities;
 import com.lavendergoons.dndcharacter.Objects.Armor;
 import com.lavendergoons.dndcharacter.Objects.Attack;
@@ -20,7 +19,6 @@ import com.lavendergoons.dndcharacter.Objects.Note;
 import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
 import com.lavendergoons.dndcharacter.Objects.Skill;
 import com.lavendergoons.dndcharacter.Objects.Spell;
-import com.lavendergoons.dndcharacter.R;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -36,7 +34,7 @@ public class CharacterManager {
     public static final String TAG = "CHAR_MANAGER";
 
     private static CharacterManager mInstance;
-    private static Context mContext;
+    private ArrayList<SimpleCharacter> simpleCharacters = new ArrayList<>();
     private Character character;
     private DBAdapter dbAdapter;
     private Long characterId;
@@ -50,8 +48,7 @@ public class CharacterManager {
 
     //TODO CLEAN UP CASTING FOR CHARACTER SETS
 
-    public static synchronized CharacterManager getInstance(Context context) {
-        mContext = context;
+    public static synchronized CharacterManager getInstance() {
         if (mInstance == null) {
             mInstance = new CharacterManager();
         }
@@ -63,7 +60,7 @@ public class CharacterManager {
             if (dbAdapter == null) {
                 throw new DatabaseNotInitializedException(TAG);
             }
-        }catch(DatabaseNotInitializedException ex) {
+        }catch(Exception ex) {
             ex.printStackTrace();
             FirebaseCrash.log(ex.toString());
         }
@@ -76,7 +73,7 @@ public class CharacterManager {
             if (dbAdapter == null) {
                 throw new DatabaseNotInitializedException(TAG);
             }
-        }catch(DatabaseNotInitializedException ex) {
+        }catch(Exception ex) {
             ex.printStackTrace();
             FirebaseCrash.log(ex.toString());
         }
@@ -119,7 +116,10 @@ public class CharacterManager {
                 cursor.close();
             }
         } else {
-            Toast.makeText(mContext, mContext.getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
+            if (dbAdapter == null)
+                throw new DatabaseNotInitializedException(TAG);
+            else
+                throw new IllegalCharacterIdException(TAG);
         }
     }
 
@@ -155,7 +155,10 @@ public class CharacterManager {
                 }
             }
         } else {
-            Toast.makeText(mContext, mContext.getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
+            if (dbAdapter == null)
+                throw new DatabaseNotInitializedException(TAG);
+            else
+                throw new IllegalCharacterIdException(TAG);
         }
     }
 
@@ -190,7 +193,10 @@ public class CharacterManager {
                 }
             }
         } else {
-            Toast.makeText(mContext, mContext.getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
+            if (dbAdapter == null)
+                throw new DatabaseNotInitializedException(TAG);
+            else
+                throw new IllegalCharacterIdException(TAG);
         }
     }
 
@@ -224,7 +230,10 @@ public class CharacterManager {
                 }
             }
         } else {
-            Toast.makeText(mContext, mContext.getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
+            if (dbAdapter == null)
+                throw new DatabaseNotInitializedException(TAG);
+            else
+                throw new IllegalCharacterIdException(TAG);
         }
     }
 
@@ -258,7 +267,10 @@ public class CharacterManager {
                 }
             }
         } else {
-            Toast.makeText(mContext, mContext.getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
+            if (dbAdapter == null)
+                throw new DatabaseNotInitializedException(TAG);
+            else
+                throw new IllegalCharacterIdException(TAG);
         }
     }
 
@@ -292,7 +304,10 @@ public class CharacterManager {
                 }
             }
         } else {
-            Toast.makeText(mContext, mContext.getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
+            if (dbAdapter == null)
+                throw new DatabaseNotInitializedException(TAG);
+            else
+                throw new IllegalCharacterIdException(TAG);
         }
     }
 
@@ -325,7 +340,10 @@ public class CharacterManager {
                 }
             }
         } else {
-            Toast.makeText(mContext, mContext.getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
+            if (dbAdapter == null)
+                throw new DatabaseNotInitializedException(TAG);
+            else
+                throw new IllegalCharacterIdException(TAG);
         }
     }
 
@@ -361,7 +379,10 @@ public class CharacterManager {
                 }
             }
         }  else {
-            Toast.makeText(mContext, mContext.getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
+            if (dbAdapter == null)
+                throw new DatabaseNotInitializedException(TAG);
+            else
+                throw new IllegalCharacterIdException(TAG);
         }
     }
 
@@ -402,7 +423,10 @@ public class CharacterManager {
                 }
             }
         } else {
-            Toast.makeText(mContext, mContext.getString(R.string.warning_database_not_initialized), Toast.LENGTH_SHORT).show();
+            if (dbAdapter == null)
+                throw new DatabaseNotInitializedException(TAG);
+            else
+                throw new IllegalCharacterIdException(TAG);
         }
     }
 
@@ -417,6 +441,74 @@ public class CharacterManager {
         character.setSpellList(spells);
         //TODO Move to AsyncTask
         writeToDatabase(DBAdapter.COLUMN_SPELL, gson.toJson(spells));
+    }
+
+    //**********************************************************
+    // Character List Calls
+    //**********************************************************
+
+    public long getCharacterId(String name) {
+        long id = -1;
+        if (dbAdapter == null) {
+            throw new DatabaseNotInitializedException(TAG);
+        }
+        try {
+            Cursor c = dbAdapter.getCharacterId();
+            if (c != null) {
+                for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
+                    String json = c.getString(c.getColumnIndex(DBAdapter.COLUMN_CHARACTER));
+                    SimpleCharacter simpleCharacter = gson.fromJson(json, SimpleCharacter.class);
+                    if (simpleCharacter.getName().equals(name)) {
+                        id = (long) c.getInt(c.getColumnIndex(DBAdapter.COLUMN_ID));
+                        break;
+                    }
+                }
+            }
+            c.close();
+        }catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return id;
+    }
+
+    public SimpleCharacter getCharacterFromName(String name) {
+        for(SimpleCharacter c : simpleCharacters) {
+            if (c.getName().equals(name))
+                return c;
+        }
+        return null;
+    }
+
+    public ArrayList<SimpleCharacter> getCharacters() {
+        if (dbAdapter == null) {
+            throw new DatabaseNotInitializedException(TAG);
+        }
+        Cursor c = dbAdapter.getAllCharacterNames();
+        simpleCharacters.clear();
+        if (c != null) {
+            for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
+                String json = c.getString(c.getColumnIndex(DBAdapter.COLUMN_CHARACTER));
+                Log.d("JSON", "SimpleCharacter json string "+json);
+                SimpleCharacter simpleCharacter = gson.fromJson(json, SimpleCharacter.class);
+                simpleCharacters.add(simpleCharacter);
+            }
+            c.close();
+        }
+        return simpleCharacters;
+    }
+
+    public void insertCharacter(String characterJson) {
+        if (dbAdapter == null) {
+            throw new DatabaseNotInitializedException(TAG);
+        }
+        dbAdapter.insertRow(characterJson);
+    }
+
+    public void destroyCharacter(String name) {
+        if (dbAdapter == null) {
+            throw new DatabaseNotInitializedException(TAG);
+        }
+        dbAdapter.deleteRow(getCharacterId(name));
     }
 
     //**********************************************************

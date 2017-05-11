@@ -47,7 +47,7 @@ public class NoteFragment extends Fragment {
             note = getArguments().getParcelable(NOTE_KEY);
             index = getArguments().getInt(INDEX_KEY);
         }
-        characterManager = CharacterManager.getInstance(this.getContext());
+        characterManager = CharacterManager.getInstance();
         noteList = characterManager.getCharacterNotes();
     }
 

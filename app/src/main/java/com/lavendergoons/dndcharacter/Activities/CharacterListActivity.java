@@ -17,12 +17,13 @@ import com.lavendergoons.dndcharacter.Fragments.AboutFragment;
 import com.lavendergoons.dndcharacter.Fragments.CharacterListFragment;
 import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
 import com.lavendergoons.dndcharacter.R;
+import com.lavendergoons.dndcharacter.Utils.CharacterManager;
 import com.lavendergoons.dndcharacter.Utils.Constants;
 
 
 /**
-  * Initial Activity to hold list of simpleCharacters
-  * Add and delete simpleCharacters.
+  * Initial Activity to hold list of SimpleCharacters
+  * Add and delete SimpleCharacters.
   * Selecting SimpleCharacter will launch CharacterNavDrawerActivity,
   * to show all SimpleCharacter info.
  */
@@ -35,6 +36,7 @@ public class CharacterListActivity extends AppCompatActivity implements
 
     Toolbar mToolbar;
     private DBAdapter dbAdapter;
+    private CharacterManager characterManager;
 
     boolean isFirstOpen = true;
 
@@ -76,6 +78,10 @@ public class CharacterListActivity extends AppCompatActivity implements
     protected void onStart() {
         dbAdapter = new DBAdapter(this);
         dbAdapter.open();
+
+        //Load database in CharacterManager
+        characterManager = CharacterManager.getInstance();
+        characterManager.loadDatabase(dbAdapter);
         super.onStart();
     }
 
@@ -123,10 +129,5 @@ public class CharacterListActivity extends AppCompatActivity implements
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
-    }
-
-
-    public DBAdapter getDbAdapter() {
-        return dbAdapter;
     }
 }

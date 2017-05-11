@@ -125,7 +125,7 @@
     <string name="gen_copper">Copper</string>
 
     <!-- Labels -->
-    <string name="label_add_character_btn">Add Character</string>
+    <string name="label_nav_character_sections">Character Sections</string>
     <string name="label_nav_drawer_attributes">Attributes</string>
     <string name="label_nav_drawer_abilities">Abilities</string>
     <string name="label_nav_drawer_feats">Feats</string>
@@ -136,6 +136,7 @@
     <string name="label_nav_drawer_spells">Spells</string>
     <string name="label_nav_drawer_armor">Armor</string>
     <string name="label_nav_drawer_notes">Notes</string>
+
     <string name="label_layout_ac_bonus">AC\nBonus</string>
     <string name="label_layout_max_dex">Max\nDex</string>
     <string name="label_layout_check_penalty">Check\nPenalty</string>

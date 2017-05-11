@@ -67,7 +67,7 @@ public class ArmorListFragment extends Fragment implements
             characterId = getArguments().getLong(Constants.CHARACTER_ID);
             simpleCharacter = getArguments().getParcelable(Constants.CHARACTER_KEY);
         }
-        characterManager = CharacterManager.getInstance(this.getContext());
+        characterManager = CharacterManager.getInstance();
         armorList = characterManager.getCharacterArmor();
     }
 
