@@ -1,6 +1,5 @@
 package com.lavendergoons.dndcharacter.Fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,9 +18,8 @@ import com.lavendergoons.dndcharacter.Adapters.SkillsAdapter;
 
 import java.util.ArrayList;
 
-public class SkillsFragment extends Fragment {
+public class SkillsFragment extends Fragment implements SkillsAdapter.SkillAdapterListener {
 
-    private OnFragmentInteractionListener mListener;
     private RecyclerView mSkillsRecyclerView;
     private SkillsAdapter mSkillRecyclerAdapter;
     private RecyclerView.LayoutManager mSkillRecyclerLayoutManager;
@@ -77,31 +75,11 @@ public class SkillsFragment extends Fragment {
         return rootView;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
 
     @Override
     public void onStop() {
         writeSkills();
         super.onStop();
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction();
     }
 
     private void writeSkills() {

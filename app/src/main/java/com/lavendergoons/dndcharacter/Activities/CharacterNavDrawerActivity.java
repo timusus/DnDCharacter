@@ -48,7 +48,6 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         ItemsGeneralFragment.OnFragmentInteractionListener,
         NotesListFragment.OnFragmentInteractionListener,
         NoteFragment.OnFragmentInteractionListener,
-        SkillsFragment.OnFragmentInteractionListener,
         SpellFragment.OnFragmentInteractionListener,
         SpellListFragment.OnFragmentInteractionListener,
         FragmentManager.OnBackStackChangedListener {

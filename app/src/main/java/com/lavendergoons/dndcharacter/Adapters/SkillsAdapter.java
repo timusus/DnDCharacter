@@ -1,5 +1,6 @@
 package com.lavendergoons.dndcharacter.Adapters;
 
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,7 +13,6 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.lavendergoons.dndcharacter.Fragments.SkillsFragment;
 import com.lavendergoons.dndcharacter.Objects.Abilities;
 import com.lavendergoons.dndcharacter.Objects.Skill;
 import com.lavendergoons.dndcharacter.R;
@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder> {
 
-    private SkillsFragment skillsFragment;
+    private Fragment fragment;
     private ArrayList<Skill> mDataset;
     private Abilities abilities;
 
@@ -70,11 +70,18 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
         }
     }
 
-    public SkillsAdapter(SkillsFragment skillsFragment, ArrayList<Skill> dataset, Abilities abilities) {
-        this.skillsFragment = skillsFragment;
+    public SkillsAdapter(Fragment fragment, ArrayList<Skill> dataset, Abilities abilities) {
         this.mDataset = dataset;
         this.abilities = abilities;
+        if (fragment instanceof SkillAdapterListener) {
+            this.fragment = fragment;
+        } else {
+            throw new RuntimeException(fragment.toString()
+                    + " must implement SkillAdapterListener");
+        }
     }
+
+    public interface SkillAdapterListener {}
 
     @Override
     public SkillsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -100,28 +107,6 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
         holder.skillModEdit.setText(String.valueOf(abilities.getMod(mod)));
         holder.skillRankEdit.setText(String.valueOf(mDataset.get(position).getRank()));
         holder.skillMiscEdit.setText(String.valueOf(mDataset.get(position).getMisc()));
-
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onCardClick();
-            }
-        });
-
-        holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                return onCardLongClick();
-            }
-        });
-    }
-
-    private void onCardClick() {
-
-    }
-
-    private boolean onCardLongClick() {
-        return true;
     }
 
     @Override
