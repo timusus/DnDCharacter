@@ -5,7 +5,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,10 +20,39 @@ import com.lavendergoons.dndcharacter.Utils.Utils;
  * Dialog for Editing and Creating Attacks
  */
 
-public class AttackDialog extends DialogFragment {
+public class AttackDialog {
 
-    public AttackDialog() {
-        super();
+    private Context context;
+    private Fragment fragment;
+    private Activity activity;
+    private Attack attack;
+    private AttackDialogListener listener;
+
+    private EditText atkDialogNameEdit, atkDialogBonusEdit, atkDialogDamageEdit, atkDialogCriticalEdit, atkDialogRangeEdit, atkDialogTypeEdit, atkDialogAmmoEdit, atkDialogNotesEdit;
+
+    public AttackDialog(Fragment fragment, Attack attack) {
+        this.context = fragment.getContext();
+        this.fragment = fragment;
+        this.activity = fragment.getActivity();
+        this.attack = attack;
+        if (fragment instanceof AttackDialogListener) {
+            this.listener = (AttackDialogListener) fragment;
+        } else {
+            throw new RuntimeException(fragment.toString()
+                + " must implement AttackDialogListener.");
+        }
+    }
+
+    public AttackDialog(Activity activity, Attack attack) {
+        this.context = activity;
+        this.activity = activity;
+        this.attack = attack;
+        if (fragment instanceof AttackDialogListener) {
+            this.listener = (AttackDialogListener) fragment;
+        } else {
+            throw new RuntimeException(fragment.toString()
+                    + " must implement AttackDialogListener.");
+        }
     }
 
     public static interface AttackDialogListener {
@@ -31,31 +60,21 @@ public class AttackDialog extends DialogFragment {
         void OnAttackDialogNegative();
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        try {
-            AttackDialog.AttackDialogListener mInterface = (AttackDialog.AttackDialogListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() +" must implement AttackDialogListener");
-        }
-    }
-
-    public static void showAttackDialog(final Activity activity, final AttackDialog.AttackDialogListener target, final Attack attack) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle(activity.getString(R.string.title_attack_dialog));
+    public void showDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(context.getString(R.string.title_attack_dialog));
 
         LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_attack, null);
 
-        final EditText atkDialogNameEdit = (EditText) view.findViewById(R.id.atkDialogNameEdit);
-        final EditText atkDialogBonusEdit = (EditText) view.findViewById(R.id.atkDialogBonusEdit);
-        final EditText atkDialogDamageEdit = (EditText) view.findViewById(R.id.atkDialogDamageEdit);
-        final EditText atkDialogCriticalEdit = (EditText) view.findViewById(R.id.atkDialogCriticalEdit);
-        final EditText atkDialogRangeEdit = (EditText) view.findViewById(R.id.atkDialogRangeEdit);
-        final EditText atkDialogTypeEdit = (EditText) view.findViewById(R.id.atkDialogTypeEdit);
-        final EditText atkDialogAmmoEdit = (EditText) view.findViewById(R.id.atkDialogAmmoEdit);
-        final EditText atkDialogNotesEdit = (EditText) view.findViewById(R.id.atkDialogNotesEdit);
+        atkDialogNameEdit = (EditText) view.findViewById(R.id.atkDialogNameEdit);
+        atkDialogBonusEdit = (EditText) view.findViewById(R.id.atkDialogBonusEdit);
+        atkDialogDamageEdit = (EditText) view.findViewById(R.id.atkDialogDamageEdit);
+        atkDialogCriticalEdit = (EditText) view.findViewById(R.id.atkDialogCriticalEdit);
+        atkDialogRangeEdit = (EditText) view.findViewById(R.id.atkDialogRangeEdit);
+        atkDialogTypeEdit = (EditText) view.findViewById(R.id.atkDialogTypeEdit);
+        atkDialogAmmoEdit = (EditText) view.findViewById(R.id.atkDialogAmmoEdit);
+        atkDialogNotesEdit = (EditText) view.findViewById(R.id.atkDialogNotesEdit);
 
         if (attack != null) {
             atkDialogNameEdit.setText(attack.getAttack());
@@ -96,9 +115,9 @@ public class AttackDialog extends DialogFragment {
                     attack.setType(type);
                     attack.setAmmo(ammo);
                     attack.setNotes(notes);
-                    target.OnAttackDialogPositive(null);
+                    listener.OnAttackDialogPositive(null);
                 } else if (!Utils.isStringArrayEmpty(new String[]{name, bonus, damage, critical, type}) && !exceptionCheck && attack == null) {
-                    target.OnAttackDialogPositive(new Attack(name, bonus, damage, critical, range, type, ammo, notes));
+                    listener.OnAttackDialogPositive(new Attack(name, bonus, damage, critical, range, type, ammo, notes));
                 } else {
                     Toast.makeText(activity, activity.getString(R.string.warning_enter_required_fields), Toast.LENGTH_LONG).show();
                 }
@@ -106,7 +125,7 @@ public class AttackDialog extends DialogFragment {
         }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                target.OnAttackDialogNegative();
+                listener.OnAttackDialogNegative();
             }
         });
 

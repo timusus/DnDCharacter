@@ -18,7 +18,7 @@ public class ConfirmationDialog extends DialogFragment {
         super();
     }
 
-    public static interface ConfirmationDialogInterface {
+    public interface ConfirmationDialogInterface {
         void ConfirmDialogOk(Object o);
         void ConfirmDialogCancel(Object o);
     }

@@ -2,6 +2,7 @@ package com.lavendergoons.dndcharacter.Adapters;
 
 import android.content.Context;
 import android.os.Vibrator;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.lavendergoons.dndcharacter.Dialogs.AttackDialog;
-import com.lavendergoons.dndcharacter.Fragments.AttacksFragment;
 import com.lavendergoons.dndcharacter.Objects.Attack;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.Constants;
@@ -22,12 +22,24 @@ import java.util.ArrayList;
 
 public class AttackAdapter extends RecyclerView.Adapter<AttackAdapter.ViewHolder> {
 
-    private AttacksFragment attacksFragment;
+    private Fragment fragment;
+    private AttackAdapterListener listener;
     private ArrayList<Attack> mDataset;
 
-    public AttackAdapter(AttacksFragment fragment, ArrayList<Attack> dataset) {
-        this.attacksFragment = fragment;
+
+    public AttackAdapter(Fragment fragment, ArrayList<Attack> dataset) {
         this.mDataset = dataset;
+        this.fragment = fragment;
+        if (fragment instanceof AttackAdapterListener) {
+            this.listener = (AttackAdapterListener) fragment;
+        } else {
+            throw new RuntimeException(fragment.toString()
+                    + " must implement AttackAdapterListener");
+        }
+    }
+
+    public interface AttackAdapterListener {
+        void removeAttack(Attack attack);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -83,13 +95,14 @@ public class AttackAdapter extends RecyclerView.Adapter<AttackAdapter.ViewHolder
     }
 
     private void onCardClick(Attack attack) {
-        AttackDialog.showAttackDialog(attacksFragment.getActivity(), attacksFragment, attack);
+        //AttackDialog.showAttackDialog(fragment.getActivity(), (AttackDialog.AttackDialogListener) fragment, attack);
+        new AttackDialog(fragment, attack).showDialog();
     }
 
     private boolean onCardLongClick(Attack attack) {
-        Vibrator v = (Vibrator) attacksFragment.getContext().getSystemService(Context.VIBRATOR_SERVICE);
+        Vibrator v = (Vibrator) fragment.getContext().getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(Constants.LONG_CLICK_VIBRATION);
-        attacksFragment.deleteAttack(attack);
+        listener.removeAttack(attack);
         return true;
     }
 

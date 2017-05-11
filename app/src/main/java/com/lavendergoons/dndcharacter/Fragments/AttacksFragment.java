@@ -1,6 +1,5 @@
 package com.lavendergoons.dndcharacter.Fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -21,22 +20,21 @@ import com.lavendergoons.dndcharacter.Utils.Constants;
 
 import java.util.ArrayList;
 
-public class AttacksFragment extends Fragment implements View.OnClickListener, AttackDialog.AttackDialogListener, ConfirmationDialog.ConfirmationDialogInterface {
+public class AttacksFragment extends Fragment
+        implements View.OnClickListener, AttackDialog.AttackDialogListener, AttackAdapter.AttackAdapterListener, ConfirmationDialog.ConfirmationDialogInterface {
 
     public static final String TAG = "ATTACKS_FRAG";
-
 
     private RecyclerView mAttacksRecyclerView;
     private RecyclerView.Adapter mAttacksRecyclerAdapter;
     private RecyclerView.LayoutManager mAttacksRecyclerLayoutManager;
-    private OnFragmentInteractionListener mListener;
 
     private CharacterManager characterManager;
     private SimpleCharacter simpleCharacter;
     private long characterId = -1;
 
     private ArrayList<Attack> attackList = new ArrayList<>();
-    private FloatingActionButton fab;
+    private FloatingActionButton addAttackFAB;
 
     public AttacksFragment() {
         // Required empty public constructor
@@ -78,8 +76,8 @@ public class AttacksFragment extends Fragment implements View.OnClickListener, A
         mAttacksRecyclerAdapter = new AttackAdapter(this, attackList);
         mAttacksRecyclerView.setAdapter(mAttacksRecyclerAdapter);
 
-        fab = (FloatingActionButton) rootView.findViewById(R.id.addAttackFAB);
-        fab.setOnClickListener(this);
+        addAttackFAB = (FloatingActionButton) rootView.findViewById(R.id.addAttackFAB);
+        addAttackFAB.setOnClickListener(this);
         return rootView;
     }
 
@@ -91,7 +89,8 @@ public class AttacksFragment extends Fragment implements View.OnClickListener, A
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.addAttackFAB:
-                AttackDialog.showAttackDialog(this.getActivity(), this, null);
+                //AttackDialog.showAttackDialog(this.getActivity(), this, null);
+                new AttackDialog(this, null).showDialog();
                 break;
         }
     }
@@ -105,9 +104,7 @@ public class AttacksFragment extends Fragment implements View.OnClickListener, A
     }
 
     @Override
-    public void OnAttackDialogNegative() {
-
-    }
+    public void OnAttackDialogNegative() {}
 
     @Override
     public void ConfirmDialogOk(Object attack) {
@@ -118,38 +115,16 @@ public class AttacksFragment extends Fragment implements View.OnClickListener, A
     }
 
     @Override
-    public void ConfirmDialogCancel(Object o) {
+    public void ConfirmDialogCancel(Object o) {}
 
-    }
-
-    public void deleteAttack(Attack attack) {
+    @Override
+    public void removeAttack(Attack attack) {
         ConfirmationDialog.showConfirmDialog(this.getContext(), getString(R.string.confirm_delete_attack), this, attack);
     }
 
     @Override
-    public void onDestroy() {
+    public void onStop() {
         writeAttacks();
-        super.onDestroy();
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction();
+        super.onStop();
     }
 }

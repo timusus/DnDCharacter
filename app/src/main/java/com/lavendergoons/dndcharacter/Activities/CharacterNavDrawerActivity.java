@@ -44,7 +44,6 @@ import com.lavendergoons.dndcharacter.Utils.Constants;
 public class CharacterNavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         AboutFragment.OnFragmentInteractionListener,
-        AttacksFragment.OnFragmentInteractionListener,
         ItemsGeneralFragment.OnFragmentInteractionListener,
         NotesListFragment.OnFragmentInteractionListener,
         NoteFragment.OnFragmentInteractionListener,
