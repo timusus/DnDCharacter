@@ -1,7 +1,9 @@
 package com.lavendergoons.dndcharacter.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Vibrator;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,7 +22,9 @@ import java.util.ArrayList;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> {
 
-    private NotesListFragment fragment;
+    //private NotesListFragment fragment;
+    private Fragment fragment;
+    private NotesAdapterListener listener;
     private ArrayList<Note> mDataset;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -35,9 +39,19 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
         }
     }
 
-    public NotesAdapter(NotesListFragment fragment, ArrayList<Note> notes) {
+    public NotesAdapter(Fragment fragment, ArrayList<Note> notes) {
         this.fragment = fragment;
         this.mDataset = notes;
+        if (fragment instanceof NotesAdapterListener) {
+            this.listener = (NotesAdapterListener) fragment;
+        } else {
+            throw new RuntimeException(fragment.toString()
+                + " must implement NotesAdapterListener.");
+        }
+    }
+
+    public interface NotesAdapterListener {
+        void remoteNote(Note note);
     }
 
     @Override
@@ -70,7 +84,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
     private boolean onCardLongClick(int position) {
         Vibrator v = (Vibrator) fragment.getContext().getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(Constants.LONG_CLICK_VIBRATION);
-        fragment.deleteNote(mDataset.get(position));
+        listener.remoteNote(mDataset.get(position));
         return true;
     }
 

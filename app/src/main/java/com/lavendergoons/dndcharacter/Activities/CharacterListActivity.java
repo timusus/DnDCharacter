@@ -20,7 +20,6 @@ import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.Constants;
 
 
-
 /**
   * Initial Activity to hold list of simpleCharacters
   * Add and delete simpleCharacters.
@@ -29,7 +28,6 @@ import com.lavendergoons.dndcharacter.Utils.Constants;
  */
 
 public class CharacterListActivity extends AppCompatActivity implements
-        AboutFragment.OnFragmentInteractionListener,
         CharacterListFragment.OnCharacterClickListener{
 
     public static final String TAG = "CHARACTER_LIST";
@@ -127,10 +125,6 @@ public class CharacterListActivity extends AppCompatActivity implements
         return true;
     }
 
-    @Override
-    public void onFragmentInteraction() {
-
-    }
 
     public DBAdapter getDbAdapter() {
         return dbAdapter;

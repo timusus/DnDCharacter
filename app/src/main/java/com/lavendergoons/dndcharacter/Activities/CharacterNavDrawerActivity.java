@@ -41,11 +41,7 @@ import com.lavendergoons.dndcharacter.Utils.Constants;
  */
 
 public class CharacterNavDrawerActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,
-        AboutFragment.OnFragmentInteractionListener,
-        NotesListFragment.OnFragmentInteractionListener,
-        NoteFragment.OnFragmentInteractionListener,
-        FragmentManager.OnBackStackChangedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, FragmentManager.OnBackStackChangedListener {
 
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
@@ -310,13 +306,5 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
             fragTransaction.replace(R.id.content_character_nav, fragment, tag).commit();
         }
         return true;
-    }
-
-    @Override
-    public void onFragmentInteraction() {}
-
-
-    public DBAdapter getDbAdapter() {
-        return dbAdapter;
     }
 }

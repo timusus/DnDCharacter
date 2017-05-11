@@ -1,12 +1,9 @@
 package com.lavendergoons.dndcharacter.Fragments;
 
-import android.content.Context;
 
 import android.content.DialogInterface;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -20,10 +17,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.lavendergoons.dndcharacter.Activities.CharacterNavDrawerActivity;
-import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
 import com.lavendergoons.dndcharacter.Objects.Note;
@@ -33,21 +26,17 @@ import com.lavendergoons.dndcharacter.Utils.Constants;
 import com.lavendergoons.dndcharacter.Adapters.NotesAdapter;
 import com.lavendergoons.dndcharacter.Utils.Utils;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-
-public class NotesListFragment extends Fragment implements ConfirmationDialog.ConfirmationDialogInterface, View.OnClickListener {
+public class NotesListFragment extends Fragment
+        implements ConfirmationDialog.ConfirmationDialogInterface, View.OnClickListener, NotesAdapter.NotesAdapterListener {
 
     public static final String TAG = "NOTES_LIST_FRAG";
-
-    private Gson gson = new Gson();
 
     private RecyclerView mNotesRecyclerView;
     private NotesAdapter mNotesRecyclerAdapter;
     private RecyclerView.LayoutManager mNotesLayoutManager;
     private FloatingActionButton addNotesFAB;
-    private OnFragmentInteractionListener mListener;
     private CharacterManager characterManager;
 
     private SimpleCharacter simpleCharacter;
@@ -106,23 +95,6 @@ public class NotesListFragment extends Fragment implements ConfirmationDialog.Co
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    @Override
     public void onStop() {
         writeNotes();
         super.onStop();
@@ -132,12 +104,13 @@ public class NotesListFragment extends Fragment implements ConfirmationDialog.Co
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.addNotesFAB:
-                NotesDialog.newInstance(this);
+                new NotesDialog().showDialog();
                 break;
         }
     }
 
-    public void deleteNote(Note note) {
+    @Override
+    public void remoteNote(Note note) {
         ConfirmationDialog.showConfirmDialog(this.getContext(), getString(R.string.confirm_delete_note), this, note);
     }
 
@@ -154,10 +127,6 @@ public class NotesListFragment extends Fragment implements ConfirmationDialog.Co
 
     }
 
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction();
-    }
-
 
     private int addNote(Note note) {
         int i = -1;
@@ -170,9 +139,10 @@ public class NotesListFragment extends Fragment implements ConfirmationDialog.Co
     }
 
     // Simple Dialog to Create New Note
-    public static class NotesDialog extends DialogFragment {
+    public class NotesDialog  {
 
-        public static void newInstance(final NotesListFragment fragment) {
+        public void showDialog() {
+            final NotesListFragment fragment = NotesListFragment.this;
             AlertDialog.Builder builder = new AlertDialog.Builder(fragment.getActivity());
             LinearLayout dialogLayout = new LinearLayout(fragment.getActivity());
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);

@@ -1,6 +1,5 @@
 package com.lavendergoons.dndcharacter.Fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,7 +18,6 @@ public class NoteFragment extends Fragment {
 
     public static final String TAG = "NOTE_FRAG";
 
-    private OnFragmentInteractionListener mListener;
     private CharacterManager characterManager;
     private EditText titleEdit, contentEdit;
 
@@ -65,22 +63,6 @@ public class NoteFragment extends Fragment {
         return rootView;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
 
     @Override
     public void onStop() {
@@ -94,6 +76,4 @@ public class NoteFragment extends Fragment {
         characterManager.setCharacterNotes(noteList);
         super.onStop();
     }
-
-    public interface OnFragmentInteractionListener {}
 }
