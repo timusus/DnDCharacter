@@ -1,6 +1,5 @@
 package com.lavendergoons.dndcharacter.Fragments;
 
-import android.content.Context;
 import android.os.BadParcelableException;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,7 +24,6 @@ public class SpellFragment extends Fragment {
 
     private EditText spellNameEdit, spellLevelEdit, spellTypeEdit, spellComponentEdit, spellCastTimeEdit, spellRangeEdit, spellAreaEdit, spellDurationEdit, spellSavingThrowEdit, spellNotesEdit;
     private Switch spellResSwitch;
-    private OnFragmentInteractionListener mListener;
     private CharacterManager characterManager;
     private ArrayList<Spell> spellList = new ArrayList<>();
     private Spell spell;
@@ -124,26 +122,5 @@ public class SpellFragment extends Fragment {
         spellList.set(index, spell);
         characterManager.setCharacterSpells(spellList);
         super.onStop();
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-
     }
 }

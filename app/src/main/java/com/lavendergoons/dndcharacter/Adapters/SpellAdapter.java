@@ -2,6 +2,7 @@ package com.lavendergoons.dndcharacter.Adapters;
 
 import android.content.Context;
 import android.os.Vibrator;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.lavendergoons.dndcharacter.Fragments.SpellFragment;
-import com.lavendergoons.dndcharacter.Fragments.SpellListFragment;
 import com.lavendergoons.dndcharacter.Objects.Spell;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.Constants;
@@ -24,12 +24,25 @@ import java.util.ArrayList;
 
 public class SpellAdapter extends RecyclerView.Adapter<SpellAdapter.ViewHolder> {
 
-    private SpellListFragment spellListFragment;
+    private Fragment fragment;
+    private Context context;
+    private SpellAdapterListener listener;
     private ArrayList<Spell> mDataset;
 
-    public SpellAdapter(SpellListFragment fragment, ArrayList<Spell> dataset) {
-        this.spellListFragment = fragment;
+    public SpellAdapter(Fragment fragment, ArrayList<Spell> dataset) {
+        this.fragment = fragment;
         this.mDataset = dataset;
+        this.context = fragment.getContext();
+        if (fragment instanceof SpellAdapterListener) {
+            this.listener = (SpellAdapterListener) fragment;
+        } else {
+            throw new RuntimeException(fragment.toString()
+                + " must implement SpellAdapterListener.");
+        }
+    }
+
+    public interface SpellAdapterListener {
+        void removeSpell(Spell spell);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -81,14 +94,14 @@ public class SpellAdapter extends RecyclerView.Adapter<SpellAdapter.ViewHolder> 
     }
 
     private boolean onCardLongClick(Spell spell) {
-        Vibrator v = (Vibrator) spellListFragment.getContext().getSystemService(Context.VIBRATOR_SERVICE);
+        Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(Constants.LONG_CLICK_VIBRATION);
-        spellListFragment.deleteSpell(spell);
+        listener.removeSpell(spell);
         return true;
     }
 
     private void launchSpellFragment(Spell spell, int i) {
-        FragmentTransaction fragTransaction = spellListFragment.getActivity().getSupportFragmentManager().beginTransaction();
+        FragmentTransaction fragTransaction = fragment.getActivity().getSupportFragmentManager().beginTransaction();
         fragTransaction.replace(R.id.content_character_nav, SpellFragment.newInstance(spell, i), SpellFragment.TAG).addToBackStack(SpellFragment.TAG).commit();
     }
 

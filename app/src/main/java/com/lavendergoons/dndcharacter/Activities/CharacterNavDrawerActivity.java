@@ -45,8 +45,6 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
         AboutFragment.OnFragmentInteractionListener,
         NotesListFragment.OnFragmentInteractionListener,
         NoteFragment.OnFragmentInteractionListener,
-        SpellFragment.OnFragmentInteractionListener,
-        SpellListFragment.OnFragmentInteractionListener,
         FragmentManager.OnBackStackChangedListener {
 
     private ActionBarDrawerToggle mDrawerToggle;

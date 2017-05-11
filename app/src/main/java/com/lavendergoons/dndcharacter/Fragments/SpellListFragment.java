@@ -1,10 +1,8 @@
 package com.lavendergoons.dndcharacter.Fragments;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -29,15 +27,16 @@ import com.lavendergoons.dndcharacter.Utils.Utils;
 
 import java.util.ArrayList;
 
-public class SpellListFragment extends Fragment implements View.OnClickListener, ConfirmationDialog.ConfirmationDialogInterface {
+
+public class SpellListFragment extends Fragment
+        implements View.OnClickListener, SpellAdapter.SpellAdapterListener, ConfirmationDialog.ConfirmationDialogInterface {
 
     public static final String TAG = "SPELL_LIST_FRAG";
 
     private RecyclerView mSpellRecyclerView;
     private RecyclerView.Adapter mSpellRecyclerAdapter;
     private RecyclerView.LayoutManager mSpellRecyclerLayoutManager;
-    private FloatingActionButton fab;
-    private OnFragmentInteractionListener mListener;
+    private FloatingActionButton addSpellFAB;
     private CharacterManager characterManager;
 
     private ArrayList<Spell> spellList = new ArrayList<>();
@@ -85,11 +84,10 @@ public class SpellListFragment extends Fragment implements View.OnClickListener,
         mSpellRecyclerAdapter = new SpellAdapter(this, spellList);
         mSpellRecyclerView.setAdapter(mSpellRecyclerAdapter);
 
-        fab = (FloatingActionButton) rootView.findViewById(R.id.addSpellFAB);
-        fab.setOnClickListener(this);
+        addSpellFAB = (FloatingActionButton) rootView.findViewById(R.id.addSpellFAB);
+        addSpellFAB.setOnClickListener(this);
         return rootView;
     }
-
 
 
     private void writeSpells() {
@@ -100,7 +98,7 @@ public class SpellListFragment extends Fragment implements View.OnClickListener,
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.addSpellFAB:
-                SpellDialog.newInstance(this);
+                new SpellDialog().showDialog();
                 break;
         }
     }
@@ -116,7 +114,9 @@ public class SpellListFragment extends Fragment implements View.OnClickListener,
     @Override
     public void ConfirmDialogCancel(Object o) {}
 
-    public void deleteSpell(Spell spell) {
+
+    @Override
+    public void removeSpell(Spell spell) {
         ConfirmationDialog.showConfirmDialog(this.getContext(), getString(R.string.confirm_delete_spell), this, spell);
     }
 
@@ -131,35 +131,17 @@ public class SpellListFragment extends Fragment implements View.OnClickListener,
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
     public void onStop() {
         writeSpells();
         super.onStop();
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {}
-
-
     // Simple Dialog to Create New Spell
-    public static class SpellDialog extends DialogFragment {
+    public class SpellDialog {
 
-        public static void newInstance(final SpellListFragment fragment) {
+        public void showDialog() {
+            final SpellListFragment fragment = SpellListFragment.this;
+
             AlertDialog.Builder builder = new AlertDialog.Builder(fragment.getActivity());
             LinearLayout dialogLayout = new LinearLayout(fragment.getActivity());
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
