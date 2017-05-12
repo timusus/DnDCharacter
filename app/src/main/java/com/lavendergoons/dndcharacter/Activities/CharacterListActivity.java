@@ -3,6 +3,7 @@ package com.lavendergoons.dndcharacter.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -11,6 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.widget.LinearLayout;
 
 import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Fragments.AboutFragment;
@@ -55,11 +59,7 @@ public class CharacterListActivity extends AppCompatActivity implements
         isFirstOpen = sharedPreferences.getBoolean(FIRST_OPEN, true);
 
         if (isFirstOpen) {
-            new AlertDialog.Builder(this).setTitle(getString(R.string.announcement_title))
-                    .setMessage(getString(R.string.announcement_first_open_message))
-                    .setPositiveButton(R.string.ok, null)
-                    .create().show();
-            isFirstOpen = false;
+            new FirstOpenDialog().showDialog();
         }
         sharedEditor.putBoolean(FIRST_OPEN, isFirstOpen);
         sharedEditor.apply();
@@ -129,5 +129,29 @@ public class CharacterListActivity extends AppCompatActivity implements
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    public class FirstOpenDialog {
+        public void showDialog() {
+            Context context = CharacterListActivity.this;
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+            LinearLayout dialogLayout = new LinearLayout(context);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+            final WebView webView = new WebView(context);
+            webView.getSettings().setJavaScriptEnabled(true);
+            webView.setBackgroundColor(Color.TRANSPARENT);
+            webView.loadUrl("file:///android_asset/firstOpen.html");
+
+            dialogLayout.setLayoutParams(params);
+            dialogLayout.addView(webView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+            builder.setTitle(getString(R.string.announcement_title))
+                    .setView(dialogLayout)
+                    .setPositiveButton(R.string.ok, null)
+                    .create().show();
+        }
     }
 }

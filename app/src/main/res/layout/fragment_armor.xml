@@ -24,7 +24,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
+                android:inputType="textCapWords"
                 android:hint="@string/armor_name"
                 android:ems="10"
                 android:id="@+id/armorNameEdit"
@@ -47,7 +47,7 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
+                android:inputType="textCapWords"
                 android:hint="@string/armor_type"
                 android:ems="10"
                 android:id="@+id/armorTypeEdit"

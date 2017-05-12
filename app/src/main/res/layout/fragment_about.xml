@@ -88,4 +88,14 @@
         android:text="@string/about_issues_email"
         android:autoLink="email"
         android:layout_marginTop="@dimen/activity_half_vertical_margin"/>
+
+    <TextView
+        android:id="@+id/aboutChangeLogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/aboutIssuesEmail"
+        android:text="@string/announcement_view_changelog"
+        android:textSize="20sp"
+        android:layout_marginTop="@dimen/activity_half_vertical_margin"/>
 </RelativeLayout>
