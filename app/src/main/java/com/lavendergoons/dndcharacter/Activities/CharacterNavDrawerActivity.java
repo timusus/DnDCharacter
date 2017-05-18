@@ -23,6 +23,8 @@ import com.lavendergoons.dndcharacter.Fragments.ArmorFragment;
 import com.lavendergoons.dndcharacter.Fragments.ArmorListFragment;
 import com.lavendergoons.dndcharacter.Fragments.AttacksFragment;
 import com.lavendergoons.dndcharacter.Fragments.AttributesFragment;
+import com.lavendergoons.dndcharacter.Fragments.CompanionFragment;
+import com.lavendergoons.dndcharacter.Fragments.CompanionsListFragment;
 import com.lavendergoons.dndcharacter.Fragments.FeatsFragment;
 import com.lavendergoons.dndcharacter.Fragments.ItemsGeneralFragment;
 import com.lavendergoons.dndcharacter.Fragments.NoteFragment;
@@ -151,8 +153,11 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
 
     @Override
     public void onBackStackChanged() {
-        if (isCurrentFragment(SpellFragment.TAG) || isCurrentFragment(ArmorFragment.TAG)
-                || isCurrentFragment(AboutFragment.TAG) || isCurrentFragment(NoteFragment.TAG)) {
+        if (isCurrentFragment(SpellFragment.TAG)
+                || isCurrentFragment(ArmorFragment.TAG)
+                || isCurrentFragment(AboutFragment.TAG)
+                || isCurrentFragment(NoteFragment.TAG)
+                || isCurrentFragment(CompanionFragment.TAG)) {
             showBackButton(true);
             setDrawerLock(true);
         } else {
@@ -186,8 +191,10 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
                 title = getString(R.string.title_fragment_spells);
             } else if (frag instanceof NotesListFragment) {
                 title = getString(R.string.title_fragment_notes);
-            }else if (frag instanceof NoteFragment) {
+            } else if (frag instanceof NoteFragment) {
                 title = getString(R.string.title_fragment_notes);
+            } else if (frag instanceof CompanionsListFragment) {
+                title = getString(R.string.title_fragment_companions);
             }
         }
         return title;
@@ -222,6 +229,7 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Launch the AboutFragment
         if (item.getItemId() == R.id.actionAbout) {
             mToolbar.setTitle(getString(R.string.title_fragment_about));
             FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();
@@ -232,6 +240,7 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
     }
 
     private void loadDefaultFragment() {
+        //Load Attributes Fragment as Default
         FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();
         fragTransaction.replace(R.id.content_character_nav, AttributesFragment.newInstance(simpleCharacter, characterId),  AttributesFragment.TAG).commit();
     }
@@ -297,11 +306,16 @@ public class CharacterNavDrawerActivity extends AppCompatActivity
                 tag = NotesListFragment.TAG;
                 title = getString(R.string.title_fragment_notes);
                 break;
+            case R.id.nav_companion:
+                fragment = CompanionsListFragment.newInstance(simpleCharacter, characterId);
+                tag = CompanionsListFragment.TAG;
+                title = getString(R.string.title_fragment_companions);
+                break;
         }
 
         mDrawerLayout.closeDrawer(GravityCompat.START);
         if (!isCurrentFragment(tag)) {
-            mToolbar.setTitle(title);
+            //mToolbar.setTitle(title);
             FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();
             fragTransaction.replace(R.id.content_character_nav, fragment, tag).commit();
         }

@@ -31,6 +31,7 @@
     <string name="title_fragment_spells">Spells</string>
     <string name="title_fragment_skills">Skills</string>
     <string name="title_fragment_notes">Notes</string>
+    <string name="title_fragment_companions">Companions</string>
 
     <!-- General Strings -->
     <string name="ok">OK</string>
@@ -111,7 +112,7 @@
     <string name="label_nav_drawer_skills">Skills</string>
     <string name="label_nav_drawer_items">Items</string>
     <string name="label_nav_drawer_attacks">Attacks</string>
-    <string name="label_nav_drawer_animals">Animals</string>
+    <string name="label_nav_drawer_companions">Companions</string>
     <string name="label_nav_drawer_spells">Spells</string>
     <string name="label_nav_drawer_armor">Armor</string>
     <string name="label_nav_drawer_notes">Notes</string>
@@ -137,6 +138,7 @@
     <string name="title_spell_dialog">Create New Spell</string>
     <string name="title_note_dialog">Create New Note</string>
     <string name="title_select_feat_type">Select Feat Type</string>
+    <string name="title_companion_dialog">Create New Companion</string>
 
     <!-- Hints/Placeholders -->
     <string name="hint_name">Name</string>
