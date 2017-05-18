@@ -61,7 +61,7 @@ public class CharacterListActivity extends AppCompatActivity implements
         if (isFirstOpen) {
             new FirstOpenDialog().showDialog();
         }
-        sharedEditor.putBoolean(FIRST_OPEN, isFirstOpen);
+        sharedEditor.putBoolean(FIRST_OPEN, false);
         sharedEditor.apply();
     }
 
