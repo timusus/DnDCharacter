@@ -133,8 +133,8 @@ public class CharacterManager {
 
     public void setCharacterAbilities(Abilities abilities) {
         character.setAbilities(abilities);
-        //TODO Move to AsyncTask
-        writeToDatabase(DBAdapter.COLUMN_ABILITIES, gson.toJson(abilities));
+        WriteToDatabaseTask writeToDatabaseTask = new WriteToDatabaseTask(DBAdapter.COLUMN_ABILITIES);
+        writeToDatabaseTask.execute(gson.toJson(abilities));
     }
 
     //**********************************************************
@@ -149,7 +149,6 @@ public class CharacterManager {
                 String json = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_ARMOR));
                 if (json != null && !Utils.isStringEmpty(json) && !json.equals("[]") && !json.equals("[ ]")) {
                     Type attributeType = new TypeToken<ArrayList<Armor>>(){}.getType();
-                    attributeType.getClass();
                     character.setArmorList((ArrayList<Armor>) gson.fromJson(json, attributeType));
                     cursor.close();
                 }
@@ -172,8 +171,8 @@ public class CharacterManager {
 
     public void setCharacterArmor(ArrayList<Armor> armorList) {
         character.setArmorList(armorList);
-        //TODO Move to AsyncTask
-        writeToDatabase(DBAdapter.COLUMN_ARMOR, gson.toJson(armorList));
+        WriteToDatabaseTask writeToDatabaseTask = new WriteToDatabaseTask(DBAdapter.COLUMN_ARMOR);
+        writeToDatabaseTask.execute(gson.toJson(armorList));
     }
 
 
@@ -210,8 +209,8 @@ public class CharacterManager {
 
     public void setCharacterAttacks(ArrayList<Attack> attacks) {
         character.setAttackList(attacks);
-        //TODO Move to AsyncTask
-        writeToDatabase(DBAdapter.COLUMN_ATTACK, gson.toJson(attacks));
+        WriteToDatabaseTask writeToDatabaseTask = new WriteToDatabaseTask(DBAdapter.COLUMN_ATTACK);
+        writeToDatabaseTask.execute(gson.toJson(attacks));
     }
 
     //**********************************************************
@@ -247,8 +246,8 @@ public class CharacterManager {
 
     public void setCharacterAttributes(ArrayList<String> attributes) {
         character.setAttributesList(attributes);
-        //TODO Move to AsyncTask
-        writeToDatabase(DBAdapter.COLUMN_ATTRIBUTES, gson.toJson(attributes));
+        WriteToDatabaseTask writeToDatabaseTask = new WriteToDatabaseTask(DBAdapter.COLUMN_ATTRIBUTES);
+        writeToDatabaseTask.execute(gson.toJson(attributes));
     }
 
     //**********************************************************
@@ -284,8 +283,8 @@ public class CharacterManager {
 
     public void setCharacterFeats(ArrayList<Feat> feats) {
         character.setFeatList(feats);
-        //TODO Move to AsyncTask
-        writeToDatabase(DBAdapter.COLUMN_FEATS, gson.toJson(feats));
+        WriteToDatabaseTask writeToDatabaseTask = new WriteToDatabaseTask(DBAdapter.COLUMN_FEATS);
+        writeToDatabaseTask.execute(gson.toJson(feats));
     }
 
     //**********************************************************
@@ -320,8 +319,8 @@ public class CharacterManager {
 
     public void setCharacterItems(ArrayList<Item> items) {
         character.setItemList(items);
-        //TODO Move to AsyncTask
-        writeToDatabase(DBAdapter.COLUMN_ITEM_GENERAL, gson.toJson(items));
+        WriteToDatabaseTask writeToDatabaseTask = new WriteToDatabaseTask(DBAdapter.COLUMN_ITEM_GENERAL);
+        writeToDatabaseTask.execute(gson.toJson(items));
     }
 
     //**********************************************************
@@ -356,8 +355,8 @@ public class CharacterManager {
 
     public void setCharacterNotes(ArrayList<Note> notes) {
         character.setNotesList(notes);
-        //TODO Move to AsyncTask
-        writeToDatabase(DBAdapter.COLUMN_NOTES, gson.toJson(notes));
+        WriteToDatabaseTask writeToDatabaseTask = new WriteToDatabaseTask(DBAdapter.COLUMN_NOTES);
+        writeToDatabaseTask.execute(gson.toJson(notes));
     }
 
     //**********************************************************
@@ -395,8 +394,8 @@ public class CharacterManager {
 
     public void setCharacterSkills(ArrayList<Skill> skills) {
         character.setSkillsList(skills);
-        //TODO Move to AsyncTask
-        writeToDatabase(DBAdapter.COLUMN_SKILL, gson.toJson(skills));
+        WriteToDatabaseTask writeToDatabaseTask = new WriteToDatabaseTask(DBAdapter.COLUMN_SKILL);
+        writeToDatabaseTask.execute(gson.toJson(skills));
     }
 
     private void initSkills() {
@@ -439,8 +438,8 @@ public class CharacterManager {
 
     public void setCharacterSpells(ArrayList<Spell> spells) {
         character.setSpellList(spells);
-        //TODO Move to AsyncTask
-        writeToDatabase(DBAdapter.COLUMN_SPELL, gson.toJson(spells));
+        WriteToDatabaseTask writeToDatabaseTask = new WriteToDatabaseTask(DBAdapter.COLUMN_SPELL);
+        writeToDatabaseTask.execute(gson.toJson(spells));
     }
 
     //**********************************************************
@@ -642,6 +641,7 @@ public class CharacterManager {
 
         @Override
         protected Void doInBackground(String... strings) {
+            //Log.d("WRITE_TASK", "Column: "+column+" Strings[JSON]: "+strings[JSON]);
             dbAdapter.fillColumn(characterId, column, strings[JSON]);
             return null;
         }
