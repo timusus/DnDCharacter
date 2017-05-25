@@ -191,6 +191,7 @@ public class DBAdapter {
 
         @Override
         public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
+            //TODO Refactor and make this better
             Log.w(TAG, "Upgrading SQLite Table");
 
             // Upgrading from 1 to 2 add notes column
