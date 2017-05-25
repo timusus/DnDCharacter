@@ -3,6 +3,7 @@ package com.lavendergoons.dndcharacter.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,12 +11,15 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.google.firebase.crash.FirebaseCrash;
 import com.lavendergoons.dndcharacter.Database.DBAdapter;
 import com.lavendergoons.dndcharacter.Fragments.AboutFragment;
 import com.lavendergoons.dndcharacter.Fragments.CharacterListFragment;
@@ -37,12 +41,15 @@ public class CharacterListActivity extends AppCompatActivity implements
 
     public static final String TAG = "CHARACTER_LIST";
     private static final String FIRST_OPEN = "FIRST_OPEN";
+    //TODO Remove and show change log
+    private static final String V121 = "V_1.2.1";
 
     Toolbar mToolbar;
     private DBAdapter dbAdapter;
     private CharacterManager characterManager;
 
     boolean isFirstOpen = true;
+    boolean isV121 = true;
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor sharedEditor;
@@ -57,10 +64,29 @@ public class CharacterListActivity extends AppCompatActivity implements
         sharedPreferences = this.getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
         sharedEditor = sharedPreferences.edit();
         isFirstOpen = sharedPreferences.getBoolean(FIRST_OPEN, true);
+        isV121 = sharedPreferences.getBoolean(FIRST_OPEN, true);
 
         if (isFirstOpen) {
-            new FirstOpenDialog().showDialog();
+            new ChangeLogDialog().showDialog(true);
         }
+
+        //TODO Refactor
+        int versionCode = 0;
+        String versionName = "";
+        try {
+            PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            versionCode = packageInfo.versionCode;
+            versionName = packageInfo.versionName;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            FirebaseCrash.log(ex.toString());
+        }
+
+        if (versionCode == 4 && isV121) {
+            new ChangeLogDialog().showDialog(false);
+        }
+
+        sharedEditor.putBoolean(V121, false);
         sharedEditor.putBoolean(FIRST_OPEN, false);
         sharedEditor.apply();
     }
@@ -131,8 +157,8 @@ public class CharacterListActivity extends AppCompatActivity implements
         return true;
     }
 
-    public class FirstOpenDialog {
-        public void showDialog() {
+    public class ChangeLogDialog {
+        public void showDialog(boolean isAnnouncment) {
             Context context = CharacterListActivity.this;
 
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -143,13 +169,23 @@ public class CharacterListActivity extends AppCompatActivity implements
             final WebView webView = new WebView(context);
             webView.getSettings().setJavaScriptEnabled(true);
             webView.setBackgroundColor(Color.TRANSPARENT);
-            webView.loadUrl("file:///android_asset/firstOpen.html");
+            if (isAnnouncment) {
+                webView.loadUrl("file:///android_asset/firstOpen.html");
+            } else {
+                webView.loadUrl("file:///android_asset/info.html");
+            }
+
 
             dialogLayout.setLayoutParams(params);
             dialogLayout.addView(webView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-            builder.setTitle(getString(R.string.announcement_title))
-                    .setView(dialogLayout)
+            //TODO Change
+            if (isAnnouncment) {
+                builder.setTitle(getString(R.string.announcement_title));
+            } else {
+                builder.setTitle(getString(R.string.announcement_changelog));
+            }
+            builder.setView(dialogLayout)
                     .setPositiveButton(R.string.ok, null)
                     .create().show();
         }

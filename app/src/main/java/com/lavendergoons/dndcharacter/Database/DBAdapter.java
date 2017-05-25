@@ -48,6 +48,9 @@ public class DBAdapter {
             COLUMN_FEATS
     };
 
+    //*********************************************
+    // PUT COMMA AFTER text not null default
+    //*********************************************
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + TABLE_CHARACTERS + " (" + COLUMN_ID +
                     " integer primary key autoincrement, " +
@@ -59,7 +62,7 @@ public class DBAdapter {
                     COLUMN_ITEM_GENERAL + " text not null default '', " +
                     COLUMN_SKILL + " text not null default '', " +
                     COLUMN_SPELL + " text not null default '', " +
-                    COLUMN_NOTES + " text not null default ''" +
+                    COLUMN_NOTES + " text not null default '', " +
                     COLUMN_FEATS + " text not null default ''" +
                     " );";
 
