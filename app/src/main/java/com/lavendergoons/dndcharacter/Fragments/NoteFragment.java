@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.google.firebase.crash.FirebaseCrash;
 import com.lavendergoons.dndcharacter.Objects.Note;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.CharacterManager;
@@ -68,12 +69,20 @@ public class NoteFragment extends Fragment {
     public void onStop() {
         if (!Utils.isStringEmpty(titleEdit.getText().toString())) {
             note.setTitle(titleEdit.getText().toString());
+        } else {
+            note.setContent("N/A");
         }
         if (!Utils.isStringEmpty(contentEdit.getText().toString())) {
             note.setContent(contentEdit.getText().toString());
+        } else {
+            note.setContent("N/A");
         }
-        noteList.set(index, note);
-        characterManager.setCharacterNotes(noteList);
+        if (index >= 0) {
+            noteList.set(index, note);
+            characterManager.setCharacterNotes(noteList);
+        } else {
+            FirebaseCrash.log(TAG+": Note Index Out of Bounds");
+        }
         super.onStop();
     }
 }

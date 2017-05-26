@@ -79,6 +79,7 @@ public class CharacterManager {
         }
         this.characterId = id;
         character = new Character();
+        FirebaseCrash.log(TAG+" Character: "+character);
     }
 
     public void loadDatabase(DBAdapter dbAdapter) {
@@ -125,6 +126,11 @@ public class CharacterManager {
 
     public Abilities getCharacterAbilities() {
         //TODO Move to AsyncTask
+        FirebaseCrash.log(TAG+" getCharacterAbilities Character: "+character);
+        if (character == null) {
+            character = new Character();
+        }
+
         if (character.getAbilities() == null) {
             readCharacterAbilities();
         }
@@ -164,6 +170,11 @@ public class CharacterManager {
 
     public ArrayList<Armor> getCharacterArmor() {
         //TODO Move to AsyncTask
+        FirebaseCrash.log(TAG+" getCharacterArmor Character: "+character);
+        if (character == null) {
+            character = new Character();
+        }
+
         if (character.getArmorList() == null || character.getArmorList().size() == 0) {
             readCharacterArmor();
         }
@@ -202,6 +213,11 @@ public class CharacterManager {
 
     public ArrayList<Attack> getCharacterAttacks() {
         //TODO Move to AsyncTask
+        FirebaseCrash.log(TAG+" getCharacterAttacks Character: "+character);
+        if (character == null) {
+            character = new Character();
+        }
+
         if (character.getAttackList() == null || character.getAttackList().size() == 0) {
             readCharacterAttacks();
         }
@@ -239,6 +255,11 @@ public class CharacterManager {
 
     public ArrayList<String> getCharacterAttributes() {
         //TODO Move to AsyncTask
+        FirebaseCrash.log(TAG+" getCharacterAttributes Character: "+character);
+        if (character == null) {
+            character = new Character();
+        }
+
         if (character.getAttributesList() == null || character.getAttributesList().size() == 0) {
             readCharacterAttributes();
         }
@@ -276,6 +297,11 @@ public class CharacterManager {
 
     public ArrayList<Feat> getCharacterFeats() {
         //TODO Move to AsyncTask
+        FirebaseCrash.log(TAG+" getCharacterFeats Character: "+character);
+        if (character == null) {
+            character = new Character();
+        }
+
         if (character.getFeatList() == null || character.getFeatList().size() == 0) {
             readCharacterFeats();
         }
@@ -312,6 +338,11 @@ public class CharacterManager {
     }
 
     public ArrayList<Item> getCharacterItems() {
+        if (character == null) {
+            FirebaseCrash.log(TAG+" getCharacterItems Character: "+character);
+            character = new Character();
+        }
+
         if (character.getItemList() == null || character.getItemList().size() == 0) {
             readCharacterItems();
         }
@@ -348,6 +379,11 @@ public class CharacterManager {
     }
 
     public ArrayList<Note> getCharacterNotes() {
+        if (character == null) {
+            FirebaseCrash.log(TAG+" getCharacterNotes Character: "+character);
+            character = new Character();
+        }
+
         if (character.getNotesList() == null || character.getNotesList().size() == 0) {
             readCharacterNotes();
         }
@@ -387,6 +423,11 @@ public class CharacterManager {
     }
 
     public ArrayList<Skill> getCharacterSkills() {
+        if (character == null) {
+            FirebaseCrash.log(TAG+" getCharacterSkills Character: "+character);
+            character = new Character();
+        }
+
         if (character.getSkillsList() == null || character.getSkillsList().size() == 0) {
             readCharacterSkills();
         }
@@ -431,6 +472,11 @@ public class CharacterManager {
     }
 
     public ArrayList<Spell> getCharacterSpells() {
+        if (character == null) {
+            FirebaseCrash.log(TAG+" getCharacterSpells Character: "+character);
+            character = new Character();
+        }
+
         if (character.getSpellList() == null || character.getSpellList().size() == 0) {
             readCharacterSpells();
         }

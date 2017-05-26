@@ -83,6 +83,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
 
         characterManager = CharacterManager.getInstance();
         abilities = characterManager.getCharacterAbilities();
+        FirebaseCrash.log("Abilities: "+abilities);
     }
 
     @Override
@@ -276,7 +277,11 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
         readGrappleValues();
         readScoreModValues();
         readMoneyValues();
-        characterManager.setCharacterAbilities(abilities);
+        if (abilities != null) {
+            characterManager.setCharacterAbilities(abilities);
+        } else {
+            FirebaseCrash.log(TAG+" Abilities Null writeAbilities");
+        }
     }
 
     //**********************************************************
@@ -285,10 +290,11 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void OnACPositive(Abilities abilities) {
-        this.abilities = abilities;
-        Log.d(TAG, Arrays.toString(abilities.getACArray()));
-        if (this.abilities == null) {
-            FirebaseCrash.log("Abilities Null in AcPositive");
+        if (abilities == null) {
+            FirebaseCrash.log("Abilities Null From OnACPositive");
+        } else {
+            this.abilities = abilities;
+            Log.d(TAG, Arrays.toString(abilities.getACArray()));
         }
         setACValues();
     }
@@ -299,7 +305,11 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void OnSavesPositive(Abilities abilities) {
-        this.abilities = abilities;
+        if (abilities == null) {
+            FirebaseCrash.log("Abilities Null From OnSavesPositive");
+        } else {
+            this.abilities = abilities;
+        }
         setSaveValues();
     }
 
@@ -309,7 +319,11 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void OnScoresPositive(Abilities abilities) {
-        this.abilities = abilities;
+        if (abilities == null) {
+            FirebaseCrash.log("Abilities Null From OnScoresPositive");
+        } else {
+            this.abilities = abilities;
+        }
         setScoreModValues();
     }
 
@@ -535,18 +549,23 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
                 FirebaseCrash.report(ex);
             }
         }
-        abilities.setHp(hp);
-        abilities.setNonLethal(nonLethal);
-        abilities.setBaseAtk(baseAtk);
-        abilities.setSpellRes(spellRes);
-        abilities.setInitiative(init);
-        abilities.setSpeed(speed);
+        try {
+            abilities.setHp(hp);
+            abilities.setNonLethal(nonLethal);
+            abilities.setBaseAtk(baseAtk);
+            abilities.setSpellRes(spellRes);
+            abilities.setInitiative(init);
+            abilities.setSpeed(speed);
 
-        abilities.setFort(fort, Abilities.SAVE_TOTAL);
-        abilities.setReflex(reflex, Abilities.SAVE_TOTAL);
-        abilities.setWill(will, Abilities.SAVE_TOTAL);
+            abilities.setFort(fort, Abilities.SAVE_TOTAL);
+            abilities.setReflex(reflex, Abilities.SAVE_TOTAL);
+            abilities.setWill(will, Abilities.SAVE_TOTAL);
 
-        abilities.setAC(ac, Abilities.AC_TOTAL);
+            abilities.setAC(ac, Abilities.AC_TOTAL);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            FirebaseCrash.log("readAbilityGeneralValues: "+ex.toString());
+        }
     }
 
     private void readGrappleValues() {
@@ -571,7 +590,13 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
             }
             ex.printStackTrace();
         }
-        abilities.setGrappleArray(array);
+        try {
+            abilities.setGrappleArray(array);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            FirebaseCrash.log("readGrappleValues: "+ex.toString());
+        }
+
     }
 
     private void readMoneyValues() {
@@ -592,10 +617,15 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
                 FirebaseCrash.report(ex);
             }
         }
-        abilities.setPlatinum(platinum);
-        abilities.setGold(gold);
-        abilities.setSilver(silver);
-        abilities.setCopper(copper);
+        try {
+            abilities.setPlatinum(platinum);
+            abilities.setGold(gold);
+            abilities.setSilver(silver);
+            abilities.setCopper(copper);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            FirebaseCrash.log("readMoneyValues: "+ex.toString());
+        }
     }
 
     private void readScoreModValues() {
@@ -645,8 +675,14 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
                 FirebaseCrash.report(ex);
             }
         }
-        abilities.setScoreArray(scores);
-        abilities.setModArray(mods);
+
+        try {
+            abilities.setScoreArray(scores);
+            abilities.setModArray(mods);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            FirebaseCrash.log("readScoreModValues: "+ex.toString());
+        }
     }
 
     private String modValue(CharSequence score) {
