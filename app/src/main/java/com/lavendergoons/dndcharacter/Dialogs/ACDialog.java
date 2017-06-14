@@ -97,6 +97,7 @@ public class ACDialog  {
             total = Integer.parseInt(acTotalEdit.getText().toString());
         }catch (Exception ex) {
             ex.printStackTrace();
+            FirebaseCrash.log(TAG +ex.toString());
         }
         abilities.setAC(armor, Abilities.AC_ARMOR);
         abilities.setAC(shield, Abilities.AC_SHIELD);

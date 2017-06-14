@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.firebase.crash.FirebaseCrash;
 import com.lavendergoons.dndcharacter.Dialogs.ConfirmationDialog;
 import com.lavendergoons.dndcharacter.Objects.Armor;
 import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
@@ -175,6 +176,7 @@ public class ArmorListFragment extends Fragment implements
                         quantity = Integer.parseInt(armorDialogQuantity.getText().toString());
                     }catch (Exception ex) {
                         ex.printStackTrace();
+                        FirebaseCrash.log(TAG +ex.toString());
                         exceptionCheck = true;
                     }
                     if (!Utils.isStringEmpty(name) && !exceptionCheck) {

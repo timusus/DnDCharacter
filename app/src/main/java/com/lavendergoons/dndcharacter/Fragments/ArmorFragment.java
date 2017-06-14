@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.google.firebase.crash.FirebaseCrash;
 import com.lavendergoons.dndcharacter.Objects.Armor;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.CharacterManager;
@@ -88,6 +89,7 @@ public class ArmorFragment extends Fragment {
             armor.setQuantity(Integer.parseInt(armorQuantityEdit.getText().toString()));
         }catch (Exception ex) {
             ex.printStackTrace();
+            FirebaseCrash.log(TAG +ex.toString());
         }
     }
 
@@ -105,14 +107,19 @@ public class ArmorFragment extends Fragment {
             armorQuantityEdit.setText(String.valueOf(armor.getQuantity()));
         }catch (Exception ex) {
             ex.printStackTrace();
+            FirebaseCrash.log(TAG +ex.toString());
         }
     }
 
     @Override
     public void onStop() {
         setValues();
-        armorList.set(index, armor);
-        characterManager.setCharacterArmor(armorList);
+        if (index >= 0 && index < armorList.size()) {
+            armorList.set(index, armor);
+            characterManager.setCharacterArmor(armorList);
+        } else {
+            FirebaseCrash.log(TAG + " Index out of Bounds. Index: "+index);
+        }
         super.onStop();
     }
 

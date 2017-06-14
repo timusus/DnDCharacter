@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Switch;
 
+import com.google.firebase.crash.FirebaseCrash;
 import com.lavendergoons.dndcharacter.Objects.Spell;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Utils.CharacterManager;
@@ -95,6 +96,7 @@ public class SpellFragment extends Fragment {
             spellResSwitch.setChecked(spell.isSpellRes());
         }catch (Exception ex) {
             ex.printStackTrace();
+            FirebaseCrash.log(TAG +ex.toString());
         }
     }
 
@@ -113,14 +115,19 @@ public class SpellFragment extends Fragment {
             spell.setSpellRes(spellResSwitch.isChecked());
         }catch (Exception ex) {
             ex.printStackTrace();
+            FirebaseCrash.log(TAG +ex.toString());
         }
     }
 
     @Override
     public void onStop() {
         setValues();
-        spellList.set(index, spell);
-        characterManager.setCharacterSpells(spellList);
+        if (index >= 0 && index < spellList.size()) {
+            spellList.set(index, spell);
+            characterManager.setCharacterSpells(spellList);
+        } else {
+            FirebaseCrash.log(TAG + " Index out of Bounds. Index: "+index);
+        }
         super.onStop();
     }
 }

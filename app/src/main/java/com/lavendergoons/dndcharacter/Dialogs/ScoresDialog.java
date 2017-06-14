@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.crash.FirebaseCrash;
 import com.lavendergoons.dndcharacter.Objects.Abilities;
 import com.lavendergoons.dndcharacter.R;
 
@@ -23,6 +24,8 @@ import static java.lang.Integer.parseInt;
  */
 
 public class ScoresDialog {
+
+    public static final String TAG = "SCORE_DIALOG";
 
     private Activity activity;
     private ScoresDialogListener target;
@@ -129,6 +132,7 @@ public class ScoresDialog {
             modTemp = parseInt(modTempEdit.getText().toString());
         }catch (Exception ex) {
             ex.printStackTrace();
+            FirebaseCrash.log(TAG +ex.toString());
         }
         abilities.setScore(score, which);
         abilities.setScoreTemp(scoreTemp, which);
@@ -182,7 +186,7 @@ public class ScoresDialog {
             mod = parseInt(score.toString());
         }catch (NumberFormatException ex) {
             ex.printStackTrace();
-            Toast.makeText(activity, ex.toString(), Toast.LENGTH_SHORT).show();
+            FirebaseCrash.log(TAG +ex.toString());
         }
         mod = (mod%2==0)? (mod - 10)/2 : (mod - 11)/2;
         return String.valueOf(mod);

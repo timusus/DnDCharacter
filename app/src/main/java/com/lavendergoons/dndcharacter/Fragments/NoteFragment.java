@@ -77,11 +77,11 @@ public class NoteFragment extends Fragment {
         } else {
             note.setContent("N/A");
         }
-        if (index >= 0) {
+        if (index >= 0 && index < noteList.size()) {
             noteList.set(index, note);
             characterManager.setCharacterNotes(noteList);
         } else {
-            FirebaseCrash.log(TAG+": Note Index Out of Bounds");
+            FirebaseCrash.log(TAG+": Index Out of Bounds. Index: "+index);
         }
         super.onStop();
     }

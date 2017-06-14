@@ -161,6 +161,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
                     abilities.setReflex(Integer.parseInt(saveReflexValue.getText().toString()), Abilities.SAVE_TOTAL);
                 }catch (Exception ex) {
                     ex.printStackTrace();
+                    FirebaseCrash.log(TAG +ex.toString());
                 }
             }
             @Override
@@ -180,6 +181,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
                     setSaveValues();
                 }catch (Exception ex) {
                     ex.printStackTrace();
+                    FirebaseCrash.log(TAG +ex.toString());
                 }
             }
             @Override
@@ -211,6 +213,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
                     setSaveValues();
                 }catch (Exception ex) {
                     ex.printStackTrace();
+                    FirebaseCrash.log(TAG +ex.toString());
                 }
             }
             @Override
@@ -353,6 +356,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
             acFlatFootValue.setText(String.valueOf(abilities.getAcFlatFoot()));
         }catch (Exception ex) {
             ex.printStackTrace();
+            FirebaseCrash.log(TAG +ex.toString());
             if (!BuildConfig.DEBUG) {
                 FirebaseCrash.report(ex);
             }
@@ -366,6 +370,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
             saveWillValue.setText(String.valueOf(abilities.getWillTotal()));
         }catch (Exception ex) {
             ex.printStackTrace();
+            FirebaseCrash.log(TAG +ex.toString());
             if (!BuildConfig.DEBUG) {
                 FirebaseCrash.report(ex);
             }
@@ -390,6 +395,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
             //checkAndSetTempValue();
         }catch (Exception ex) {
             ex.printStackTrace();
+            FirebaseCrash.log(TAG +ex.toString());
             FirebaseCrash.log("Scores Array: "+Arrays.toString(abilities.getScoreArray()));
             FirebaseCrash.log("Scores Array: "+Arrays.toString(abilities.getModArray()));
             if (!BuildConfig.DEBUG) {
@@ -474,6 +480,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
             abilitySpeedEdit.setText(String.valueOf(abilities.getSpeed()));
         }catch (Exception ex) {
             ex.printStackTrace();
+            FirebaseCrash.log(TAG +ex.toString());
             if (!BuildConfig.DEBUG) {
                 FirebaseCrash.report(ex);
             }
@@ -489,6 +496,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
             grappleTotalEdit.setText(String.valueOf(abilities.getGrapple(Abilities.GRAPPLE_TOTAL)));
         }catch (Exception ex) {
             ex.printStackTrace();
+            FirebaseCrash.log(TAG +ex.toString());
             if (!BuildConfig.DEBUG) {
                 FirebaseCrash.report(ex);
             }
@@ -503,6 +511,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
             copperEdit.setText(String.valueOf(abilities.getCopper()));
         }catch (Exception ex) {
             ex.printStackTrace();
+            FirebaseCrash.log(TAG +ex.toString());
             if (!BuildConfig.DEBUG) {
                 FirebaseCrash.report(ex);
             }
@@ -531,6 +540,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
             ac = parseInt(acGenValue.getText().toString());
         }catch (Exception ex) {
             ex.printStackTrace();
+            FirebaseCrash.log(TAG +ex.toString());
             FirebaseCrash.log("EditText Values:\n"+
                     "HP: "+abilityHpEdit.getText().toString()+
                     " NonLethal: "+abilityNonLethalEdit.getText().toString()+
@@ -589,6 +599,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
                 FirebaseCrash.report(ex);
             }
             ex.printStackTrace();
+            FirebaseCrash.log(TAG +ex.toString());
         }
         try {
             abilities.setGrappleArray(array);
@@ -608,6 +619,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
             copper = parseInt(copperEdit.getText().toString());
         }catch (Exception ex) {
             ex.printStackTrace();
+            FirebaseCrash.log(TAG +ex.toString());
             FirebaseCrash.log("Money: "+
                     platinumEdit.getText().toString()+" \nG"+
                     goldEdit.getText().toString()+" \nS"+
@@ -653,6 +665,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
             mods[Abilities.CHA] = parseInt(abilityChaModEdit.getText().toString());
         }catch (Exception ex) {
             ex.printStackTrace();
+            FirebaseCrash.log(TAG +ex.toString());
             FirebaseCrash.log("Score EditText Values:\n"+
                     " STR: "+abilityStrScoreEdit.getText().toString()+
                     " DEX: "+abilityDexScoreEdit.getText().toString()+
@@ -694,7 +707,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
             mod = parseInt(score.toString());
         }catch (NumberFormatException ex) {
             ex.printStackTrace();
-            Toast.makeText(this.getActivity(), ex.toString(), Toast.LENGTH_SHORT).show();
+            FirebaseCrash.log(TAG +ex.toString());
         }
         mod = (mod%2==0)? (mod - 10)/2 : (mod - 11)/2;
         return String.valueOf(mod);
@@ -718,6 +731,7 @@ public class AbilitiesFragment extends Fragment implements View.OnClickListener,
                 misc = Integer.parseInt(grappleMiscModEdit.getText().toString());
             }catch (Exception ex) {
                 ex.printStackTrace();
+                FirebaseCrash.log(TAG +ex.toString());
             }
             grappleTotalEdit.setText(String.valueOf(base + str + size + misc));
         }

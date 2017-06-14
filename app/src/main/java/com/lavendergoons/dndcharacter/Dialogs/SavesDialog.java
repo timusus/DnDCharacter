@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.firebase.crash.FirebaseCrash;
 import com.lavendergoons.dndcharacter.Objects.Abilities;
 import com.lavendergoons.dndcharacter.R;
 
@@ -130,6 +131,7 @@ public class SavesDialog {
             temp = Integer.parseInt(tempEdit.getText().toString());
         }catch (Exception ex) {
             ex.printStackTrace();
+            FirebaseCrash.log(TAG +ex.toString());
         }
         array[Abilities.SAVE_TOTAL] = total;
         array[Abilities.SAVE_BASE] = base;

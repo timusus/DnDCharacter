@@ -513,6 +513,7 @@ public class CharacterManager {
             c.close();
         }catch (Exception ex) {
             ex.printStackTrace();
+            FirebaseCrash.log(TAG +ex.toString());
         }
         return id;
     }

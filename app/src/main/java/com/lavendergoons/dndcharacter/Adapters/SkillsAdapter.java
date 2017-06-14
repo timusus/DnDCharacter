@@ -13,6 +13,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.crash.FirebaseCrash;
 import com.lavendergoons.dndcharacter.Objects.Abilities;
 import com.lavendergoons.dndcharacter.Objects.Skill;
 import com.lavendergoons.dndcharacter.R;
@@ -29,6 +30,7 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
     private Fragment fragment;
     private ArrayList<Skill> mDataset;
     private Abilities abilities;
+    public static final String TAG = "SKILLS_ADAPTER";
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public View cardView;
@@ -163,7 +165,7 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
                 value = Integer.parseInt(charSequence.toString());
             } catch (Exception ex) {
                 ex.printStackTrace();
-                Log.e("PARSE", "Error parsing int in SkillsAdapter");
+                FirebaseCrash.log(TAG +" Error parsing int in SkillsAdapter");
             }
             mDataset.get(position).setTotal(value);
             Log.d("SKILL_TEXT", mDataset.get(position).toString());
@@ -192,7 +194,7 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
                 value = Integer.parseInt(charSequence.toString());
             } catch (Exception ex) {
                 ex.printStackTrace();
-                Log.e("PARSE", "Error parsing int in SkillsAdapter");
+                FirebaseCrash.log(TAG +" Error parsing int in SkillsAdapter");
             }
             mDataset.get(position).setMod(value);
             int mod = mDataset.get(position).getMisc();
@@ -226,7 +228,7 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
                 value = Integer.parseInt(charSequence.toString());
             } catch (Exception ex) {
                 ex.printStackTrace();
-                Log.e("PARSE", "Error parsing int in SkillsAdapter");
+                FirebaseCrash.log(TAG +" Error parsing int in SkillsAdapter");
             }
             mDataset.get(position).setRank(value);
             int misc = mDataset.get(position).getMisc();
@@ -262,7 +264,7 @@ public class SkillsAdapter extends RecyclerView.Adapter<SkillsAdapter.ViewHolder
                 value = Integer.parseInt(charSequence.toString());
             } catch (Exception ex) {
                 ex.printStackTrace();
-                Log.e("PARSE", "Error parsing int in SkillsAdapter");
+                FirebaseCrash.log(TAG +" Error parsing int in SkillsAdapter");
             }
             mDataset.get(position).setMisc(value);
             int mod = mDataset.get(position).getMod();

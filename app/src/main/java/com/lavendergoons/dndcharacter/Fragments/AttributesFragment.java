@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.crash.FirebaseCrash;
 import com.lavendergoons.dndcharacter.Objects.SimpleCharacter;
 import com.lavendergoons.dndcharacter.R;
 import com.lavendergoons.dndcharacter.Adapters.AttributesAdapter;
@@ -99,6 +100,7 @@ public class AttributesFragment extends Fragment implements AttributesAdapter.At
             try {
                 lvl = Integer.parseInt(attributesList.get(LEVEL));
             } catch (Exception ex) {
+                FirebaseCrash.log(TAG +ex.toString());
                 ex.printStackTrace();
             }
             simpleCharacter.setLevel(lvl);
