@@ -17,7 +17,6 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.google.firebase.crash.FirebaseCrash;
 import com.lavendergoons.dndcharacter.Database.DBAdapter;
@@ -41,15 +40,14 @@ public class CharacterListActivity extends AppCompatActivity implements
 
     public static final String TAG = "CHARACTER_LIST";
     private static final String FIRST_OPEN = "FIRST_OPEN";
-    //TODO Remove and show change log
-    private static final String V121 = "V_1.2.1";
+    public static final String VERSION_CODE = "VERSION_CODE";
 
     Toolbar mToolbar;
     private DBAdapter dbAdapter;
     private CharacterManager characterManager;
 
     boolean isFirstOpen = true;
-    boolean isV121 = true;
+    private int storedVersion = -1;
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor sharedEditor;
@@ -64,14 +62,9 @@ public class CharacterListActivity extends AppCompatActivity implements
         sharedPreferences = this.getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE);
         sharedEditor = sharedPreferences.edit();
         isFirstOpen = sharedPreferences.getBoolean(FIRST_OPEN, true);
-        isV121 = sharedPreferences.getBoolean(FIRST_OPEN, true);
+        storedVersion = sharedPreferences.getInt(VERSION_CODE, 0);
 
-        if (isFirstOpen) {
-            new ChangeLogDialog().showDialog(true);
-        }
-
-        //TODO Refactor
-        int versionCode = 0;
+        int versionCode = -1;
         String versionName = "";
         try {
             PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -82,11 +75,12 @@ public class CharacterListActivity extends AppCompatActivity implements
             FirebaseCrash.log(ex.toString());
         }
 
-        if (versionCode == 4 && isV121) {
+        Log.d(TAG, "VersionCode: "+versionCode+" StoredVersion: "+storedVersion);
+        if ((versionCode != -1 && versionCode != storedVersion) || isFirstOpen) {
             new ChangeLogDialog().showDialog(false);
         }
 
-        sharedEditor.putBoolean(V121, false);
+        sharedEditor.putInt(VERSION_CODE, versionCode);
         sharedEditor.putBoolean(FIRST_OPEN, false);
         sharedEditor.apply();
     }
